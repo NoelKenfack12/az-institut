@@ -1,0 +1,72 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration, Az corporation, E-learning, Az E-learning, Cours diplomant, cours en ligne, cours vidéos, forum {{ site }}"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}, Az corporation, E-learning, Az E-learning, Cours diplomant, cours en ligne, cours vidéos,  forum {{ site }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Forum {{ site }}
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Forum
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+	<div class="container">
+		{{ render(controller("ProduitServiceBundle:Service:banniereforum")) }}
+		<div class="row mt centered">
+			{% for scat in categorie_forum %}
+			<div class="col-lg-12 text-left" style="padding: 3px 7px;">
+				<h1><span class="mdi-communication-textsms"></span> {{ scat.nom }}</h1>
+				<div class="col-lg-12" style="padding: 0px;">
+				<div class="divider"></div>
+				</div>
+			</div>
+			
+				{% for service in scat.getServiceSouscategorie %}
+				<div class="col-md-6">
+				<div class="card small">
+				  <div class="card-image">
+					<img src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/sample-1.jpg') }}{% endif %}" alt="sample" title="{{ service.keyword }}"/>
+					<span class="card-title"><span class="mdi-av-hearing"></span> {{ service.nom }}</span>
+				  </div>
+				  <div class="card-content text-left" style="overflow: hidden; padding: 0px;">
+					<a href="{{ path('produit_service_ajouter_commentaire_article_user', {'id': service.id }) }}" style="display: block; padding: 5px 7px; height: 60%;" class="hover-effet"><p style="display: block;">{{ service.description }}</p></a>
+				  </div>
+				  {% for lastpost in service.commentaireblogs|slice(0,1) %}
+					  <div class="card-action text-left hover-effet-user" style="padding: 5px 7px;">
+					  <a href="{{ path('produit_service_interventions_sujets_courant', {'id': lastpost.id }) }}" style="padding: 0px; margin: 0px; text-transform: capitalize; display: block; color: #333;">
+						<div><img src="{% if lastpost.user != null %}{% if lastpost.user.imgprofil != null %}{{ asset(lastpost.user.imgprofil.getWebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="" style="width: 20px; height:20px; margin-top: 0px;"/> <strong>{{ lastpost.user.name(30) }}</strong> <span class="fa fa-calendar"></span>   {{ lastpost.date|date('d') }} {{ lastpost.user.mois(lastpost.date|date('m')) }} {{ lastpost.date|date('Y') }} à {{ lastpost.date|date('H') }}:{{ lastpost.date|date('i') }} <span class="mdi-action-open-in-new pull-right"></span></div>
+						<div>{{ lastpost.titre[:50] }} </div>
+					  </a>
+					  </div>
+				  {% else %}
+						<div class="card-action text-left hover-effet-user" style="padding: 5px 7px;">
+					  <a href="#!" style="padding: 0px; margin: 0px; text-transform: capitalize; display: block; color: #333;">
+						<div><img src="{{ asset('template/images/logo.png') }}" alt="" style="width: 20px; height:20px; margin-top: 0px;"/> <strong>{{ site }}</strong> <span class="fa fa-calendar"></span>  À l'instant <span class="mdi-action-open-in-new pull-right"></span></div>
+						<div>Aucun sujet pour ce thème</div>
+					  </a>
+					  </div>
+				  {% endfor %}
+				</div>
+				</div>
+				{% endfor %}
+			{% endfor %}
+		</div><!-- /row -->
+		
+	</div><!-- /container -->
+
+	<hr>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+
+{% endblock %}

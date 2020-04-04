@@ -1,0 +1,117 @@
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" style="box-shadow: 0 15px 15px -1px #f2f2f2 inset; background: #fff;">
+  <div style="box-shadow: 0px 6px 6px #CCC;">
+  <div class="container">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="{{ path('users_user_acces_plateforme') }}" style="color: green;"><b>Az Corp</b></a>
+	</div>
+	<div class="navbar-collapse collapse">
+	  <ul class="nav navbar-nav">
+		<li><a href="{{ path('produit_service_visiter_notre_blog') }}" style="color: green;">Formations</a></li>
+		<li><a href="{{ path('produit_produit_accueil_boutique_produit') }}" style="color: green;">Cours</a></li>
+		<li><a href="{{ path('produit_service_forum_site') }}" style="color: green;">Forum</a></li>
+		<li><a href="{{ path('produit_service_apropos_denous') }}" style="color: green;">À propos</a></li>
+		<li>
+		<div class="search zone-etab-rechercher" style="display: inline;" value="0" name="">
+			<form class="form-recherche-product" action="#!" method="post" style="display: inline;">
+				<input type="text" class="search-form form-products-plateforme" autocomplete= "off" placeholder="Lancez la recherche" style="color: #333; margin-top: 15px;"/>
+				<i class="glyphicon glyphicon-search recherche-products" style="color: green; z-index: 1000; position: absolute; margin-top: 20px;"></i>
+			</form>
+	   </div>
+		</li>
+	  </ul>
+	  <ul class="nav navbar-nav navbar-right">
+		
+		<li><a href="{{ path('produit_service_toute_actualite_entreprise') }}" style="color: green;">Formateurs</a></li>
+		<li>
+		<div class="btn-group" style="margin-top: 15px; margin-left: 5px;">
+		<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; color: green;">{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}<img src="{% if app.user.imgprofil != null %}{{ asset(app.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="" style="width: 20px; height:20px; border-radius: 15px; margin-top: -5px;"/> {{ app.user.name(15) }} {% else %}<img src="{{ asset('template/images/co.png') }}" alt="" style="width: 20px; height:20px; border-radius: 15px; margin-top: -5px;"/> Espace membre{% endif %} <span class="caret"></span></a>
+			<ul class="dropdown-menu" style="margin-top: 13px; border-radius: 0px;">
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				<li><a href="{{ path('users_user_user_accueil', {'id': app.user.id }) }}"><span class="fa fa-user"></span> Mon compte utilisateur</a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('users_user_modifier_profil', {'id': app.user.id }) }}"><span class="fa fa-edit"></span> Modifier mes paramètres</a></li>
+				{% if app.user.formateur == true and is_granted('ROLE_FORMATEUR') %}
+				<li class="divider"></li>
+				<li><a href="{{ path('produit_produit_ajouter_nouveau_produit') }}"><span class="fa fa-plus"></span> Ajoutez un cours</a></li>
+				{% endif %}
+				<li class="divider"></li>
+				<li><a href="{{ path('produit_service_yourcv_recrutement') }}"><span class="fa fa-external-link"></span> Créditez votre compte</a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('logout') }}"><span class="fa fa-sign-out"></span> Déconnexion</a></li>
+				{% else %}
+				<li><a href="{{ path('users_user_inscription_user') }}"><span class="fa fa-hand-o-right"></span> Inscription</a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('login') }}"><span class="fa fa-sign-in"></span> Connexion</a></li>
+				<li class="divider"></li>
+				<li><a href="#!"><span class="fa fa-bell-o"></span> Notifications</a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('produit_service_yourcv_recrutement') }}"><span class="fa fa-external-link"></span> Créditez votre compte</a></li>
+				<li class="divider"></li>
+				<li><a href="{{ path('produit_service_toute_actualite_entreprise') }}"><span class="fa fa-users"></span> Formateurs</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		</li>
+	  </ul>
+	</div><!--/.nav-collapse -->
+  </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+function rechercheetab()
+{
+if($('.form-products-plateforme').val().length >= 2)// on vérifier si l'utilisateur a entré plus de 5 caractères
+{
+  var libre = $('.zone-etab-rechercher').attr('value'); // on initialise la variable libre
+  var donnee = $('.form-products-plateforme').val();  //on récupère la donnée
+  if (libre == 0 && donnee != $('.zone-etab-rechercher').attr('name')){ // on vérifier si la requête précedente est rétournée et que la recherche ne corespnd pas à la dernière effectuée
+  $('.zone-etab-rechercher').attr('value',1); // on bloque d'autres recherches
+  $('.zone-etab-rechercher').attr('name',donnee); // on enregistre la recherche effectuer.
+  $('.recherche-products').removeClass('glyphicon-search');
+  $('.recherche-products').html('<img src="{{ asset('template/images/attente.gif') }}" alt="" style="width: 15px; height: 15px; margin-top: -10px;"/>'); //attente du résultat
+  
+	  $.get('{{ path('produit_produit_recherche_new_produit') }}', { donnee: $('.form-products-plateforme').val() }, function(data){
+		  $('.recherche-products').html('');
+		  $('.recherche-products').addClass('glyphicon-search');
+		  $('.content-recherche-products-market').html(data);
+		  $('.content-manage-market').hide();
+		  $('.content-recherche-products-market').show();
+		  $('.content-manage-market').css('margin-top','0px');
+		  $('.content-manage-market').css('padding-top','0px');
+		  $('.zone-etab-rechercher').attr('value',0);
+		  setTimeout(function() { rechercheetab(); }, 100);  // on relance la fonction après 200 ms.
+	  });
+  }else{
+	setTimeout(function() { rechercheetab(); }, 100);
+  }
+}else{
+	setTimeout(function() { rechercheetab(); }, 100);
+    }
+}
+
+
+$(".form-products-plateforme").focus(function(){
+rechercheetab(); 
+});
+
+$('.form-recherche-product').on('submit', function(){
+    if($('.form-products-plateforme').val().length < 2)// on vérifier si l'utilisateur a entré plus de 5 caractères
+	{
+		$('.infos-action-effectuer').html('<span class="fa fa-warning"></span> Echec ! Rentrez au moins 2 caractères !');
+		$('#infos-action-effectuer').modal('show');
+	}else{
+		$('.infos-action-effectuer').html('<span class="fa fa-warning"></span> Patientez ! Auto-recherche en cours !');
+		$('#infos-action-effectuer').modal('show');
+	}
+	return false;
+});
+</script>

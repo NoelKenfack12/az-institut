@@ -1,0 +1,198 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | {{ user.name(20) }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+.box{
+background-color:#fff;border-top:1px solid #f0f0f0;-webkit-box-shadow:0 1px 2px 0 rgba(0,0,0,0.1);box-shadow:0 1px 2px 0 rgba(0,0,0,0.1);padding:10px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;
+}
+</style>
+{% endblock %}
+
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil  <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ user.name(30) }} <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Mise à jour des paramètres
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+<h1 style="background: #ECF0F1; display: block; text-align: left; padding: 15px; margin-top: 0px;">
+<div class="animecourant-panel">
+</div>
+</h1>
+	<div class="container">
+	
+		<div class="row mt centered">
+		{% for infos in app.session.flashbag.get('information') %}
+			{% if loop.first %}
+				<div class="col-lg-12 alert alert-warning text-left alert-dismissable" style="margin-bottom: 15px; border-radius: 0px;">{{ infos|raw }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+			{% endif %}
+		{% endfor %}
+			<div class="col-md-12 photoday-grid" style="padding: 3px 7px; margin-top: -20px;">
+			
+			{% if user.formateur == true %}
+			<div class="panel panel-default" style="background: #f2f2f2;  margin-top: 15px; text-align: justify; padding: 7px; border-radius: 0px;">
+
+			<div style="border-bottom: 1px solid #ddd;" class="text-primary"><strong><span class="mdi-communication-textsms"></span> À propos de mon compte formateur <a href="#!" class="open-content pull-right" value="down" name="1"><span class="mdi-hardware-keyboard-arrow-down"></span></a></strong></div>
+				<div class="content-panel-1">
+				<form action="{{ path('users_user_modifier_profil', {'id': user.id }) }}" method="post" {{ form_enctype(formcouverture) }}>
+				<div class="col-md-12 box" style="margin-top: 15px; margin-bottom: 0px;">
+					<div class="col-md-6" style="margin: 15px 0px;">
+						<fieldset>
+						<legend>Mon statut personnel</legend>
+						<div class="form-group">
+							<input type="text" name="diplome" class="form-control" value="{{ user.diplome }}" style="width: 100%;" placeholder="Rentrez votre dernier diplôme et spécialité" required=""/>
+						</div>
+						<div class="form-group">
+							<input type="text" name="poste" class="form-control" value="{{ user.poste }}" style="width: 100%;" placeholder="Rentrez votre poste actuel" required=""/>
+						</div>
+						</fieldset>
+						<fieldset>
+						<legend>Contact</legend>
+						<div class="col-md-6" style="padding: 0px;">
+							<div class="form-group">
+								<input type="text" name="contact" class="form-control" value="{{ user.tel }}" style="width: 100%;" placeholder="Votre numéro de téléphone" required=""/>
+							</div>
+						</div>
+						<div class="col-md-6" style="padding-top: 15px;">
+							<input type="checkbox" name="public" id="contact" {% if user.telpublic == true %}checked=""{% endif %}/> <label for="contact">Public</label>
+						</div>
+						</fieldset>
+						<fieldset>
+						<legend>Mettez à jour l'image de couverture</legend>
+						<div class="form-group">
+							<span style="color:red;">{{ form_errors(formcouverture.file) }}</span>
+							{{ form_widget(formcouverture.file) }}
+						</div>
+						</fieldset>
+					</div>
+				
+					<div class="col-md-6" style="margin: 15px 0px;">
+						<fieldset>
+						<legend>Modifiez votre message du profil</legend>
+							<div class="form-group">
+								<textarea class="tinymce-manager form-control" name="message" style="width: 100%;" value="{{ user.message }}">{{ user.message }}</textarea>
+							</div>
+							<div class="form-group">
+								<input type="text" name="emailprof" class="form-control" value="{{ user.mailformateur }}" style="width: 100%;" placeholder="Rentrez votre adresse e-mail professionnelle" required=""/>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary btn-block btn-lg" style="border-radius: 0px;">Envoyez <span class="glyphicon glyphicon-send"></span> </button>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				{{ form_rest(formcouverture) }}
+				</form>
+				</div>
+			</div>
+			{% endif %}
+			
+			<div class="panel panel-default" style="background: #f2f2f2;  margin-top: 15px; text-align: justify; padding: 7px; border-radius: 0px;">
+
+			<div style="border-bottom: 1px solid #ddd;" class="text-primary"><strong><span class="mdi-communication-textsms"></span> Mon compte utilisateur <a href="#!" class="open-content pull-right" value="down" name="2"><span class="mdi-hardware-keyboard-arrow-down"></span></a></strong></div>
+				<div class="content-panel-2">
+				<form action="{{ path('users_user_update_profil_user', {'id': user.id }) }}" method="post" {{ form_enctype(formprofil) }}>
+				<div class="col-md-6" style="margin-top: 15px; margin-bottom: 0px;">
+				<div class="box">
+						<fieldset>
+						<legend>Coordonnées</legend>
+						<div class="form-group">
+							<select name="ville" class="form-control" style="width: 100%;">
+								<option value="">Votre ville actuelle</option>
+								{% for ville in liste_ville %}
+									<option value="{{ ville.id }}" {% if user.ville == ville %}selected=""{% endif %}>{{ ville.nom }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-group">
+							<input type="text" name="username" class="form-control" value="{{ user.username }}" style="width: 100%;" placeholder="Rentrez votre e-mail" required="" disabled=""/>
+						</div>
+						</fieldset>
+						<fieldset>
+						<legend>Contact</legend>
+						<div class="col-md-6" style="padding: 0px;">
+							<div class="form-group">
+								<input type="text" name="contact" class="form-control" value="{{ user.tel }}" style="width: 100%;" placeholder="Votre numéro de téléphone" required=""/>
+							</div>
+						</div>
+						<div class="col-md-6" style="padding-top: 15px;">
+							<span class="fa fa-warning"></span> {% if user.telpublic == true %}Ce numéro est public{% else %}Ce numéro est privé{% endif %}
+						</div>
+						</fieldset>
+						<fieldset>
+						<legend>Mettez à jour votre image de profile</legend>
+						<div class="form-group">
+							<span style="color:red;">{{ form_errors(formprofil.file) }}</span>
+							{{ form_widget(formprofil.file) }}
+						</div>
+						</fieldset>
+					</div>
+					</div>
+
+					<div class="col-md-6" style="margin-top: 15px; margin-bottom: 0px;">
+					<div class="box" style="min-height: 382px;">
+						<fieldset>
+						<legend>Mes informations personnelles</legend>
+						<div class="form-group">
+							<input type="text" name="nomuser" class="form-control" value="{{ user.name(35) }}" style="width: 100%;" placeholder="Rentrez votre nom" required="" disabled=""/>
+						</div>
+						<div class="input-group" style="margin-top: 15px;">
+							<span class="input-group-addon">Sexe:</span>
+							<input type="text" name="sexe" class="form-control" value="{% if user.sexe == true %}Homme{% else %}Femme{% endif %}" style="width: 100%;" placeholder="Rentrez votre e-mail" required="" disabled=""/>
+						</div>
+						<div class="input-group" style="margin-top: 15px;">
+							<span class="input-group-addon">Âge:</span>
+							<input type="text" name="sexe" class="form-control" value="{{ user.datenaiss|date('d') }}/{{ user.datenaiss|date('m') }}/{{ user.datenaiss|date('Y') }}" style="width: 100%;" placeholder="Rentrez votre e-mail" required="" disabled=""/>
+						</div>
+						</fieldset>
+						
+						<div class="form-group" style="margin-top: 15px;">
+							<button class="btn btn-primary btn-block btn-lg" style="border-radius: 0px;">Envoyez <span class="glyphicon glyphicon-send"></span> </button>
+						</div>
+					</div>
+					</div>
+				<div class="clearfix"></div>
+				{{ form_rest(formprofil) }}
+				</form>
+				</div>
+			</div>
+			
+			</div>
+		</div><!-- /row -->
+
+	</div><!-- /container -->
+
+	<hr>
+	<script src="{{ asset('template/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+
+$('.open-content').click(function(){
+	$('.content-panel-'+$(this).attr('name')).toggle('slow');
+	if($(this).attr('value') == 'down')
+	{
+		$(this).attr('value','up');
+		$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-right"></span>');
+	}else{
+		$(this).attr('value','down');
+		$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-down"></span>');
+	}
+});
+tinymce.init({ selector:'.tinymce-manager'});
+{% endblock %}

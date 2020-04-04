@@ -1,0 +1,113 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration, Az corporation, E-learning, Az E-learning, Cours diplomant, cours en ligne, cours vidéos, forum {{ site }}"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}, Az corporation, E-learning, Az E-learning, Cours diplomant, cours en ligne, cours vidéos,  forum {{ site }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Forum {{ site }}
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Forum <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ recherche.donnee }}
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+	<div class="container">
+		{{ render(controller("ProduitServiceBundle:Service:banniereforum")) }}
+		<div class="row mt centered">
+			<div class="col-md-12">
+				<div class="panel panel-widget text-left">
+					<div class="col-lg-12" style="border-radius: 0px;">
+						<h3 style="background: #ECF0F1; padding: 5px; margin-top: 10px;"><span class="mdi-communication-textsms"></span> Recherche <strong>{{ recherche.donnee }}</strong><span class="fa fa-check pull-right"></span></h3>
+					<div></div>
+					</div>
+				<div class="clearfix"></div>
+				</div>
+			</div>
+
+
+			{% for sujet in liste_sujet %}
+				{% include 'ProduitServiceBundle:Forum:sujetforum.html.twig' %}
+			{% else %}
+				<div class="col-lg-12  alert-warning text-left" style="padding: 15px;  margin-bottom: 20px; border: 1px solid transparent; border-radius: 0px;"><span class="fa fa-info-circle"></span> Aucun sujet pour ce thème de forum !<span class="fa fa-cog pull-right"></span></div>
+			{% endfor %}
+
+		<div class="clearfix"></div>
+		<div class="col-md-12">
+			{% if nombrepage > 0  %}
+
+			{% if page > 1 and page <= nombrepage %}
+			{% set pagepre = page - 1 %}
+			{% else %}
+			{% set pagepre = nombrepage %}
+			{% endif %}
+
+			{% if page < nombrepage %}
+			{% set pagesuiv = page + 1 %}
+			{% else %}
+			{% set pagesuiv =  1 %}
+			{% endif %}
+
+			<ul class="pagination pull-left">
+				<li><a href="{{ path('produit_service_recherche_forum', {'donnee': recherche.donnee, 'page': pagepre }) }}" ><<</a></li>
+				{% for p in 1..nombrepage %}
+				<li value="{{ p }}" class="{% if p == page %}active{% endif %}"><a href="{{ path('produit_service_recherche_forum', {'donnee': recherche.donnee, 'page': p }) }}">{{ p }}</a></li>
+				{% endfor %}
+				<li><a href="{{ path('produit_service_recherche_forum', {'donnee': recherche.donnee, 'page': pagesuiv }) }}">>></a></li>
+			</ul>
+			
+			{% endif %}
+		</div>
+
+		</div><!-- /row -->
+	
+		<div class="row mt centered">
+			
+		</div><!-- /row -->
+		
+	</div><!-- /container -->
+<script src="{{ asset('template/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<hr>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+tinymce.init({ selector:'.tinymce-manager'});
+
+$('.affiche-form-subject').click(function(){
+	$('.attente-form-subject').show();
+	setTimeout(function() { $('.attente-form-subject').hide(); $('.form-subject').show(); }, 3000);
+});
+
+$('.like-produit-courant').click(function(){
+  var id = $(this).attr('value');
+  
+  if($('.variation-contenu').attr('value') == 0)
+  {
+  $('.variation-contenu').attr('value',1);
+  $('.like-produit-courant-'+id).html('<span><img src="{{ asset('template/images/wait-user.gif') }}" alt="..."/></span>'); //attente du résultat
+  $.get('{{ path('produit_produit_like_courant_product') }}',{ id: id }, function(data){
+  $('.variation-contenu').attr('value',0);
+	  if(data == 1)
+	  {
+		  $('.like-produit-courant-'+id).html('<i class="fa fa-caret-down" style="margin-right: 10px; margin-top: 15px;"></i>');
+		  $('.infos-action-effectuer').html('<span class="fa fa-thumbs-o-up"></span> Le sujet a été épinglé avec succès !');
+		  $('#infos-action-effectuer').modal('show');
+		  window.location.reload();
+	  }else{
+		  $('.infos-action-effectuer').html('<span class="fa fa-warning"></span> Echec ! une erreur a été rencontrée !');
+		  $('#infos-action-effectuer').modal('show');
+		  window.location.reload();
+	  }
+  });
+  }
+  return false;
+});
+{% endblock %}

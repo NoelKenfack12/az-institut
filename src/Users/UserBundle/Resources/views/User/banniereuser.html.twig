@@ -1,0 +1,102 @@
+<div class="row mt centered">	
+<div class="col-md-12" style="padding: 3px 7px;">
+	<div id="profile-page-header" class="card">
+	<div class="card-image waves-effect waves-block waves-light">
+		<img class="activator" src="{% if user.imgcouverture != null %}{{ asset(user.imgcouverture.getwebpath) }}{% else %}{{ asset('template/images/user-bg.jpg') }}{% endif %}" alt="user background" style="height: 170px;">                    
+	</div>
+	<figure class="card-profile-image" style="position: absolute; z-index: 1; top: 180px; left: 15px;">
+		<img src="{% if user.imgprofil != null %}{{ asset(user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="profile image" class="circle z-depth-2 responsive-img activator" style="width: 120px; height: 120px; border-radius: 60px;">
+	</figure>
+	<div class="card-content">
+	  <div class="row">                    
+		<div class="col s3 offset-s2">                        
+			<h4 class="card-title grey-text text-darken-4">{{ user.name(20) }}</h4>
+			<p class="medium-small grey-text">{% if user.diplome != null %} {{ user.diplome }}{% else %}Formateur Az{% endif %}</p>                        
+		</div>
+		<div class="col s2 center-align">
+			<a href="#cours-courant-user" class="page-scroll-to"><h4 class="card-title grey-text text-darken-4">{{ liste_produit|length }}</h4>
+			<p class="medium-small grey-text">Cours complets</p>  </a>                      
+		</div>
+		<div class="col s2 center-align">
+			{% if app.user == user %}
+			<a href="{{ path('users_user_accueil_commande_user', {'id': user.id }) }}"><h4 class="card-title grey-text text-darken-4">{{ liste_panier|length }}</h4>
+			<p class="medium-small grey-text">Formations en cours</p></a>  
+			{% else %}
+			<a href="mailto:{% if user.mailformateur != null %} {{ user.mailformateur }}{% else %}{{ email }}{% endif %}"><h4 class="card-title grey-text text-darken-4"><span class="glyphicon glyphicon-send"></span></h4>
+			<p class="medium-small grey-text">{% if user.mailformateur != null %} {{ user.mailformateur }}{% else %}Email{% endif %}</p></a> 
+			{% endif %}
+		</div>                    
+		<div class="col s2 center-align">
+			
+			{% if app.user == user %}
+			<a href="{{ path('users_user_modifier_profil', {'id': user.id }) }}"><h4 class="card-title grey-text text-darken-4"><i class="mdi-maps-rate-review" style="margin-left: 0px; margin-top: -10px;"></i></h4>
+			<p class="medium-small grey-text">Modifier le profil</p></a>  
+			{% else %}
+			<a href="#!" class="affichephone"><h4 class="card-title grey-text text-darken-4"><span class="mdi-action-settings-phone"></span></h4>
+			<p class="medium-small grey-text">{% if user.telpublic != null %}{% if user.tel != null %}{{ user.tel }}{% else %}Téléphone{% endif %}{% else %}Téléphone{% endif %}</p></a> 
+			{% endif %}
+		</div>                    
+		<div class="col s1 right-align">
+		  <a class="btn-floating activator waves-effect waves-light darken-2 right" style="margin-top: 20px;">
+			  <i class="mdi-action-perm-identity" style="margin-left: 0px; margin-top: -10px;"></i>
+		  </a>
+		</div>
+	  </div>
+	</div>
+	<div class="card-reveal text-left">
+		<p>
+		  <span class="card-title grey-text text-darken-4">{{ user.name(20) }} <i class="mdi-navigation-close right"></i></span>
+		  <span><i class="mdi-action-perm-identity cyan-text text-darken-2"></i> {% if user.diplome != null %} {{ user.diplome }}{% else %}Formateur Az{% endif %}</span>
+		</p>
+
+		<p>{% if user.message != null %}{{ user.message|raw }}{% endif %}</p>
+		
+		<p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> {% if user.telpublic != null %}{% if user.tel != null %}{{ user.tel }}{% else %}{{ telephone }}{% endif %}{% else %}{{ telephone }}{% endif %}</p>
+	</div>
+</div>
+</div>
+
+{% if user.message != null %}
+<div class="col-md-12 photoday-grid" style="padding: 3px 7px; margin-top: 10px;">
+<div class="panel panel-default" style="margin-top: 15px; text-align: justify; padding: 7px; border-radius: 0px;">
+
+<div style="border-bottom: 1px solid #ddd;" class="text-primary"><strong><span class="mdi-communication-textsms"></span> {{ user.poste }} <a href="#!" class="open-content pull-right" value="down" name="1"><span class="mdi-hardware-keyboard-arrow-down"></span></a></strong></div>
+	<div class="content-panel-1">
+		{{ user.message|raw }}
+	</div>
+</div>
+</div>
+{% endif %}
+</div><!-- /row -->
+
+<script type="text/javascript">
+$('.open-content').click(function(){
+	$('.content-panel-'+$(this).attr('name')).toggle('slow');
+	if($(this).attr('value') == 'down')
+	{
+		$(this).attr('value','up');
+		$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-right"></span>');
+	}else{
+		$(this).attr('value','down');
+		$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-down"></span>');
+	}
+});
+
+$('a.page-scroll-to').click(function() {
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+  var target = $(this.hash);
+  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+  if (target.length) {
+	$('html,body').animate({
+	  scrollTop: target.offset().top - 40
+	}, 900);
+	return false;
+  }
+}
+});
+
+$('.affichephone').click(function(){
+	$('.infos-action-effectuer').html('<div>Joindre {{ user.name(30) }} via le numéro:</div> <span class="mdi-action-settings-phone"></span> {% if user.telpublic != null %}{% if user.tel != null %}{{ user.tel }}{% else %}{{ telephone }}{% endif %}{% else %}{{ telephone }}{% endif %}');
+	$('#infos-action-effectuer').modal('show');
+});
+</script>

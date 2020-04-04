@@ -1,0 +1,144 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration, {{ comment.titre }}, Az corporation, E-learning, Az E-learning, Cours diplomant, {{ comment.service.keyword }},cours en ligne, cours vidéos, forum {{ site }}"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}, {{ comment.contenu }}, Az corporation, E-learning, Az E-learning, {{ comment.service.keyword }},Cours diplomant, cours en ligne, cours vidéos,  forum {{ site }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Forum - {{ comment.titre }}
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Forum <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ comment.service.nom }}
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+	<div class="container">
+		{{ render(controller("ProduitServiceBundle:Service:banniereforum")) }}
+		<div class="row mt centered">
+			<div class="col-md-12">
+				<div class="panel panel-widget text-left">
+					<div class="col-lg-12" style="border-radius: 0px;">
+						<h3 style="background: #ECF0F1; padding: 5px; margin-top: 10px;"><span class="mdi-communication-textsms"></span> <a href="{{ path('produit_service_ajouter_commentaire_article_user', {'id': comment.service.id}) }}">{{ comment.service.nom }}</a> <span class="fa fa-angle-double-right"></span> {{ comment.titre }}</h3>
+					<div></div>
+					</div>
+				<div class="clearfix"></div>
+				</div>
+			</div>
+			
+				
+			<div class="col-sm-12">
+			{% for infos in app.session.flashbag.get('information') %}
+			{% if loop.first %}	
+				<div class="alert alert-warning text-left" style="broder-radius: 0px;"><span class="fa fa-warning"></span> {{ infos|raw }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>	
+			{% endif %}
+			{% endfor %}
+			
+			{% for intervention in liste_intervention %}
+			<div class="panel panel-widget compose-left" style="margin-bottom: 7px; padding: 0px;">
+			{% if intervention.user == app.user or is_granted('ROLE_GESTION') %}
+			<div class="btn-group pull-right">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#!"><i class="fa fa-caret-down" style="margin-right: 10px; margin-top: 15px;"></i></a>
+				<ul class="dropdown-menu pull-right text-left">
+					
+					<li class="divider"></li>
+					<li><a href="{{ path('produit_service_delete_intervention_sujet', {'id': intervention.id}) }}" class="menutop-dropdown" style="border-radius: 0px; color: red;"> <em class="fa fa-angle-right" style="float: right"></em> <strong style="padding-right: 10px;"><em class="fa fa-times"></em>  Supprimer cette intervention</strong></a></li>
+					
+				</ul>
+			</div>
+			{% endif %}
+			<div class="chat-grid widget-shadow text-left" style="margin: 0px;">
+				<ul style="padding: 0px 10px;">
+					<li class="item-menu-right open-element" style="display: block; width: 100%;margin-top: 15px; border-bottom: 1Px solid #ddd;">
+						<div class="chat-left pull-left" style="width: 80px; margin-right: 15px;padding-right: 10px;">
+							<img src="{% if intervention.user != null %}{% if intervention.user.imgprofil != null %}{{ asset(intervention.user.imgprofil.getWebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="article aimé" style="width: 70px; height:70px; border-radius: 5px; margin: 10px;"/>
+						</div>
+						<div class="chat-right">
+							<p style="margin: 0px;"><strong>{% if intervention.user != null %}{{ intervention.user.name(25) }}{% else %}Anonyme{% endif %}</strong> <span class="fa fa-calendar"></span> {{ intervention.date|date('d') }} {{ intervention.user.mois(intervention.date|date('m')) }} {{ intervention.date|date('Y') }} à {{ intervention.date|date('H') }}:{{ intervention.date|date('i') }}</p>
+							<p style="margin: 0px;">{{ intervention.contenu|raw }} </p>
+						</div>
+					<div class="clearfix"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{% else %}
+			<div class="col-lg-12  alert-warning text-left" style="padding: 15px;  margin-bottom: 20px; border: 1px solid transparent; border-radius: 0px;"><span class="fa fa-info-circle"></span> Aucun sujet pour ce thème de forum !<span class="fa fa-cog pull-right"></span></div>
+		{% endfor %}
+
+
+		<div class="clearfix"></div>
+		</div>
+		<div class="col-md-12">
+			{% if nombrepage > 0  %}
+
+			{% if page > 1 and page <= nombrepage %}
+			{% set pagepre = page - 1 %}
+			{% else %}
+			{% set pagepre = nombrepage %}
+			{% endif %}
+
+			{% if page < nombrepage %}
+			{% set pagesuiv = page + 1 %}
+			{% else %}
+			{% set pagesuiv =  1 %}
+			{% endif %}
+
+			<ul class="pagination pull-left">
+				<li><a href="{{ path('produit_service_interventions_sujets_courant', {'id': comment.id, 'page': pagepre }) }}" ><<</a></li>
+				{% for p in 1..nombrepage %}
+				<li value="{{ p }}" class="{% if p == page %}active{% endif %}"><a href="{{ path('produit_service_interventions_sujets_courant', {'id': comment.id, 'page': p }) }}">{{ p }}</a></li>
+				{% endfor %}
+				<li><a href="{{ path('produit_service_interventions_sujets_courant', {'id': comment.id, 'page': pagesuiv }) }}">>></a></li>
+			</ul>
+			
+			{% endif %}
+		</div>
+		
+		{% if app.user != null %}
+			<div class="col-md-12">
+			<div class="panel panel-widget text-left form-subject" style="padding: 15px; margin-bottom: -20px;">
+			<form  action="{{ path('produit_service_interventions_sujets_courant', {'id': comment.id}) }}" method="post" {{ form_enctype(form) }}>
+			<div style="margin-bottom: 15px;"><strong><span class="mdi-communication-textsms"></span> {{ comment.titre }}</strong> / Vos idées à ce sujet.</div>
+				<label><span style="color:red;">{{ form_errors(form.contenu) }}</span></label>
+				<div class="form-group">
+				{{ form_widget(form.contenu) }}
+				</div>   
+				
+				<div class="form-group">
+					<button class="btn btn-primary pull-right">Envoyer <span class="glyphicon glyphicon-send"></span></button>
+				</div> 
+				{{ form_rest(form) }}
+				<div class="clearfix"></div>
+			</form>
+			</div>
+			</div>
+			{% endif %}
+
+		</div><!-- /row -->
+	
+		<div class="row mt centered">
+			
+		</div><!-- /row -->
+		
+	</div><!-- /container -->
+<script src="{{ asset('template/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<hr>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+tinymce.init({ selector:'.tinymce-manager'});
+
+$('.affiche-form-subject').click(function(){
+	$('.attente-form-subject').show();
+	setTimeout(function() { $('.attente-form-subject').hide(); $('.form-subject').show(); }, 3000);
+});
+
+{% endblock %}

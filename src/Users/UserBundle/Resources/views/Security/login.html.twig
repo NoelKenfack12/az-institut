@@ -1,0 +1,267 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Inscription, Connexion, Az corporation, E-learning, Az E-learning, Cours diplomant, cours en ligne, cours vidéos"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} - {{ metier }} - Cours diplômant en ligne."/>
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Accueil
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+
+{% endblock %}
+{% block userblog_body %}
+<div id="headerwrap" style="background: #428bca;">
+<div class="container">
+	<div class="row" style="padding: 0px; margin: 0px;">
+		<div class="col-lg-6">
+			<h1>Az E-learning<br/>
+			Connexion.</h1>
+			<form action="{{ path('login_check') }}" class="form-inline" method="post">
+			  {% if error %}
+			  <div class="alert alert-danger" style="margin-bottom: 3px;">Mot de passe ou Email invalid</div>
+			  {% endif %}
+			  <div class="form-group">
+				<input type="email" placeholder="E-mail" id="username" name="_username" value="{{ last_username }}" required class="form-control">
+				<input type="password" placeholder="Mot de passe" id="password" name="_password" required class="form-control" style="margin-top: 15px; ">
+			  </div>
+			  <div style="margin-top: 15px;">
+				<a class="news-letter " href="#" style="color: #fff;">
+				 <label class="checkbox1"><input type="checkbox" id="remember_me" name="_remember_me" checked /><i> </i>Garder ma session ouverte</label>
+			   </a>
+			  </div>
+			  <div style="margin-top: 15px;">
+			  <button type="submit" class="btn btn-warning btn-lg">Connexion </button>
+			  </div>
+			</form>
+
+		<div style="margin-top: 15px;"><a href="{{ path('users_user_inscription_user') }}" class="btn btn-primary">Inscription gratuite <span class="fa fa-angle-double-right"></span></a></div>
+		</div><!-- /col-lg-6 -->
+		<div class="col-lg-6">
+			<img class="img-responsive" src="{% if slide != null %}{{ asset(slide.getwebpath) }}{% else %}{{ asset('template/assets/img/ipad-hand.png') }}{% endif %}" alt="">
+		</div><!-- /col-lg-6 -->
+		
+	</div><!-- /row -->
+</div><!-- /container -->
+</div><!-- /headerwrap -->
+	
+	
+<div style="box-shadow: 0 15px 15px -10px rgba(0,0,0,.35) inset;">
+<div class="container">
+	<div class="row mt centered">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h1>Nos formations</h1>
+			<h3>It is a long established fact that a reader will be distracted by.</h3>
+		</div>
+	</div><!-- /row -->
+
+		
+		
+<div class="row">
+{% for formation in liste_formation %}
+<!-- blog card -->
+<div class="col s12 m12 l4">
+	<div class="blog-card" >
+	<div class="card">
+		<div class="card-image waves-effect waves-block waves-light" style="background: #f2f2f2;">
+			<a href="#!"><img src="{% if formation.imgservice != null %}{{ asset(formation.imgservice.getwebpath) }}{% else %}{{ asset('template/assets/img/1.jpg') }}{% endif %}" alt="blog-img" class="activator" style="height: 250px;"></a>
+		</div>
+		<div style=" margin-top: -5px;">
+		<div style="margin: 7px 18px!important; padding-top: 5px;">
+		<a class="btn-floating waves-effect waves-light light-blue accent-4" style="background: rgba(83, 101, 240, 1);"><i class="mdi-action-info activator" style="margin-left: 0px; margin-top: -10px;"></i></a>
+		<a href="{{ path('produit_service_assistance_entreprise', {'id': formation.id }) }}" class="btn waves-effect waves-light indigo pull-right">En savoir plus <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>
+		</div>
+		<div class="card-content" style="border-top: 1px solid #ddd; padding-top: 0px; padding-bottom: 0px;">
+			<h4 class="card-title grey-text text-darken-4" style="margin-top: 0px; padding-top: 0px;">
+			<a href="{{ path('produit_service_assistance_entreprise', {'id': formation.id }) }}" class="grey-text text-darken-4" style="font-size: 20px;">{{ formation.name(35) }}</a>
+			</h4> 
+			
+			<div class="row">
+			  <div class="col s1">
+				<i class="mdi-action-assignment-turned-in"></i>
+			  </div>
+			  <div class="col s4" style="margin-top: 7px; padding-left: 10px;"> <a href="#!" title="Formation en ligne">En ligne</a></div>
+			  <div class="col s1">
+				<i class="mdi-action-assignment-turned-in"></i>
+			  </div>
+			  <div class="col s4" style="margin-top: 7px; padding-left: 10px;"> <a href="#!" title="Formation dans notre centre de formation">Au centre</a></div>
+			</div>
+		</div>
+		</div>
+		<div class="card-reveal">
+			<span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> <a href="{{ path('produit_service_assistance_entreprise', {'id': formation.id }) }}">{{ formation.nom }}</a></span>
+			<p>{{ formation.pubinline|raw }}</p>
+		</div>
+	</div>
+	</div>
+</div>
+{% endfor %}
+</div>
+
+<div style="text-align: center;">
+<a href="{{ path('produit_service_visiter_notre_blog') }}"class="btn btn-warning btn-lg">Toutes les formations <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>
+</div>
+<!-- END MAIN -->
+
+</div><!-- /container -->
+</div><!-- /container -->
+
+<hr>
+<div style="background: #ddd;">
+<div class="container">
+	<div class="row mt centered">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h1>Nos formateurs</h1>
+			<h3>Cours accéssibles en ligne et forum pour entre-aide</h3>
+		</div>
+	</div><!-- /row -->
+	
+	<div class="row mt centered">
+	
+	<div class="slider1" style="padding: 0px; margin: 0px;">
+	<div class="arrival-grids" style="padding: 0px; margin: 0px;">			 
+		 <ul id="flexiselDemo1">
+			{% for formateur in liste_formateur %}
+			<li>
+				<div class="item" style="margin-right: 5px; margin-left: 5px;">
+					<div class="col-lg-12">
+						<img class="img-circle img-thumbnail" src="{% if formateur.imgprofil != null %}{{ asset(formateur.imgprofil.getWebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" style="width: 140px; height: 140px;"  alt="">
+						<h4><a href="{{ path('users_user_user_accueil', {'id': formateur.id }) }}">{{ formateur.name(30) }}</a></h4>
+						<p>{{ formateur.poste }}</p>
+						<p><i class="mdi-av-subtitles"></i> <i class="mdi-notification-phone-forwarded"></i> <i class="mdi-social-public"></i></p>
+					</div><!--/col-lg-4 -->
+				</div>
+			</li>
+			{% endfor %}
+		 </ul>
+	 </div>
+	 </div>
+
+	</div><!-- /row -->
+	
+	<script type="text/javascript">
+	 $(window).load(function() {			
+	  $("#flexiselDemo1").flexisel({
+		visibleItems: 3,
+		animationSpeed: 1000,
+		autoPlay: true,
+		autoPlaySpeed: 5000,    		
+		pauseOnHover:true,
+		enableResponsiveBreakpoints: true,
+		responsiveBreakpoints: { 
+			portrait: { 
+				changePoint:480,
+				visibleItems: 1
+			}, 
+			landscape: { 
+				changePoint: 640,
+				visibleItems: 2
+			},
+			tablet: { 
+				changePoint: 900,
+				visibleItems: 4
+			}
+		}
+	});
+	});
+	</script>
+	<script type="text/javascript" src="{{ asset('template/assets/js/jquery.flexisel.js') }}"></script>
+	
+	<div style="text-align: center;">
+	<a href="{{ path('produit_service_toute_actualite_entreprise') }}" class="btn btn-warning btn-lg">Tous les formateurs <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>
+	</div>
+</div><!-- /container -->
+</div><!-- /container -->
+<hr>
+
+
+<div class="container">
+<div class="row mt centered">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h1>Nos Cours</h1>
+		<h3>Cours accéssibles en ligne et forum pour entre-aide</h3>
+	</div>
+</div><!-- /row -->
+
+	<div class="row centered">
+		
+		{% for produit in liste_produit %}
+			<div class="col-md-3 photoday-grid">
+			{% include 'ProduitProduitBundle:Produit:produitdescript.html.twig' %}
+			</div>
+		{% endfor %}
+
+	</div><!-- /row -->
+	<div style="text-align: center;">
+	<a href="{{ path('produit_produit_accueil_boutique_produit') }}" class="btn btn-warning btn-lg">Tous les cours <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>
+	</div>
+</div><!-- /container -->
+	
+	<hr>
+	<div style="background: #ddd;">
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-8 col-lg-offset-2">
+				<h1>Formations ultrats innovant</h1>
+				<h3>Toutes nos formations comprennent </h3>
+			</div>
+		</div><!-- /row -->
+	
+		<! -- CAROUSEL -->
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				  {% for valeur in liste_valeur %}
+					{% if loop.first %}
+				    <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index0 }}" class="active"></li>
+					{% else %}
+					<li data-target="#carousel-example-generic" data-slide-to="{{ loop.index0 }}"></li>
+					{% endif %}
+				  {% endfor %}
+				  </ol>
+				
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner text-center">
+				  {% for valeur in liste_valeur %}
+					{% if loop.first %}
+				    <div class="item active" style="text-align: center;">
+				      <img src="{% if valeur.imginfoentreprise != null %}{{ asset(valeur.imginfoentreprise.getwebpath) }}{% else %}{{ asset('template/assets/img/p01.png') }}{% endif %}" alt="" style="margin-top: 15px; margin-bottom: 15px; height: 300px; width: 100%;"/>
+					  <div class="text-left" style="height: 200px;">
+					  <h3>{{ valeur.titre }}</h3>
+					  <div style="margin-bottom: 15px;">{{ valeur.description }}</div>
+					  <div>{% if valeur.link != null %}<a href="{{ valeur.link }}" class="btn btn-warning btn-lg">En savoir plus <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>{% endif %}</div>
+					  </div>
+					</div>
+					{% else %}
+					<div class="item text-center" style="text-align: center;">
+				      <img src="{% if valeur.imginfoentreprise != null %}{{ asset(valeur.imginfoentreprise.getwebpath) }}{% else %}{{ asset('template/assets/img/p01.png') }}{% endif %}" alt="" style="margin-top: 15px; margin-bottom: 15px; height: 300px; ; width: 100%;"/>
+					  <div class="text-left" style="height: 200px;">
+					  <h3>{{ valeur.titre }}</h3>
+					  <div style="margin-bottom: 15px;">{{ valeur.description }}</div>
+					  <div>{% if valeur.link != null %}<a href="{{ valeur.link }}" class="btn btn-warning btn-lg">En savoir plus <span class="mdi-av-play-circle-fill" style="margin-top: -7px; font-size: 15px;"></span></a>{% endif %}</div>
+					  </div>
+				    </div>
+					{% endif %}
+				  {% endfor %}
+				  </div>
+				</div>			
+			</div><!-- /col-lg-8 -->
+		</div><!-- /row -->
+	</div><! --/container -->
+	</div><! --/container -->
+	<hr>
+{% endblock %}
+
+{% block srcjavascripttemplate %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

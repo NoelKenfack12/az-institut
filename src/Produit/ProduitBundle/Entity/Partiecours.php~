@@ -1,0 +1,134 @@
+<?php
+
+namespace Produit\ProduitBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Partiecours
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Produit\ProduitBundle\Entity\PartiecoursRepository")
+ */
+class Partiecours
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255)
+     */
+    private $titre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rang", type="integer")
+     */
+    private $rang;
+	
+	/**
+       * @ORM\ManyToOne(targetEntity="Produit\ProduitBundle\Entity\Produit")
+       * @ORM\JoinColumn(nullable=false)
+        */
+	private $produit;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+	
+	public function __construct()
+	{
+		$this->date = new \Datetime();
+	}
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     * @return Partiecours
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string 
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set rang
+     *
+     * @param integer $rang
+     * @return Partiecours
+     */
+    public function setRang($rang)
+    {
+        $this->rang = $rang;
+
+        return $this;
+    }
+
+    /**
+     * Get rang
+     *
+     * @return integer 
+     */
+    public function getRang()
+    {
+        return $this->rang;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Partiecours
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+}

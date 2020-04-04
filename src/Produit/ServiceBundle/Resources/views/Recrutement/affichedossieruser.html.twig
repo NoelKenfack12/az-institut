@@ -1,0 +1,86 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, ajout des fonds, créditez votre compte, fiche d'ajout des fonds"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Créditez votre compte {{ site }} | fiche d'ajout des fonds"/>
+{% endblock %}
+{% block title %}
+{{ parent() }} | {{ site }} | Fiche d'ajout des fonds
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ app.user.name(25) }} <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Fiche d'ajout des fonds.
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;">
+
+<h1 style="background: #ECF0F1; display: block; text-align: left; padding: 15px; margin-top: 0px;">
+<div class="animecourant-panel">
+</div>
+</h1>
+<div class="container">
+	<div class="row mt centered">
+		
+		<div class="col-md-4">
+		<div class="filtr-container toutleblock">
+			
+		{% include 'UsersUserBundle:User:lienutile.html.twig' %}
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stop-courant-panel">
+						
+		</div>
+		</div>
+		</div>
+		
+		<div class="col-md-8" style="padding: 0px;">
+		<div class="panel panel-widget text-left">
+		<div class="col-lg-12" style="border-radius: 0px;">
+		<h3 style="background: #ECF0F1; padding: 5px; margin-top: 10px;"><span class="fa fa-info-circle"></span> Téléchargez votre fiche d'ajout des fonds sur {{ site }}.</br></h3>
+		<div></div>
+		</div>
+		<div class="clearfix"></div>
+		</div>
+				
+		<div id="work" class="panel panel-widget work all_pad" style="padding: 15px 0px;;">
+				<div class="col-sm-4" style="padding: 3px;">
+				<!-- special-services -->
+				{% include 'ProduitServiceBundle:Recrutement:menustruct.html.twig' %}
+				
+				</div>
+				<div class="col-sm-8" style="padding: 3px;">
+                {% for infos in app.session.flashbag.get('information') %}
+				{% if loop.first %}	
+					<div class="alert alert-warning text-left" style="broder-radius: 0px;"><span class="fa fa-warning"></span> {{ infos|raw }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>	
+				{% endif %}
+				{% endfor %}
+				
+				<div>
+					<a href="{{ path('produit_service_telechargement_fiche_ouverture_dossier', {'id': dossier.id }) }}" class="btn btn-primary btn-block" target="_blank" style="border-radius: 0px;text-align: left;"><span class="fa fa-money"></span> Téléchargez votre fiche et procédez au transfert via le compte sélectionné.</a>
+					<div style="border: 2px solid #f2f2f2; border-radius: 2px; margin-top: 15px; height: 410px;">
+						<object data="{{ asset(dossier.getDossierwebpath) }}" type="application/pdf" style="display: block;margin:0;padding:0;border:0;width:100%;height:100%;">
+						<p>Télécharger : <a href="{{ path('produit_service_telechargement_fiche_ouverture_dossier', {'id': dossier.id }) }}">{{ asset(dossier.getDossierwebpath) }}</a></p>
+						</object>
+					</div>
+				</div>
+				</div>				
+               <div class="clearfix"> </div>
+			   <div class="head text-left" style="padding: 7px; background: #ddd; margin: 0px -1px -30px -1px; color: #fff;"><span class="fa fa-money"></span> Modes de payement: <img src="{{ asset('template/images/mtnmobile.jpg') }}" style="height: 40px; width: 60px;"/> <img src="{{ asset('template/images/orangemonnaie.png') }}" style="height: 40px; width: 60px;"/></div>
+		</div>
+		</div>
+		
+		</div>
+</div>
+
+<hr>
+<!-- //mail -->
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Inscription, Connexion, Maisons Cameroun, Immobilier, Annonce Cameron, Appartement, Studios à louer, Studio simple, Appartements meublés,terrains, duplex, villas,"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="Inscription gratuite sur {{ site }} - {{ metier }} - Annonce Cameroun, Annonce gratuite."/>
+{% endblock %}
+{% block title %}
+{{ parent() }} | Inscription 
+{% endblock %}
+
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> E-learning place <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Noel Kenfack
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;">
+<!-- banner -->
+	<div class="banner">
+		<div class="container" style="padding-top: 50px; margin-bottom: 10px;">
+			<div class="banner-left">
+				<h3>Identifier le super administrateur configurer dans le système et connectez-vous en tantque surper admin!</h3>
+				<p>Rentrez le mot de passe Configuré dans le système.</p>
+			</div>
+			<div class="banner-right" style="padding-bottom: 200px;">
+				<h3><span>Devenir Super Administrateur</span></h3>
+				<div class="reservation">
+				<form action="{{ path('users_user_ajout_super_admin') }}" method="post">
+					{% for infos in app.session.flashbag.get('information') %}
+					{% if loop.first %}
+					<div class="alert alert-warning" style="margin-bottom: 3px;">{{ infos|raw }}</div>
+					{% endif %}
+					{% endfor %}
+					<div class="keywords">
+						<span class="glyphicon glyphicon-list-alt"></span>
+						<input type="text" placeholder="Nom de l'application" id="username" name="_username" value="" required/>
+					</div>
+					<div class="keywords" style="margin-top: 25px;">
+						<span class="glyphicon glyphicon-lock"></span>
+						<input type="password" placeholder="Password" id="password" name="_password" required/>
+					</div>
+					
+					<div class="keywords">
+						<input type="submit" value="Ajouter le rôle super admin à votre compte" style="margin-top: 15px;">
+					</div>
+				</form>
+				</div>
+				{% if app.user == null %}
+				<h4 style="margin-top: 40px;">Vous avez déjà un compte ? <a href="{{ path('login') }}"><i class="fa fa-sign-in"></i> Connexion</a></h4>
+				{% else %}
+				<h4 style="margin-top: 40px;">Vous ne vous souvenez plus des accès ? <a href="{{ path('users_user_user_accueil', {'id': app.user.id }) }}"><i class="fa fa-sign-in"></i> Retournez vers votre compte</a></h4>
+				{% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!-- //banner -->
+	<hr>
+{% endblock %}
+
+{% block javascripttemplate %}
+$('.active').removeClass('active');
+$('.compte-user').addClass('active');
+{% endblock %}

@@ -1,0 +1,60 @@
+
+<nav id="footer" style="position: absolute; z-index: 5; width: 100%; padding-top: 0px;">
+
+<section style="background: #bdc3c7; margin-bottom: 20px;">
+<div class="container">
+<div class="row">
+	<div class="col-lg-12" style="padding-top: 15px;">
+		Abonnez-vous à la newletter pour suivre la mise à jour des cours en temps réel. <span class="fa fa-angle-double-right"></span>  <form action="{{ path('users_user_create_newsletter_account') }}" method="post" {{ form_enctype(form) }} style="display: inline;">{{ form_widget(form.nom, {'attr': {'placeholder':'Rentrez votre nom','style':'height: 35px; padding: 7px;'}}) }} {{ form_widget(form.email, {'attr': {'placeholder':'Rentrez votre e-mail','style':'height: 35px; padding: 7px;'}}) }}  <button class="btn btn-primary" style="height: 35px; border-radius: 0px;">S'inscrire</button> {{ form_rest(form) }}</form>
+	</div>
+</div>
+</div>
+</section>
+
+<div class="container">
+<div class="row">
+	
+	<div class="col-lg-3">
+		<div><strong><span class="mdi-action-description"></span> Az Corp E-learning</strong></div>	
+		<div><a href="{{ path('produit_service_apropos_denous') }}" style="color: #fff;"> À propos</a></div>	
+		<div><a href="{{ path('produit_service_apropos_denous') }}" style="color: #fff;"> Comment ça marche ?</a></div>	
+		<div><a href="#!" style="color: #fff;"> Conditions d'utilisation</a></div>	
+	</div>
+	<div class="col-lg-3">
+		<div><strong><span class="mdi-action-open-in-new"></span> L'entreprise</strong></div>	
+		<div><a href="http://e-learning.azcorporation.net" style="color: #fff;" target="_blank"> e-learning.azcorporation.net</a></div>	
+		<div><a href="http://azcorporation.net" style="color: #fff;" target="_blank"> azcorporation.net</a></div>
+		
+		<div>{% if is_granted('ROLE_ADMIN') %}<a href="{{ path('users_adminuser_accueil_administration') }}" style="color: #fff;"> Administration</a> {% endif %} {% if is_granted('ROLE_FORMATEUR') %}| <a href="{{ path('produit_produit_ajouter_nouveau_produit') }}" style="color: #fff;"> Créez un cours</a>{% endif %}</div>
+		
+	</div>
+	<div class="col-lg-3">
+		<div><strong><span class="mdi-action-perm-phone-msg"></span> Nous Contactez</strong></div>	
+		<div><a href="#!" style="color: #fff;"> Tel: (+237) 697.27.97.70</a></div>
+		<div><a href="#!" style="color: #fff;"> BP: 154 Yaoundé</a></div>
+		<div><a href="{{ path('produit_service_contact_us') }}" style="color: #fff;"> Formulaire de contact</a></div>	
+	</div>
+	<div class="col-lg-3">
+		<div><strong><span class="mdi-communication-location-on"></span> Localisation</strong></div>	
+		<div><a href="#!" style="color: #fff;"> Yaoundé, Biyem-assi-Collège Bambis</a></div>
+		<div><a href="#!" style="color: #fff;"> Cameroun</a></div>
+	</div>
+</div>
+		
+</div>
+<div class="container">
+	<hr>
+	<div class="pull-left fnav">
+		<p>© 2017 All rights reserved. Design By <a href="http://africexplorer.com/">Afex</a></p>
+	</div>
+	<div class="pull-right fnav">
+		<ul class="footer-social">
+			<li>Suivez-nous sur : </li>
+			<li><a href="{{ facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+			<li><a href="{{ google }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+			<li><a href="{{ twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a href="{{ linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+		</ul>
+	</div>
+</div>
+</nav>

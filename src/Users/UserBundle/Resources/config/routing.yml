@@ -1,0 +1,88 @@
+users_user_inscription_user:
+    path: /inscription/user
+    defaults: { _controller: UsersUserBundle:User:inscriptionuser }
+users_user_user_accueil:
+    path: /accueil/user/{id}
+    defaults: { _controller: UsersUserBundle:User:accueiluser }
+    requirements:
+        id: \d+
+users_user_accueil_commande_user:
+    path: /accueil/commande/user/{id}
+    defaults: { _controller: UsersUserBundle:User:accueilcommandeuser }
+    requirements:
+        id: \d+
+users_user_connexion_user:
+    path: /login
+    defaults: { _controller: UsersUserBundle:Security:login }
+users_user_acces_plateforme:
+    path: /
+    defaults: { _controller: UsersUserBundle:Security:accueilsite }
+users_user_courant_noel_website_alert:
+    path: /noel/kenfack/courant/website
+    defaults: { _controller: UsersUserBundle:User:alertnoel }
+users_user_modifier_profil:
+    path: /user/modifier/profil/user/{id}
+    defaults: { _controller: UsersUserBundle:User:modifierprofil }
+    requirements:
+        id: \d+
+users_user_update_profil_user:
+    path: /user/update/profil/user/{id}
+    defaults: { _controller: UsersUserBundle:User:updateprofil }
+    requirements:
+        id: \d+
+users_user_detail_panier_user:
+    path: /user/detail/user/commande/{panier}/{produit}
+    defaults: { _controller: ProduitProduitBundle:Panier:detailpanieruser }
+    requirements:
+        panier: \d+
+        produit: \d+
+users_user_add_new_copie_exercice:
+    path: /user/add/new/copie/exercice/{exercice}/{prodpan}
+    defaults: { _controller: ProduitProduitBundle:Panier:addnewcopieexercice }
+    requirements:
+        exercice: \d+
+        prodpan: \d+
+users_user_ajout_copie_travaux_pratique:
+    path: /user/ajout/copie/travaux/pratique/{pratique}/{prodpan}
+    defaults: { _controller: ProduitProduitBundle:Panier:ajoutcopietp }
+    requirements:
+        pratique: \d+
+        prodpan: \d+
+users_user_alter_copie_exercice_user:
+    path: /user/alter/copie/exercice/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:altercopieexercice }
+    requirements:
+        id: \d+
+users_user_modification_copie_travaux_pratique_user:
+    path: /user/modification/copie/travaux/pratique/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:modificationcopietp }
+    requirements:
+        id: \d+
+users_user_update_note_exercice_user:
+    path: /user/update/note/exercice/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:updatenoteexercice }
+    requirements:
+        id: \d+
+users_user_modif_note_tp_courant_user:
+    path: /user/modif/note/tp/courant/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:updatenotetp }
+    requirements:
+        id: \d+
+users_user_ajout_super_admin:
+    path: /ajouter/supper/admin
+    defaults: { _controller: UsersUserBundle:User:ajouteradmin }
+    requirements:
+        id: \d+
+users_user_presentation_service_even:
+    path: /presentation/service/evenement/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:presentation, id: 0 }
+    requirements:
+        id: \d+
+users_user_liste_forum_epingle:
+    path: /liste/forum/epingle/{id}
+    defaults: { _controller: UsersUserBundle:User:forumepingle }
+    requirements:
+        id: \d+
+users_user_create_newsletter_account:
+    path: /create/newsletter/account
+    defaults: { _controller: UsersUserBundle:Newsletter:createaccount }

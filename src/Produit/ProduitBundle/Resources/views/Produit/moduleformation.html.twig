@@ -1,0 +1,58 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, {% for scat in liste_scat %}{{ scat.nom }},{% endfor %} cours, vidéos, cours en ligne, vidéo az, cours az, formation"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} - Nos modules de formation" />
+{% endblock %}
+{% block title %}
+{{ parent() }} Nos modules de formation
+{% endblock %}
+
+{% block userblog_body %}
+
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span>  Cours
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+<div class="container">
+	<div class="row mt centered">
+		<div class="col-lg-12"  style="padding: 3px 7px;">
+			<h1 class="text-primary text-left"><img src="{{ asset('template/images/badgeaz.png') }}" alt="Certificat" class="pull-right" title="Formations certifiantes" style="height: 40px; width: 30px;"/><span class="mdi-action-book" style="font-size: 35px;"></span> Modules de formation</h1>
+		</div>
+
+		<div class="col-lg-12" style="padding: 3px 7px;">
+		<div class="divider"></div>
+		</div>
+	</div><!-- /row -->
+	  
+	  <div class="row  mt centered">
+	  <div class="col-lg-12 demo-tiles"  style="padding-top: 30px; max-width: 98%; margin-left: 10px;">
+        {% for scat in liste_scat %}
+		<div class="col-lg-3">
+          <div class="tile" style="margin-bottom: 30px;">
+			<img src="{{ asset('template/png/ribbon.png') }}" alt="ribbon" class="tile-hot-ribbon">
+            <img src="{% if scat.src != null %}{{ asset(scat.getwebpath) }}{% else %}{{ asset('template/images/user-bg.jpg') }}{% endif %}" alt="{{ scat.nom }}" class="tile-image big-illustration" style="width: 120px; height: 120px; border-radius: 60px;"/>
+            <h3 class="tile-title">{{ scat.nom }}</h3>
+            <p>{{ scat.contenu }}</p>
+            <a class="btn btn-primary btn-block" style="position: absolute; bottom: 10px; width: 90%;" href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scat.id }) }}"><span class="fa fa-book"></span> Les cours</a>
+          </div>
+        </div>
+		{% endfor %}
+      </div>
+      </div>
+	  
+</div><!-- /container -->
+
+<hr>
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

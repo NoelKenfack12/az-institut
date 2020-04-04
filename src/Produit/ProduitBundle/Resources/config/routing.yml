@@ -1,0 +1,270 @@
+produit_produit_liste_produit_souscategorie:
+    path: /liste/cours/module/{id}/{page}
+    defaults: { _controller: ProduitProduitBundle:Produit:listeproduituser, id: 0, page: 1 }
+    requirements:
+        id: \d+
+        page: \d+
+produit_produit_module_deformation:
+    path: /module/deformation
+    defaults: { _controller: ProduitProduitBundle:Produit:moduleformation }
+produit_produit_ajouter_nouveau_produit:
+    path: /user/ajouter/nouveau/cours
+    defaults: { _controller: ProduitProduitBundle:Produit:ajouterproduit }
+produit_produit_check_corant_tickect:
+    path: /check/corant/tickect
+    defaults: { _controller: ProduitProduitBundle:Produit:checkticket }
+produit_produit_modification_produit_controller:
+    path: /user/modification/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:modifierproduit }
+    requirements:
+        id: \d+
+produit_produit_detail_produit_market:
+    path: /detail/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:detailproduit }
+    requirements:
+        id: \d+
+produit_produit_add_new_partie_cours:
+    path: /user/add/new/partie/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Partiecours:addpartiecours }
+    requirements:
+        id: \d+
+produit_produit_modification_partie_cours:
+    path: /user/modification/partie/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Partiecours:modificationpartiecours }
+    requirements:
+        id: \d+
+produit_produit_supprimer_partie_cours:
+    path: /user/supprimer/partie/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Partiecours:supprimerpartiecours }
+    requirements:
+        id: \d+
+produit_produit_add_quartier_ville:
+    path: /market/add/quartier/ville/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:addquartierville }
+    requirements:
+        id: \d+
+produit_produit_inscription_user_produit:
+    path: /market/inscription/user/produit/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:inscriptionuser }
+    requirements:
+        id: \d+
+produit_produit_connexion_user_produit_indent:
+    path: /market/connexion/user/produit/indent/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:connexionuser }
+    requirements:
+        id: \d+
+produit_produit_like_courant_product:
+    path: /like/courant/product
+    defaults: { _controller: ProduitProduitBundle:Produit:likeproduct }
+produit_produit_ajouter_product_panier:
+    path: /user/ajouter/product/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:ajouterpanier }
+    requirements:
+        id: \d+
+produit_produit_add_chapitre_panier_user:
+    path: /user/add/chapter/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:ajouterpanier }
+    requirements:
+        id: \d+
+produit_produit_add_panier_produit:
+    path: /add/panier/produit/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:addpanier }
+    requirements:
+        id: \d+
+produit_produit_reglement_commande_du_panier:
+    path: /reglement/commande/dupanier/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:reglementcommande }
+    requirements:
+        id: \d+
+produit_produit_editer_courant_commande:
+    path: /edit/courant/commande
+    defaults: { _controller: ProduitProduitBundle:Produit:editcommande }
+    requirements:
+        id: \d+
+produit_produit_elever_produit_commande:
+    path: /enleve/produit/commande/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:eleveproduit }
+    requirements:
+        id: \d+
+produit_produit_recherche_new_produit:
+    path: /recherche/new/produit
+    defaults: { _controller: ProduitProduitBundle:Produit:rechercheproduit }
+produit_produit_valider_payement_ticket:
+    path: /valider/payement/ticket/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:validationpayement }
+    requirements:
+        id: \d+
+produit_produit_modifier_lieu_livraison:
+    path: /modifier/lieu/livraison/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:modifierlieulivraison }
+    requirements:
+        id: \d+
+produit_produit_accueil_boutique_produit:
+    path: /nos/cours/{page}
+    defaults: { _controller: ProduitProduitBundle:Produit:accueilboutique, page: 1 }
+    requirements:
+        page: \d+
+produit_produit_add_new_chapter:
+    path: /user/add/new/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:addnewchapter }
+    requirements:
+        id: \d+
+produit_produit_presentation_chapter:
+    path: /presentation/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:presentationchapter }
+    requirements:
+        id: \d+
+produit_produit_user_modif_chapter:
+    path: /user/modifier/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:modifierchapter }
+    requirements:
+        id: \d+
+produit_produit_user_supprimer_chapter:
+    path: /user/supprimer/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:supprimerchapter }
+    requirements:
+        id: \d+
+structure_pubquartier_delete_image_produit_en_vente:
+    path: /user/delete/image/produit/en/vente
+    defaults: { _controller: ProduitProduitBundle:Produit:deleteimageproduit }
+produit_produit_telecherger_panier:
+    path: /telechergement/facture/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:telechargerpanier }
+    requirements:
+        id: \d+
+produit_produit_download_video_chapter:
+    path: /user/download/video/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:downloadvideochapitre }
+    requirements:
+        id: \d+
+produit_produit_ajout_nouveau_support_chapter:
+    path: /user/ajout/nouveau/support/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:ajoutnouveausupport }
+    requirements:
+        id: \d+
+produit_produit_modif_support_courant_chapter:
+    path: /user/modif/support/courant/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:modifsupportchapter }
+    requirements:
+        id: \d+
+produit_produit_telecharger_support_chapter:
+    path: /user/telecharger/support/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:telechargersupport }
+    requirements:
+        id: \d+
+produit_produit_supprimer_support_chapter:
+    path: /user/supprimer/support/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:supprimersupport }
+    requirements:
+        id: \d+
+produit_produit_ajout_new_travaux_pratique:
+    path: /user/ajout/new/travaux/pratique/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:ajoutnewtravauxpratique }
+    requirements:
+        id: \d+
+produit_produit_modif_exercice_chapter_current:
+    path: /user/modif/exercice/chapter/current/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:modifexercicechapter }
+    requirements:
+        id: \d+
+produit_download_correction_exercice_chapter:
+    path: /user/download/correction/exercice/chapter/{id}/{prodpan}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:downloadcorrectionexo }
+    requirements:
+        id: \d+
+        prodpan: \d+
+produit_telecharg_correction_tp_chapter:
+    path: /user/elecharg/correction/tp/chapter/{id}/{prodpan}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:telechargcorrectiontp }
+    requirements:
+        id: \d+
+        prodpan: \d+
+produit_produit_download_travaux_pratique:
+    path: /user/download/travaux/pratique/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:telechargertp }
+    requirements:
+        id: \d+
+produit_produit_suppression_travaux_pratique:
+    path: /user/suppression/travaux/pratique/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:suppressiontp }
+    requirements:
+        id: \d+
+produit_produit_ajout_new_exercice:
+    path: /user/ajouter/exercice/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:ajouterexercice }
+    requirements:
+        id: \d+
+produit_produit_telecharge_exercice:
+    path: /user/telecharge/exercice/chapter/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:downloadexercice }
+    requirements:
+        id: \d+
+produit_produit_supprime_exercice:
+    path: /user/supprime/exercice/{id}
+    defaults: { _controller: ProduitProduitBundle:Chapitrecours:supprimeexercice }
+    requirements:
+        id: \d+
+produit_produit_user_nouvelle_question_chapter:
+    path: /user/nouvelle/question/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:nouvellequestion }
+    requirements:
+        id: \d+
+produit_produit_user_liste_propos_questionnaire:
+    path: /user/liste/propos/questionnaire/{id}/{src}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:questionnairenotion, src: 0 }
+    requirements:
+        id: \d+
+        src: \d+
+produit_produit_user_ajouter_new_proposition_question:
+    path: /user/ajouter/new/proposition/question/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:addnewproposition }
+    requirements:
+        id: \d+
+produit_produit_question_update_reponse:
+    path: /user/question/update/reponse/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:updatereponse }
+    requirements:
+        id: \d+
+produit_produit_liste_questionnaire_composition_chapter:
+    path: /liste/questionnaire/composition/chapter/{id}/{idpropan}/{src}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:composquestionnaire, src: 0 }
+    requirements:
+        id: \d+
+        idpropan: \d+
+        src: \d+
+produit_produit_valider_questionnaire_courant_chapter:
+    path: /user/valider/questionnaire/courant/chapter/{id}/{prodpan}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:validationquestionnaire }
+    requirements:
+        id: \d+
+        prodpan: \d+
+produit_produit_composition_update_compos_questionnaire:
+    path: /user/composition/update/compos/questionnaire/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:updatecomposition }
+    requirements:
+        id: \d+
+produit_produit_supprimer_proposition_question:
+    path: /user/supprimer/proposition/question/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:supprimerproposition }
+    requirements:
+        id: \d+
+produit_produit_validate_courant_question:
+    path: /user/validate/courant/question/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:validatequestion }
+    requirements:
+        id: \d+
+produit_produit_user_delete_questionnaire:
+    path: /user/delete/questionnaire/{id}
+    defaults: { _controller: ProduitProduitBundle:Questionnaire:deletequestionnaire }
+    requirements:
+        id: \d+
+produit_produit_download_video_cours:
+    path: /download/video/cours/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:downloadvideocours }
+    requirements:
+        id: \d+
+produit_produit_guide_formateur:
+    path: /user/guide/formateur/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:guideformateur }
+    requirements:
+        id: \d+

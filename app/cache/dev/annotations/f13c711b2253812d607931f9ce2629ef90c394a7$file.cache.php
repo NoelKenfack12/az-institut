@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:46:"General\\ValidatorBundle\\Validatorfile\\Yourfile":3:{s:7:"message";s:42:"la taille de l\'image  %string% est grande.";s:9:"taillemax";i:100000000;s:6:"groups";a:1:{i:0;s:7:"Default";}}}');

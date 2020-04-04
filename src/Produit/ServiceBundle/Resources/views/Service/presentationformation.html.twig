@@ -1,0 +1,489 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration,formation en ligne, e-learning, cours, support, vidéos, {{ service.nom }} , {{ service.keyword }}"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} - {{ metier }} - Présentation formation {{ service.nom }} , {{ service.keyword }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Connexion
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }} 
+<link rel="stylesheet" href="{{ asset('template/player/themes/maccaco/projekktor.style.css') }}" type="text/css" media="screen" />
+
+<script type="text/javascript" src="{{ asset('template/player/projekktor-1.3.09.min.js') }}"></script>
+{% endblock %}
+
+{% block userblog_body %}	
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Formation <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ service.nom }}
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;">
+
+	
+<h1 style="background: #ECF0F1; display: block; text-align: left; padding: 15px; margin-top: 0px;">
+<div class="animecourant-panel">
+</div>
+</h1>
+<div class="container">
+	<div class="row mt centered">
+	{% for infos in app.session.flashbag.get('information') %}
+	{% if loop.first %}
+		<div class="col-lg-12 alert alert-warning text-left alert-dismissable">{{ infos|raw }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+	{% endif %}
+	{% endfor %}
+		<div class="col-lg-12" style="padding: 3px 7px;">
+			<h1 style="background: #ECF0F1; display: block; text-align: left;"><span class="mdi-action-subject"></span> {{ service.nom }}
+			<div class="btn-group pull-right" style="margin-top: -10px; padding: 0px;">
+			<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; padding: 0px; margin: 0px;"><i class="mdi-hardware-keyboard-arrow-down" style="padding: 0px; margin: 0px;"></i></a>
+				<ul class="dropdown-menu pull-right" style="margin-top: 0px; border-radius: 0px;">
+					<li><a href="#!"><span class=" fa fa-info-circle"></span> À propos </a></li>
+					<li class="divider"></li>
+					<li><a href="#"><span class="fa fa-check"></span> Formation en ligne et au centre</a></li>
+				</ul>
+			</div>
+			</h1>
+		</div>
+		<div class="col-lg-12" style="padding:0px 7px;">
+		<div class="divider" style="margin-top: -12px;"></div>
+		</div>
+		<div class="col-lg-12" style="padding: 0px 7px;">
+		<h1 style="background: #BDC3C7; display: block; text-align: left; margin-top: -12px;">
+		<a href="#!" class="formats-cours" title="Format Description: accès libre et gratuit en ligne"><span class="mdi-av-my-library-books" style="margin: 3px;" title="Format autorisé"></span></a> 
+		<a href="#!" class="formats-cours" title="Format Vidéos: accès gratuit ou payant en ligne"><span class="mdi-notification-voice-chat" title="Format autorisé" style="margin: 3px;"></span></a> 
+		<a href="#!" class="formats-cours" title="Format E-book: accès gratuit ou payant en ligne"><span class="mdi-hardware-phone-android" title="Format autorisé" style="margin: 3px;"></span></a> 
+		<a href="#!" class="formats-cours-ban"><span class="mdi-maps-local-library" title="Format Livre papier: non gérer." style="margin: 3px;"></span> </a>
+		<a href="#!" class="formats-cours" title="Exercices et TP: accès gratuit ou payant en ligne"><span class="mdi-action-assignment-turned-in" title="Validation de la formation" style="margin: 3px;"></span></a>
+		<a href="#!" class="formats-cours" title="Certificat: pris en charge pour ce cours"><span class="mdi-action-wallet-membership" title="Certificat" style="margin: 3px;"></span></a>
+
+		<span class="pull-right" style="font-size: 15px; background: #f0ad4e; margin: 7px; color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); padding: 5px; border-radius: 5px;"><span class="mdi-image-iso" style="font-size: 14px;"></span> {% set nbressource = nbvideo + nbsupport + nbpratique + nbexercice %} Ressources disponibles: {{ nbressource }}</span>
+		
+		</h1>
+		</div>
+		<div class="col-lg-12" style="padding:0px 7px;">
+		<div class="divider" style="margin-top: -7px;"></div>
+		</div>
+	</div><!-- /row -->
+	
+	<div class="row mt centered">
+		<div id="monaccordeon" class="panel-group col-lg-4" style="padding: 0px 7px;">
+		<div class="toutleblock">
+		<div class="panel panel-default text-left" style="border-radius: 0px;">
+		<div class="panel-heading">
+		<h3 class="panel-title">
+		<a class="accordion-toggle" href="#item1" data-parent="#monaccordeon" data-toggle="collapse" style="display: block;"><span class="mdi-content-report" style="font-size: 15px;"></span> Formation au centre
+		<div class="btn-group pull-right" style="margin-top: -20px; margin-right: -10px; padding: 0px;">
+		<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; padding: 3px 0px; margin: 0px;"><i class="mdi-hardware-keyboard-arrow-down" style="padding: 0px; margin: 0px;"></i></a>
+			<ul class="dropdown-menu pull-right" style="margin-top: 0px; border-radius: 0px;">
+				<li><a href=""><span class=" fa fa-info-circle"></span> À propos </a></li>
+				<li class="divider"></li>
+				<li><a href="#"><span class="fa fa-th"></span> Certificats 120</a></li>
+			</ul>
+		</div>
+		</a>
+		</h3>
+		</div>
+		<div id="item1" class="panel-collapse collapse in">
+		<div class="panel-body"> 
+		<ul style="padding: 0px;">
+			<li><a href=""><span class="mdi-notification-event-available" style="font-size: 17px;"></span> Formation: du {{ service.datebegin|slice(0, 2) }} {{ service.user.mois(service.datebegin|slice(4, 2)) }} au {{ service.datefin|slice(0, 2) }} {{ service.user.mois(service.datefin|slice(4, 2)) }} {{ service.datebegin|slice(6, 4) }}</a></li>
+		</ul>
+		<div style="text-align: justify;">{{ service.puboffline }}</div>
+		<div class="alert-info" style="margin-top: 15px; padding: 15px;  margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px;">Formation: {{ service.nprixoff }} {{ devise }} <a href="#formationhorsligne" class="page-scroll-to">Comprennant <span class="fa fa-check-square-o"></span></a></div>
+		<div><a href="#!" class="btn btn-primary souscription-cours-offline" value="0">Souscrire à cette formation</a></div>
+		</div>
+		</div>
+		</div>
+		
+		<div class="panel panel-default text-left" style="border-radius: 0px;">
+		<div class="panel-heading">
+		<h3 class="panel-title">
+		<a class="accordion-toggle" href="#item2" data-parent="#monaccordeon" data-toggle="collapse" style="display: block;"><span class="mdi-content-report" style="font-size: 15px;"></span> Formation en ligne
+		<div class="btn-group pull-right" style="margin-top: -20px; margin-right: -10px; padding: 0px;">
+		<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; padding: 3px 0px; margin: 0px;"><i class="mdi-hardware-keyboard-arrow-down" style="padding: 0px; margin: 0px;"></i></a>
+			<ul class="dropdown-menu pull-right" style="margin-top: 0px; border-radius: 0px;">
+				<li><a href=""><span class=" fa fa-info-circle"></span> À propos </a></li>
+				<li class="divider"></li>
+				<li><a href="#"><span class="fa fa-th"></span> Certificats 120</a></li>
+			</ul>
+		</div>
+		</a>
+		</h3>
+		</div>
+		<div id="item2" class="panel-collapse collapse in">
+		<div class="panel-body"> 
+		<ul style="padding: 0px;">
+			<li><a href=""><span class="mdi-notification-event-available" style="font-size: 17px;"></span> Formation: En continue</a></li>
+		</ul>
+		<div style="text-align: justify;">{{ service.pubinline }}</div>
+		<div class="alert-info" style="margin-top: 15px; padding: 15px;  margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px;">Formation: {{ service.nprix }} {{ devise }} <a href="#formationenligne" class="page-scroll-to">Comprennant <span class="fa fa-check-square-o"></span></a></div>
+		<div><a href="#!" class="btn btn-primary souscription-cours-offline" value="1">Souscrire à cette formation</a></div>
+		</div>
+		</div>
+		</div>
+		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stop-courant-panel">
+				
+		</div>
+		</div>
+							
+		</div>
+		<div class="col-lg-8" style="padding: 0px 7px;">
+		
+		<div class="projekktor"  id="player_block_1" style="width: 100%; text-align: center;">
+		</div>
+
+		<div class="panel panel-default" style="margin-top: 15px; text-align: justify; padding: 7px; border-radius: 0px;">
+		<div style="text-align: right; border-bottom: 2px solid #f0ad4e; margin-top: -30px; position: absolute; z-index: 5; top: 5px; right: -10px; width: 97%; margin-right: 20px;"><a href="{{ path('produit_service_download_video_formation', {'id': service.id }) }}" class="btn btn-warning" value="0" style="background: #f0ad4e; margin-bottom: 2px;" target="_blank"><span class="fa fa-download"></span> Téléchargez cette vidéo ({{ service.imgservicesecond.nbtele }})</a></div>
+		
+		<div style="border-bottom: 1px solid #ddd;" class="text-primary"><strong><span class="mdi-communication-textsms"></span> {{ service.nom }} <a href="#!" class="open-content pull-right" value="down" name="1"><span class="mdi-hardware-keyboard-arrow-down"></span></a></strong></div>
+			<div class="content-panel-1">{{ service.description|raw }}</div>
+		</div>
+		
+		<div class="panel panel-default" id="formationhorsligne" style="border-radius: 0px;">
+		<div class="panel-heading">
+		<h3 class="panel-title text-left"><span class="mdi-toggle-check-box" style="font-size: 17px;"></span> <a href="#!" class="pull-right btn btn-primary souscription-cours-offline" value="0" style="color: #fff; padding: 4px; margin-top: -4px;">Je m'inscris</a>  Formation hors ligne comprennant</h3>
+		</div>
+		<div class="panel-body" style="padding: 5px 0px; margin: 0px;">
+		<div class="col-sm-12 text-left">
+		<div style="border-bottom: 1px solid #ddd; margin-bottom: 5px;"><strong><span class="fa fa-chevron-right"></span> Les ressources accéssibles partout</strong></div>
+		</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/video-image2.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;">Cours Vidéos <span class="badge">{{ nbvideo }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px; ">
+				<img src="{{ asset('template/images/support1.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Supports de cours <span class="badge">{{ nbsupport }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/tpratique3.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Travaux pratiques <span class="badge">{{ nbpratique }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/exercice2.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Exercices corrigés <span class="badge">{{ nbexercice }}</span></p>
+			</div>
+			<div class="col-sm-12" style="padding: 0px;">
+			<div class="compose-left text-left" style="margin-bottom: 7px; margin-left: -30px; margin-right: 10px;">
+			<div class="chat-grid widget-shadow">
+				<ul>
+					<li class="item-menu-right open-element" style="display: block; width: 100%; margin-top: 15px; border-bottom: 1Px solid #ddd; border-top: 1Px solid #ddd;">
+						<div class="chat-left pull-left" style="width: 80px; padding-right: 10px;">
+							<img src="{{ asset('template/images/info.png') }}" alt="article aimé" style="width: 70px; height:70px; border-radius: 5px; margin-top: 10px; margin-bottom: 10px;"/>
+						</div>
+						<div class="chat-right">
+							<p style="margin: 0px;"><strong><span class="fa fa-chevron-right"></span> Des formateurs qualifiés</strong></p>
+							<p style="margin: 0px;">hgcsdfsndk </p>
+							<p style="margin: 0px;">:: <i class="badge">ghvfsdnfbsd</i> :: <i class="badge">Cours Invalides</i> :: <i class="badge">Cours valides</i> :: <i class="badge">Inscription aux cours</i> ::</p>
+						</div>
+					<div class="clearfix"> </div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		</div>
+		<div class="col-sm-12" style="padding: 0px;">
+			<div class="compose-left text-left" style="margin-bottom: 7px; margin-left: -30px; margin-right: 10px;">
+			<div class="chat-grid widget-shadow">
+				<ul>
+					<li class="item-menu-right open-element" style="display: block; width: 100%; margin-top: 15px; border-bottom: 1Px solid #ddd; border-top: 1Px solid #ddd;">
+						<div class="chat-left pull-left" style="width: 80px; padding-right: 10px;">
+							<img src="{{ asset('template/images/info.png') }}" alt="article aimé" style="width: 70px; height:70px; border-radius: 5px; margin-top: 10px; margin-bottom: 10px;"/>
+						</div>
+						<div class="chat-right">
+							<p style="margin: 0px;"><strong><span class="fa fa-chevron-right"></span> Un espace de formation agréable</strong></p>
+							<p style="margin: 0px;">hgcsdfsndk </p>
+							<p style="margin: 0px;">:: <i class="badge">ghvfsdnfbsd</i> :: <i class="badge">Cours Invalides</i> :: <i class="badge">Cours valides</i> :: <i class="badge">Inscription aux cours</i> ::</p>
+						</div>
+					<div class="clearfix"> </div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		</div>
+		</div>
+		</div>
+		
+		<div class="panel panel-default" id="formationenligne" style="border-radius: 0px;">
+		<div class="panel-heading">
+		<h3 class="panel-title text-left"><span class="mdi-toggle-check-box" style="font-size: 17px;"></span> <a href="#!" class="pull-right btn btn-primary souscription-cours-offline" value="1" style="color: #fff; padding: 4px; margin-top: -4px;">Je m'inscris</a> Formation en ligne comprennant</h3>
+		</div>
+		<div class="panel-body" style="padding-bottom: 0px; margin-bottom: 0px;">
+			<div class="col-sm-12 text-left">
+		<div style="border-bottom: 1px solid #ddd; margin-bottom: 5px;"><strong><span class="fa fa-chevron-right"></span> Les ressources accéssibles partout</strong></div>
+		</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/video-image2.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;">Cours Vidéos <span class="badge">{{ nbvideo }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px; ">
+				<img src="{{ asset('template/images/support1.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Supports de cours <span class="badge">{{ nbsupport }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/tpratique3.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Travaux pratiques <span class="badge">{{ nbpratique }}</span></p>
+			</div>
+			<div class="col-md-3">
+			  <div class="demo-download" style="height: 90px; width: 90px; padding-top: 15px; padding-left: 20px; margin-bottom: 5px;">
+				<img src="{{ asset('template/images/exercice2.png') }}" style="height: 60px; width: 50px;"/>
+			  </div>
+			  <p class="demo-download-text" style="padding-bottom: 0px; margin-bottom: 5px;"> Exercices corrigés <span class="badge">{{ nbexercice }}</span></p>
+			</div>
+			<div class="col-sm-12" style="padding: 0px;">
+			<div class="compose-left text-left" style="margin-bottom: 7px; margin-left: -30px; margin-right: 10px;">
+			<div class="chat-grid widget-shadow">
+				<ul>
+					<li class="item-menu-right open-element" style="display: block; width: 100%; margin-top: 15px; border-bottom: 1Px solid #ddd; border-top: 1Px solid #ddd;">
+						<div class="chat-left pull-left" style="width: 80px; padding-right: 10px;">
+							<img src="{{ asset('template/images/info.png') }}" alt="article aimé" style="width: 70px; height:70px; border-radius: 5px; margin-top: 10px; margin-bottom: 10px;"/>
+						</div>
+						<div class="chat-right">
+							<p style="margin: 0px;"><strong><span class="fa fa-chevron-right"></span> Des formateurs qualifiés</strong></p>
+							<p style="margin: 0px;">hgcsdfsndk </p>
+							<p style="margin: 0px;">:: <i class="badge">ghvfsdnfbsd</i> :: <i class="badge">Cours Invalides</i> :: <i class="badge">Cours valides</i> :: <i class="badge">Inscription aux cours</i> ::</p>
+						</div>
+					<div class="clearfix"> </div>
+					</li>
+				</ul>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			</div>
+		</div>
+		</div>
+		
+		<div class="panel panel-widget text-left" style="border: 1px solid #ddd; margin-bottom: 7px; border-radius: 0px;">
+				<h2 style="margin: 5px; background: #f7f7f7; ">Cours utils pour cette formation <span style="font-size: 12px;" class="fa fa-quote-right"></span></h2>	
+		</div>
+				
+		<div style="margin-left: -5px; margin-right: -5px;">
+		{% for produit in service.produits %}
+			<div class="col-md-4 photoday-grid" style="padding: 3px 7px;">
+			{% include 'ProduitProduitBundle:Produit:produitdescript.html.twig' %}
+			</div>
+		{% else %}
+		<div class="alert alert-warning text-left">Aucun cours retrouvé en ligne pour cette formation actuellement.</div>
+		{% endfor %}
+		</div>
+		</div>
+	<div class="modal fade modal-alter" id="modal-inscription-formation" style="margin-top: 100px;">
+	<div class="modal-dialog modal-md">
+	<div class="modal-content" style="border-radius: 0px;">
+	<div class="modal-header" style="position: absolute; z-index: 3; width: 100%; padding: 2px 0px; box-shadow: 0 15px 15px -1px #f2f2f2 inset;background: #fff;">
+	<div style="box-shadow: 0px 6px 6px #CCC; margin: 0px;">
+	<button type="button" class="close" data-dismiss="modal" style="padding: 7px;">&times;</button>
+	<h4 class="modal-title text-left" style="padding: 7px;"><span class="fa fa-plus-square"></span> Inscription à la formation</h4>
+	</div>
+	</div>
+	<hr style="margin-top: 38px; margin-bottom: 0px;"/>
+	<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+	</div>
+	<div style="background: #BDC3C7;">
+		<div class="text-left" style="color: #fff; padding-left: 15px;">
+		   <span class="fa fa-angle-double-right"></span> {{ service.nom }}</a>
+		</div>	
+	</div>	
+	<hr style="margin-bottom: 0px;"/>
+
+	<div class="modal-body" style="background: #fff; color: #333;">
+	<div style="background: #ECF0F1; padding: 15px;">
+	<div class="col-sm-12" style="padding: 0px;">
+	<div class="compose-left text-left" style="margin-bottom: 7px; margin-left: -30px; margin-right: 10px;">
+	<div class="chat-grid widget-shadow">
+		<ul>
+			<li class="item-menu-right open-element" style="display: block; width: 100%; margin-top: 15px; border-bottom: 1Px solid #ddd; border-top: 1Px solid #ddd;">
+				<div class="chat-left pull-left" style="width: 80px; padding-right: 10px;">
+					<img src="{% if service.imgservice != null %} {{ asset(service.imgservice.getwebpath) }} {% else %}{{ asset('template/player/media/intro.png') }}{% endif %}" alt="article aimé" style="width: 70px; height:70px; border-radius: 5px; margin-top: 10px; margin-bottom: 10px;"/>
+				</div>
+				<div class="chat-right">
+					<p style="margin: 0px;"><strong><span class="fa fa-chevron-right"></span> {{ service.nom }}</strong></p>
+					<p style="margin: 0px;" class="type-de-formation">Prix de la formation</p>
+					<p style="margin: 0px; text-align: right;">Montant :: <i class="badge montant-formation">{{ service.nprixoff }} {{ devise }}</i> ::</p>
+				</div>
+			<div class="clearfix"> </div>
+			</li>
+		</ul>
+	</div>
+	</div>
+	<div class="clearfix"></div>
+	</div>
+	<div class="col-sm-12" style="padding: 8px;">
+	<form action="{{ path('produit_service_add_formation_panier', {'id': service.id }) }}" method="post" style="margin-top: 15px;">
+	<div class="form-group">
+		<input type="password" placeholder="Rentrez votre mot de passe" id="password" name="_password" required class="form-control" style="margin-top: 15px; width: 100%; border-radius: 0px;">
+		<input type="hidden" placeholder="Rentrez votre mot de passe" id="typedeformation" name="_typedeformation" required class="input-type-deformation" style="margin-top: 15px; width: 100%; border-radius: 0px;">
+	</div>
+	<div style="margin-top: 15px;">
+		<button type="submit" class="btn btn-warning btn-lg btn-block" style="border-radius: 0px;">Confirmez le payement avec votre compte {{ site }} </button>
+	</div>
+	</form>
+	</div>
+	
+	<div class="clearfix"></div>
+	</div>
+	</div>
+
+	<hr style="margin-bottom: 15px;"/>
+	<div class="modal-footer" style="text-align: right; padding: 7px; background: #222222; color: #fff;">
+	<span class="pull-left">&copy; {{ site }}</span>
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+	</div>
+
+	</div>
+	</div>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+        projekktor('#player_block_1',{
+        poster: '{% if service.imgservice != null %} {{ asset(service.imgservice.getwebpath) }} {% else %}{{ asset('template/player/media/intro.png') }}{% endif %}',
+        title: 'this is projekktor',
+        playerFlashMP4: '{{ asset('template/player/swf/StrobeMediaPlayback/StrobeMediaPlayback.swf') }}',
+        playerFlashMP3: '{{ asset('template/player/swf/StrobeMediaPlayback/StrobeMediaPlayback.swf') }}',
+        width: '100%',
+        height: 385,
+        playlist: [
+            {
+            0: {src: "{% if service.imgservicesecond != null %}{{ asset(service.imgservicesecond.getwebpath) }} {% else %}{{ asset('template/player/media/intro.mp4') }}{% endif %}", type: "video/mp4"},
+            }
+        ]    
+        }, function(player) {} // on ready 
+        );
+		
+		
+		$('a.page-scroll-to').click(function() {
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		  var target = $(this.hash);
+		  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		  if (target.length) {
+			$('html,body').animate({
+			  scrollTop: target.offset().top - 40
+			}, 900);
+			return false;
+		  }
+		}
+	  });
+	  
+	  $('.open-content').click(function(){
+			$('.content-panel-'+$(this).attr('name')).toggle('slow');
+			if($(this).attr('value') == 'down')
+			{
+				$(this).attr('value','up');
+				$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-right"></span>');
+			}else{
+				$(this).attr('value','down');
+				$('.open-content[name='+$(this).attr('name')+']').html('<span class="mdi-hardware-keyboard-arrow-down"></span>');
+			}
+		});
+		
+	});
+	
+	
+	</script>
+	</div><!-- /row -->
+</div><!-- /container -->
+
+<hr>
+<script src="{{ asset('template/assets/js/onvisible.js') }}" type="text/javascript"></script>	
+{% endblock %}
+
+{% block javascripttemplate %}
+
+var bouge = 1;
+var dimension = 200;
+function activateelement()
+{
+var visibility = visibleElement('.animecourant-panel');
+
+if(visibility && bouge == 0){
+	bouge = 1;
+	$('.toutleblock').css('position','relative');
+	$('.toutleblock').css('bottom','0px');
+	$('.toutleblock').css('margin-bottom','0px');
+}
+}
+
+function stopelement()
+{
+var visibility = visibleElement('.stop-courant-panel');
+if(visibility && bouge == 1){
+	if(visibleElement('.animecourant-panel') && visibleElement('.stop-courant-panel'))
+	{
+	
+	}else{
+	bouge = 0;
+	$('.toutleblock').css('position','fixed');
+	$('.toutleblock').css('width',dimension+'px');
+	$('.toutleblock').css('bottom','7px');
+	$('.toutleblock').css('margin-bottom','50px');
+	}
+}
+}
+
+var idStopelement = 0;
+var idActivateelement = 0;
+function controlScroll()
+{
+	var largeur = ($(window).width());
+	dimension = $('.toutleblock').width();
+	if (largeur >= 768)
+	{
+	   /*
+		if(visibleElement('.animecourant-panel') && visibleElement('.stop-courant-panel'))
+		{
+			$('.toutleblock').css('position','fixed');
+			$('.toutleblock').css('width',dimension+'px'); 
+		}else{ 
+			idStopelement = window.setInterval(function() { stopelement(); }, 100);
+			idActivateelement = window.setInterval(function() { activateelement(); }, 100);
+		}*/
+		idStopelement = window.setInterval(function() { stopelement(); }, 100);
+		idActivateelement = window.setInterval(function() { activateelement(); }, 100);
+	}
+}
+controlScroll();
+
+$('.souscription-cours-offline').click(function(){
+	var id = $(this).attr('value');
+	{% if app.user == null %}
+		$('#modal-infos-action-connexion').modal('show');
+	{% else %}
+		$('#modal-inscription-formation').modal('show');
+		if(id == 1)
+		{
+			$('.type-de-formation').html('<span class="fa fa-chevron-right"> Formation accéssible uniquement en ligne</span> ');
+			$('.montant-formation').html('{{ service.nprix }} {{ devise }}');
+			$('.input-type-deformation').attr('value',1);
+		}else{
+			$('.type-de-formation').html('<span class="fa fa-chevron-right"> Formation accéssible en ligne et dans notre centre de formation</span> ');
+			$('.montant-formation').html('{{ service.nprixoff }} {{ devise }}');
+			$('.input-type-deformation').attr('value',0);
+		}
+	{% endif %}
+});
+{% endblock %}

@@ -1,0 +1,270 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | {{ user.name(20) }}
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ user.name(30) }} <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Formations <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ produit.titre[:50] }}
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+<h1 style="background: #ECF0F1; display: block; text-align: left; padding: 15px; margin-top: 0px;">
+<div class="animecourant-panel">
+</div>
+</h1>
+
+	<div class="container">
+		<div class="row mt centered">
+		{% for infos in app.session.flashbag.get('information') %}
+		{% if loop.first %}
+			<div class="col-lg-12 alert alert-warning text-left alert-dismissable" style="margin-bottom: 15px; border-radius: 0px;">{{ infos|raw }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+		{% endif %}
+		{% else %}
+		<div class="col-lg-12  alert-warning text-left" style="padding: 15px;  margin-bottom: 20px; margin-top: -30px; border: 1px solid transparent; border-radius: 0px;"><span class="fa fa-info-circle"></span> Feuille de suivi de {{ user.name(30) }} sur ce cours. <span class="fa fa-check pull-right"></span></div>
+		{% endfor %}
+	
+			<div class="col-lg-12" style="padding: 3px 7px;">
+				<h1 style="background: #ECF0F1; display: block; text-align: left;"><span class="mdi-action-subject"></span> {{ produit.titre[:50] }}
+				<div class="btn-group pull-right" style="margin-top: -10px; padding: 0px;">
+				<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; padding: 0px; margin: 0px;"><i class="mdi-hardware-keyboard-arrow-down" style="padding: 0px; margin: 0px;"></i></a>
+					<ul class="dropdown-menu pull-right" style="margin-top: 0px; border-radius: 0px;">
+						<li><a href="#"><span class="fa fa-th"></span> Certificats 120</a></li>
+					</ul>
+				</div>
+				</h1>
+			</div>
+			<div class="col-lg-12" style="padding:0px 7px;">
+			<div class="divider" style="margin-top: -12px;"></div>
+			</div>
+			<div class="col-lg-12" style="padding: 0px 7px;">
+			<h1 style="background: #BDC3C7; display: block; text-align: left; margin-top: -12px;">
+			<a href="#!" class="formats-cours" title="Format Description: accès libre et gratuit en ligne"><span class="mdi-av-my-library-books" style="margin: 3px;" title="Format autorisé"></span></a> 
+			<a href="#!" class="formats-cours" title="Format Vidéos: accès gratuit ou payant en ligne"><span class="mdi-notification-voice-chat" title="Format autorisé" style="margin: 3px;"></span></a> 
+			<a href="#!" class="formats-cours" title="Format E-book: accès gratuit ou payant en ligne"><span class="mdi-hardware-phone-android" title="Format autorisé" style="margin: 3px;"></span></a> 
+			<a href="#!" class="formats-cours-ban"><span class="mdi-maps-local-library" title="Format Livre papier: non gérer." style="margin: 3px;"></span> </a>
+			<a href="#!" class="formats-cours" title="Exercices et TP: accès gratuit ou payant en ligne"><span class="mdi-action-assignment-turned-in" title="Validation de la formation" style="margin: 3px;"></span></a>
+			<a href="#!" class="formats-cours" title="Certificat: pris en charge pour ce cours"><span class="mdi-action-wallet-membership" title="Certificat" style="margin: 3px;"></span></a>
+			
+			
+			<span class="pull-right" style="font-size: 15px; background: #f0ad4e; margin: 7px; color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); padding: 5px; border-radius: 5px;"><span class="mdi-image-iso" style="font-size: 14px;"></span> Note</span>
+			
+			</h1>
+			</div>
+			<div class="col-lg-12" style="padding:0px 7px;">
+				<div class="divider" style="margin-top: -7px;"></div>
+			</div>
+		</div>
+		
+		<div class="row mt centered">
+		<div id="monaccordeon" class="panel-group col-lg-4" style="padding: 0px 7px;">
+		<div class="toutleblock">
+		<div class="panel panel-default text-left" style="border-radius: 0px;">
+		<div class="panel-heading">
+		<h3 class="panel-title">
+		<a class="accordion-toggle" href="#item0" data-parent="#monaccordeon" data-toggle="collapse" style="display: block;"><span class="mdi-content-report" style="font-size: 15px;"></span> À propos de ce cours <span class="mdi-hardware-keyboard-arrow-down pull-right"></span></a>
+		</h3>
+		</div>
+		<div id="item0" class="panel-collapse collapse in">
+		<div class="panel-body"> 
+		<div>
+		<ul style="padding: 0px;">
+			<li><a href="{{ path('produit_produit_detail_produit_market', {'id': produit.id }) }}" class="item-chapter-cours"><span class="fa fa-home"></span> Présentation générale</a></li>
+		</ul>
+		</div>
+		</div>
+		</div>
+		</div>
+		
+		{% for partie in liste_part %}
+		{{ render(controller("ProduitProduitBundle:Partiecours:detailpartie", {'partie': partie.id, 'number': loop.index, 'addform': 0 })) }}
+		{% endfor %}
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 stop-courant-panel">
+				
+		</div>
+		</div>
+		
+		{% for partie in liste_part %}
+		{{ render(controller("ProduitProduitBundle:Partiecours:detailpartie", {'partie': partie.id, 'number': loop.index, 'addform': 1 })) }}
+		{% endfor %}
+		
+		</div>
+		<div class="col-lg-8" style="padding: 0px 7px;">
+		<div class="variation-sub-contenu" value="0">
+			{% for chapitre in liste_chapter %}
+			
+				<div class="panel panel-default text-left" style="border-radius: 0px;">
+				<div class="panel-heading">
+				<h3 class="panel-title">
+				<a class="accordion-toggle" href="#itemm{{ chapitre.id }}" data-parent="#monaccordeon" data-toggle="collapse" style="display: block;"><span class="mdi-content-report" style="font-size: 15px;"></span> Chapitre {{ chapitre.rang }} <span class="mdi-hardware-keyboard-arrow-down pull-right"></span></a>
+				</h3>
+				</div>
+				<div id="itemm{{ chapitre.id }}" class="panel-collapse collapse in">
+				<div class="panel-body"> 
+				<div>
+				{{ chapitre.titre }}
+				</div>
+				</div>
+				</div>
+				</div>
+		
+				<div class="text-left">
+				<table class="table table-bordered table-striped table-condensed">
+				<caption style="margin-top: -10px;">
+				<h4 style="text-align: left; border-bottom: 1px solid #f2dede;"><span class="mdi-communication-textsms" style="font-size: 18px;"></span> Exercices</h4>
+				</caption>
+				<thead>
+				<tr>
+				<th>Enoncé</th>
+				<th>Composition</th>
+				<th>Correction</th>
+				<th>Note/{{ bareme }}</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for exercice in chapitre.exerciceparties %}
+					{{ render(controller("ProduitProduitBundle:Panier:detailexercice", {'id': exercice.id, 'panier': panier.id, 'ident': loop.index })) }}
+				{% else %}
+				<tr class="success">
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+				</table>
+				</div>
+				
+				<div class="text-left">
+				<table class="table table-bordered table-striped table-condensed">
+				<caption style="margin-top: -10px;">
+				<h4 style="text-align: left; border-bottom: 1px solid #f2dede;"><span class="mdi-communication-textsms" style="font-size: 18px;"></span> Travaux pratiques</h4>
+				</caption>
+				<thead>
+				<tr>
+				<th>Enoncé</th>
+				<th>Composition</th>
+				<th>Correction</th>
+				<th>Note/{{ bareme }}</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for pratique in chapitre.pratiquechapitres %}
+					{{ render(controller("ProduitProduitBundle:Panier:detailpartique", {'id': pratique.id, 'panier': panier.id, 'ident': loop.index })) }}
+				{% else %}
+				<tr class="success">
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+				</table>
+				</div>
+
+				<div class="text-left">
+				<table class="table table-bordered table-striped table-condensed">
+				<caption style="margin-top: -10px;">
+				<h4 style="text-align: left; border-bottom: 1px solid #f2dede;"><span class="mdi-communication-textsms" style="font-size: 18px;"></span> Questionnaire</h4>
+				</caption>
+				<thead>
+				<tr>
+				<th>Enoncé</th>
+				<th>Composition</th>
+				<th>Correction</th>
+				<th>Note/{{ bareme }}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="success">
+				<td><a href="{{ path('produit_produit_presentation_chapter', {'id': chapitre.id }) }}"><span class="fa fa-eye"></span> Voir</a></td>
+				<td>-</td>
+				<td>-</td>
+				<td><a href="#!"><span class="fa fa-file-text-o"></span> {% if prodpan != null %}{{ chapitre.getNoteQuestionnaire(prodpan)}}{% else %}-{% endif %} </a> </td>
+				</tr>
+				
+				</tbody>
+				</table>
+				</div>
+			{% endfor %}
+
+		</div>
+		</div>
+		
+	</div>
+	</div><!-- /container -->
+
+	<hr>
+	<script src="{{ asset('template/assets/js/onvisible.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+var bouge = 1;
+var dimension = 200;
+function activateelement()
+{
+var visibility = visibleElement('.animecourant-panel');
+
+if(visibility && bouge == 0){
+	bouge = 1;
+	$('.toutleblock').css('position','relative');
+	$('.toutleblock').css('bottom','0px');
+	$('.toutleblock').css('margin-bottom','0px');
+}
+}
+
+function stopelement()
+{
+var visibility = visibleElement('.stop-courant-panel');
+if(visibility && bouge == 1){
+	if(visibleElement('.animecourant-panel') && visibleElement('.stop-courant-panel'))
+	{
+	
+	}else{
+	bouge = 0;
+	$('.toutleblock').css('position','fixed');
+	$('.toutleblock').css('width',dimension+'px');
+	
+	$('.toutleblock').css('bottom','7px');
+	$('.toutleblock').css('margin-bottom','50px');
+	}
+}
+}
+
+var idStopelement = 0;
+var idActivateelement = 0;
+function controlScroll()
+{
+	var largeur = ($(window).width());
+	dimension = $('.toutleblock').width();
+	if (largeur >= 768)
+	{
+	   /*
+		if(visibleElement('.animecourant-panel') && visibleElement('.stop-courant-panel'))
+		{
+			$('.toutleblock').css('position','fixed');
+			$('.toutleblock').css('width',dimension+'px'); 
+		}else{ 
+			idStopelement = window.setInterval(function() { stopelement(); }, 100);
+			idActivateelement = window.setInterval(function() { activateelement(); }, 100);
+		}*/
+		idStopelement = window.setInterval(function() { stopelement(); }, 100);
+		idActivateelement = window.setInterval(function() { activateelement(); }, 100);
+	}
+}
+controlScroll();
+
+{% endblock %}

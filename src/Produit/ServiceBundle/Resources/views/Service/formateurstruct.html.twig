@@ -1,0 +1,55 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, formateurs, enseignants, éducateurs, travaux pratiques, exercices corrigés, formations"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} - {{ metier }} - liste des formateurs {{ site }}."/>
+{% endblock %}
+{% block title %}
+{{ parent() }} | Formateurs {{ site }}
+{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+{% block userblog_body %}
+
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Formateurs
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-12 text-left" style="padding: 3px 7px;">
+				<h1><span class="mdi-av-hearing"></span> Nos formateurs</h1>
+				<div class="col-lg-12" style="padding: 0px;">
+				<div class="divider"></div>
+				</div>
+				<h3>It is a long established fact that a reader will be distracted by.</h3>
+			</div>
+		</div><!-- /row -->
+		
+		<div class="row mt centered">
+		
+		<div class="content-article variation-contenu" value="0" id="">
+			{{ render(controller("ProduitServiceBundle:Service:listeformateur", {'page': 1})) }}
+		</div>
+						
+		</div>
+</div>
+<hr/>
+
+{% endblock %}
+
+{% block srcjavascripttemplate %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

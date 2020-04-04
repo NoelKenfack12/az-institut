@@ -1,0 +1,35 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: elearning_website
+    database_user: root
+    database_password: abc
+    mailer_transport: smtp
+    mailer_host: server1.akiba01.com
+    mailer_user: infos@azcorporation.net
+    mailer_password: site-info
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    site: AZ E-learning
+    metier: Produits et services Informatiques
+    devise: FCFA
+    ville: Yaounde
+    telephone: +237 676264027
+    facebook: MobileGames
+    twitter: #
+    google: #
+    linkedin: #
+    myaconect: #
+    slogan: Cabinet D'expertise immobilière
+    description: Mobile Games est un jeu de paris foot en ligne
+    localisation: BP 30020 YAOUNDE CAMEROUN, BYEMASSI-BAMBIS 
+    email: infos@azcorporation.com
+    regex_mail: /[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}/i
+    regex_number: /^[2-9][0-9]{8}$/
+    siteweb: http://www.cm.africexplorer.com
+    commentjouer: <div>Les paris sur <strong>Mobile Games</strong> se font très aisement de manière suivante</div>

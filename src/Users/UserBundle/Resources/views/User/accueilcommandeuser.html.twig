@@ -1,0 +1,148 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | {{ user.name(20) }}
+{% endblock %}
+{% block userblog_body %}
+<hr style="margin-top: 45px; margin-bottom: 0px;"/>
+<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+</div>
+<div style="background: #BDC3C7;">
+	<div class="container" style="color: #fff;">
+	Accueil <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> {{ user.name(30) }} <span class="mdi-av-play-arrow" style="font-size: 10px;"></span> Formations en cours
+	</div>	
+</div>	
+<hr style="margin-bottom: 0px;"/>
+
+	<div class="container">
+			<div class="row mt centered">
+
+			<div class="clearfix"></div>
+			<div class="col-md-12 text-left" style="padding: 3px 7px;">
+			<table class="table table-bordered table-striped table-condensed">
+			<caption>
+			<h4 style="text-align: left; border-bottom: 1px solid #f2dede;"><span class="mdi-communication-textsms" style="font-size: 18px;"></span> Liste des formations à suivre par {{ user.name(30) }}.</h4>
+			</caption>
+			<thead>
+			<tr>
+			<th>Date d'inscription</th>
+			<th>Type</th>
+			<th>Intitutlé</th>
+			<th>Progression</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for panier in liste_panier %}
+			<tr class="{% if loop.index % 3 == 1 %}success{% endif %} {% if loop.index % 3 == 2 %}danger{% endif %} {% if loop.index % 3 == 0 %}active{% endif %}">
+			<td>{{ panier.date|date('d') }}/{{ panier.date|date('m') }}/{{ panier.date|date('Y') }} </td>
+			<td>{% if panier.service != null %}Parcours{% else %}{% if panier.chapitrecours != null %}Chapitre{% else %}Cours{% endif %}{% endif %} </td>
+			<td>
+			{% if panier.service != null %}{{ panier.service.nom }}
+				<div class="btn-group pull-right" style="margin-top: 0px; padding: 0px;">
+				<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer; padding: 0px; margin: 0px;"><i class="mdi-hardware-keyboard-arrow-down" style="padding: 0px; margin: 0px;"></i></a>
+					<ul class="dropdown-menu pull-right" style="margin-top: 0px; border-radius: 0px;">
+						<li><a href="#"><span class="fa fa-info-circle"></span> Liste de cours à suivre</a></li>
+						<li class="divider"></li>
+						{% for product in panier.service.produits %}
+							{% if product.user == user %}
+								<li><a href="{{ path('users_user_detail_panier_user', {'panier': panier.id, 'produit': product.id }) }}" title="statistique"><span class="fa fa-angle-double-right"></span> {{ product.titre }}</a></li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				{% if panier.chapitrecours != null %}
+					<a href="{{ path('users_user_detail_panier_user', {'panier': panier.id, 'produit': panier.chapitrecours.partiecours.produit.id }) }}" title="statistique">{{ panier.chapitrecours.titre }}</a>
+				{% else %}  
+					{% for prodpan in panier.produitpaniers %}
+						{% if loop.first %}<a href="{{ path('users_user_detail_panier_user', {'panier': panier.id, 'produit': prodpan.produit.id }) }}" title="statistique">{{ prodpan.produit.titre }}</a>{% endif %}
+					{% endfor %}  
+				{% endif %}
+			{% endif %}
+			</td>
+			<td>
+			{% if panier.chapitrecours != null %}
+				{% for prodpan in panier.produitpaniers %}
+					{% if loop.first %}
+						{% set notechap = panier.chapitrecours.getNoteQuestionnaire(prodpan) %}
+						{% if notemin <= notechap %}
+							{% set moy = 100 %}
+						{% else %}
+							{% if bareme != 0 %} {% set moy = ((notechap/bareme)*100)|round %} {% else %} {% set moy = 0 %} {% endif %}
+						{% endif %}
+						<div class="progress progress-striped active" style="margin-bottom: 0px;">
+							<div class="progress-bar progress-bar-warning" style="width: {{ moy }}%;"></div>
+						</div>
+				    {% endif %}
+				{% endfor %} 
+			{% else %}
+				{% if panier.chapitrecours == null and panier.service == null %}
+					{% set chapitreval = 0 %}
+					{% for prodpan in panier.produitpaniers %}
+						{% if loop.first %}
+							{% for chapitre in prodpan.produit.getChapitreCours %}
+								{% set notechap = chapitre.getNoteQuestionnaire(prodpan) %}
+								{% if notemin <= notechap %}
+									{% set chapitreval = chapitreval + 1 %}
+								{% endif %}
+							{% endfor %}
+							
+							{% if prodpan.produit.getChapitreCours|length != 0 %} {% set moy = ((chapitreval/prodpan.produit.getChapitreCours|length)*100)|round %} {% else %} {% set moy = 0 %} {% endif %}
+							<div class="progress progress-striped active" style="margin-bottom: 0px;">
+								<div class="progress-bar progress-bar-warning" style="width: {{ moy }}%;"></div>
+							</div>
+						{% endif %}
+					{% endfor %} 
+				{% else %}
+					{% if panier.service != null %}
+						{% set chapitreval = 0 %}
+						{% set nbchapitre = 0 %}
+						
+						{% for prodpan in panier.produitpaniers %}
+							{% for chapitre in prodpan.produit.getChapitreCours %}
+								{% set notechap = chapitre.getNoteQuestionnaire(prodpan) %}
+								{% if notemin <= notechap %}
+									{% set chapitreval = chapitreval + 1 %}
+								{% endif %}
+								{% set nbchapitre = nbchapitre + 1 %}
+							{% endfor %}
+						{% endfor %}
+						
+						{% if nbchapitre != 0 %} {% set moy = ((chapitreval/nbchapitre)*100)|round %} {% else %} {% set moy = 0 %} {% endif %}
+						<div class="progress progress-striped active" style="margin-bottom: 0px;">
+							<div class="progress-bar progress-bar-warning" style="width: {{ moy }}%;"></div>
+						</div>
+						
+					{% endif %}
+				{% endif %}
+			{% endif %}
+			</td>
+			</tr>
+			
+			{% else %}
+				<tr>
+					<td>-<br><br><br><br><br><br><br></td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+			{% endfor %}
+
+			</tbody>
+			</table>
+			</div>
+		</div>
+	</div><!-- /container -->
+
+	<hr>
+{% endblock %}
+
+
+{% block javascripttemplate %}
+
+{% endblock %}
