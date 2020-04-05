@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}">
+	
+	<title>
+		{% block title %}{{ site }}{% endblock %}
+	</title>
+	
+	{% block meta %} {% endblock %}
+	
+    
+    {% block stylesheets %}
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="{{ asset('templatehome/css/materialdesignicons.min.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('templatehome/css/vendor.bundle.base.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('templatehome/css/vendor.bundle.addons.css') }}"/>
+		<!-- endinject -->
+		<!-- plugin css for this page -->
+		<!-- End plugin css for this page -->
+		<!-- inject:css -->
+		<link rel="stylesheet" href="{{ asset('templatehome/css/style.css') }}"/>
+		
+		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	
+
+	{% endblock %}
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  </head>
+
+  <body>
+  <div class="container-scroller">
+	  {{ render(controller("GeneralTemplateBundle:Menu:menubare", {'position': 'home'})) }}
+
+	  <div class="container-fluid page-body-wrapper variation-contenu content-manage-market" value="0">
+		  <div class="main-panel" style="background: #f7f7f7;">
+		  {% block body %}
+				
+		  {% endblock %}
+
+		  
+		  <div class="content-recherche-products-market" style="display: none;">
+
+		  </div>
+		  
+		  {{ render(controller("GeneralTemplateBundle:Menu:footer", {'position': 'home'})) }}
+		  </div>
+	  </div>
+  </div>
+  
+  
+	<div class="modal fade modal-alter" id="modal-infos-action-connexion" style="margin-top: 100px;">
+	<div class="modal-dialog modal-md">
+	<div class="modal-content" style="border-radius: 0px;">
+	<div class="modal-header" style="position: absolute; z-index: 3; width: 100%; padding: 2px 0px; box-shadow: 0 15px 15px -1px #f2f2f2 inset;background: #fff;">
+	<div style="box-shadow: 0px 6px 6px #CCC; margin: 0px;">
+	<button type="button" class="close" data-dismiss="modal" style="padding: 7px;">&times;</button>
+	<h4 class="modal-title text-left" style="padding: 7px;"><span class="fa fa-lock"></span> Connexion nécessaire</h4>
+	</div>
+	</div>
+	<hr style="margin-top: 38px; margin-bottom: 0px;"/>
+	<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+	</div>
+	<div style="background: #BDC3C7;">
+		<div class="text-left" style="color: #fff; padding-left: 15px;">
+		   <span class="fa fa-angle-double-right"></span> Si vous n'avez pas encore un compte, <a href="{{ path('users_user_inscription_user') }}">Inscrivez-vous ici.</a>
+		</div>	
+	</div>	
+	<hr style="margin-bottom: 0px;"/>
+
+	<div class="modal-body" style="background: #fff; color: #333;">
+	<div style="background: #ECF0F1; padding: 15px;">
+	<form action="{{ path('login_check') }}" method="post" style="margin-top: 15px;">
+	<div class="form-group">
+		<input type="email" placeholder="E-mail" id="username" name="_username" value="" required class="form-control" style="width: 100%;">
+		<input type="password" placeholder="Mot de passe" id="password" name="_password" required class="form-control" style="margin-top: 15px; width: 100%;">
+	</div>
+	<div style="margin-top: 15px;">
+		<a class="news-letter " href="#" style="color: #fff;">
+		 <label class="checkbox1"><input type="checkbox" id="remember_me" name="_remember_me" checked /><i> </i>Garder ma session ouverte</label>
+	    </a>
+		<button type="submit" class="btn btn-warning btn-lg pull-right">Connexion </button>
+	</div>
+	</form>
+	</div>
+	</div>
+
+	<hr style="margin-bottom: 15px;"/>
+	<div class="modal-footer" style="text-align: right; padding: 7px; background: #222222; color: #fff;">
+	<span class="pull-left">&copy; {{ site }}</span>
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+	</div>
+
+	</div>
+	</div>
+	</div>
+
+	<div class="modal fade modal-alter" id="infos-action-effectuer" style="margin-top: 100px;">
+	<div class="modal-dialog modal-md">
+	<div class="modal-content" style="border-radius: 0px;">
+	<div class="modal-header" style="position: absolute; z-index: 3; width: 100%; padding: 2px 0px; box-shadow: 0 15px 15px -1px #f2f2f2 inset;background: #fff;">
+	<div style="box-shadow: 0px 6px 6px #CCC; margin: 0px;">
+	<button type="button" class="close" data-dismiss="modal" style="padding: 7px;">&times;</button>
+	<h4 class="modal-title text-left" style="padding: 7px;"><span class="fa fa-info-circle"></span> Traitement de votre action</h4>
+	</div>
+	</div>
+	<hr style="margin-top: 38px; margin-bottom: 0px;"/>
+	<div  style="background: rgba(83, 101, 240, 1); height: 10px;">
+	</div>
+	<div style="background: #BDC3C7;">
+		<div class="text-left" style="color: #fff; padding-left: 15px; padding-top: 20px;">
+		  
+		</div>	
+	</div>	
+	<hr style="margin-bottom: 0px;"/>
+
+	<div class="modal-body" style="background: #fff; color: #333;">
+		<div class="alert-warning infos-action-effectuer" style="margin-top: 15px; padding: 15px;  margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px;"></div>
+	</div>
+
+	<hr style="margin-bottom: 15px; margin-top: 0px;"/>
+	<div class="modal-footer" style="text-align: right; padding: 7px; background: #222222; color: #fff;">
+	<span class="pull-left">&copy; {{ site }}</span>
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+	</div>
+
+	</div>
+	</div>
+	</div>
+
+	<!-- //here ends scrolling icon -->
+
+	{# { render(controller("GeneralTemplateBundle:Menu:testinscriptionnewsletter")) } #}
+	{% block srcjavascript %}
+
+	{% endblock %}
+	
+	
+	
+	<script type="text/javascript">
+		$('a').tooltip();
+		
+		{% for infos in app.session.flashbag.get('alertnewsletter') %}
+			{% if loop.first %}
+				$('.infos-action-effectuer').html('{{ infos|raw }}');
+				$('#infos-action-effectuer').modal('show');
+			{% endif %}
+		{% endfor %}
+		
+		{% block javascript %}
+
+		{% endblock %}
+		
+		/*$('.dropdown-toggle').mouseover(function() {
+		$(this).dropdown('toggle');
+		});
+
+		$(function () {
+		$('[data-toggle=tooltip]').tooltip();
+		});
+		
+		$(".close").click(function() {
+		$(".alert").hide("slow");
+		});*/
+	</script>	
+
+</body>
+</html>

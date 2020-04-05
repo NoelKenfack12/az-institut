@@ -10,7 +10,7 @@ use Users\UserBundle\Form\NewsletterType;
 
 class MenuController extends Controller
 {
-public function menubareAction()
+public function menubareAction($position)
 {
 	$em = $this->getDoctrine()->getManager();
 	$service = $this->container->get('general_service.servicetext');
@@ -76,10 +76,11 @@ public function menubareAction()
 							  ->findBy(array('user'=>$this->getUser(),'lut'=>0));
 	}
 	return $this->render('GeneralTemplateBundle:Menu:menubare.html.twig',
-	array('liste_actualite'=>$liste_actualite,'liste_notification'=>$liste_notification));
+	array('liste_actualite'=>$liste_actualite,'liste_notification'=>$liste_notification,
+	'position'=>$position));
 }
 
-public function footerAction()
+public function footerAction($position)
 {
 	$em = $this->getDoctrine()->getManager();
 	$topcat = $em->getRepository('ProduitProduitBundle:Souscategorie')
@@ -108,7 +109,8 @@ public function footerAction()
 			}
 	}
 	return $this->render('GeneralTemplateBundle:Menu:footer.html.twig',
-	array('topcat'=>$topcat,'plus_vendu'=>$plus_vendu,'plus_like'=>$plus_like,'nbprod'=>$nbprod,'topservice'=>$topservice,'form'=>$form->createView()));
+	array('topcat'=>$topcat,'plus_vendu'=>$plus_vendu,'plus_like'=>$plus_like,'nbprod'=>$nbprod,
+	'topservice'=>$topservice,'position'=>$position,'form'=>$form->createView()));
 }
 
 public function testinscriptionnewsletterAction()

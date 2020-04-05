@@ -8,23 +8,27 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ asset('template/images/logo.png') }}">
 	{% block meta %} {% endblock %}
-    <title>{% block title %}{{ site }}{% endblock %}</title>
+	
+    <title>
+		{% block title %}{{ site }}{% endblock %}
+	</title>
 
     <!-- Bootstrap core CSS -->
     
     {% block stylesheets %}
-    <link href="{{ asset('template/assets/css/materializetest.css') }}" rel="stylesheet">
-	
-	<link href="{{ asset('template/assets/css/bootstrap.css') }}" rel="stylesheet">
-	<link href="{{ asset('template/assets/css/font-awesome.css') }}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('template/assets/css/main16.css') }}" rel="stylesheet">
+		<link href="{{ asset('template/assets/css/materializetest.css') }}" rel="stylesheet"/>
+		
+		<link href="{{ asset('template/assets/css/bootstrap.css') }}" rel="stylesheet"/>
+		<link href="{{ asset('template/assets/css/font-awesome.css') }}" rel="stylesheet"/>
+		<!-- Custom styles for this template -->
+		<link href="{{ asset('template/assets/css/main16.css') }}" rel="stylesheet"/>
 
-    <!-- Fonts from Google Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
-    <script src="{{ asset('template/assets/js/jquery.min.js') }}"></script>
-	<link href="{{ asset('autocomplete/css/jquery.auto-complete.css') }}" rel="stylesheet" media="all">
+		<!-- Fonts from Google Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'/>
+		<script src="{{ asset('template/assets/js/jquery.min.js') }}"></script>
+		<link href="{{ asset('autocomplete/css/jquery.auto-complete.css') }}" rel="stylesheet" media="all"/>
 	{% endblock %}
+	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -35,11 +39,13 @@
 
   <body>
   {{ render(controller("GeneralTemplateBundle:Menu:menubare")) }}
+  
   <div class="variation-contenu content-manage-market" value="0">
   {% block body %}
         
   {% endblock %}
   </div>
+  
   <div class="content-recherche-products-market" style="display: none;">
 
   </div>
