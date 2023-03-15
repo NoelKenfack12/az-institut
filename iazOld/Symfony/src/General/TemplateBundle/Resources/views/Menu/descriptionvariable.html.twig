@@ -1,0 +1,38 @@
+
+{% if defindicateur|default(null) != null %}
+<div class="row">
+<div class="col s12 m12">
+<div style="background: #3565ae; z-index: 500; display: inline-block; width: 220px; border-radius: 0px 0px 15px 0px; color: #fff; padding: 3px;">
+<i class="mdi-action-info-outline" style="font-size: 13px;"></i> {{ 'À propos de cet indicateur'|trans }}
+</div>
+<ul class="collapsible collapsible-accordion" data-collapsible="accordion" style="box-shadow: none; border-left: 5px solid #3565ae; margin-top: -10px;">
+<li>
+<div class="collapsible-header active">
+{{ defindicateur.titre|trans }} 
+{% if is_granted('ROLE_GESTION') %}
+<ul id="dropdown-type-{{ defindicateur.id }}" class="dropdown-content right"style="min-width: 150px!important;">
+	<li><a href="{{ path('pme_assistancepme_thermes_modifier_definition', {'id': defindicateur.id}) }}" class="-text"><i class="mdi-image-edit" style="font-size: 15px; margin: 0px;"></i> {{ 'Modifier'|trans }}</a> </li>
+	<li><a href="{{ path('pme_assistancepme_thermes_supprimer_definition', {'id': defindicateur.id}) }}" class="-text"><i class="mdi-content-clear" style="font-size: 15px;  margin: 0px;"></i> {{ 'Supprimer'|trans }}</a></li>
+</ul>
+<a class="dropdown-button secondary-content" href="#!" data-activates="dropdown-type-{{ defindicateur.id }}" style="color: #333; margin-right: -5px;"><i class="mdi-hardware-keyboard-control"></i></a>
+{% else %}
+<a href="#!" style="color: #333;" class="secondary-content"><i class="mdi-content-remove"></i></a>
+{% endif %}
+</div>
+<div class="collapsible-body">
+  {{ defindicateur.description|trans|raw }}
+</div>
+</li>
+</ul>				
+</div>
+</div>
+{% endif %}
+
+{% if linebottom|default(1) == 1 %}
+	<div style="background: #6ab32d!important; color: #fff; margin-top: -40px; margin-bottom: 15px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);">
+		<h6>Administration {{ site }} - v1
+		<a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse" style="float: right; color: #fff;"><i class="mdi-navigation-apps"></i></a>
+		</h6>
+	</div>
+{% endif %}

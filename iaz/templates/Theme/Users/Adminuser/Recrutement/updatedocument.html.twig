@@ -1,0 +1,49 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	{{ form_start(form, {'class': 'col s12', 'attr': path('users_adminuser_alter_document_telechargeable', {'id': recrutement.id}) }}
+	<div class="row">
+	<span style="color:red;">{{ form_errors(form) }}</span>
+	<span style="color:red;">{{ form_errors(form.message) }}</span>
+	  <div class="input-field col s12">
+		{{ form_errors(form.message) }}
+		{{ form_widget(form.message) }}
+		{{ form_label(form.message,'Titre du document') }}
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Image</span>
+		  {{ form_widget(form.file) }}
+		</div>
+	  </div>
+
+	  <div class="input-field col s12">
+		  <select name="typedocument" class="browser-default">
+			<option value="depliant">Type de document</option>
+			<option value="depliant">Dépliant</option>
+			<option value="planing">Planing de formation</option>
+		  </select>
+	  </div>
+	  
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>PDF</span>
+		  {{ form_widget(form.yourcv) }}
+		</div>
+	  </div>
+	</div>
+	  <div class="row">
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+	{{ form_end(form) }}
+	<div class="clearfix"></div>
+</div>
+</div>
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>

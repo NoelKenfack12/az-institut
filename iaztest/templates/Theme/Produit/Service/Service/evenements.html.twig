@@ -1,0 +1,972 @@
+{% extends "Theme/Users/User/layouthome.html.twig" %}
+
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Actualité et offres spéciales
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+
+<style>
+	#key-parties {
+	  position: relative;
+	  display: -webkit-box;
+	  display: -ms-flexbox;
+	  display: flex;
+	  -webkit-box-pack: start;
+		  -ms-flex-pack: start;
+			  justify-content: flex-start;
+	  -webkit-box-align: start;
+		  -ms-flex-align: start;
+			  align-items: flex-start;
+	  height: 310px;
+	}
+	#key-parties.show-all {
+	  height: auto;
+	}
+
+	#key-parties-menu {
+	  width: 250px;
+	  height: 100%;
+	  margin: 0;
+	  background: #0283C4;
+	}
+
+
+	/* Menu list buttons */
+
+	a.menu-item-btn {
+	  width: 100%;
+	  display: -webkit-box;
+	  display: -ms-flexbox;
+	  display: flex;
+	  -webkit-box-pack: justify;
+		  -ms-flex-pack: justify;
+			  justify-content: space-between;
+	  -webkit-box-align: center;
+		  -ms-flex-align: center;
+			  align-items: center;
+	  padding: 12px;
+	  font-weight: bold;
+	  background: #0283C4;
+	  text-align: left;
+	  width: 100%;
+	  cursor: pointer;
+	  font-size: 15px;
+	  text-decoration: none;
+	  color: white;
+	}
+
+	a.menu-item-btn i.fa-chevron-down {
+	  font-size: 12px;
+	  display: none;
+	}
+
+	.menu-item a.menu-item-btn:hover {
+	  background: #026fbb;
+	}
+
+	/* Selected menu item */
+
+	.selected {
+	  background: #003087 !important;
+	  position: relative;
+	}
+	.selected::after {
+	  content: '';
+	  width: 15px;
+	  height: 15px;
+	  background: #DDEEF5;
+	  position: absolute;
+	  top: 12px;
+	  right: -8px;
+	  transform: rotate(45deg);
+	}
+
+	.selected i.fa-chevron-down {
+	  -webkit-transform-origin: center;
+		  -ms-transform-origin: center;
+			  transform-origin: center;
+	  -webkit-transform: rotate(180deg);
+		  -ms-transform: rotate(180deg);
+			  transform: rotate(180deg);
+	}
+
+	/* Menu Item Main Content */
+
+	.menu-item-content {
+	  font-size: 15px;
+	  position: absolute;
+	  display: none;
+	  background: #DDEEF5;
+	  top: 0;
+	  right: 0;
+	  width: calc(100% - 250px);
+	  height: 100%;
+	  padding: 24px 12px 24px 24px;
+	  overflow: hidden;
+	}
+
+	button.toggle-btn {
+	  outline: none;
+	  background: #fff;
+	  color: #E87722;
+	  border: none;
+	  border-radius: none;
+	  font-size: 15px;
+	  font-weight: bold;
+	  margin-top: 18px;
+	  margin-left: calc(50% - 52px);
+	  cursor: pointer;
+	}
+	button.toggle-btn i {
+	  margin-left: 3px;
+	}
+	button.toggle-btn:hover {
+	  color: #d55f00;
+	}
+
+	.shadow-overlay {
+	  width: 100%;
+	  height: 35px;
+	  position: absolute;
+	  bottom: 0;
+	  right: 0;
+	  opacity: .25;
+	  mix-blend-mode: multiply;
+	  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(129,136,138,1) 100%); 
+	  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(129,136,138,1) 100%); 
+	  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(129,136,138,1) 100%);
+	}
+
+	.show-content {
+	  display: block;
+	}
+
+	h3 {
+	  font-weight: bold;
+	  color: #003087;
+	  font-size: 18px;
+	  margin-bottom: 24px;
+	}
+
+	h4 {
+	  font-size: 15px;
+	  font-weight: bold;
+	  margin: 0;
+	}
+
+	.contact-cards {
+	  display: flex;
+	  justify-content: flex-start;
+	  flex-wrap: wrap;
+	}
+
+	.contact-card {
+	  background: #F2F5F9;
+	  padding: 15px 15px 10px 15px;
+	  min-width: 250px;
+	  display: inline-block;
+	  margin: 0 14px 14px 0;
+	  flex: 1;
+	  border-radius: 3px;
+	}
+
+	.contact-card li {
+	  font-size: 15px;
+	  margin: 5px 0;
+	}
+
+	.contact-card a {
+	  color: #009FDF;
+	  font-weight: bold;
+	  text-decoration: none;
+	}
+
+	.contact-card a:hover {
+	  text-decoration: underline;
+	}
+
+	.contact-card hr {
+	  border: 0;
+	  clear: both;
+	  display: block;
+	  width: 100%;               
+	  background-color: #D6D9E2;
+	  height: 1px;
+	  margin: 5px 0 15px 0;
+	}
+
+	/* Collapse into accordion on mobile */
+
+	@media only screen and (max-width: 600px) {
+	  /* Make menu height automatic */
+	  #key-parties {
+		height: auto !important;
+	  }
+	  /* Stacks content under corresponding menu button */
+		.menu-item-content {
+		position: relative;
+		width: 100%;
+		padding: 12px 0 12px 12px !important;
+	  }
+	  .contact-card {
+		margin: 0 12px 12px 0;
+	  }
+	  /* Show chevrons */
+	  a.menu-item-btn i.fa-chevron-down {
+		display: inline-block;
+	  }
+	  /* Make menu span width of device */
+	  #key-parties-menu {
+		width: 100%;
+	  }
+	  /* Hide category headers, buttons, selected caret, and shadows in accordions */
+	  .menu-item-content h3 {
+		display: none;
+	  }
+	  .shadow-overlay {
+		display: none !important;
+	  }
+	  #show-all-btn {
+		display: none;
+	  }
+	  .selected::after {
+		display: none;
+	  }
+	}
+	
+	.functionalities{
+		  clear: both;
+		position: relative;
+	}
+	.functionalities li{
+		list-style: none;
+		float: left;
+		padding-right: 10px;
+	}
+	.funcionalidades.container {
+		width: 100%;
+		margin: auto;
+	}
+	.functionalities ul.breadcrumb{
+		background-color: #ee6e73;
+		  padding: 0 1.5em;
+		clear: both;
+		height: 40px;
+	}
+	.functionalities ul.breadcrumb li{  
+		background-color: #ee6e73; 
+		border-right: 3px solid #fff;
+		transform: skewX(-25deg);
+		height: 40px;
+		padding: 0 20px;
+		position: relative;
+		top: 0; 
+		line-height: 40px;
+	}
+	.functionalities ul.breadcrumb li:first-child {
+		display: none;
+	}
+	.functionalities ul.breadcrumb li:nth-child(2) {
+		border-left: 3px solid #fff;
+	}
+	.functionalities ul.breadcrumb li:last-child {
+		border-right: none;
+	}
+	.functionalities ul.breadcrumb li a{	
+		  color: #fff;
+		transform: skewX(25deg);
+		display: inline-block;
+	}
+	.functionalities ul.breadcrumb li a:hover, .functionalities ul.breadcrumb li a:focus{
+		text-decoration: none;
+		color: #7b4446;
+	}
+	.functionalities ul.breadcrumb li strong {
+		color: #fff;
+		text-decoration: none;
+		transform: skewX(25deg);
+		display: inline-block;
+		font-size: 1.5rem;
+		font-weight: 400;
+		text-transform: uppercase;
+	}
+	.functionalities ul.breadcrumb i{
+		position: relative;
+		float: none;
+	}
+		
+body, .text-light-black {
+   color: rgba(0,0,0,0.6);
+}
+.text-black {
+  color: rgba(0,0,0,0.9);
+}
+.text-muted {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+.ff-serif {
+  font-family: 'Lora', serif;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+}
+.font-weight-medium {
+  font-weight: 500;
+}
+
+ .lts-1px {
+   letter-spacing: 1px;
+}
+.lts-2px {
+  letter-spacing: 2px;
+}
+
+
+.w-full {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.d-block {
+  display: block;
+}
+.d-inline-block {
+  display: inline-block;
+}
+
+.p-relative {
+  position: relative;
+}
+.p-absolute {
+  position: absolute
+}
+
+
+
+.bg-white {
+  background-color: #fff;
+}
+
+
+
+
+
+
+.small {
+  font-size: 0.75rem;
+}
+.card-heading {
+  font-size: 2.25rem;
+}
+.styled-link {
+  text-decoration: none;
+  outline: none;
+  color: #2196fe;
+  transition: all 0.25s ease-in; 
+}
+.styled-link:hover,
+.styled-link:focus,
+.styled-link:active {
+  color: #536dfe;
+}
+.shadow-1 {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.15);
+}
+.blue-hover {
+  transition: all 0.25s ease-in;
+  border-bottom: 5px solid transparent;
+}
+.blue-hover:hover {
+  transform: translateY(-5px);
+  mar
+  border: none;
+  border-bottom: 5px solid #2196fe;
+}
+
+
+
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.float-left {
+  float: left;
+}
+.float-right{
+  float: right;
+}
+
+
+
+
+
+.container .post {
+  width: 350px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.container .post:hover .header_post {
+  margin-top: -20px;
+}
+.container .post:hover .body_post {
+  height: 50%;
+}
+.container .post .header_post {
+  width: 100%;
+  height: 40%;
+  background: #ddd;
+  position: absolute;
+  top: 0;
+  -webkit-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -moz-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -ms-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -o-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+}
+.container .post .header_post img {
+  max-width: 100%;
+  height: auto;
+}
+.container .post .body_post {
+  width: 100%;
+  height: 60%;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -moz-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -ms-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -o-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  cursor: pointer;
+}
+.container .post .body_post .post_content {
+  width: 80%;
+  height: 80%;
+  background: #fff;
+  position: relative;
+}
+.container .post .body_post .post_content h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.container .post .body_post .post_content p {
+  font-size: 14px;
+  font-weight: normal;
+}
+.container .post .body_post .post_content .container_infos {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 25px;
+}
+.container .post .body_post .post_content .container_infos .postedBy {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+.container .post .body_post .post_content .container_infos .postedBy span {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.container .post .body_post .post_content .container_infos .container_tags {
+  display: flex;
+  flex-direction: column;
+}
+.container .post .body_post .post_content .container_infos .container_tags span {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.container .post .body_post .post_content .container_infos .container_tags .tags ul {
+  display: flex;
+}
+.container .post .body_post .post_content .container_infos .container_tags .tags ul li {
+  font-size: 12px;
+  letter-spacing: 2px;
+  list-style: none;
+  margin-left: 8px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.container .post .body_post .post_content .container_infos .container_tags .tags ul li:first-child {
+  margin-left: 0px;
+}
+.container .post .body_post .post_content .container_infos .container_tags .tags ul li:before {
+  content: '';
+  text-align: center;
+  width: 100%;
+  height: 5px;
+  background: #FC6042;
+  opacity: 0.5;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  padding: 0px 1px;
+  -webkit-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -moz-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -ms-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  -o-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+  transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+}
+.container .post .body_post .post_content .container_infos .container_tags .tags ul li:hover:before {
+  height: 18px;
+}
+
+@keyframes top {
+  0% {
+    opacity: 0;
+    bottom: -80px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+@keyframes icon {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    bottom: 0px;
+  }
+}
+</style>
+{% endblock %}
+{% block userblog_body %}
+
+<div style="background: #f4f4f4; padding-bottom: 30px;">
+<div class="container" style="overflow: hidden;">
+  <div class="row" style="margin-top: 25px;">
+	<div class="col-md-12">
+		<div class="functionalities">
+		  <ul id="breadcrumb" class="breadcrumb">
+			<li></li>
+			<li>
+			  <a title="home"><i class=""><i class="fa fa-home"></i> Accueil</i></a>
+			</li>
+			<li><a title="blog">L'entreprise</i></a></li>
+			<li class="active"><strong style="text-transform: capitalize!important;"> evènements</strong></li>
+		  </ul>				
+		</div>
+	</div>
+  </div>
+  
+  <script src="{{ asset('template/galerie/js/lc_lightbox.lite.js') }}" type="text/javascript"></script>
+  <link rel="stylesheet" href="{{ asset('template/galerie/css/lc_lightbox.css') }}" />
+
+  <!-- SKINS -->
+  <link rel="stylesheet" href="{{ asset('template/galerie/skins/minimal.css') }}" />
+
+	<!-- ASSETS -->
+	<script src="{{ asset('template/galerie/lib/AlloyFinger/alloy_finger.min.js') }}" type="text/javascript"></script>
+
+	<style type="text/css">
+
+	.elem, .elem * {
+		box-sizing: border-box;
+		margin: 0 !important;	
+	}
+	.elem {
+		display: inline-block;
+		font-size: 0;
+		border: 20px solid transparent;
+		border-bottom: none;
+		background: #fff;
+		padding: 10px;
+		height: auto;
+		background-clip: padding-box;
+		border: 1px solid #f4f4f4;
+	}
+	.elem > span {
+		display: block;
+		cursor: pointer;
+		height: 0;
+		padding-bottom:	70%;
+		background-size: cover;	
+		background-position: center center;
+	}
+	</style>
+
+	<!-- LIGHTBOX FADING SHOW/HIDE EFFECT (as explained in documentation) -->
+	<style type="text/css">
+	.lcl_fade_oc.lcl_pre_show #lcl_overlay,
+	.lcl_fade_oc.lcl_pre_show #lcl_window,
+	.lcl_fade_oc.lcl_is_closing #lcl_overlay,
+	.lcl_fade_oc.lcl_is_closing #lcl_window {
+		opacity: 0 !important;
+	}
+	.lcl_fade_oc.lcl_is_closing #lcl_overlay {
+		-webkit-transition-delay: .15s !important; 
+		transition-delay: .15s !important;
+	}
+	
+	.header .menu-btn:checked ~ .menu {
+		max-height: 500px!important;
+	}
+	</style>
+	
+	<div class="row">
+	<div class="col-md-12">
+	<div id="carriere-accueil">
+		{% for slide in event_galerie %}
+		<a class="elem col-lg-3 col-md-3 col-xs-6 col-sm-4" href="{% if slide.imgservice != null %}{{ asset(slide.imgservice.getwebpath) }}{% else %}{{ asset('template/images/1.jpg') }}{% endif %}" title="{{ slide.nom }}" data-lcl-txt="<a href='{% if slide.link != null %}{{ slide.link }}{% else %}#!{% endif %}'>{{ slide.breve }} <button style='float: right; padding: 0px 10px; margin-left: 7px; height: 25px; font-size: 10px; line-height: 15px; margin-top: -10px; border: 1px solid red;' class='btn bg-struct lcl_close' onclick='modalopenarticle({{ slide.id }})'>En savoir plus</button></a>" data-lcl-author="AZ Corporation" data-lcl-thumb="{% if slide.imgservice != null %}{{ asset(slide.imgservice.getwebpath) }}{% else %}{{ asset('template/images/1.jpg') }}{% endif %}">
+			<span style="background-image: url({% if slide.imgservice != null %}{{ asset(slide.imgservice.getwebpath) }}{% else %}{{ asset('template/images/1.jpg') }}{% endif %});"></span>
+		</a>
+		{% endfor %}
+		<br/><br/>
+	</div>
+	</div>
+	</div>
+		
+	<script type="text/javascript">
+		$(document).ready(function(e){
+			// live handler
+			lc_lightbox('.elem', {
+				wrap_class: 'lcl_fade_oc',
+				gallery : true,	
+				thumb_attr: 'data-lcl-thumb', 
+				
+				skin: 'minimal',
+				radius: 0,
+				padding	: 0,
+				border_w: 0,
+			});	
+		});
+		
+	</script>
+</div>
+</div>
+
+<style>
+/* CLEARFIX */
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table; 
+}
+
+.cf:after { clear: both; }
+.cf { *zoom: 1; }
+
+/* GENERAL STYLES FOR BOX AND OVERLAY */
+
+.box {
+  display: block;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #bbb;
+  text-align: center;
+  position: relative;
+}
+
+.overlay{
+  width: 100%;
+  height:40%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* SLIDE IN */
+
+.slide-in .overlay{
+  background-color: #6addaa;
+  line-height: 10px;
+  color: #fff;
+  transform: translateX(-100%);
+  -webkit-transition: transform 0.5s ease-out;
+  -o-transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+}
+
+.slide-in .box:hover .overlay{
+  transform: translateX(0);
+}
+
+/* SLIDE UP */
+
+.slide-up .overlay{
+  background-color: #3dcbe8;
+  line-height: 10px;
+  color: #fff;
+  transform: translateY(100%);
+  -webkit-transition: transform 0.5s ease-out;
+  -o-transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+}
+
+.slide-up .box:hover .overlay{
+  transform: translateY(0);
+}
+
+/* SLIDE DOWN DELAY */
+
+.slide-down-delay .overlay{
+  background-color: #ee6f8c;
+  line-height: 10px;
+  color: #fff;
+  transform: translateY(-100%);
+  -webkit-transition: transform 0.5s ease-out;
+  -o-transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+}
+
+.slide-down-delay .box:hover .overlay{
+  transform: translateY(0);
+}
+
+.slide-down-delay .overlay i{
+  transform: translateY(-80%);
+  opacity: 0;
+  -webkit-transition: transform 0.5s linear, opacity 0.5s linear 0.5s;
+  -o-transition: transform 0.5s linear, opacity 0.5s linear 0.5s;
+  transition: transform 0.5s linear, opacity 0.5s linear 0.5s;
+}
+
+.slide-down-delay .box:hover .overlay i{
+  transform: translateY(0);
+  opacity: 1;
+}
+.box {
+  display: block;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background-color: #bbb;
+  text-align: center;
+  position: relative;
+}
+</style>
+
+<div style="background: #3565ae; padding: 0px 0px 20px 0px;">
+<div class="container" style="overflow: hidden;">
+<div class="row" style="overflow: hidden;">
+	<div class="col-md-5">
+		<h3 style="color: #fff; font-size: 30px;">Carte de voeux AZ corporation</h3>
+		<div style="margin-top: 50px;">
+			<a href="" class="btn btn-primary btn-lg" style=" font-size: 30px; margin-top: 15px;"><span class="fa fa-users"></span> Toutes les cartes de voeux</a>
+			<a href="" class="btn btn-primary btn-lg" style="font-size: 30px; margin-top: 15px;"><span class="fa fa-users"></span> Commandez une carte</a>
+		</div>
+	</div>
+	
+	<div class="col-md-7" style="padding: 0px;">
+	<div class="row" style="margin: 0px;">
+		<div class="col-md-12">
+		<h3 style="color: #fff; font-size: 30px;">Pourquoi nous choisir ?</h3>
+		</div>
+		{% for i in range(1,6) %}
+		<div class="col-md-4" style="margin-top: 15px;">
+			<div class="cf">
+			<div class="slide-up four">
+				<a href="">
+				<div class="box" style="cursor: pointer; background: url({{ asset('template/images/present.png') }}) no-repeat center;
+				   -webkit-background-size: cover;
+					-moz-background-size: cover;
+					-o-background-size: cover;
+					background-size: cover;
+					position:relative;">
+					<span class="original">
+						<h1 style="margin-top: 80px; font-size: 20px; text-shadow: 2px 2px #333;">Ville</h1>
+					</span>
+					<div class="overlay" style="background: rgba(0,0,0,0.4); color: #fff; padding-top: 5px;">
+						<i class="fa fa-3x" aria-hidden="true" style="font-size: 18px; color: #fff;">12 jobbers</i></br>
+						<a href="" class="btn btn-primary" style="font-size: 11px; padding: 5px; margin-top: 15px;">Trouvez un jobber à Douala</a>
+					</div>
+				</div>
+				</a>
+			</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	</div>
+	</div>
+</div>
+</div>
+
+
+<div style="background: #f4f4f4; padding-top: 30px;">
+<div class="container" style="overflow: hidden;">
+<div class="row cards ">
+      <div class="col-12 col-md-6">
+        <div class="card card2 card-large card-row-layout">
+          <a href="#" class="">
+            <span class="card-icon-top  vfi vfi-porte-voix" aria-hidden="true"></span>
+          <div class="card-body">
+            <span class="card-title">Prennez un rendez-vous </span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </a>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card card4 card-large card-row-layout">
+          <a href="#" class="">
+            <span class="card-icon-top  vfi vfi-nid-de-poule" aria-hidden="true"></span>
+          <div class="card-body">
+            <span class="card-title">Nos réalisations</span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </a>
+        </div>
+      </div>
+	  <div class="col-12 col-md-6" style="margin-top: -25px;">
+		<div style="height: 5px;"></div>
+      </div>
+	  <div class="col-12 col-md-6" style="margin-top: -25px;">
+		<div style="height: 10px; background: #fff; width: 100%;"></div>
+      </div>
+	  <div class="col-12 col-md-12" style="margin-bottom: 20px; margin-top: -20px;">
+		<div style="height: 10px; background: #fff; width: 100%;"></div>
+      </div>
+    </div>
+    <div class="row cards ">
+      <div class="col-12 col-md-6">
+        <div class="card card2 card-large">
+          <a href="#" class="">
+            <img class="card-img-top " src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card #1 img alt.">
+          <div class="card-body">
+            <span class="card-title">Card #1 title</span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer">
+            Footer call-to-action<span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+          </div>
+        </a>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card card4 card-large">
+          <a href="#" class="">
+            <img class="card-img-top " src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card #2 img alt.">
+          <div class="card-body">
+            <span class="card-title">Card #2 title</span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer">
+            Footer call-to-action<span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+          </div>
+        </a>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card card2 card-fw card-row-layout">
+          <a href="#" class="">
+              <img class="card-img-top " src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card #2 img alt.">
+            <div class="card-body">
+              <span class="card-title">Full width card with image on right side</span>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer">
+              <span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card card4 card-fw card-row-layout">
+          <a href="#" class="">
+              <img class="card-img-top " src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card #2 img alt.">
+            <div class="card-body">
+              <span class="card-title">Full width card with image on right side</span>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer">
+              <span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+function modalopenarticle(id)
+{
+	$('#modal-souscription-offert').modal('show');
+
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	
+	$.post('{{ path('produit_produit_modal_souscription_service') }}', {id: id}, function(data){
+		if(data == 0)
+		{
+			resetNotif();
+			alertify.alert('<div style="margin-bottom: 20px;"><span class="fa fa-frown-o"></span> Echec, Toutes les données n\'ont pas été reçu.</div>');
+			$('#modal-souscription-offert').modal('hide');
+		}else{
+			$('.wait-chargement-content-module').hide();
+			$('.content-module-loading').html(data);
+			$('.content-module-loading').show();
+		}
+	});
+}
+</script>
+
+{% endblock %}
+
+{% block javascripttemplate %}
+   $('.menu-item-117').addClass('current-active');
+	
+   $('.open-modal-souscription').click(function(){
+		var id = $(this).attr('value');
+		modalopenarticle(id);
+   });
+{% endblock %}

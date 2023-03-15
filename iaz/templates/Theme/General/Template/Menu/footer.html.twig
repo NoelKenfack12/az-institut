@@ -1,0 +1,276 @@
+
+{% if position == 'home' %}
+
+<div style="position: relative; z-index: 999999;">
+<div class="brandSection clearfix">
+	<div class="container">
+	  <div class="row">
+		<div class="col-xs-12">
+		  <div class="owl-carousel partnersLogoSlider">
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand1.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand2.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand3.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand4.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand5.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand1.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand2.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand3.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand4.png') }}" /></a>
+			  </div>
+			</div>
+			<div class="slide">
+			  <div class="partnersLogo clearfix">
+				<a href="#"><img src="{{ asset('templatecourse/images/brand5.png') }}" /></a>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div><!-- Brand-section -->
+
+<footer class="footer-v1">
+<div class="menuFooter clearfix">
+  <div class="container">
+	<div class="row clearfix">
+
+	  <div class="col-sm-3 col-xs-6">
+		<ul class="menuLink">
+		  <li><a href="about.html">About Royal College</a></li>
+		  <li><a href="campus.html">About Campus</a></li>
+		  <li><a href="stuff.html">Staff Members</a></li>
+		  <li><a href="about.html">Why Choose Us?</a></li>
+		</ul>
+	  </div><!-- col-sm-3 col-xs-6 -->
+
+	  <div class="col-sm-3 col-xs-6 borderLeft">
+		<ul class="menuLink">
+		  <li><a href="course-fullwidth.html">All Courses</a></li>
+		  <li><a href="buying-steps.html">Admission</a></li>
+		  <li><a href="photo-gallery3col.html">Photo Gallery</a></li>
+		  <li><a href="international_students.html">International Students</a></li>
+		</ul>
+	  </div><!-- col-sm-3 col-xs-6 -->
+
+	  <div class="col-sm-3 col-xs-6 borderLeft">
+		<div class="footer-address">
+		  <h5>Location:</h5>
+		  <address>
+			Royal College<br>
+			1727 Lombard St.<br>
+			San Francisco
+		  </address>
+		  <a href="contact-us.html"><span class="place"><i class="fa fa-map-marker"></i>Main Campus</span></a>
+		</div>
+	  </div><!-- col-sm-3 col-xs-6 -->
+
+	  <div class="col-sm-3 col-xs-6 borderLeft">
+		<div class="socialArea">
+		  <h5>Find us on:</h5>
+		  <ul class="list-inline ">
+		  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+		  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+		  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+		  <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+		  <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+		  <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+		  </ul>
+		</div><!-- social -->
+		<div class="contactNo">
+		  <h5>Call us on:</h5>
+		  <h3>012-3434-456768</h3>
+		</div><!-- contactNo -->
+	  </div><!-- col-sm-3 col-xs-6 -->
+
+	</div><!-- row -->
+  </div><!-- container -->
+</div><!-- menuFooter -->
+
+<div class="footer clearfix">
+  <div class="container">
+	<div class="row clearfix">
+	  <div class="col-sm-6 col-xs-12 copyRight">
+		<p>© 2016 Copyright Royal College Bootstrap Template by <a href="http://www.iamabdus.com">Abdus</a></p>
+	  </div><!-- col-sm-6 col-xs-12 -->
+	  <div class="col-sm-6 col-xs-12 privacy_policy">
+		<a href="contact-us.html">Contact us</a>
+		<a href="privacy-policy.html">Privacy Policy</a>
+	  </div><!-- col-sm-6 col-xs-12 -->
+	</div><!-- row clearfix -->
+  </div><!-- container -->
+</div><!-- footer -->
+</footer>
+</div>
+
+{% else %}
+	{% if position == 'admin' %}
+	
+		<footer class="page-footer" style="background: #151414!important;">
+			<div class="footer-copyright">
+				<div class="container" style="color: #fff;">
+					Copyright © 2014 - {{ 'now'|date('Y') }} AZ Corporation. All rights reserved
+					<span class="right"> <a class="grey-text text-lighten-4" href="#!" title="Conditions Générales d'Utilisation">CGU</a> {% if is_granted('ROLE_GESTION') %}. <a class="grey-text text-lighten-4" href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a>{% endif %} .  <a class="grey-text text-lighten-4" href="http://afhunt.com/" target="_blank">Design By <u>AFH<u></a></span>
+				</div>
+			</div>
+		</footer>
+		
+		{#
+		<footer class="page-footer" style="margin-top: -30px; background: #333;">
+		   <div class="footer-copyright taille-footer-user">
+			<div class="container">
+			<div class="row">
+				<div class="col s12 m4 12">
+					<div style="border-bottom: 1px solid #ddd; padding-bottom: 0px;">{{ 'Liens utiles'|trans }}</div>
+					<div style="margin-bottom: -15px;"><a href="http://www.statistics-cameroon.org/" style="color: #fff; margin-left: 5px; white-space: nowrap;">{{ 'Site d\'assurance tech'|trans }}</a></div>
+					<div style="margin-bottom: -15px;">
+					<select name="lien-utiles" value="" class="browser-default selection-nouveau-site" style="background: #333; color: #fff; border: none; padding: 5px 0px;">
+						<option value="0" selected>{{ 'Plus De Liens'|trans }}</option>
+						<option value="">{{ 'Site e-learning'|trans }}</option>
+
+					</select>
+					</div>
+				</div>
+				<div class="col s12 m4 12">
+					<div style="border-bottom: 1px solid #ddd;">{{ 'L\'entreprise'|trans }}</div>
+
+					<div style="margin-bottom: -15px;"><a href="" style="color: #fff;">{{ 'Contacts'|trans }}</a></div>
+				</div>
+				<div class="col s12 m4 12 user-menu-bar-lg" style="text-align: right;">
+				<div style="border-left: 2px solid #999; padding-right: 17px; border-bottom: 2px solid #999; background: #fff; color: #333; height: 50px; width: 250px; margin: -2px 0px 40px 0px; right: 50px; border-radius: 0px 0px 0px 20px; position: absolute;">
+				{{ 'Visites:'|trans }}
+				</div>
+				<div style="margin-bottom: -15px; margin-top: 60px;">
+				<a href="{{ twitter }}" title="{{ 'visitez notre page twitter'|trans }}"  target="_blank" style="margin-right: 2px;"><img src="{{ asset('templateopme/images/twitter.png') }}" alt="" style=""/></a> 
+				<a href="{{ facebook }}"  title="{{ 'visitez notre page facebook'|trans }}" target="_blank" style="margin-right: 2px;"><img src="{{ asset('templateopme/images/facebook.png') }}" alt="" style=""/></a>
+				<a href="{{ google }}" title="{{ 'visitez notre page google+'|trans }}"  target="_blank" style="margin-right: 2px;"><img src="{{ asset('templateopme/images/google.png') }}" alt="" style=""/></a>
+				<a href="{{ linkedin }}" title="{{ 'visitez notre page linkedin+'|trans }}" target="_blank" style="margin-right: 2px;"><img src="{{ asset('templateopme/images/linkedin.png') }}" alt="" style=""/></a>
+				</div>
+				</div>
+			</div>
+			</div>
+			<div class="container">
+			<hr style="margin-bottom: -5px;"/>
+				Copyright © {{ moisText("now"|date('m')) }} {{ "now"|date('Y') }} <a class="grey-text text-lighten-4" href="#!">{{ site }}</a> All rights reserved.
+				<span class="right"> <a class="grey-text text-lighten-4" href="#!" title="Conditions Générales d'Utilisation">CGU</a> {% if is_granted('ROLE_GESTION') %}. <a class="grey-text text-lighten-4" href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a>{% endif %} .  <a class="grey-text text-lighten-4" href="http://africexplorer.com/" target="_blank">Design By <u>Afex<u></a></span>
+			</div>
+			</div>
+		</footer>
+		<!-- END FOOTER -->
+
+		<script type="text/javascript">
+		$('.selection-nouveau-site').on('change', function(e){
+			if($(this).val() == 0)
+			{
+				alert('Erreur ! Choisissez un site web.');
+			}else{
+				document.location.href= $(this).val();
+			}
+		});
+		</script>
+		#}
+	{% else %}
+		{% if position == 'login' %}
+			<div  style="background: #fff; padding: 15px 15px; min-height: 40px; position: relative; width: 100%; left: 0px; bottom: -15px; margin-left: -15px; margin-bottom: -15px;">
+				<div style=""><span style="float: left;">Copyright © 2014 - {{ 'now'|date('Y') }} AZ Corporation. All rights reserved</span> <span style="float: right;"><a href="{{ path('users_user_acces_plateforme') }}">Accueil</a> | <a href="#!" >Support</a> | <a href="#!">CGU</a> | <a href="#!">Confidentialité</a> </span></div>    
+			</div>
+		{% else %}
+			{% if position == 'dashboard' %}
+				<!-- Début section footer  -->
+				<div class="app-wrapper-footer">
+				<div class="app-footer">
+				<div class="container fiori-container">
+				<div class="app-footer__inner">
+					<div>
+						Copyright © 2014 - {{ 'now'|date('Y') }} AZ Corporation. All rights reserved
+						{% if is_granted('ROLE_GESTION') %}<a class="grey-text text-lighten-4" href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a>{% endif %}
+					</div>
+					<div class="app-footer-right">
+					<ul class="header-megamenu nav">
+					<li class="nav-item">
+					<a data-placement="top" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link" data-original-title="" title="">
+					Footer Menu
+					<div class="badge badge-success ml-0 ml-1">
+					<small>Old</small>
+					</div>
+					<i class="fa fa-angle-up ml-2 opacity-8"></i>
+					</a>
+					<div class="rm-max-width rm-pointers">
+					<div class="d-none popover-custom-content">
+					<div class="dropdown-mega-menu dropdown-mega-menu-sm">
+						<div class="grid-menu grid-menu-2col">
+							<div class="no-gutters row">
+								<div class="col-sm-6 col-xl-6">
+									<ul class="nav flex-column">
+										<li class="nav-item-header nav-item">Overview</li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon lnr-inbox"> </i><span>Contacts</span></a></li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon lnr-book"> </i><span>Incidents</span>
+											<div class="ml-auto badge badge-pill badge-danger">5</div>
+										</a></li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon lnr-picture"> </i><span>Companies</span></a></li>
+										<li class="nav-item"><a disabled="" href="javascript:void(0);" class="nav-link disabled"><i class="nav-link-icon lnr-file-empty"> </i><span>Dashboards</span></a></li>
+									</ul>
+								</div>
+								<div class="col-sm-6 col-xl-6">
+									<ul class="nav flex-column">
+										<li class="nav-item-header nav-item">Sales &amp; Marketing</li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link">Queues</a></li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link">Resource Groups</a></li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link">Goal Metrics
+											<div class="ml-auto badge badge-warning">3</div>
+										</a></li>
+										<li class="nav-item"><a href="javascript:void(0);" class="nav-link">Campaigns</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					</div>
+					</li>
+					</ul>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>   
+				<!-- Fin section footer -->
+			{% else %}
+			
+			{% endif %}
+		{% endif %}
+	{% endif %}
+{% endif %}

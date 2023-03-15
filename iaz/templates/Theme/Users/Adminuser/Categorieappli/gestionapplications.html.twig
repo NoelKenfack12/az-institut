@@ -1,0 +1,334 @@
+{% extends "Theme/Users/Adminuser/layoutadmin.html.twig" %}
+
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation, Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}"/>
+{% endblock %}
+
+{% block title %}
+	 {{ parent() }} | {{ 'Accueil Admin'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("App\\Controller\\Users\\Adminuser\\AccueilController:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="content">
+	<div class="container">
+	{% include 'Theme/General/Template/Menu/descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+<div class="inner-content">
+
+<div class="col s12 m12 l6">
+ <!--Borderless Table-->
+ <div class="section" style="padding: 5px 0px 0px 0px;">
+ <div class="row" style="margin: -15px -20px 0px -20px; background: #fafafa;">
+  <div class="col s12 m12 l12">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a>
+	  </li>
+	  <li class="active">{{ 'Localisation'|trans }}</li>
+	  <li class="active">{{ 'Applications'|trans }}</li>
+	</ol>
+  </div>
+</div>
+<div class="divider" style="border-top: 2px dashed #999;"></div>
+<!--DataTables example-->
+
+<!--DataTables 
+<!-- Form with placeholder -->
+<h5 class="breadcrumbs-title">{{ 'Liste des catégories d\'application'|trans }} <a href="#!" class="open-modal-continent btn-floating btn-large waves-effect waves-light right bg-struct"><i class="mdi-content-add"></i></a></h5>
+<hr>
+{% for infos in app.session.flashbag.get('information') %}
+{% if loop.first %}
+	{% include 'GeneralTemplateBundle:Menu:flasinfos.html.twig' %}
+{% endif %}
+{% endfor %}
+
+{% set id = '' %}
+{% for infos in app.session.flashbag.get('supprime_continent') %}
+{% if loop.last %}
+<div style="background: #f2f2f2; padding: 5px; border-left: 4px solid #3565ae;">
+<strong style="color: red;"><span class="fa fa-warning"></span> {{ 'Êtes vous certain de vouloir supprimer la catégorie d\'application'|trans }} {{ infos|trans|lower|raw }} </strong>
+<form action="{{ path('users_adminuser_categorieappli_supprimer_categorie',{'id': id }) }}" method="post" style="display: inline;">
+<input type="submit" value="{{ 'Supprimer'|trans }}" style="background: red;"/>
+{{ form_rest(formsupp) }}
+</form>
+</div>
+{% else %}
+{% set id = infos %}
+{% endif %}
+{% endfor %}
+
+{% set id = '' %}
+{% for infos in app.session.flashbag.get('pays_supp') %}
+{% if loop.last %}
+<div style="background: #f2f2f2; padding: 5px; border-left: 4px solid #3565ae;">
+<strong style="color: red;"><span class="fa fa-warning"></span> {{ 'Êtes vous certain de vouloir supprimer l\'application '|trans }} <i class="mdi-hardware-keyboard-arrow-right" style="font-size: 12px;"></i> {{ infos|trans|lower|raw }} </strong>
+<form action="{{ path('users_adminuser_del_application_cat',{'id': id }) }}" method="post" style="display: inline;">
+<input type="submit" value="{{ 'Supprimer'|trans }}" style="background: red;"/>
+{{ form_rest(formsupp) }}
+</form>
+</div>
+{% else %}
+{% set id = infos %}
+{% endif %}
+{% endfor %}			 
+
+
+<!--DataTables example Row grouping-->
+<div class="row" style="margin-top: 20px;">
+{% for categorie in liste_categorie %}
+<div class="col s12 m4 12">
+<div style="display:block;">
+<ul id="dropdown-type-{{ categorie.id }}" class="dropdown-content right"style="min-width: 150px!important;">
+	<li><a href="#!" class="-text open-modal-update-continent" value="{{ categorie.id }}"><i class="mdi-image-edit" style="font-size: 15px;"></i> {{ 'Modifier'|trans }}</a> </li>
+	<li><a href="{{ path('users_adminuser_categorieappli_supprimer_categorie', {'id': categorie.id }) }}" class="-text"><i class="mdi-content-clear" style="font-size: 15px;"></i> {{ 'Supprimer'|trans }}</a></li>
+</ul>
+<a class="dropdown-button waves-effect waves-light" href="#!" data-activates="dropdown-type-{{ categorie.id }}" style="float:right; margin-top: 15px;"><i class="mdi-hardware-keyboard-control"></i></a>
+</div>
+<ul class="collection" style="overflow: visible;">
+  <a href="#!" class="collection-item" style="padding: 5px;">
+	<div style="height: 150px;">
+	<div style="color: rgba(0, 0, 0, 0.87); font-size: 18px;"><strong><i class="mdi-image-adjust" style="font-size: 16px;" title="Plus prioritaire"></i> {{ categorie.nom|trans }}</strong></div>
+	<div><img src="{% if categorie.src != 'source' %}{{ asset(categorie.getwebpath) }}{% else %}{{ asset('templateopme/images/user-bg-simple.jpg') }}{% endif %}" alt="" style="width: 100%; height: 120px;"></div>
+	</div>
+	<div style="background: #f2f2f2; height: 50px; border-top: 5px solid #3565ae;">
+	<div style="color: rgba(0, 0, 0, 0.87); margin-top: 10px;">---</div>
+	<div style="display:block; bottom: 20px; position: absolute; right: -20px;"><span class="badge" title="{{ 'Nombre d\'application'|trans }}"><i class="mdi-action-settings-input-component" style="font-size: 14px;"></i>{{ categorie.applications|length }}</span></div>
+	</div>
+  </a>
+</ul>
+</div>
+{% else %}
+<div class="col s12 m12 12" style="height: 100px;">
+Aucune catégorie
+</div>
+{% endfor %}
+</div>
+
+<h5 class="breadcrumbs-title">{{ 'Liste des applications'|trans }} <a href="#!" class="open-modal-pays btn-floating btn-large waves-effect waves-light right bg-struct"><i class="mdi-content-add"></i></a></h5>
+<hr>
+<div class="row" style="margin-top: 20px;">
+{% for application in liste_application %}
+<div class="col s12 m4 12">
+<div style="display:block;">
+<ul id="dropdown-pays-{{ application.id }}" class="dropdown-content right"style="min-width: 150px!important;">
+	<li><a href="#!" class="-text open-modal-update-pays" value="{{ application.id }}" class="-text"><i class="mdi-image-edit" style="font-size: 15px;"></i> {{ 'Modifier'|trans }}</a> </li>
+	<li><a href="{{ path('users_adminuser_del_application_cat', {'id': application.id }) }}" class="-text"><i class="mdi-content-clear" style="font-size: 15px;"></i> {{ 'Supprimer'|trans }}</a></li>
+</ul>
+<a class="dropdown-button waves-effect waves-light" href="#!" data-activates="dropdown-pays-{{ application.id }}" style="float:right; margin-top: 15px;"><i class="mdi-hardware-keyboard-control"></i></a>
+</div>
+<ul class="collection" style="overflow: visible;">
+  <a href="#!" class="collection-item" style="padding: 5px;">
+	<div style="height: 150px;">
+	<div style="color: rgba(0, 0, 0, 0.87); font-size: 18px;"><strong><i class="mdi-image-adjust" style="font-size: 16px;" title="Plus prioritaire"></i> {{ application.nom|trans }}</strong></div>
+	<div><img src="{% if application.src != null %}{{ asset(application.getwebpath) }}{% else %}{{ asset('templateopme/images/user-bg-simple.jpg') }}{% endif %}" alt="" style="width: 100%; height: 120px;"></div>
+	</div>
+	<div style="background: #f2f2f2; height: 50px; border-top: 5px solid #3565ae;">
+	<div style="color: rgba(0, 0, 0, 0.87); margin-top: 10px;">...</div>
+	<div style="display:block; bottom: 20px; position: absolute; right: -20px; white-space: nowrap;"><span class="badge" title=""><i class="mdi-action-settings-input-component" style="font-size: 14px;"></i>{{ application.categorieappli.nom }}</span></div>
+	</div>
+  </a>
+</ul>
+</div>
+{% else %}
+<div class="col s12 m12 12" style="height: 100px;">
+Aucune application
+</div>
+{% endfor %}
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modal2" style="padding-top: 100px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-action-receipt"></i> {{ 'Ajouter une catégorie d\'application'|trans }} <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+
+	{{ form_start(form, {'class': 'col s12', 'style': 'margin-top: 15px', 'attr': path('users_adminuser_gestion_applications') }}) }}
+	  <div class="input-field col s12">
+		 {{ form_widget(form.nom) }}
+		 {{ form_label(form.nom, 'Nom de la catégorie'|trans) }}
+		 <div style="color: red;">{{ form_errors(form.nom)|trans }}</div>
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(form.description) }}
+		{{ form_widget(form.description) }}
+		{{ form_label(form.description,'Description de l\'article') }}
+	  </div>
+	  <div class="input-field col s12">
+		 {{ form_widget(form.rang) }}
+		 {{ form_label(form.rang, 'Rang dans le classement'|trans) }}
+		 <div style="color: red;">{{ form_errors(form.rang)|trans }}</div>
+	  </div>
+	  <div class="file-field input-field col s12">
+		  <input class="file-path validate" type="text" disabled style="padding-left: 40px;"/>
+		  <div class="btn bg-struct" style="margin-left: 10px;">
+			<span><i class="mdi-image-exposure"></i> {{ 'Image'|trans }}</span>
+			{{ form_widget(form.file) }}
+		  </div>
+	  </div>
+	  <div class="col s12" style="margin-top: 30px;">
+		 <button class="btn waves-effect waves-light bg-struct" type="submit">{{ 'Envoyer'|trans }} <i class="mdi-content-send right"></i></button>
+	  </div>
+{{ form_end(form) }}
+
+</div>
+</div>
+<div class="modal-footer" style="padding-top: 15px; z-index: 1;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modal3" style="padding-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-image-camera"></i> {{ 'Ajouter une nouvelle application'|trans }} <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row" style="">
+	{{ form_start(form2, {'class': 'col s12', 'style': 'margin-top: 15px', 'attr': path('users_adminuser_add_new_application_user') }}) }}
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.nom) }}
+		 {{ form_label(form2.nom, 'Nom de l\'application'|trans) }}
+		 <div style="color: red;">{{ form_errors(form2.nom)|trans }}</div>
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(form2.description) }}
+		{{ form_widget(form2.description) }}
+		{{ form_label(form2.description,'Description de l\'article') }}
+	  </div>
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.rang) }}
+		 {{ form_label(form2.rang, 'Rang dans le classement'|trans) }}
+		 <div style="color: red;">{{ form_errors(form.rang)|trans }}</div>
+	  </div>
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.categorieappli) }}
+		 {{ form_label(form2.categorieappli, 'Sélectionner une catégorie'|trans) }}
+		 <div style="color: red;">{{ form_errors(form2.categorieappli)|trans }}</div>
+	  </div>
+	  
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.siteweb) }}
+		 {{ form_label(form2.siteweb, 'Site web'|trans) }}
+		 <div style="color: red;">{{ form_errors(form2.siteweb)|trans }}</div>
+	  </div>
+
+	  <div class="file-field input-field col s12">
+		  <input class="file-path validate" type="text" disabled style="padding-left: 40px;"/>
+		  <div class="btn bg-struct" style="margin-left: 10px;">
+			<span><i class="mdi-image-exposure"></i> {{ 'Logo'|trans }}</span>
+			{{ form_widget(form2.file) }}
+		  </div>
+	  </div>
+	  <div class="col s12" style="margin-top: 30px;">
+		 <button class="btn waves-effect waves-light bg-struct" type="submit">{{ 'Envoyer'|trans }} <i class="mdi-content-send right"></i></button>
+	  </div>
+	{{ form_end(form2) }}
+  </div>
+</div>
+<div class="modal-footer" style="padding-top: 15px; z-index: 1;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modal-update-content" style="padding-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-notification-sms"></i> {{ 'Mise à jour du contenu'|trans }} <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+	   <div class="input-field col s12">
+		<div class="wait-chargement-content-module-article" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading-article" style="display: none;">
+		
+		</div>
+	  </div>
+  </div>
+</div>
+<div class="modal-footer" style="padding-top: 15px; z-index: 1;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block srcjavascripttemplate %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.open-modal-update-continent').click(function(){
+	var id = $(this).attr('value');
+	$('.wait-chargement-content-module-article').show();
+	$('.content-module-loading-article').hide();
+	$('#modal-update-content').modal('show');
+	$.get('{{ path('users_adminuser_modif_cat_application') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module-article').hide();
+		$('.content-module-loading-article').show();
+		$('.content-module-loading-article').html(data);
+	});
+});	
+
+$('.open-modal-update-pays').click(function(){
+	var id = $(this).attr('value');
+	$('.wait-chargement-content-module-article').show();
+	$('.content-module-loading-article').hide();
+	$('#modal-update-content').modal('show');
+	$.get('{{ path('users_adminuser_change_application_user') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module-article').hide();
+		$('.content-module-loading-article').show();
+		$('.content-module-loading-article').html(data);
+	});
+});	
+
+$('.open-modal-continent').click(function(){
+	$('#modal2').modal('show');
+});
+$('.open-modal-pays').click(function(){
+	$('#modal3').modal('show');
+});
+{% endblock %}

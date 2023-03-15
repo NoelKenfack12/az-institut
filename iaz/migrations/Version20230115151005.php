@@ -1,0 +1,257 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20230115151005 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE application (id INT AUTO_INCREMENT NOT NULL, categorieappli_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, rang INT NOT NULL, siteweb VARCHAR(255) DEFAULT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_A45BDDC16C6E55B5 (nom), UNIQUE INDEX UNIQ_A45BDDC18535EB27 (siteweb), INDEX IDX_A45BDDC1360ED39E (categorieappli_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE apropos (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, entreprise TINYINT(1) NOT NULL, particulier TINYINT(1) NOT NULL, team TINYINT(1) NOT NULL, slider TINYINT(1) NOT NULL, nom VARCHAR(255) NOT NULL, poste VARCHAR(255) DEFAULT NULL, contenu LONGTEXT NOT NULL, date DATETIME NOT NULL, tel VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, facebook VARCHAR(255) DEFAULT NULL, twitter VARCHAR(255) DEFAULT NULL, google VARCHAR(255) DEFAULT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, INDEX IDX_2440FEAAA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE backgroundslide (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, INDEX IDX_D6588348A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE billet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, produitpanier_id INT DEFAULT NULL, panier_id INT DEFAULT NULL, titre VARCHAR(255) DEFAULT NULL, description LONGTEXT NOT NULL, date DATETIME NOT NULL, avis TINYINT(1) NOT NULL, avisuser INT NOT NULL, INDEX IDX_1F034AF6A76ED395 (user_id), INDEX IDX_1F034AF6F0A2E50F (produitpanier_id), INDEX IDX_1F034AF6F77D927C (panier_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE caracteristique (id INT AUTO_INCREMENT NOT NULL, souscategorie_id INT NOT NULL, user_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, date DATETIME NOT NULL, rang INT NOT NULL, icon VARCHAR(255) DEFAULT NULL, INDEX IDX_D14FBE8BA27126E0 (souscategorie_id), INDEX IDX_D14FBE8BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE caracteristiqueproduit (id INT AUTO_INCREMENT NOT NULL, produit_id INT DEFAULT NULL, caracteristique_id INT DEFAULT NULL, user_id INT NOT NULL, valeur LONGTEXT NOT NULL, date DATETIME NOT NULL, INDEX IDX_C73F314EF347EFB (produit_id), INDEX IDX_C73F314E1704EEB7 (caracteristique_id), INDEX IDX_C73F314EA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE cataloguechantier (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, rang INT NOT NULL, date DATETIME NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_54F2517E6C6E55B5 (nom), INDEX IDX_54F2517EA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE categorie (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, nom VARCHAR(255) NOT NULL, typeservice VARCHAR(255) DEFAULT NULL, description LONGTEXT NOT NULL, date DATETIME NOT NULL, rang INT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_497DD6346C6E55B5 (nom), INDEX IDX_497DD634A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE categorieappli (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, nom VARCHAR(100) NOT NULL, description LONGTEXT NOT NULL, rang INT NOT NULL, UNIQUE INDEX UNIQ_8A946B376C6E55B5 (nom), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE commentaireblog (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, service_id INT NOT NULL, nom VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, contenu LONGTEXT NOT NULL, date DATETIME NOT NULL, timestamp BIGINT NOT NULL, INDEX IDX_161F2FBFA76ED395 (user_id), INDEX IDX_161F2FBFED5CA9E6 (service_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE contacts (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, pays_id INT DEFAULT NULL, type VARCHAR(255) NOT NULL, pseudo VARCHAR(255) DEFAULT NULL, nom VARCHAR(255) NOT NULL, structname VARCHAR(255) DEFAULT NULL, prenom VARCHAR(255) NOT NULL, adresse VARCHAR(255) DEFAULT NULL, ville VARCHAR(255) DEFAULT NULL, email VARCHAR(255) NOT NULL, tel VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_33401573A76ED395 (user_id), INDEX IDX_33401573A6E44244 (pays_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE continent (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, siteweb VARCHAR(255) DEFAULT NULL, nom VARCHAR(100) NOT NULL, citoyen VARCHAR(100) DEFAULT NULL, citoyenne VARCHAR(100) DEFAULT NULL, UNIQUE INDEX UNIQ_6CC70C7C8535EB27 (siteweb), UNIQUE INDEX UNIQ_6CC70C7C6C6E55B5 (nom), UNIQUE INDEX UNIQ_6CC70C7C8E7EF6AC (citoyen), UNIQUE INDEX UNIQ_6CC70C7CD113EBB3 (citoyenne), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE couponcard (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, titre VARCHAR(255) NOT NULL, montant INT NOT NULL, nbplace INT NOT NULL, actif TINYINT(1) NOT NULL, publique TINYINT(1) NOT NULL, revendeur TINYINT(1) NOT NULL, date DATETIME NOT NULL, UNIQUE INDEX UNIQ_BAA8E5C3FF7747B4 (titre), INDEX IDX_BAA8E5C3A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE coutlivraison (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, ville_id INT NOT NULL, produit_id INT NOT NULL, montant INT NOT NULL, date DATETIME NOT NULL, INDEX IDX_D6595389A76ED395 (user_id), INDEX IDX_D6595389A73F0036 (ville_id), INDEX IDX_D6595389F347EFB (produit_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE curentwebsite (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE detailinfoentreprise (id INT AUTO_INCREMENT NOT NULL, infoentreprise_id INT NOT NULL, user_id INT NOT NULL, titre VARCHAR(255) DEFAULT NULL, description LONGTEXT NOT NULL, date DATETIME NOT NULL, timestamp BIGINT NOT NULL, INDEX IDX_D206B895D3281AE4 (infoentreprise_id), INDEX IDX_D206B895A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE drapeau (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE evenement (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, service_id INT NOT NULL, imgevenement_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, typearticle VARCHAR(255) NOT NULL, link VARCHAR(255) DEFAULT NULL, breve VARCHAR(255) DEFAULT NULL, date DATETIME NOT NULL, rang INT NOT NULL, INDEX IDX_B26681EA76ED395 (user_id), INDEX IDX_B26681EED5CA9E6 (service_id), UNIQUE INDEX UNIQ_B26681EDF3D9B63 (imgevenement_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgevenement (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imginfoentreprise (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgproduit (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgprofil (id INT NOT NULL, user_id INT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_4422F764A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgservice (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgservicesecond (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE imgslide (id INT AUTO_INCREMENT NOT NULL, souscategorie_id INT DEFAULT NULL, user_id INT NOT NULL, backgroundslide_id INT DEFAULT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, titre VARCHAR(255) NOT NULL, slide TINYINT(1) NOT NULL, description VARCHAR(255) NOT NULL, date DATETIME NOT NULL, rang INT NOT NULL, link VARCHAR(255) DEFAULT NULL, INDEX IDX_E1DB6F41A27126E0 (souscategorie_id), INDEX IDX_E1DB6F41A76ED395 (user_id), UNIQUE INDEX UNIQ_E1DB6F416DD60BD0 (backgroundslide_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE infoentreprise (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, imginfoentreprise_id INT DEFAULT NULL, titre VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, date DATETIME NOT NULL, timestamp BIGINT NOT NULL, rang INT NOT NULL, UNIQUE INDEX UNIQ_EDF5E64081CFA4CE (rang), INDEX IDX_EDF5E640A76ED395 (user_id), UNIQUE INDEX UNIQ_EDF5E64098E8A50A (imginfoentreprise_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, titre VARCHAR(255) NOT NULL, nom VARCHAR(255) DEFAULT NULL, contenu LONGTEXT NOT NULL, date DATETIME NOT NULL, email VARCHAR(255) DEFAULT NULL, INDEX IDX_B6BD307FA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE messemail (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, titre VARCHAR(255) NOT NULL, contenu LONGTEXT NOT NULL, date DATETIME NOT NULL, INDEX IDX_A2A8E232A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE newsletter (id INT AUTO_INCREMENT NOT NULL, date DATETIME NOT NULL, nom VARCHAR(255) DEFAULT NULL, email VARCHAR(255) NOT NULL, lastemail DATETIME NOT NULL, UNIQUE INDEX UNIQ_7E8585C8E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE notification (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, auteur_id INT DEFAULT NULL, date DATETIME NOT NULL, contenu LONGTEXT DEFAULT NULL, titre VARCHAR(255) DEFAULT NULL, transaction TINYINT(1) NOT NULL, valide TINYINT(1) NOT NULL, lut TINYINT(1) NOT NULL, depot INT NOT NULL, retrait INT NOT NULL, timestamp BIGINT NOT NULL, INDEX IDX_BF5476CAA76ED395 (user_id), INDEX IDX_BF5476CA60BB6FE6 (auteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE panier (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, ville_id INT DEFAULT NULL, couponcard_id INT DEFAULT NULL, contact_id INT DEFAULT NULL, service_id INT DEFAULT NULL, date DATETIME NOT NULL, payer TINYINT(1) NOT NULL, livrer TINYINT(1) NOT NULL, sousmis TINYINT(1) NOT NULL, coastlivraison INT NOT NULL, montantht INT NOT NULL, montantttc INT NOT NULL, livraisonpayer TINYINT(1) NOT NULL, tel VARCHAR(255) DEFAULT NULL, destination VARCHAR(255) DEFAULT NULL, INDEX IDX_24CC0DF2A76ED395 (user_id), UNIQUE INDEX UNIQ_24CC0DF2A73F0036 (ville_id), INDEX IDX_24CC0DF2EACC1E0 (couponcard_id), INDEX IDX_24CC0DF2E7A1254A (contact_id), INDEX IDX_24CC0DF2ED5CA9E6 (service_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE parametreadmin (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, type VARCHAR(255) NOT NULL, valeur LONGTEXT DEFAULT NULL, link VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, date DATETIME NOT NULL, rang INT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, INDEX IDX_C68FEE0BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE pays (id INT AUTO_INCREMENT NOT NULL, drapeau_id INT DEFAULT NULL, continent_id INT NOT NULL, nom VARCHAR(255) NOT NULL, siteweb VARCHAR(255) DEFAULT NULL, citoyen VARCHAR(255) DEFAULT NULL, citoyenne VARCHAR(255) DEFAULT NULL, code VARCHAR(255) DEFAULT NULL, domaine VARCHAR(255) DEFAULT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_349F3CAE6C6E55B5 (nom), UNIQUE INDEX UNIQ_349F3CAE8535EB27 (siteweb), UNIQUE INDEX UNIQ_349F3CAE77153098 (code), UNIQUE INDEX UNIQ_349F3CAE78AF0ACC (domaine), UNIQUE INDEX UNIQ_349F3CAE2C70DBB9 (drapeau_id), INDEX IDX_349F3CAE921F4C77 (continent_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE produit (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, imgproduit_id INT DEFAULT NULL, souscategorie_id INT NOT NULL, nom VARCHAR(255) NOT NULL, contenu LONGTEXT DEFAULT NULL, rapport VARCHAR(255) DEFAULT NULL, rang INT NOT NULL, choixauteur TINYINT(1) NOT NULL, date DATETIME NOT NULL, nblike INT NOT NULL, nbvente INT NOT NULL, newprise INT NOT NULL, lastprise INT NOT NULL, difference INT NOT NULL, prixlivraison INT NOT NULL, nbvote INT NOT NULL, totalnote INT NOT NULL, INDEX IDX_29A5EC27A76ED395 (user_id), UNIQUE INDEX UNIQ_29A5EC27A5BE6EE4 (imgproduit_id), INDEX IDX_29A5EC27A27126E0 (souscategorie_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE produit_user (produit_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_A40BABA6F347EFB (produit_id), INDEX IDX_A40BABA6A76ED395 (user_id), PRIMARY KEY(produit_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE produitpanier (id INT AUTO_INCREMENT NOT NULL, produit_id INT NOT NULL, panier_id INT NOT NULL, quantite INT NOT NULL, date DATETIME NOT NULL, INDEX IDX_9E6886FAF347EFB (produit_id), INDEX IDX_9E6886FAF77D927C (panier_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE recrutement (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, yourcv_id INT NOT NULL, date DATETIME NOT NULL, src VARCHAR(255) NOT NULL, alt VARCHAR(255) NOT NULL, nbtele INT NOT NULL, message LONGTEXT NOT NULL, typedocument LONGTEXT NOT NULL, timestamp BIGINT NOT NULL, INDEX IDX_25EB2319A76ED395 (user_id), UNIQUE INDEX UNIQ_25EB231942BE6E8E (yourcv_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE reponsebillet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, billet_id INT NOT NULL, description LONGTEXT NOT NULL, date DATETIME NOT NULL, INDEX IDX_7AD2DD09A76ED395 (user_id), INDEX IDX_7AD2DD0944973C78 (billet_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE ressourcearticle (id INT AUTO_INCREMENT NOT NULL, service_id INT NOT NULL, ressource_id INT NOT NULL, user_id INT NOT NULL, date DATETIME NOT NULL, type VARCHAR(255) NOT NULL, rang INT NOT NULL, INDEX IDX_11483A58ED5CA9E6 (service_id), INDEX IDX_11483A58FC6CD52A (ressource_id), INDEX IDX_11483A58A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE service (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, souscategorie_id INT DEFAULT NULL, imgservice_id INT DEFAULT NULL, type_id INT DEFAULT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, breve VARCHAR(255) DEFAULT NULL, keyword VARCHAR(255) DEFAULT NULL, link VARCHAR(255) DEFAULT NULL, nomcompte VARCHAR(255) DEFAULT NULL, numcompte VARCHAR(255) DEFAULT NULL, rang INT NOT NULL, principal TINYINT(1) NOT NULL, date DATETIME NOT NULL, typearticle VARCHAR(255) NOT NULL, INDEX IDX_E19D9AD2A76ED395 (user_id), INDEX IDX_E19D9AD2A27126E0 (souscategorie_id), UNIQUE INDEX UNIQ_E19D9AD247D6B9F9 (imgservice_id), INDEX IDX_E19D9AD2C54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE souscategorie (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, categorie_id INT NOT NULL, cataloguechantier_id INT DEFAULT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, helpdashboard LONGTEXT DEFAULT NULL, link VARCHAR(255) DEFAULT NULL, date DATETIME NOT NULL, nbvente INT NOT NULL, rang INT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, INDEX IDX_6FF3A701A76ED395 (user_id), INDEX IDX_6FF3A701BCF5E72D (categorie_id), INDEX IDX_6FF3A701C83D7F1B (cataloguechantier_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE typearticle (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, rang INT NOT NULL, src VARCHAR(255) DEFAULT NULL, alt VARCHAR(255) DEFAULT NULL, position VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_D8DE82DDA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, pays_id INT DEFAULT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, salt VARCHAR(255) DEFAULT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', tel VARCHAR(255) DEFAULT NULL, mailval TINYINT(1) NOT NULL, datebeg BIGINT NOT NULL, dateend BIGINT NOT NULL, dateins DATETIME NOT NULL, telval TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), INDEX IDX_8D93D649A6E44244 (pays_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE ville (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, nom VARCHAR(255) NOT NULL, pays VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_43C3D9C3A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE yourcv (id INT AUTO_INCREMENT NOT NULL, src VARCHAR(255) NOT NULL, nbtele INT NOT NULL, alt VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E0FB7336F0 (queue_name), INDEX IDX_75EA56E0E3BD61CE (available_at), INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE application ADD CONSTRAINT FK_A45BDDC1360ED39E FOREIGN KEY (categorieappli_id) REFERENCES categorieappli (id)');
+        $this->addSql('ALTER TABLE apropos ADD CONSTRAINT FK_2440FEAAA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE backgroundslide ADD CONSTRAINT FK_D6588348A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE billet ADD CONSTRAINT FK_1F034AF6A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE billet ADD CONSTRAINT FK_1F034AF6F0A2E50F FOREIGN KEY (produitpanier_id) REFERENCES produitpanier (id)');
+        $this->addSql('ALTER TABLE billet ADD CONSTRAINT FK_1F034AF6F77D927C FOREIGN KEY (panier_id) REFERENCES panier (id)');
+        $this->addSql('ALTER TABLE caracteristique ADD CONSTRAINT FK_D14FBE8BA27126E0 FOREIGN KEY (souscategorie_id) REFERENCES souscategorie (id)');
+        $this->addSql('ALTER TABLE caracteristique ADD CONSTRAINT FK_D14FBE8BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE caracteristiqueproduit ADD CONSTRAINT FK_C73F314EF347EFB FOREIGN KEY (produit_id) REFERENCES produit (id)');
+        $this->addSql('ALTER TABLE caracteristiqueproduit ADD CONSTRAINT FK_C73F314E1704EEB7 FOREIGN KEY (caracteristique_id) REFERENCES caracteristique (id)');
+        $this->addSql('ALTER TABLE caracteristiqueproduit ADD CONSTRAINT FK_C73F314EA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE cataloguechantier ADD CONSTRAINT FK_54F2517EA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE categorie ADD CONSTRAINT FK_497DD634A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE commentaireblog ADD CONSTRAINT FK_161F2FBFA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE commentaireblog ADD CONSTRAINT FK_161F2FBFED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE contacts ADD CONSTRAINT FK_33401573A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE contacts ADD CONSTRAINT FK_33401573A6E44244 FOREIGN KEY (pays_id) REFERENCES pays (id)');
+        $this->addSql('ALTER TABLE couponcard ADD CONSTRAINT FK_BAA8E5C3A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE coutlivraison ADD CONSTRAINT FK_D6595389A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE coutlivraison ADD CONSTRAINT FK_D6595389A73F0036 FOREIGN KEY (ville_id) REFERENCES ville (id)');
+        $this->addSql('ALTER TABLE coutlivraison ADD CONSTRAINT FK_D6595389F347EFB FOREIGN KEY (produit_id) REFERENCES produit (id)');
+        $this->addSql('ALTER TABLE detailinfoentreprise ADD CONSTRAINT FK_D206B895D3281AE4 FOREIGN KEY (infoentreprise_id) REFERENCES infoentreprise (id)');
+        $this->addSql('ALTER TABLE detailinfoentreprise ADD CONSTRAINT FK_D206B895A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681EA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681EED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681EDF3D9B63 FOREIGN KEY (imgevenement_id) REFERENCES imgevenement (id)');
+        $this->addSql('ALTER TABLE imgprofil ADD CONSTRAINT FK_4422F764A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE imgslide ADD CONSTRAINT FK_E1DB6F41A27126E0 FOREIGN KEY (souscategorie_id) REFERENCES souscategorie (id)');
+        $this->addSql('ALTER TABLE imgslide ADD CONSTRAINT FK_E1DB6F41A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE imgslide ADD CONSTRAINT FK_E1DB6F416DD60BD0 FOREIGN KEY (backgroundslide_id) REFERENCES backgroundslide (id)');
+        $this->addSql('ALTER TABLE infoentreprise ADD CONSTRAINT FK_EDF5E640A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE infoentreprise ADD CONSTRAINT FK_EDF5E64098E8A50A FOREIGN KEY (imginfoentreprise_id) REFERENCES imginfoentreprise (id)');
+        $this->addSql('ALTER TABLE message ADD CONSTRAINT FK_B6BD307FA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE messemail ADD CONSTRAINT FK_A2A8E232A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE notification ADD CONSTRAINT FK_BF5476CAA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE notification ADD CONSTRAINT FK_BF5476CA60BB6FE6 FOREIGN KEY (auteur_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2A73F0036 FOREIGN KEY (ville_id) REFERENCES ville (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2EACC1E0 FOREIGN KEY (couponcard_id) REFERENCES couponcard (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2E7A1254A FOREIGN KEY (contact_id) REFERENCES contacts (id)');
+        $this->addSql('ALTER TABLE panier ADD CONSTRAINT FK_24CC0DF2ED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE parametreadmin ADD CONSTRAINT FK_C68FEE0BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE pays ADD CONSTRAINT FK_349F3CAE2C70DBB9 FOREIGN KEY (drapeau_id) REFERENCES drapeau (id)');
+        $this->addSql('ALTER TABLE pays ADD CONSTRAINT FK_349F3CAE921F4C77 FOREIGN KEY (continent_id) REFERENCES continent (id)');
+        $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27A5BE6EE4 FOREIGN KEY (imgproduit_id) REFERENCES imgproduit (id)');
+        $this->addSql('ALTER TABLE produit ADD CONSTRAINT FK_29A5EC27A27126E0 FOREIGN KEY (souscategorie_id) REFERENCES souscategorie (id)');
+        $this->addSql('ALTER TABLE produit_user ADD CONSTRAINT FK_A40BABA6F347EFB FOREIGN KEY (produit_id) REFERENCES produit (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE produit_user ADD CONSTRAINT FK_A40BABA6A76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE produitpanier ADD CONSTRAINT FK_9E6886FAF347EFB FOREIGN KEY (produit_id) REFERENCES produit (id)');
+        $this->addSql('ALTER TABLE produitpanier ADD CONSTRAINT FK_9E6886FAF77D927C FOREIGN KEY (panier_id) REFERENCES panier (id)');
+        $this->addSql('ALTER TABLE recrutement ADD CONSTRAINT FK_25EB2319A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE recrutement ADD CONSTRAINT FK_25EB231942BE6E8E FOREIGN KEY (yourcv_id) REFERENCES yourcv (id)');
+        $this->addSql('ALTER TABLE reponsebillet ADD CONSTRAINT FK_7AD2DD09A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE reponsebillet ADD CONSTRAINT FK_7AD2DD0944973C78 FOREIGN KEY (billet_id) REFERENCES billet (id)');
+        $this->addSql('ALTER TABLE ressourcearticle ADD CONSTRAINT FK_11483A58ED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE ressourcearticle ADD CONSTRAINT FK_11483A58FC6CD52A FOREIGN KEY (ressource_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE ressourcearticle ADD CONSTRAINT FK_11483A58A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE service ADD CONSTRAINT FK_E19D9AD2A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE service ADD CONSTRAINT FK_E19D9AD2A27126E0 FOREIGN KEY (souscategorie_id) REFERENCES souscategorie (id)');
+        $this->addSql('ALTER TABLE service ADD CONSTRAINT FK_E19D9AD247D6B9F9 FOREIGN KEY (imgservice_id) REFERENCES imgservice (id)');
+        $this->addSql('ALTER TABLE service ADD CONSTRAINT FK_E19D9AD2C54C8C93 FOREIGN KEY (type_id) REFERENCES typearticle (id)');
+        $this->addSql('ALTER TABLE souscategorie ADD CONSTRAINT FK_6FF3A701A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE souscategorie ADD CONSTRAINT FK_6FF3A701BCF5E72D FOREIGN KEY (categorie_id) REFERENCES categorie (id)');
+        $this->addSql('ALTER TABLE souscategorie ADD CONSTRAINT FK_6FF3A701C83D7F1B FOREIGN KEY (cataloguechantier_id) REFERENCES cataloguechantier (id)');
+        $this->addSql('ALTER TABLE typearticle ADD CONSTRAINT FK_D8DE82DDA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649A6E44244 FOREIGN KEY (pays_id) REFERENCES pays (id)');
+        $this->addSql('ALTER TABLE ville ADD CONSTRAINT FK_43C3D9C3A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE application DROP FOREIGN KEY FK_A45BDDC1360ED39E');
+        $this->addSql('ALTER TABLE apropos DROP FOREIGN KEY FK_2440FEAAA76ED395');
+        $this->addSql('ALTER TABLE backgroundslide DROP FOREIGN KEY FK_D6588348A76ED395');
+        $this->addSql('ALTER TABLE billet DROP FOREIGN KEY FK_1F034AF6A76ED395');
+        $this->addSql('ALTER TABLE billet DROP FOREIGN KEY FK_1F034AF6F0A2E50F');
+        $this->addSql('ALTER TABLE billet DROP FOREIGN KEY FK_1F034AF6F77D927C');
+        $this->addSql('ALTER TABLE caracteristique DROP FOREIGN KEY FK_D14FBE8BA27126E0');
+        $this->addSql('ALTER TABLE caracteristique DROP FOREIGN KEY FK_D14FBE8BA76ED395');
+        $this->addSql('ALTER TABLE caracteristiqueproduit DROP FOREIGN KEY FK_C73F314EF347EFB');
+        $this->addSql('ALTER TABLE caracteristiqueproduit DROP FOREIGN KEY FK_C73F314E1704EEB7');
+        $this->addSql('ALTER TABLE caracteristiqueproduit DROP FOREIGN KEY FK_C73F314EA76ED395');
+        $this->addSql('ALTER TABLE cataloguechantier DROP FOREIGN KEY FK_54F2517EA76ED395');
+        $this->addSql('ALTER TABLE categorie DROP FOREIGN KEY FK_497DD634A76ED395');
+        $this->addSql('ALTER TABLE commentaireblog DROP FOREIGN KEY FK_161F2FBFA76ED395');
+        $this->addSql('ALTER TABLE commentaireblog DROP FOREIGN KEY FK_161F2FBFED5CA9E6');
+        $this->addSql('ALTER TABLE contacts DROP FOREIGN KEY FK_33401573A76ED395');
+        $this->addSql('ALTER TABLE contacts DROP FOREIGN KEY FK_33401573A6E44244');
+        $this->addSql('ALTER TABLE couponcard DROP FOREIGN KEY FK_BAA8E5C3A76ED395');
+        $this->addSql('ALTER TABLE coutlivraison DROP FOREIGN KEY FK_D6595389A76ED395');
+        $this->addSql('ALTER TABLE coutlivraison DROP FOREIGN KEY FK_D6595389A73F0036');
+        $this->addSql('ALTER TABLE coutlivraison DROP FOREIGN KEY FK_D6595389F347EFB');
+        $this->addSql('ALTER TABLE detailinfoentreprise DROP FOREIGN KEY FK_D206B895D3281AE4');
+        $this->addSql('ALTER TABLE detailinfoentreprise DROP FOREIGN KEY FK_D206B895A76ED395');
+        $this->addSql('ALTER TABLE evenement DROP FOREIGN KEY FK_B26681EA76ED395');
+        $this->addSql('ALTER TABLE evenement DROP FOREIGN KEY FK_B26681EED5CA9E6');
+        $this->addSql('ALTER TABLE evenement DROP FOREIGN KEY FK_B26681EDF3D9B63');
+        $this->addSql('ALTER TABLE imgprofil DROP FOREIGN KEY FK_4422F764A76ED395');
+        $this->addSql('ALTER TABLE imgslide DROP FOREIGN KEY FK_E1DB6F41A27126E0');
+        $this->addSql('ALTER TABLE imgslide DROP FOREIGN KEY FK_E1DB6F41A76ED395');
+        $this->addSql('ALTER TABLE imgslide DROP FOREIGN KEY FK_E1DB6F416DD60BD0');
+        $this->addSql('ALTER TABLE infoentreprise DROP FOREIGN KEY FK_EDF5E640A76ED395');
+        $this->addSql('ALTER TABLE infoentreprise DROP FOREIGN KEY FK_EDF5E64098E8A50A');
+        $this->addSql('ALTER TABLE message DROP FOREIGN KEY FK_B6BD307FA76ED395');
+        $this->addSql('ALTER TABLE messemail DROP FOREIGN KEY FK_A2A8E232A76ED395');
+        $this->addSql('ALTER TABLE notification DROP FOREIGN KEY FK_BF5476CAA76ED395');
+        $this->addSql('ALTER TABLE notification DROP FOREIGN KEY FK_BF5476CA60BB6FE6');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2A76ED395');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2A73F0036');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2EACC1E0');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2E7A1254A');
+        $this->addSql('ALTER TABLE panier DROP FOREIGN KEY FK_24CC0DF2ED5CA9E6');
+        $this->addSql('ALTER TABLE parametreadmin DROP FOREIGN KEY FK_C68FEE0BA76ED395');
+        $this->addSql('ALTER TABLE pays DROP FOREIGN KEY FK_349F3CAE2C70DBB9');
+        $this->addSql('ALTER TABLE pays DROP FOREIGN KEY FK_349F3CAE921F4C77');
+        $this->addSql('ALTER TABLE produit DROP FOREIGN KEY FK_29A5EC27A76ED395');
+        $this->addSql('ALTER TABLE produit DROP FOREIGN KEY FK_29A5EC27A5BE6EE4');
+        $this->addSql('ALTER TABLE produit DROP FOREIGN KEY FK_29A5EC27A27126E0');
+        $this->addSql('ALTER TABLE produit_user DROP FOREIGN KEY FK_A40BABA6F347EFB');
+        $this->addSql('ALTER TABLE produit_user DROP FOREIGN KEY FK_A40BABA6A76ED395');
+        $this->addSql('ALTER TABLE produitpanier DROP FOREIGN KEY FK_9E6886FAF347EFB');
+        $this->addSql('ALTER TABLE produitpanier DROP FOREIGN KEY FK_9E6886FAF77D927C');
+        $this->addSql('ALTER TABLE recrutement DROP FOREIGN KEY FK_25EB2319A76ED395');
+        $this->addSql('ALTER TABLE recrutement DROP FOREIGN KEY FK_25EB231942BE6E8E');
+        $this->addSql('ALTER TABLE reponsebillet DROP FOREIGN KEY FK_7AD2DD09A76ED395');
+        $this->addSql('ALTER TABLE reponsebillet DROP FOREIGN KEY FK_7AD2DD0944973C78');
+        $this->addSql('ALTER TABLE ressourcearticle DROP FOREIGN KEY FK_11483A58ED5CA9E6');
+        $this->addSql('ALTER TABLE ressourcearticle DROP FOREIGN KEY FK_11483A58FC6CD52A');
+        $this->addSql('ALTER TABLE ressourcearticle DROP FOREIGN KEY FK_11483A58A76ED395');
+        $this->addSql('ALTER TABLE service DROP FOREIGN KEY FK_E19D9AD2A76ED395');
+        $this->addSql('ALTER TABLE service DROP FOREIGN KEY FK_E19D9AD2A27126E0');
+        $this->addSql('ALTER TABLE service DROP FOREIGN KEY FK_E19D9AD247D6B9F9');
+        $this->addSql('ALTER TABLE service DROP FOREIGN KEY FK_E19D9AD2C54C8C93');
+        $this->addSql('ALTER TABLE souscategorie DROP FOREIGN KEY FK_6FF3A701A76ED395');
+        $this->addSql('ALTER TABLE souscategorie DROP FOREIGN KEY FK_6FF3A701BCF5E72D');
+        $this->addSql('ALTER TABLE souscategorie DROP FOREIGN KEY FK_6FF3A701C83D7F1B');
+        $this->addSql('ALTER TABLE typearticle DROP FOREIGN KEY FK_D8DE82DDA76ED395');
+        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649A6E44244');
+        $this->addSql('ALTER TABLE ville DROP FOREIGN KEY FK_43C3D9C3A76ED395');
+        $this->addSql('DROP TABLE application');
+        $this->addSql('DROP TABLE apropos');
+        $this->addSql('DROP TABLE backgroundslide');
+        $this->addSql('DROP TABLE billet');
+        $this->addSql('DROP TABLE caracteristique');
+        $this->addSql('DROP TABLE caracteristiqueproduit');
+        $this->addSql('DROP TABLE cataloguechantier');
+        $this->addSql('DROP TABLE categorie');
+        $this->addSql('DROP TABLE categorieappli');
+        $this->addSql('DROP TABLE commentaireblog');
+        $this->addSql('DROP TABLE contacts');
+        $this->addSql('DROP TABLE continent');
+        $this->addSql('DROP TABLE couponcard');
+        $this->addSql('DROP TABLE coutlivraison');
+        $this->addSql('DROP TABLE curentwebsite');
+        $this->addSql('DROP TABLE detailinfoentreprise');
+        $this->addSql('DROP TABLE drapeau');
+        $this->addSql('DROP TABLE evenement');
+        $this->addSql('DROP TABLE imgevenement');
+        $this->addSql('DROP TABLE imginfoentreprise');
+        $this->addSql('DROP TABLE imgproduit');
+        $this->addSql('DROP TABLE imgprofil');
+        $this->addSql('DROP TABLE imgservice');
+        $this->addSql('DROP TABLE imgservicesecond');
+        $this->addSql('DROP TABLE imgslide');
+        $this->addSql('DROP TABLE infoentreprise');
+        $this->addSql('DROP TABLE message');
+        $this->addSql('DROP TABLE messemail');
+        $this->addSql('DROP TABLE newsletter');
+        $this->addSql('DROP TABLE notification');
+        $this->addSql('DROP TABLE panier');
+        $this->addSql('DROP TABLE parametreadmin');
+        $this->addSql('DROP TABLE pays');
+        $this->addSql('DROP TABLE produit');
+        $this->addSql('DROP TABLE produit_user');
+        $this->addSql('DROP TABLE produitpanier');
+        $this->addSql('DROP TABLE recrutement');
+        $this->addSql('DROP TABLE reponsebillet');
+        $this->addSql('DROP TABLE ressourcearticle');
+        $this->addSql('DROP TABLE service');
+        $this->addSql('DROP TABLE souscategorie');
+        $this->addSql('DROP TABLE typearticle');
+        $this->addSql('DROP TABLE user');
+        $this->addSql('DROP TABLE ville');
+        $this->addSql('DROP TABLE yourcv');
+        $this->addSql('DROP TABLE messenger_messages');
+    }
+}

@@ -1,0 +1,280 @@
+
+<style>
+label{
+cursor: pointer;
+}
+</style>
+
+<div class="row text-left" style="margin: 0px;">
+<div class="col-md-12 text-left">
+	<h2>Renseignez les informations de de contact de l'étudiant(e) que vous souhaitez inscrire aux formations sélectionnées.</h2>
+</div>
+
+<div class="col-md-8 col-lg-8" style="border: 1px solid #ddd;">
+	<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.02); background: #fff; margin: 0px; padding: 7px; min-width: 100%; min-height: 400px;">
+	  <form action="#!" method="post" class="form_sauve_contacts">
+		<div class="row">
+		{% if liste_contact|length == 0 %}
+		
+		<div class="col-md-12" style="margin: 3px 0px;">
+			<div class="alert alert-info" style="font-size: 22px; border-left: 3px solid green;">
+				<u>Créez le contact de l'étudiant(e).</u></br>
+				<span style="font-size: 12px;">NB: Ce contact sera utilisé pour votre facturation et pour tous les aspects légaux requis en internet à {{ site }}.</span>
+			</div>
+		</div>
+		
+		<input type="hidden" id="old_contact_panier" value="0"/>
+		{% else %}
+																																																												
+		<div class="col-md-12" style="margin: 3px 0px;">
+			<div class="alert alert-info" style="font-size: 22px; border-left: 3px solid green;">
+				<u>Sélectionnez le contact de l'étudiant(e) ou ajouter un nouveau contact.</u></br>
+				<span style="font-size: 12px;">NB: Ce contact sera utilisé pour votre facturation et pour tous les aspects légaux requis en internet à {{ site }}.</span>
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+			<label for="old_contact_panier">Sélectionnez un contact</label>
+			<select name="oldcontact" id="old_contact_panier" class="form-control" style="min-width: 100%;">
+				{% for contact in liste_contact %}
+				<option value="{{ contact.id }}" {% if panier.contact != null and panier.contact == contact %}selected{% endif %}>{{ contact.name(30) }}</option>
+				{% endfor %}
+				{% if panier.contact == null %}
+				<option value="0">Créez un nouveau contact</option>
+				{% endif %}
+			</select>
+		</div>
+		{% endif %}
+		</div>
+		
+		<div class="row panel_add_new_contact" style="{% if liste_contact|length > 0 %}display: none;{% endif %}">
+		<div class="col-md-12" style="margin: 3px 0px;">
+			<label for="type_contact_panier">À qui est destiné cette inscription</label>
+			<select name="type" id="type_contact_panier" class="form-control" style="min-width: 100%;">
+				<option value="etudiant" {% if panier.contact != null and panier.contact.type == 'etudiant' %}selected{% endif %}>À moi même</option>
+				<option value="parent" {% if panier.contact != null and panier.contact.type == 'parent' %}selected{% endif %}>À mon enfant</option>
+				<option value="connaissance" {% if panier.contact != null and panier.contact.type == 'connaissance' %}selected{% endif %}>À une connaissance</option>
+			</select>
+		</div>																
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="nom_contact_panier">Nom de l'étudiant(e)</label>
+				<input type="text" id="nom_contact_panier" name="nom" placeholder="Nom" class="form-control" value="{% if app.user != null and app.user.nom != null %}{{ app.user.nom }}{% else %}{% if panier.contact != null and panier.contact.nom != null %}{{ panier.contact.nom }}{% endif %}{% endif %}" required/>
+			</div>
+		</div>
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="prenom_contact_panier">Prenom de l'étudiant(e)</label>
+				<input type="text" id="prenom_contact_panier" name="prenom" placeholder="Prenom" class="form-control" value="{% if app.user != null and app.user.prenom != null %}{{ app.user.prenom }}{% else %}{% if panier.contact != null and panier.contact.prenom != null %}{{ panier.contact.prenom }}{% endif %}{% endif %}" required/>
+			</div>
+		</div>
+
+		<div class="col-md-12" style="margin: 3px 0px;">
+			<label for="pays_contact_panier">Pays d'origine de l'étudiant(e)</label>
+			<select name="pays" id="pays_contact_panier" class="form-control" style="min-width: 100%;">
+			{% for pays in liste_pays %}
+				<option value="{{ pays.id }}" {% if panier.contact != null and panier.contact.pays == pays %}selected{% endif %}>{{ pays.code }} {{ pays.nom }}</option>
+			{% endfor %}
+			</select>
+		</div>
+		
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="email_contact_panier">Email de l'étudiant(e)</label>
+				<input type="text" id="email_contact_panier" name="email" placeholder="Votre email" class="form-control" value="{% if panier.contact != null and panier.contact.email != null %}{{ panier.contact.email }}{% endif %}" required/>
+			</div>
+		</div>
+		
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="tel_contact_panier">Téléphone de l'étudiant(e) (ex: 648545154)</label>
+				<input type="text" id="tel_contact_panier" name="tel" placeholder="Votre téléphone" class="form-control" value="{% if panier.contact != null and panier.contact.tel != null %}{{ panier.contact.tel }}{% endif %}" required/>
+			</div>
+		</div>
+		{% if app.user == null %}
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="newcompte_contact_panier" onclick="showpassword()" style="display: block!important;"><input type="checkbox" id="newcompte_contact_panier" name="newcompte" style="margin-right: 7px;"/> <span onclick="showpassword()">Créer un compte {{ site }}</span></label>
+				
+				<div class="clearfix"></div>
+				<input type="text" id="password_contact_panier" name="password" class="form-control" placeholder="Entrez votre mot de passe" style="display: none; margin-top: 10px;"/>
+				<div class="alert alert-info alert_info_new_account" style="font-size: 12px; border-left: 3px solid green;">
+					Ce compte vous permettra de gérer les ressources liées à votre formation à {{ site }}.
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="alert alert-info" style="font-size: 12px; border-left: 3px solid green;">
+				Si vous avez déjà un compte {{ site }}, vous devriez vous <a href="{{ path('login') }}">connecter</a> avant de poursuivre avec cette inscription.</br>
+				<a href="{{ path('login') }}">connectez-vous ici</a>
+			</div>
+		</div>
+		{% endif %}
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<div class="form-group">
+				<label for="cgu_contact_panier" style="display: inline!important; float: right;"><input type="checkbox" id="cgu_contact_panier" name="cgu" style="margin-right: 7px; float: left!important; display: inline!important;" checked disabled /> En poursuivant l'inscription de l'étudiant(e) aux formations sélectionnées, vous acceptez nos <a href="" title="Conditions générales d'utilisations" style="color: green;">CGU</a> et notre <a href="" title="" style="color: green;">politique de confidentialité</a> relatif à l'utilisation des informations fournies .</label>
+			</div>
+		</div>
+		<div class="col-md-6" style="margin: 3px 0px;">
+			<button class="btn btn-primary btn-block" style="color: #fff;">Enregistrer et continuer</button>
+		</div>
+		</div>
+		<div class="clearfix"></div>
+	</form>
+	</main>
+</div>
+
+<div class="col-md-4 col-lg-4" style="border: 1px solid #ddd;">
+	{% set progress = 75 %}
+	{% include 'Theme/Produit/Produit/Panier/cardoverview.html.twig' %}
+</div>
+
+<div class="col-md-12 col-lg-12" style="border-top: 1px solid #ddd;">
+	<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 15px 0px; min-width: 100%; border-top: 1px soild #ddd;">
+		<div class="comparison" style="padding: 0px 0px;">
+			
+		</div>
+						
+		<a href="#!" class="btn btn-default back_step_two" style="display: inline-block!important;  margin: 20px 0px 0px 0px; float: left; border-radius: 0px;"><span class="fa fa-chevron-left"></span> Retourner </a>
+		<a href="#!" class="btn btn-primary next_step_order_tree"  style="color: #fff; display: inline-block!important; margin: 20px 0px 0px 0px; float: right; border-radius: 0px;"> Continuer ma commander <span class="fa fa-chevron-right"></span></a>
+		<div class="clearfix"></div>
+	</main>
+</div>
+</div>
+<div class="clearfix"></div>
+
+
+<script type="text/javascript">
+$('.back_step_two').click(function(){
+	$('.step_card_tree').hide();
+	$('.step_card_two').show();
+	$('.step_card_one').hide();
+	$('.step-tree-card').removeClass('completed');
+});
+
+function showpassword(){
+	$('#password_contact_panier').toggle();
+	$('.alert_info_new_account').toggle();
+};
+
+$('form.form_sauve_contacts').on('submit', function(){
+	var $this = $(this);	
+	var formdata = (window.FormData) ? new FormData($this[0]) : null;
+	var data = (formdata !== null) ? formdata : $this.serialize();
+	
+	var hauteur = $('.card_content_update').height() + 2;
+	var largeur = $('.card_content_update').width() + 32;
+	var padding = Math.round(hauteur/2 - 50);
+	$('.card_content_update').before('<div class="attente-resultat col-md-12" style="padding-top: 250px; z-index: 10000; height: '+hauteur+'px; text-align: center; vertical-align: center; width: '+largeur+'px; position: absolute; background: rgba(221, 221, 221, 0.48);; margin-top: 0px;"><span><img src="{{ asset('template/images/loader.gif') }}" alt="..." style="width: 30px; height: 30px;" /></span></div>');
+
+	$.ajax({
+          url: '{{ path('produit_produit_sauvegarde_contacts_panier', {'id': panier.id }) }}', // Le nom du fichier indiqué dans le formulaire
+          type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
+          contentType: false, // obligatoire pour de l'upload
+          processData: false, // obligatoire pour de l'upload
+          data: data, // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+          dataType: 'html', // html
+          success: function(donnee){
+			if(donnee == 1)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, Type de contact invalide !!!");
+			  }else if(donnee == 2)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, l'intitulé de contact est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 3)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, l'intitulé légal de l'organisation est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 4)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, votre nom est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 5)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, votre prenom est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 6)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, pays invalide !!!");
+			  }else if(donnee == 7)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, l'adresse est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 8)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, la ville est invalide. Entre 2 et 100 caractères !!!");
+			  }else if(donnee == 9)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, l'adresse email est invalide. Ex: nom.prenom@domaine.com !!!");
+			  }else if(donnee == 10)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, numéro de téléphone est invalide. Ex: 52145789545 !!!");
+			  }else if(donnee == 11)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, mot de passe invalide. utilisez les lettre et les chiffres, Les caractères spéciaux acceptés sont (_/-)");
+			  }else if(donnee == 12)
+			  {
+				  resetNotif();
+				  alertify.alert("Echec, Un utilisateur existe déjà avec l'adresse email: "+$('#email_contact_panier').val()+" sur {{ site }}.</br>S'il sagit de vous <a href='{{ path('login') }}'>cliquez ici pour vous connecter à ce compte</a> avant de soumettre cette commande.");
+			  }else{
+				  $('.step_card_one').hide();
+				  $('.step_card_two').hide();
+				  $('.step_card_tree').hide();
+				  $('.step_card_four').html(donnee);
+				  $('.step_card_four').show();
+				  $('.step-four-card').addClass('selected');
+			  }
+			  $('.attente-resultat').hide();
+		  }
+	});
+	return false;
+});
+
+$('#old_contact_panier').on('change', function(e){
+	var id = $(this).val();
+	if(id == 0)
+	{
+		$('.panel_add_new_contact').show();
+	}else{
+		$('.panel_add_new_contact').hide();
+	}
+});
+
+$('.next_step_order_tree').click(function(){
+	var id = $('#old_contact_panier').val();
+	if(id == 0)
+	{
+		resetNotif();
+		alertify.alert("Echec !!! Vous devez d'abord enregistrer le nouveau contact pour poursuivre votre commande.");
+	}else{
+		var hauteur = $('.card_content_update').height() + 2;
+		var largeur = $('.card_content_update').width() + 32;
+		var padding = Math.round(hauteur/2 - 50);
+		$('.card_content_update').before('<div class="attente-resultat col-md-12" style="padding-top: 250px; z-index: 10000; height: '+hauteur+'px; text-align: center; vertical-align: center; width: '+largeur+'px; position: absolute; background: rgba(221, 221, 221, 0.48);; margin-top: 25px;"><span><img src="{{ asset('template/images/loader.gif') }}" alt="..." style="width: 30px; height: 30px;" /></span></div>');
+
+		$.post('{{ path('produit_produit_payement_commande_user', {'id': panier.id}) }}', {'id': id}, function(data){
+		  if(data != 0)
+		  {
+			  $('.step_card_one').hide();
+			  $('.step_card_two').hide();
+			  $('.step_card_tree').hide();
+			  $('.step_card_four').html(data);
+			  $('.step_card_four').show();
+			  $('.step-four-card').addClass('selected');
+			  $('.attente-resultat').hide();
+		  }else{
+			  resetNotif();
+			  alertify.alert("Echec, Une erreur a été rencontrée lors de la configuration de la commande.");
+			  $('.attente-resultat').hide();
+		  }
+		});
+	}
+});
+</script>

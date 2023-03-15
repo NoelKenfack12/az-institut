@@ -1,0 +1,99 @@
+<div class="col-md-8">
+{% for article in liste_article %}
+	<div class="my-div">
+	<section class="testing" style="width: 100%;">
+	   <div class="description2 to-expand">
+		<h2>{{ article.nom }} </h2>
+		<div><img src="{% if article.imgservice != null %}{{ asset(article.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="{{ site }} - {{ article.nom }}" style="width: 100%;"/></div>
+		
+		<p>
+		{{ article.description|raw }}
+		</p>
+		<div style="margin-bottom: 50px;">
+			<a href="#!" class="toggle-overlay-article" value="{{ article.id }}" style="display: inline-block;"><button class="btn-home btn-4 btn-mulberry">En savoir plus</button></a>
+		</div>
+	   </div>
+	</section>
+	</div>
+{% else %}
+	<div style="background: #fff; height: 500px; padding-top: 200px; text-align: center; color: red;">Aucune donnée disponible pour cette section.</div>
+{% endfor %}
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>
+
+<!-- <div class="col-md-3"> -->
+<!-- {# { render(controller("App\\Controller\\Produit\\Service\\ServiceController::livresformartion")) } #} -->
+<!-- </div> -->

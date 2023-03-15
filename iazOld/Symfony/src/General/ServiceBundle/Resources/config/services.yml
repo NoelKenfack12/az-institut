@@ -1,0 +1,38 @@
+parameters:
+    nbcategorie: 10
+    nbsouscategorie: 7
+    nbslide: 7
+    nbproduitsouscat: 10
+    nbimgparproduit: 5
+    username: africexplorer
+    devise: XAF
+    password: 91122219
+    namedns1: ns1.afhserver.com
+    namedns2: ns2.afhserver.com
+    registrat1: dnsfrance
+    systemelg: UBUNTU(PHP.v7,Mysql,QLITE)
+    serveurmap: USA(TORENCE)
+    managerhosting: HWM(TORENCE)
+    saltcookies: dkjdlkdsfnksdfsd
+    typesuivi: Live chat, Tél,Email
+    siteweb: http://host.afhunt.com/
+    sitename: Afex Hosting
+    emailadmin: support@afhunt.com
+#    general_service.example.class: General\ServiceBundle\Example
+
+services:
+#    general_service.example:
+#        class: %general_service.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    general_service.servicetext:
+        class: General\ServiceBundle\Servicetext\GeneralServicetext
+    general_service.myuserauthentification:
+        class: General\ServiceBundle\UserAuthentification\Curentwebsite
+        arguments: [@request,@doctrine.orm.entity_manager,%curentwebsite%]
+        scope: request
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+    twig.extension:
+        class: General\ServiceBundle\Servicetext\TwigExtensions
+        tags:
+          -  { name: twig.extension }

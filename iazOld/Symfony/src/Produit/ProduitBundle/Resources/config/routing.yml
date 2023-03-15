@@ -1,0 +1,83 @@
+produit_produit_liste_produit_souscategorie:
+    path: /azcorp/svce/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:listeproduituser }
+    requirements:
+        id: \d+
+produit_produit_produit_formation_institut:
+    path: /azcorp/institut/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:produitformation }
+    requirements:
+        id: \d+
+produit_produit_detail_produit_market:
+    path: /detail/produit/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:detailproduit }
+    requirements:
+        id: \d+
+produit_produit_like_courant_product:
+    path: /like/courant/product
+    defaults: { _controller: ProduitProduitBundle:Produit:likeproduct }
+produit_produit_modal_souscription_service:
+    path: /modal/souscription/service
+    defaults: { _controller: ProduitProduitBundle:Produit:modalsouscriptionservice }
+produit_produit_ajouter_product_panier:
+    path: /ajouter/product/panier
+    defaults: { _controller: ProduitProduitBundle:Produit:ajouterpanier }
+produit_produit_add_panier_produit:
+    path: /add/panier/produit/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:addpanier }
+    requirements:
+        id: \d+
+produit_produit_reglement_commande_du_panier:
+    path: /reglement/commande/dupanier
+    defaults: { _controller: ProduitProduitBundle:Produit:reglementcommande }
+produit_produit_editer_courant_commande:
+    path: /edit/courant/commande
+    defaults: { _controller: ProduitProduitBundle:Produit:editcommande }
+    requirements:
+        id: \d+
+produit_produit_elever_produit_commande:
+    path: /enleve/produit/commande/{id}
+    defaults: { _controller: ProduitProduitBundle:Produit:eleveproduit, id: 0 }
+    requirements:
+        id: \d+
+produit_produit_recherche_new_produit:
+    path: /recherche/new/produit
+    defaults: { _controller: ProduitProduitBundle:Produit:rechercheproduit }
+produit_produit_modifier_lieu_livraison:
+    path: /modifier/lieu/livraison/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:modifierlieulivraison }
+    requirements:
+        id: \d+
+produit_produit_accueil_boutique_produit:
+    path: /catalogue/boutique
+    defaults: { _controller: ProduitProduitBundle:Produit:accueilboutique }
+produit_produit_manage_parametres_commande:
+    path: /manage/parametres/commande/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:parametrescommande }
+    requirements:
+        id: \d+
+produit_produit_custom_parameter_prodpan:
+    path: /custom/parameter/prodpan/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:parameterprodpan }
+    requirements:
+        id: \d+
+produit_produit_manage_contacts_panier_user:
+    path: /manage/contacts/panier/user/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:contactspanier }
+    requirements:
+        id: \d+
+produit_produit_sauvegarde_contacts_panier:
+    path: /sauvegarde/contacts/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:savecontacts }
+    requirements:
+        id: \d+
+produit_produit_payement_commande_user:
+    path: /paiement/step/commande/user/{id}/{position}/{save}
+    defaults: { _controller: ProduitProduitBundle:Panier:paiementstep, position: 'contacts', save: 0 }
+    requirements:
+        id: \d+
+produit_produit_afh_panier_bill:
+    path: /azcorp/card/bill/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:cardbill }
+    requirements:
+        id: \d+

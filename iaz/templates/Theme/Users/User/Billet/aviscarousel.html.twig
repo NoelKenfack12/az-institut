@@ -1,0 +1,278 @@
+<style>
+a {
+	-webkit-transition: all 150ms ease;
+	-moz-transition: all 150ms ease;
+	-ms-transition: all 150ms ease;
+	-o-transition: all 150ms ease;
+	transition: all 150ms ease; 
+}
+a:hover {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
+	filter: alpha(opacity=50); /* IE7 */
+	opacity: 0.6;
+	text-decoration: none;
+}
+
+
+/* Container */
+.container-fluid {
+    background: #FFFFFF;
+    margin: 40px auto 10px;
+    padding: 20px 40px 0;
+    max-width: 960px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Page Header */
+.page-header {
+    background: #f9f9f9;
+    margin: -30px -40px 40px;
+    padding: 20px 40px;
+    border-top: 4px solid #ccc;
+    color: #999;
+    text-transform: uppercase;
+    }
+    .page-header h3 {
+        line-height: 0.88rem;
+        color: #000;
+        }
+
+
+
+/* Thumbnail Box */
+.caption h4 {
+	font-size: 1rem;
+	color: #444;
+}
+.caption p {
+	font-size: 0.75rem;
+	color: #999;
+}
+.btn.btn-mini {
+	font-size: 0.63rem;
+}
+
+
+/* Carousel Control */
+.control-box {
+	text-align: right;
+	width: 100%;
+}
+.carousel-control{
+	background: #666;
+	border: 0px;
+	border-radius: 0px;
+	display: inline-block;
+	font-size: 34px;
+	font-weight: 200;
+	line-height: 18px;
+	opacity: 0.5;
+	padding: 4px 10px 0px;
+	position: static;
+	height: 30px;
+	width: 15px;
+}
+
+@media (max-width: 479px){
+    .caption {
+    word-break: break-all;
+    }
+}
+
+
+/* Remove before adding to website */
+#carousel-testimonial {
+  padding: 4px 0;
+}
+#carousel-testimonial .testimonial {
+  height: 100%;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: flex !important;
+  flex-direction: column;
+}
+
+#carousel-testimonial .testimonial:hover {
+  background-color: #f7f7f7;
+  border: 1px solid green;
+}
+#carousel-testimonial .testimonial blockquote {
+  position: relative;
+  margin: 0;
+}
+#carousel-testimonial .testimonial blockquote .testimonial-image {
+  position: absolute;
+  top: 6px;
+  width: 42px;
+  height: 33px;
+}
+#carousel-testimonial .testimonial blockquote .testimonial-text {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.4;
+  margin: 0;
+  padding-left: 57px;
+  height: 140px;
+  overflow: hidden;
+}
+#carousel-testimonial .testimonial footer {
+  display: flex;
+  margin-top: 15px;
+  align-items: flex-end;
+  flex: 1;
+}
+#carousel-testimonial .testimonial footer .testimonial-author {
+  font-size: 18px;
+  font-weight: 400;
+  color: #009fb4;
+  margin-right: auto;
+  white-space: nowrap;
+}
+#carousel-testimonial .testimonial footer .testimonial-author .testimonial-role {
+  font-size: 1rem;
+  color: #666;
+}
+#carousel-testimonial .testimonial footer .testimonial-logo {
+  display: block;
+  max-width: 100%;
+}
+.carousel-control{
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  padding: 7px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  text-decoration: none;
+  background-image: none!important;
+}
+.carousel-control.left{
+background-image: none!important;
+}
+.carousel-control.right{
+background-image: none!important;
+}
+</style>
+{% include 'Theme/Produit/Service/Apropos/commandestep.html.twig' %}
+
+
+<div style="background: #f2f2f2; padding: 40px 0px;">
+<div class="container">
+<div class="row">
+	<div class="col-md-12">
+		<div class="carousel slide" id="myCarousel">
+				<div class="carousel-inner" id="carousel-testimonial">
+					<div class="item active">
+							<div class="thumbnails">
+								{% for i in range(0,2) %}
+								<div class="col-md-4">
+									<a href="#:" class="testimonial" style="display: block!important; text-decoration: none;">
+										<blockquote>
+										  <img class="testimonial-image" src="{{ asset('template/images/1933-nursery-quotation-mark.svg') }}" alt="Quotation mark"/>
+										  <div class="testimonial-text"> This is a short teaser to the content in the video that shows on hover. </div>
+										</blockquote>
+										
+										<footer>
+										  <div class="testimonial-author">
+											<img style="height: 50px; border-radius: 50%; margin-right: 7px; float: left;" src="{{ asset('template/images/co.png') }}"/>
+											
+											 Jean Robert Kodjo
+											<div class="testimonial-role">Etudiant</div>
+										  </div>
+										  
+										  <div class="star-ratings-css" style="margin-top: -20px; display: inline-block; width: 100px!important;">
+											  <div class="star-ratings-css-top" style="width: {{ ((5/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+											  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+										  </div>
+										</footer>
+									</a>
+								</div>
+								{% endfor %}
+								<div class="clearfix"></div>
+							</div>
+					  </div><!-- /Slide1 --> 
+					  
+					<div class="item">
+							<div class="thumbnails">
+								{% for i in range(0,2) %}
+								<div class="col-md-4">
+									<a href="#:" class="testimonial" style="display: block!important; text-decoration: none;">
+										<blockquote>
+										  <img class="testimonial-image" src="{{ asset('template/images/1933-nursery-quotation-mark.svg') }}" alt="Quotation mark"/>
+										  <div class="testimonial-text"> This is a short teaser to the content in the video that shows on hover. </div>
+										</blockquote>
+										
+										<footer>
+										  <div class="testimonial-author">
+											<img style="height: 50px; border-radius: 50%; margin-right: 7px; float: left;" src="{{ asset('template/images/co.png') }}"/>
+											
+											 Jean Robert Kodjo
+											<div class="testimonial-role">Etudiant</div>
+										  </div>
+										  
+										  <div class="star-ratings-css" style="margin-top: -20px; display: inline-block; width: 100px!important;">
+											  <div class="star-ratings-css-top" style="width: {{ ((5/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+											  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+										  </div>
+										</footer>
+									</a>
+								</div>
+								{% endfor %}
+								<div class="clearfix"></div>
+							</div>
+					</div><!-- /Slide2 --> 
+					  
+					<div class="item">
+							<div class="thumbnails">
+								{% for i in range(0,2) %}
+								<div class="col-md-4">
+									<a href="#:" class="testimonial" style="display: block!important; text-decoration: none;">
+										<blockquote>
+										  <img class="testimonial-image" src="{{ asset('template/images/1933-nursery-quotation-mark.svg') }}" alt="Quotation mark"/>
+										  <div class="testimonial-text"> This is a short teaser to the content in the video that shows on hover. </div>
+										</blockquote>
+										
+										<footer>
+										  <div class="testimonial-author">
+											<img style="height: 50px; border-radius: 50%; margin-right: 7px; float: left;" src="{{ asset('template/images/co.png') }}"/>
+											
+											 Jean Robert Kodjo
+											<div class="testimonial-role">Etudiant</div>
+										  </div>
+										  
+										  <div class="star-ratings-css" style="margin-top: -20px; display: inline-block; width: 100px!important;">
+											  <div class="star-ratings-css-top" style="width: {{ ((5/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+											  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+										  </div>
+										</footer>
+									</a>
+								</div>
+								{% endfor %}
+								<div class="clearfix"></div>
+							</div>
+					  </div><!-- /Slide3 --> 
+				</div>
+				
+				<div class="control-box">                            
+					<a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
+					<a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
+				</div><!-- /.control-box -->   				  
+			</div>
+	</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+// Carousel Auto-Cycle
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: 6000
+    })
+  });
+</script>

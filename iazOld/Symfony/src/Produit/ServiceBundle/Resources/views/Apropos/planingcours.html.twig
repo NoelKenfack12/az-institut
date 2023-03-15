@@ -1,0 +1,257 @@
+<link href="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="https://cdn.datatables.net/responsive/1.0.4/css/dataTables.responsive.css" rel="stylesheet" type="text/css" media="all"/>
+
+<script src="https://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script src="https://cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js"></script>
+<style>
+table caption {
+	padding: .5em 0;
+}
+
+table.dataTable th,
+table.dataTable td {
+  white-space: nowrap;
+}
+
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}
+
+thead .sorting:after {
+    opacity: 0.2;
+    content: "\f0ec"!important;
+}
+table.dataTable thead .sorting_asc:after {
+	content: "\f161"!important;
+}
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: block;
+    font-family: 'FontAwesome'!important;
+    opacity: 0.5;
+}
+</style>
+<div class="col-md-9">
+<div style="width: 100%!important; min-height: 400px;">
+
+<div> 
+	<ul class="nav nav-tabs" style="padding: 0px; margin: 0px; border-bottom: none;">
+		<li class="active"><a href="#help-user-depliant" data-toggle="tab" style="font-size: 12px;">Dépliants</a></li>
+		<li><a href="#help-user-programme" data-toggle="tab" style="font-size: 12px;">Programmes</a></li>
+	</ul>
+  
+  <div class="tab-content" style="min-height: 100px; margin-left: 1px;">
+	  <div class="tab-pane active" id="help-user-depliant" style="padding-bottom: 70px;">
+		  <div style="background: #fff; padding: 7px;">
+			<strong>Quand votre profil est sélectionné par un annonceur</strong>
+			<hr style="margin: 1px; border: 1px solid #f7f7f7;">
+			<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours' }) }}">Afficher la liste complète</a>
+		  </div>
+		  
+		  
+		  
+<div class="" style="background: #fff; padding: 7px;">
+  <div class="row">
+    <div class="col-xs-12">
+      <table summary="This table shows how to create responsive tables using Datatables' extended functionality" class="table table-bordered table-hover dt-responsive">
+        <caption class="text-center">An example of a responsive table based on <a href="https://datatables.net/extensions/responsive/" target="_blank">DataTables</a>:</caption>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Languages</th>
+            <th>Population</th>
+            <th>Median Age</th>
+            <th>Area (Km²)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Argentina</td>
+            <td>Spanish (official), English, Italian, German, French</td>
+            <td>41,803,125</td>
+            <td>31.3</td>
+            <td>2,780,387</td>
+          </tr>
+          <tr>
+            <td>Australia</td>
+            <td>English 79%, native and other languages</td>
+            <td>23,630,169</td>
+            <td>37.3</td>
+            <td>7,739,983</td>
+          </tr>
+          <tr>
+            <td>Greece</td>
+            <td>Greek 99% (official), English, French</td>
+            <td>11,128,404</td>
+            <td>43.2</td>
+            <td>131,956</td>
+          </tr>
+          <tr>
+            <td>Luxembourg</td>
+            <td>Luxermbourgish (national) French, German (both administrative)</td>
+            <td>536,761</td>
+            <td>39.1</td>
+            <td>2,586</td>
+          </tr>
+          <tr>
+            <td>Russia</td>
+            <td>Russian, others</td>
+            <td>142,467,651</td>
+            <td>38.4</td>
+            <td>17,076,310</td>
+          </tr>
+          <tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr><tr>
+            <td>Sweden</td>
+            <td>Swedish, small Sami- and Finnish-speaking minorities</td>
+            <td>9,631,261</td>
+            <td>41.1</td>
+            <td>449,954</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-center">Data retrieved from <a href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a> and <a href="http://www.worldometers.info/world-population/population-by-country/" target="_blank">worldometers</a>.</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--  Developed By Yasser Mas -->
+
+
+	  </div>
+	  <div class="tab-pane" id="help-user-programme" style="padding-bottom: 70px;">
+		<div style="background: #fff; padding: 7px;">
+			<strong>Quand l'annonce est susceptible de vous intéresser</strong>
+			<hr style="margin: 1px; border: 1px solid #f7f7f7;">
+			<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours' }) }}">Afficher la liste complète</a>
+		</div>
+		
+		<div class="" style="background: #fff; padding: 7px;">
+		  <div class="row">
+			<div class="col-xs-12">
+			  <table summary="This table shows how to create responsive tables using Datatables' extended functionality" class="mytable table table-bordered table-hover dt-responsive">
+				<caption class="text-center">An example of a responsive table based on <a href="https://datatables.net/extensions/responsive/" target="_blank">DataTables</a>:</caption>
+				<thead>
+				  <tr>
+					<th>Country</th>
+					<th>Languages</th>
+					<th>Population</th>
+					<th>Median Age</th>
+					<th>Area (Km²)</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<td>Argentina</td>
+					<td>Spanish (official), English, Italian, German, French</td>
+					<td>41,803,125</td>
+					<td>31.3</td>
+					<td>2,780,387</td>
+				  </tr>
+				  <tr>
+					<td>Australia</td>
+					<td>English 79%, native and other languages</td>
+					<td>23,630,169</td>
+					<td>37.3</td>
+					<td>7,739,983</td>
+				  </tr>
+				  <tr>
+					<td>Greece</td>
+					<td>Greek 99% (official), English, French</td>
+					<td>11,128,404</td>
+					<td>43.2</td>
+					<td>131,956</td>
+				  </tr>
+				  <tr>
+					<td>Luxembourg</td>
+					<td>Luxermbourgish (national) French, German (both administrative)</td>
+					<td>536,761</td>
+					<td>39.1</td>
+					<td>2,586</td>
+				  </tr>
+				  <tr>
+					<td>Russia</td>
+					<td>Russian, others</td>
+					<td>142,467,651</td>
+					<td>38.4</td>
+					<td>17,076,310</td>
+				  </tr>
+				  <tr>
+					<td>Sweden</td>
+					<td>Swedish, small Sami- and Finnish-speaking minorities</td>
+					<td>9,631,261</td>
+					<td>41.1</td>
+					<td>449,954</td>
+				  </tr>
+				</tbody>
+				<tfoot>
+				  <tr>
+					<td colspan="5" class="text-center">Data retrieved from <a href="http://www.infoplease.com/ipa/A0855611.html" target="_blank">infoplease</a> and <a href="http://www.worldometers.info/world-population/population-by-country/" target="_blank">worldometers</a>.</td>
+				  </tr>
+				</tfoot>
+			  </table>
+			</div>
+		  </div>
+		</div>
+
+	  </div>
+  </div>
+</div>
+  
+</div>
+
+
+<span class="clearfix"></span>			
+</div>
+
+<script type="text/javascript">
+$('table').DataTable();
+$('mytable').DataTable();
+</script>

@@ -1,0 +1,41 @@
+<div class="row">
+{{ form_start(form2, {'class': 'col s12', 'attr': path('users_adminuser_change_application_user', {'id': application.id}) }}) }}
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.nom) }}
+		 {{ form_label(form2.nom, 'Nom de l\'application'|trans) }}
+		 <div style="color: red;">{{ form_errors(form2.nom)|trans }}</div>
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_widget(form2.description) }}
+		{{ form_label(form2.description,'Description de l\'article') }}
+	  </div>
+	  
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.rang) }}
+		 {{ form_label(form2.rang, 'Rang dans le classement'|trans) }}
+	  </div>
+	  
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.categorieappli, {'attr': {'class': 'browser-default'}}) }}
+		 <div style="color: red;">{{ form_errors(form2.categorieappli)|trans }}</div>
+	  </div>
+	  
+	  <div class="input-field col s12">
+		 {{ form_widget(form2.siteweb) }}
+		 {{ form_label(form2.siteweb, 'Site web'|trans) }}
+		 <div style="color: red;">{{ form_errors(form2.siteweb)|trans }}</div>
+	  </div>
+
+	  <div class="file-field input-field col s12">
+		  <input class="file-path validate" type="text" disabled style="padding-left: 40px;"/>
+		  <div class="btn bg-struct" style="margin-left: 10px;">
+			<span><i class="mdi-image-exposure"></i> {{ 'Logo'|trans }}</span>
+			{{ form_widget(form2.file) }}
+		  </div>
+	  </div>
+	  <div class="col s12" style="margin-top: 30px;">
+		 <button class="btn waves-effect waves-light bg-struct" type="submit">{{ 'Envoyer'|trans }} <i class="mdi-content-send right"></i></button>
+	  </div>
+{{ form_end(form2) }}
+</div>
+<script type="text/javascript" src="{{ asset('template/js/materialize.js') }}"></script>

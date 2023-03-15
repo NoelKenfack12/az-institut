@@ -1,0 +1,89 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	<form action="{{ path('users_adminuser_modif_about_us_message', {'id': review.id }) }}" method="post" {{ form_enctype(form) }} style="margin-top: 15px;">
+	
+	<div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.nom) }}
+	  {{ form_label(form.nom,'Nom de client') }}
+	</div>
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.poste) }}
+	  {{ form_label(form.poste,'Poste') }}
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.facebook) }}
+	  {{ form_label(form.facebook,'Ajouter la page facebook du client') }}
+	</div>
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.twitter) }}
+	  {{ form_label(form.twitter,'Ajouter la page twitter du client') }}
+	</div>
+	
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.google) }}
+	  {{ form_label(form.google,'Page youtube') }}
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  <div style="margin-left: 43px;">
+		<select name="nature" class="browser-default">
+			<option value="entreprise">Sélectionnez le type de compte</option>
+			<option value="entreprise" {% if review.nature == 'entreprise' %}selected{% endif %}>Entreprise</option>
+			<option value="particulier" {% if review.nature == 'particulier' %}selected{% endif %}>Particulier</option>
+			<option value="partenaire" {% if review.nature == 'partenaire' %}selected{% endif %}>Partenaire</option>
+		</select>
+	  </div>
+	</div>
+	
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.contenu, {'attr': {'class': 'materialize-textarea'}}) }}
+	  {{ form_label(form.contenu,'Contenu du message') }}
+	</div>
+	
+	<div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct" style="margin-left: 15px;">
+		  <span>Profil</span>
+		  {{ form_widget(form.file) }}
+		</div>
+	</div>
+	
+	<div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.tel) }}
+	  {{ form_label(form.tel,'Ajouter le téléphone') }}
+	</div>
+	
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(form.email) }}
+	  {{ form_label(form.email,'Ajouter une adresse email') }}
+	</div>
+	</div>
+	
+	<div class="col s12" style="margin-top: 20px;">
+		 <button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action"> Enregistrer</button>     
+	</div>
+	</div>
+	
+	 <div class="clearfix"></div>
+	 {{ form_rest(form) }}
+	</form>	
+	<div class="clearfix"></div>
+</div>
+</div>
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>

@@ -1,0 +1,533 @@
+{% extends "UsersAdminuserBundle::layoutadmin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | {{ 'Accueil Admin'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("UsersAdminuserBundle:Accueil:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="content">
+	<div class="container">
+	{% include 'GeneralTemplateBundle:Menu:descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+<div class="inner-content">
+<div class="row" style="background: #fafafa; border-bottom: 2px dashed #999;">
+  <div class="col s12 m12 16">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Accueil'|trans }}</a></li>
+	  <li>{{ 'Tableau de bord d\'administration'|trans }}</li>
+	</ol>
+  </div>
+  <div class="col s12 m6 16">
+	<div class="row">
+	
+	</div>
+  </div>
+</div>
+
+<div class="row">
+   <div class="col s12 m4">
+    <div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#galerie-reseller" class="page-scroll-cgu" style="display: block;">
+		Galerie <span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ allslide|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-new-slide" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+  
+  <div class="col s12 m4">
+	<div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#categorie-produit" class="page-scroll-cgu" style="display: block;">
+		Catégories <span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ nbcategorie|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-nouv-categorie" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+  
+  <div class="col s12 m4">
+	<div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#souscategorie-produit" class="page-scroll-cgu" style="display: block;">
+		Sous-Catégories <span class="nb-scat-accueil" style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ liste_scategorie|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-nouvelle-souscategorie" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+	 <div class="col s12 m12">
+		{% for infos in app.session.flashbag.get('information') %}
+		{% if loop.first %}
+			{% include 'GeneralTemplateBundle:Menu:flasinfos.html.twig' %}
+		{% endif %}
+		{% endfor %}
+
+	  {% set id = '' %}
+		{% for infos in app.session.flashbag.get('supprime_slide') %}
+		{% if loop.last %}
+		<div class="card-panel" style="margin-top: 0px; margin-bottom: 5px;">
+		<strong style="color: red;"><span class="fa fa-warning"></span> Êtes vous certain de vouloir supprimer le slide {{ infos|lower }} </strong>
+		<form action="{{ path('users_adminuser_delete_courant_slide',{'id': id }) }}" method="post">
+		<input type="submit" value="Supprimer" style="background: red;"/>
+		{{ form_rest(formsupp) }}
+		</form>
+		</div>
+		{% else %}
+		{% set id = infos %}
+		{% endif %}
+		{% endfor %}
+	</div>
+</div>
+
+<h5 id="galerie-reseller" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: -10px;">
+	{{ 'Galerie photos'|trans }}:
+</h5>
+	
+<div class="row">
+{% for slide in allslide %}
+<!-- blog card -->
+<div class="col s12 m12 l4">
+	<div class="blog-card">
+	<div class="card" style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
+		<div class="card-image waves-effect waves-block waves-light">
+			<img src="{{ asset(slide.getWebpath) }}" alt="blog-img" style="height: 200px;">
+		</div>
+		<ul class="card-action-buttons">
+			<li><a href="{{ path('users_adminuser_delete_courant_slide',{'id': slide.id }) }}" class="btn-floating waves-effect waves-light btn-floating waves-effect waves-light deep-orange accent-4"><i class="mdi-action-highlight-remove"></i></a>
+			</li>                            
+			<li><a class="btn-floating waves-effect waves-light light-blue update-subcontent-image-slide" value="{{ slide.id }}"><i class="mdi-editor-mode-edit"></i></a>
+			</li>
+		</ul>
+		<div class="card-content">
+			<p class="row">
+			  <span class="left coustom-my-text" style="display: inline-block; width: 60%;"><a href="#!" class="activator" title="{{ slide.titre }}">{{ slide.titre }}</a></span>
+			  <span class="right">{{ slide.date|date('d/m/y') }}</span>
+			</p>
+			<h4 class="card-title grey-text text-darken-4 coustom-my-text"><a href="#" class="grey-text text-darken-4">{{ slide.description }}</a></h4>                                        
+			<div class="row">
+			  <div class="col s12">
+				<img src="{% if slide.user.imgprofil == null %}{{ asset('template/images/co.png') }}{% else %}{{ asset(slide.user.imgprofil.getWebPath) }}{% endif %}" alt="" class="circle responsive-img valign profile-image" style="height: 30px; width: 30px; border-radius: 15px; float: left; margin-right: 5px;margin-top: -7px;">
+				Par <a href="#">{{ slide.user.name(25) }}</a>
+			  </div>
+			</div>
+		</div>
+		<div class="card-reveal">
+			<span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i> {{ slide.titre }}</span>
+			<p>{{ slide.description }}</p>
+		</div>
+	</div>
+	</div>
+</div>
+{% endfor %}
+</div>
+<!--card widgets end-->
+
+<h5 id="categorie-produit" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: 0px;">
+	{{ 'Catalogue produit'|trans }}:
+</h5>
+<div class="row">
+   {% for categorie in nbcategorie %}
+   <div class="col s12 m4">
+    <div class="cardd card-1" style="margin-bottom: 5px;">
+        <h4 class="title-1" style="line-height: 18px;">
+		<a href="#produit-scategorie-{{ categorie.id }}" class="page-scroll-cgu" style="display: block;" title="{{ categorie.nom }}">
+		<img src="{{ asset(categorie.getWebPath) }}" alt="" class="circle responsive-img valign profile-image left" style="width: 30px; height: 30px;"/>
+		<span style="margin-left: 7px; display: inline-block; width: 70%;" class="coustom-my-text">{{ categorie.rang }}. {{ categorie.nom }} </span>
+		<span style="float: right; padding-top: 7px; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ categorie.souscategories|length }}</span>
+		</a>
+		<span style="margin-left: 7px; display: inline-block; width: 70%; font-size: 15px; color: #333;"><span class="mdi-image-navigate-next" style="font-size: 16px;"></span> {% if categorie.typeservice == 'continue' %}Formation Continue{% else %}{% if categorie.typeservice == 'diplomante' %}Formation Diplomante{% else %}Type non spécifé{% endif %}{% endif %}</span>
+		</h4>
+        <a href="#!" class="update-content-article" value="{{ categorie.id }}" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-content-create" style="font-size: 11px;"></span> Modifier</a>
+        <a href="{{ path('users_adminuser_supprimer_categorie_produit', {'id': categorie.id}) }}" style="background: #ff4081; padding: 7px; color: #fff;"><span class="mdi-action-highlight-remove" style="font-size: 11px;"></span> Supprimer</a>
+    </div>
+   </div>
+   {% endfor %}
+</div>
+
+{% for categorie in nbcategorie %}
+<h5 id="produit-scategorie-{{ categorie.id }}" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: 0px;">
+	{{ categorie.nom|trans }}:
+</h5>
+
+<div class="row">
+   {% for scat in categorie.souscategories %}
+   <div class="col s12 m4">
+    <div class="cardd card-1" style="margin-bottom: 5px;">
+        <h4 class="title-1">
+		<a href="{{ path('users_adminuser_liste_produit_souscategorie', {'id': scat.id }) }}" style="display: block;" title="{{ scat.nom }}">
+		<img src="{% if scat.src != null %}{{ asset(scat.getWebPath) }}{% else %}{{ asset('template/images/diplome.jpg') }}{% endif %}" alt="" class="circle responsive-img valign profile-image left" style="width: 30px; height: 30px;"/>
+		<span style="margin-left: 7px; display: inline-block; width: 70%;" class="coustom-my-text">{{ scat.rang }}. {{ scat.nom }} </span>
+		<span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ scat.produits|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="update-subcontent-product" value="{{ scat.id }}" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-content-create" style="font-size: 11px;"></span> Modifier</a>
+        <a href="{{ path('users_adminuser_delete_scat_prod', {'id': scat.id}) }}" style="background: #ff4081; padding: 7px; color: #fff;"><span class="mdi-action-highlight-remove" style="font-size: 11px;"></span> Supprimer</a>
+    </div>
+   </div>
+   {% endfor %}
+</div>
+{% endfor %}
+
+
+</div>	
+</div>	
+</div>	
+
+<div class="modal fade" data-backdrop="false" id="modalGestionCatalogueSelect" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Mise à jour de l'article <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div class="modal fade" data-backdrop="false" id="modalFormSlide" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Ajouter une image de galerie <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<h4 class="header2">Préparer vos images pour les slides</h4>
+<div class="row">
+  <form class="col s12" action="{{ path('users_adminuser_add_new_slide') }}" method="post" {{ form_enctype(formslide) }}>
+	<div class="row">
+	<span style="color:red;">{{ form_errors(formslide) }}</span>
+	<span style="color:red;">{{ form_errors(formslide.titre) }}</span>
+	  <div class="input-field col s12">
+		{{ form_widget(formslide.titre) }}
+		{{ form_label(formslide.titre,'Titre du slide') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(formslide.description) }}
+		{{ form_widget(formslide.description) }}
+		{{ form_label(formslide.description,'Description de l\'image') }}
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="input-field col s12">
+		{{ form_errors(formslide.souscategorie) }}
+		{{ form_widget(formslide.souscategorie) }}
+		{{ form_label(formslide.souscategorie,'Affectez à une sous-catégorie') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(formslide.rang) }}
+		{{ form_widget(formslide.rang) }}
+		{{ form_label(formslide.rang,'N° Classement') }}
+	  </div>
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Image</span>
+		  {{ form_widget(formslide.file) }}
+		</div>
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(formslide.link) }}
+		{{ form_widget(formslide.link) }}
+		{{ form_label(formslide.rang,'Ajouter un lien (facultation)') }}
+	  </div>
+	  
+	  <div class="col s12">
+		{{ form_errors(formslide.slide) }}
+		{{ form_widget(formslide.slide) }}
+		{{ form_label(formslide.rang,'Image d\'accueil') }}
+	  </div>
+	  
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Icone</span>
+		  {{ form_widget(formslide.backgroundslide) }}
+		</div>
+	  </div>
+	  
+	</div>
+	  <div class="row">
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+	{{ form_rest(formslide) }}
+	</form> 
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+
+</div>
+</div>
+</div>
+
+
+<div class="modal fade" data-backdrop="false" id="modalFormCategorie" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Ajouter une nouvelle catégorie <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+<form class="col s12" action="{{ path('users_adminuser_save_categorie_product') }}" method="post" {{ form_enctype(form) }}>
+  <h4 class="header2">Ajouter une formation sur {{ site }}</h4>
+  <div class="row">
+  <span style="color:red;">{{ form_errors(form) }}</span>
+  <span style="color:red;">{{ form_errors(form.nom) }}</span>
+  
+  <div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-assignment prefix"></i>
+	  {{ form_widget(form.nom) }}
+	  {{ form_label(form.nom,'Nom de la formation') }}
+	</div>
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Image</span>
+		  {{ form_widget(form.file) }}
+		</div>
+	  </div>
+	  <div class="input-field col s12">
+		  <i class="mdi-action-assignment prefix"></i>
+		  {{ form_widget(form.rang) }}
+		  {{ form_label(form.rang,'Rang dans la classement') }}
+	  </div>
+	  <div class="input-field col s12">
+	  <i class="mdi-action-assignment prefix"></i>
+	  {{ form_widget(form.description) }}
+	  {{ form_label(form.description,'Brève description de la formation') }}
+	  </div>
+	  
+	  <div class="input-field col s12">
+		  <select name="typeservice">
+			<option value="continue">Type de formation</option>
+			<option value="continue">Formation continue</option>
+			<option value="diplomante">Formation diplomante</option>
+		  </select>
+	  </div>
+	<div class="input-field col s12">
+		<button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action"> Enregistrez</button>
+	</div>
+  </div>
+  </div>
+  {{ form_rest(form) }}
+</form>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modalFormSousCategorie" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Ajouter une nouvelle sous-catégorie <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+<form class="col s12"  action="{{ path('users_adminuser_ajouter_sous_categorie') }}" method="post" {{ form_enctype(formcat) }}>
+  <h4 class="header2">Lier votre sous-catégorie à une formation existante</h4>
+  <div class="row">
+  <span style="color:red;">{{ form_errors(formcat) }}</span>
+  <span style="color:red;">{{ form_errors(formcat.nom) }}</span>
+  
+	<div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  {{ form_widget(formcat.nom) }}
+	  {{ form_label(formcat.nom,'Nom de la sous-catégorie') }}
+	</div>
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  <div style="margin-left: 43px;">
+	  {{ form_widget(formcat.categorie) }}
+	  {{ form_label(formcat.categorie,'Type de formation') }}
+	  </div>
+	</div>
+	<div class="input-field col s12">
+	  <i class="mdi-action-description prefix"></i>
+	  <div style="margin-left: 43px;">
+	  {{ form_widget(formcat.cataloguechantier) }}
+	  {{ form_label(formcat.cataloguechantier,'Catalogue de formation') }}
+	  </div>
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Image</span>
+		  {{ form_widget(formcat.file) }}
+		</div>
+	  </div>
+	<div class="input-field col s12">
+	  <i class="mdi-action-assignment prefix"></i>
+		  {{ form_widget(formcat.rang) }}
+		  {{ form_label(formcat.rang,'Rang dans la classement') }}
+	</div>
+	</div>
+	<div class="row">
+	<div class="input-field col s12">
+	<i class="mdi-communication-chat prefix"></i>
+	  {{ form_widget(formcat.description) }}
+	  {{ form_label(formcat.description,'Description pour le menu utilisateur') }}
+	</div>
+	<div class="input-field col s12">
+	<i class="mdi-communication-chat prefix"></i>
+	  {{ form_widget(formcat.helpdashboard) }}
+	  {{ form_label(formcat.description,'Description pour le dashboard utilisateur') }}
+	</div>
+	<div class="col s12">
+		 <button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action"> Enregistrez</button>     
+	</div>
+	</div>
+  </div>
+  {{ form_rest(formcat) }}
+</form>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block srcjavascripttemplate %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.update-content-article').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_modification_categorie_produit') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.update-subcontent-product').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_modifier_sous_categorie_produit') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.update-subcontent-image-slide').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_change_image_slide') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.open-modal-new-slide').click(function(){
+	$('#modalFormSlide').modal('show');
+});
+$('.open-modal-nouv-categorie').click(function(){
+	$('#modalFormCategorie').modal('show');
+});
+$('.open-modal-nouvelle-souscategorie').click(function(){
+	$('#modalFormSousCategorie').modal('show');
+});
+
+
+$('a.page-scroll-cgu').click(function(){
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+  var target = $(this.hash);
+  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+  if (target.length) {
+	$('html,body').animate({
+	  scrollTop: target.offset().top - 40
+	}, 900);
+	return false;
+  }
+}
+});
+
+{% endblock %}

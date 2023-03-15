@@ -1,0 +1,248 @@
+<style>
+.cardsvideo {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 400px;
+}
+
+.cardvideo {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  background: #fefff9;
+  color: #363636;
+  text-decoration: none;
+  -moz-box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+  box-shadow: rgba(0, 0, 0, 0.19) 0 0 8px 0;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+  .cardvideo {
+    width: 100%;
+  }
+
+.cardvideo span {
+  display: block;
+}
+.cardvideo .card-summary {
+  padding: 5% 5% 3% 5%;
+  height: 100px;
+}
+.cardvideo .card-header {
+  position: relative;
+  height: 175px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.15);
+  background-blend-mode: overlay;
+  -moz-border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 4px 0 0;
+}
+.cardvideo .card-header:hover, .cardvideo .card-header:focus {
+  background-color: rgba(255, 255, 255, 0);
+}
+.cardvideo .card-title {
+  background: rgba(53, 101, 174, 0.85);
+  padding: 3.5% 0 2.5% 0;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.cardvideo .card-title h3 {
+  font-size: 1.2em;
+  line-height: 1.2;
+  padding: 0 3.5%;
+  margin: 0;
+}
+.cardvideo .card-meta {
+  max-height: 0;
+  overflow: hidden;
+  color: #666;
+  font-size: .78em;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 5%;
+  padding: 0 5%;
+  -moz-transition-property: max-height;
+  -o-transition-property: max-height;
+  -webkit-transition-property: max-height;
+  transition-property: max-height;
+  -moz-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  -moz-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+.cardvideo:hover, .cardvideo:focus {
+  background: white;
+  -moz-box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 20px 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 20px 0px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 20px 0px;
+}
+.cardvideo:hover .card-title, .cardvideo:focus .card-title {
+  background: rgba(157, 187, 63, 0.95);
+}
+.cardvideo:hover .card-meta, .cardvideo:focus .card-meta {
+  max-height: 1em;
+}
+
+
+* {
+  -moz-transition-property: background-color, border-color, box-shadow, color, opacity, text-shadow, -moz-transform;
+  -o-transition-property: background-color, border-color, box-shadow, color, opacity, text-shadow, -o-transform;
+  -webkit-transition-property: background-color, border-color, box-shadow, color, opacity, text-shadow, -webkit-transform;
+  transition-property: background-color, border-color, box-shadow, color, opacity, text-shadow, transform;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+
+.chat-hero-play-btn {
+    background-image: url(//d1eipm3vz40hy0.cloudfront.net/images/p-chat/2017/icon-play-btn-algae.svg);
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    display: inline-block!important;
+    margin-right: 10px;
+	float: left;
+}
+.chat-hero-video-text {
+    border-bottom: 2px solid transparent;
+	display: inline-block!important;
+	margin-top: 6px;
+}
+</style>
+
+<div class="col-md-8">
+<div class="row" style="width: 100%!important;">
+{% for service in liste_article %}
+	<div class="col-md-6">
+	<div class="cardsvideo">
+	<a class="cardvideo toggle-overlay-article" value="{{ service.id }}" href="#!">
+		<span class="card-header" style="background-image: url({% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %});">
+			<span class="card-title">
+				<h3>{{ service.nom }}</h3>
+			</span>
+		</span>
+		<span class="card-summary">
+			{{ service.description }} 
+		<span style="margin-top: 15px;">
+		<span class="chat-hero-play-btn"></span> <span class="chat-hero-video-text">Lire les vidéos</span>
+		</span>
+		</span>
+		<span class="card-meta">
+			Publier : {{ service.date|date('M') }} {{ service.date|date('d') }} , {{ service.date|date('Y') }} 
+		</span>
+	</a>
+	</div>
+	</div>
+{% else %}
+<div style="height: 400px; padding-top: 100px; background: #fff; margin-bottom: 15px;">
+	<div style="text-align: center; display: block; width: 100%!important;">
+	<span class="fa fa-frown-o"></span> Aucune données disponible pour cette requête.</br>
+	<hr style="width: 100px; border-bottom: 1px solid red;">
+	</div>
+</div>
+{% endfor %}
+</div>
+
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>

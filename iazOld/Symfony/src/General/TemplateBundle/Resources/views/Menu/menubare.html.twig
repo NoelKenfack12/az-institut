@@ -1,0 +1,655 @@
+<style>
+.mynav {
+  background: #fff;
+  box-shadow: 0 3px 10px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mynav ul {
+  list-style: none;
+  position: relative;
+  float: right;
+  margin-right: 0px;
+  display: inline-table;
+  z-index: 10000;
+}
+
+.mynav ul li {
+  float: left;
+  transition: all .2s ease-in-out;
+}
+
+.mynav ul li:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.mynav ul li:hover > ul {
+  display: block;
+}
+
+.mynav ul li {
+  float: left;
+  transition: all .2s ease-in-out;
+}
+
+.mynav ul li a {
+  display: block;
+  padding: 30px 20px;
+  color: #222;
+  font-size: .9em;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.mynav ul ul {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 10000;
+}
+
+.mynav ul ul li {
+  float: none;
+  position: relative;
+}
+
+.mynav ul ul li a {
+  padding: 15px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mynav ul ul ul {
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+
+.my-fixed-nav{
+	position: fixed; top: 0px; width: 100%; z-index: 1000;
+}
+
+.dropdown-item{
+	white-space: normal;
+}
+
+
+
+
+.timeline{
+  margin-left:0px;
+  overflow:visible;
+}
+
+
+.entry{
+  margin-left:20px;
+  position:relative;
+   padding-left: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width:100%;
+  height:100px;
+  overflow:visible;
+}
+
+.core{
+  width:inherit;
+  height:inherit;
+  color: #333;
+}
+
+.entry:after{
+  content:'';
+  position:absolute;
+  display:block;
+  width:36px;
+  height:5px;
+  background:black;
+  top:53%;
+  left:-7%;
+}
+
+.entry:before{
+  content:"";
+  position:absolute;
+  width:3px;height:110%;
+  display:block;
+  border-radius:0px;
+  border:2px solid skyblue;
+  background: skyblue;
+  left:-9%;
+}
+
+.core:before{
+  content:'';
+  display:block;
+  position:absolute;
+  width:7px;height:7px;
+  border:3px solid black;
+  background: black;
+  top:52%;
+  left:-10%;
+}
+
+
+</style>
+
+{% if position == 'home' %}
+<section style="background: #fff;">
+<div class="container">
+<a href="{{ path('users_user_acces_plateforme') }}" style="float: left; margin-top: 15px;">
+	<img src="{% if paramlogosm != null and paramlogosm.src != null %}{{ asset(paramlogosm.getwebpath) }}{% else %}https://s3.amazonaws.com/libapps/accounts/1226/images/logo_sm.png{% endif %}" alt="{{ site }}" class="scsl-logo" style="height: 60px; margin-bottom: 5px;"/>
+</a>
+<div class="mynav" role='navigation'>
+  <ul>
+	<li><a href="#!">Contact Us</a>
+	  <ul>
+		<li><a href="https://api.whatsapp.com/send?phone={{ telwath }}" target="_blank"><span class="fa fa-whatsapp"></span>W/App: {{ telwath }}</a></li>
+		<li><a href="tel:{{ telephone }}"><span class="fa fa-phone"></span> MTN: {{ telephone }}</a></li>
+		<li><a href="{{ path('produit_service_contact_us') }}"><span class="fa fa-envelope-open-o"></span> Envoyer email</a></li>
+		<li><a href="https://tawk.to/chat/5d5d7d44eb1a6b0be608a773/default" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="fa fa-comments-o"></span> Live chat</a></li>
+	  </ul>
+	</li>
+	<li><a href="#!">Applications</a>
+	  <ul>
+	  <li style="color: green;">Autres plateformes AZ Corporation</li>
+		{% for appli in liste_application %}
+		<li><a href="{{ appli.siteweb }}" target="_blank">{{ appli.nom }}</a></li>
+		{% endfor %}
+	  </ul>
+	</li>
+	<li><a href="#!">Espace membre</a>
+	  <ul>
+		{% if app.user != null %}
+			<li style="white-space: nowrap;"><a href="{{ path('users_user_user_accueil', {'id': app.user.id}) }}">{{ app.user.name(30) }}</a></li>
+			<li style="white-space: nowrap;"><a href="{{ path('users_user_clearpidsessid') }}">Se déconnecter</a></li>
+		{% else %}
+			<li style="white-space: nowrap;"><a href="{{ path('users_user_connexion_user') }}">Se connecter</a></li>
+			<li style="white-space: nowrap;"><a href="{{ path('users_user_inscription_user') }}">Créer un compte</a></li>
+		{% endif %}
+	  </ul>
+	</li>
+  </ul>
+</div>
+</div>
+</section>
+
+<div id="navigation" class="yamm" style=" background: #092759!important; box-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.5);transition: all 0.3s cubic-bezier(.25,.8,.25,1); ">
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{{ path('users_user_acces_plateforme') }}" class="navbar-brand">
+                    <img src="{% if paramlogosm != null and paramlogosm.src != null %}{{ asset(paramlogosm.getwebpath) }}{% else %}https://s3.amazonaws.com/libapps/accounts/1226/images/logo_sm.png{% endif %}" alt="{{ site }}" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" style="margin-left: -20px;">
+
+                
+                <ul class="nav navbar-nav">
+                    <li class="dropdown yamm-fw">
+                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown">
+                            L'institut
+                            <span class="item-caret"> <span class="fa fa-angle-down"></span> </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content container">
+                                        <div class="col-xs-12 col-md-6">
+                                            <h4>À propos de l'institut Az Corporation</h4>
+											
+											{% if apropos != null %}
+											<div class="struct-descript">
+												<img src="{% if apropos.imgservice != null and apropos.imgservice.src != null %}{{ asset(apropos.imgservice.getwebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="Discus" class="" style="max-width: 200px; float: left; margin-right: 7px;"/>
+												<div>
+													<div style="font-weight: bold;">{{ apropos.nom }}</div>
+													<div>{{ apropos.description }}</div>
+													<a href="{{ path('produit_service_apropos_denous', {'position': apropos.typearticle, 'idart': apropos.id }) }}" style="color: red; padding: 2px 0px; text-decoration: underline; ">En savoir plus <span class="fa fa-angle-right"></span> </a>
+												</div>
+											</div>
+											{% else %}
+											<div class="struct-descript">
+												<img src="{{ asset('template/images/co.png') }}" alt="Discus" class="thumbnail" style="height: 150px; float: left; margin-right: 7px;"/>
+												<div>
+													<h4>Bienvenue à l'institut AZ Corp</h4>
+													<div>Fondé en 2012, Az Corporation ....</div>
+													<a href="#!" style="color: red; padding: 2px 0px; text-decoration: underline; ">En savoir plus <span class="fa fa-angle-right"></span> </a>
+												</div>
+											</div>
+											{% endif %}
+											<div>
+												<ul class="navgul">
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'evenement' }) }}">Evènements</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'mediatheque' }) }}">Vidéothèque</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'galeriephoto' }) }}">Galerie Photo</a></li>
+													<li><a href="{{ path('produit_service_contact_us') }}">Nous contacter</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'actualite' }) }}">Actualité</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'temoignage' }) }}">Temoignage collaborateurs</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'avis' }) }}">Avis des étudiant(e)s</a></li>
+													<li><a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours' }) }}">Planing des cours</a></li>
+												</ul>
+											</div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6" style="background: #fff!important;">
+										<h4 style="color: #333;">Démarche AZ corporation</h4>
+                                            
+											
+<div class="timeline">
+    {% for article in article_demarche %}
+	<div class="entry">
+      <div class="core">
+      <h5>Etape {{ loop.index }}</h5>
+        <a href="{{ path('produit_service_apropos_denous', {'position': article.typearticle, 'idart': article.id }) }}"  style="display: inline-block; ">{{ article.nom }}</a>
+      </div>
+    </div>
+    <br/>
+	{% else %} 
+	<div class="entry">
+      <div class="core">
+      <h5>Etape 1:</h5>
+        <a href="#!" style="padding: 2px; line-height: 10px;">Entretien et orientation </a>
+      </div>
+    </div>
+    <br/>
+	<div class="entry">
+      <div class="core">
+      <h5>Etape 2:</h5>
+        <a href="#!" style="padding: 2px; line-height: 10px;">Inscription à une formation</a>
+      </div>
+    </div>
+    <br/>
+	<div class="entry">
+      <div class="core">
+      <h5>Etape 3:</h5>
+        <a href="#!" style="padding: 2px; line-height: 10px;">Formation</a>
+      </div>
+    </div>
+    <br/>
+	{% endfor %} 
+
+</div>
+
+											<ul class="navgul">
+                                                <li><a href="#!" style="color: #333;">Suivre une formation</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </li>
+                        </ul>
+                    </li>
+					{% for formation in liste_formation %}
+                    <li class="dropdown yamm-fw">
+                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ formation.nom }}
+                            <span class="item-caret"> <span class="fa fa-angle-down"></span> </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content container">
+									<div class="col-xs-12 col-md-4">
+										<h4>{{ formation.nom }}</h4>
+										<div class="nav-feature">
+											<h5>{{ formation.description }}</h5>
+											<p><a href="{{ path('produit_produit_produit_formation_institut', {'id': formation.id }) }}"><img src="{% if formation.src != null %}{{ asset(formation.getwebpath) }}{% else %}{{ asset('template/images/co.jpg') }}{% endif %}" alt="{{ formation.nom }}"/></a><br /></p>
+										</div>
+									</div>
+									
+									<div class="col-xs-12 col-md-8" style="padding: 0px;">
+										{% for diplome in formation.getScatProduits|slice(0,4) %}
+										<div class="col-xs-12 col-md-6">
+										<h4 class="coustom-my-text">{{ diplome.nom }}</h4>
+										<ul class="navgul">
+											{% for prod in diplome.getProduitScat|slice(0,2) %}
+											<li><a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}">{{ prod.nom }}</a></li>
+											{% endfor %}
+											<li><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}"><span class="fa fa-angle-right"></span> Liste complète des formations</a></li>
+										</ul>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+                            </li>
+                        </ul>
+                    </li>
+					{% endfor %}
+
+                    <li class="dropdown yamm-fw">
+                        <a href="#!" class="dropdown-toggle" data-toggle="dropdown">
+                            Entreprises
+                            <span class="item-caret"> <span class="fa fa-angle-down"></span> </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content container">
+									<div class="col-xs-12 col-md-3">
+										<h4>Partenariat</h4>
+										<div class="nav-search-form">
+										<p class="hidden-xs hidden-sm"><a href="#!" class="coll-link"><img src="{{ asset('template/images/present.png') }}" /></a></p>
+											<ul class="navgul">
+												<li><a href="">Nos Partenaires</a></li>
+												<li><a href="">Demande de partenariat</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-xs-12 col-md-3">
+										<h4>Etudiants</h4>
+										<div class="nav-search-form">
+										<p class="hidden-xs hidden-sm"><a href="#!" class="coll-link"><img src="{{ asset('template/images/present.png') }}" /></a></p>
+											<ul class="navgul">
+												<li><a href="">Avantages chez AZ</a></li>
+												<li><a href="">Réseau des étudiants</a></li>
+												<li><a href="">Consulter nos offres</a></li>
+												<li><a href="">Nous joindre</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-xs-12 col-md-3">
+										<h4>Entreprises</h4>
+										<div class="nav-search-form">
+										<p class="hidden-xs hidden-sm"><a href="#!" class="coll-link"><img src="{{ asset('template/images/present.png') }}" /></a></p>
+											<ul class="navgul">
+												<li><a href="">Embaucher un stagiaire</a></li>
+												<li><a href="">Embaucher un diplômé</a></li>
+												<li><a href="">Demande de partenariat</a></li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-md-3">
+										<h4>Visites d'entreprise</h4>
+										<div class="nav-search-form">
+										<p class="hidden-xs hidden-sm"><a href="#!" class="coll-link"><img src="{{ asset('template/images/present.png') }}" /></a></p>
+											<ul class="navgul">
+												<li><a href="">Visites 2019</a></li>
+												<li><a href="">Visites 2018</a></li>
+												<li><a href="">Visites 2017</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+                            </li>
+                        </ul>
+                    </li>
+					
+                    <li class="dropdown yamm-fw">
+                        <a href="{{ path('produit_service_apropos_denous', {'position': 'aproposinstitut' }) }}">Campus</a>
+                    </li>
+					<li class="dropdown yamm-fw">
+                        <a href="{{ path('produit_service_apropos_denous', {'position': 'aide' }) }}">Aide</a>
+                    </li>
+                </ul>
+                <a href="" style="float: right; padding: 15px 7px; display: inline-block; color: #fff; font-weight: bold;">
+					<span class="fa fa-th"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+   $(window).bind('scroll', function(){
+		var largeur = ($(window).width());
+		dimension = 150;
+		/*if (largeur < 768)
+		{
+			dimension = 800;
+		}*/
+		// The value of where the "scoll" is.
+		if($(window).scrollTop() > dimension){
+		  $('.yamm').addClass('my-fixed-nav');
+		}else{
+		  $('.yamm').removeClass('my-fixed-nav');
+		}
+	});
+});
+</script>
+{% else %}
+	{% if position == 'admin' %}
+	
+			<header id="header" class="page-topbar">
+				<div style="background: #092759!important; height: 65px; position: fixed; z-index: 500; width: 100%; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+					transition: all 0.3s cubic-bezier(.25,.8,.25,1);">
+					<a href="#!" id="hamburger" class="toggle-dashboard-nav hamburger-icon-container">
+						<span class="hamburger-icon"></span>
+					</a>
+				</div>
+			</header>
+
+		{% else %}
+		{% if position == 'dashboard' %}
+			
+			
+		<!-- Begining Header -->
+
+        <div class="app-top-bar top-bar-text-light" style="background: #092759;">
+            <div class="container fiori-container">
+                <div class="top-bar-left">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="http://azcorporation.net" target="_blank" class="nav-link">
+                                www.azcorporation.net
+                            </a>
+                        </li>
+                        <li class="nav-item ml-1">
+                            <a data-placement="top" rel="popover-focus" data-toggle="popover-custom" class="nav-link" data-original-title="" title="">
+                                Plus de produits Az
+                                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                            </a>
+                            <div class="rm-max-width">
+                                <div class="d-none popover-custom-content">
+                                    <div class="grid-menu grid-menu-2col">
+                                        <div class="no-gutters row" style="min-width: 400px;">
+
+											{% for cat in categories_app|slice(0,2) %}
+												{% for prod in cat.applications %}
+												<div class="col-sm-6 col-md-6">
+													<a href="prod.link" class="btn-icon-vertical btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-dark">
+													{% if prod.src != null %}
+														<div><img src="{{ asset(prod.getwebpath) }}" alt="" style="height: 20px;"/></div>
+													{% else %}
+														<i class="lnr-lighter text-dark opacity-7 btn-icon-wrapper mb-2"> </i>
+													{% endif %}
+													{{ prod.nom }}
+													</a>
+												</div>
+												{% endfor %}
+											{% endfor %}
+                                            
+                                        </div>
+                                    </div>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item-divider nav-item"></li>
+                                        <li class="nav-item-btn d-block text-center nav-item">
+                                            <button class="btn-shadow btn btn-focus btn-sm">Afficher tout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="nav">
+                        <li class="nav-item mr-1">
+                            <a href="{{ path('produit_service_apropos_denous', {'position': 'aide'}) }}" class="nav-link">
+                                Aide
+                            </a>
+                        </li>
+                        <li class="nav-item mr-2">
+                            <a href="{{ path('produit_service_contact_us') }}" class="nav-link">
+                                Nous contactez
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a aria-haspopup="true" data-toggle="dropdown" aria-expanded="false" class="nav-link">
+                                <i class="typcn typcn-user mr-1"></i>
+                                Mon Compte
+                                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                            </a>
+                             <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(111px, 29px, 0px);">
+                                <div class="dropdown-menu-header">
+                                    <div class="dropdown-menu-header-inner pt-4 pb-4 bg-focus">
+                                        <div class="menu-header-content text-center text-white">
+                                            <h6 class="menu-header-subtitle mt-0">
+                                                {{ app.user.name(25) }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 tabindex="-1" class="dropdown-header">
+                                    Opérations
+                                </h6>
+                                <a href="" type="button" tabindex="0" class="dropdown-item">
+                                    <span class="mr-3 opacity-8 flag large US"></span>
+                                    Paramètres
+                                </a>
+                                <a href="" type="button" tabindex="0" class="dropdown-item">
+                                    <span class="mr-3 opacity-8 flag large CH"></span>
+                                    Mes commandes
+                                </a>
+                                <a href="" type="button" tabindex="0" class="dropdown-item">
+                                    <span class="mr-3 opacity-8 flag large FR"></span>
+                                    Mes contacts
+                                </a>
+                                <div tabindex="-1" class="dropdown-divider"></div>
+                                <h6 tabindex="-1" class="dropdown-header">Session</h6>
+                                <a href="{{ path('users_user_clearpidsessid') }}" type="button" tabindex="0" class="dropdown-item active">
+                                    <span class="mr-3 opacity-8 flag large DE"></span>
+                                    Se déconnecter
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+		
+		
+		
+        <div class="app-header header-shadow">
+            <div class="container fiori-container">
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="app-header__logo" style="background: #fff; margin-top: 0px;">
+                    <a href="{{ path('users_user_acces_plateforme') }}">
+						<img src="{{ asset('template/images/logo.png') }}" alt="" style="width: 60px;"/>
+					</a>
+                </div>
+				<ul class="horizontal-nav-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" data-offset="10" data-display="static" aria-expanded="false" class="active">
+                            <i class="nav-icon-big typcn typcn-directions"></i>
+                            <span>L'institut</span>
+                            <i class="nav-icon-pointer icon ion-ios-arrow-down"></i>
+                        </a>
+                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-lg">
+                            <div class="dropdown-menu-header">
+                                <div class="dropdown-menu-header-inner bg-plum-plate" style="background: #092759!important;">
+                                    <div class="menu-header-content text-left" style="background: #092759!important;">
+                                        <h5 class="menu-header-title">{{ site }}</h5>
+                                        <h6 class="menu-header-subtitle">{{ slogan }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scroll-area-xs">
+                                <div class="scrollbar-container ps">
+									<a href="{% if apropos != null %}{{ path('produit_service_apropos_denous', {'idart': apropos.id , 'position': 'aproposinstitut'}) }}{% else %}#!{% endif %}" class="dropdown-item"><span class="nav__title">À propos</span></a>
+									<a href="{{ path('produit_service_apropos_denous', {'position': 'evenement'}) }}" class="dropdown-item"><span class="nav__title">Evènement</span></a>
+									<a href="" class="dropdown-item"><span class="nav__title">Actualité</span></a>
+									<a href="" class="dropdown-item"><span class="nav__title">vidéos</span></a>
+
+                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+                            </div>
+                            <ul class="nav flex-column">
+                                <li class="nav-item-divider nav-item"></li>
+                                <li class="nav-item-btn nav-item d-block text-center">
+                                    <a href="{{ path('produit_service_apropos_denous', {'position': 'about'}) }}" class="btn-wide btn-shadow btn btn-success btn-sm" style="background: #092759!important;">À propos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+					
+					{% for formation in liste_formation %}
+                    <li class="dropdown">
+						 <a data-toggle="dropdown" data-offset="10" data-display="static" aria-expanded="false">
+                            <i class="nav-icon-big typcn typcn-tags"></i>
+                            <span>{{ formation.nom }}</span>
+                            <i class="nav-icon-pointer icon ion-ios-arrow-down"></i>
+                        </a>
+						
+						<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
+                            <div class="dropdown-mega-menu dropdown-mega-menu-sm p-0">
+                                <div class="grid-menu grid-menu-3col">
+                                    <div class="nav flex-column">
+                                        <div class="row no-gutters">
+											{% for diplome in formation.getScatProduits|slice(0,4) %}
+                                            <div class="col-sm-4">
+                                                <div class="nav flex-column">
+                                                    <div class="nav-item-header text-primary nav-item">
+                                                        {{ diplome.nom }}
+                                                    </div>
+													{% for prod in diplome.getProduitScat|slice(0,4) %}
+                                                    <a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}" class="dropdown-item">
+                                                        {{ prod.nom }}
+                                                    </a>
+													{% endfor %}
+                                                    <a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}" class="dropdown-item"><span class="fa fa-angle-right"></span> Liste complète des formations</a>
+                                                </div>
+                                            </div>
+											{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+					{% endfor %}
+					
+                </ul> 
+				<div class="app-header-right">
+                    <div class="search-wrapper">
+                        <i class="search-icon-wrapper typcn typcn-zoom-outline"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>  
+				</div>
+                <div class="app-header__menu">
+                <span>
+                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>    
+		
+		<!-- End Hearder -->
+		
+		
+		
+		{% else %}
+			
+		{% endif %}
+	{% endif %}
+{% endif %}

@@ -1,0 +1,533 @@
+{% extends "Theme/Users/Adminuser/layoutadmin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Administration | Cameroun | {{ metier }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Accueil Admin
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("App\\Controller\\Users\\Adminuser\\AccueilController:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="content">
+	<div class="container">
+	{% include 'Theme/General/Template/Menu/descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+<div class="inner-content">
+
+<div class="col s12 m12 l6">
+<!--Borderless Table-->
+<div class="section" style="padding: 5px 0px 0px 0px;">
+<div class="row" style="background: #fafafa; border-bottom: 2px dashed #999;">
+  <div class="col s12 m6 16">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a></li>
+	  <li class="active">Articles</li>
+	</ol>
+  </div>
+</div>
+
+<div class="row">
+ <div class="col s12 m6">
+    <div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="{{ path('users_adminuser_liste_article_type') }}" style="display: block;">
+		Liste d'article <span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ liste_service|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-new-article" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+  
+  <div class="col s12 m6">
+	<div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#all-offert-reseller" class="page-scroll-cgu" style="display: block;">
+		Types d'articles 
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-nouv-type" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div id="profile-page-wall" class="col s12 m8">
+   <div id="profile-page-sidebar" class="col s12 m12">
+	{% for infos in app.session.flashbag.get('information') %}
+	{% if loop.first %}
+		{% include 'Theme/General/Template/Menu/flasinfos.html.twig' %}
+	{% endif %}
+	{% endfor %}
+   </div>
+   
+   {% set id = '' %}
+	{% for infos in app.session.flashbag.get('supprime_prod') %}
+	{% if loop.last %}
+	<div class="card-panel" style="margin-top: 0px;">
+		<strong style="color: red;"><span class="fa fa-warning"></span> Êtes vous certain de vouloir supprimer le service ou l'événement {{ infos|lower }} </strong>
+		<form action="{{ path('users_adminuser_supprimer_service_even',{'id': id }) }}" method="post">
+		<input type="submit" value="Supprimer" style="background: red;"/>
+		{{ form_rest(formsupp) }}
+		</form>
+	</div>
+	{% else %}
+	{% set id = infos %}
+	{% endif %}
+	{% endfor %}
+</div>
+</div>
+
+<h5 id="all-offert-reseller" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: -10px;">
+	{{ 'Articles par type'|trans }} :
+</h5>
+
+<div class="row">
+<div class="col s12 m12 14">
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.05); background: #fff;">
+  {% for type in type_article %}
+  <div class="topic">
+    <div class="open">
+      <h2 class="question"><img src="{% if type.src != null %}{{ asset(type.getWebPath) }}{% else %}{{ asset('templateofferts/images/3132.jpg') }}{% endif %}" alt="" style="width: 30px; height: 30px; margin-bottom: -8px!important;"/> {{ type.position }} <span class="mdi-hardware-keyboard-arrow-right" style="font-size: 11px;"></span> {{ type.nom }}</h2>
+      <span class="faq-t"></span>
+    </div>
+    <div class="answer">
+		<div class="module-comment-block">
+		<div>{{ type.description }}</div>
+		<div><a href="{{ path('users_adminuser_liste_article_type', {'idtype': type.id}) }}">Affichez la liste complète des articles de cette catégorie ({{ type.services|length }}) <span style="font-size: 12px;" class="mdi-action-input"></span></a></div>
+		
+		<ul id="dropdowntype-{{ type.id }}" class="dropdown-content right" style="min-width: 150px;">
+			<li>
+			<a href="#!" class="update-content-type-article" value="{{ type.id }}"><i class="mdi-editor-border-color"></i> Modifier</a>
+			</li>
+			<li>
+			<a href="{{ path('users_adminuser_delete_type_article', {'id': type.id}) }}"><i class="mdi-action-highlight-remove"></i> Supprimer</a>
+			</li>
+			{% if type.position != 'domaine' %}
+			<li>
+				<a href="{{ path('users_adminuser_liste_article_type', {'idtype': type.id}) }}"><i class="mdi-image-center-focus-strong"></i> Articles - {{ type.services|length }}</a>
+			</li>
+			{% endif %}
+		</ul>
+		<a class="dropdown-button right" href="#!" data-activates="dropdowntype-{{ type.id }}" style="position: absolute; right: 50px;"><i class="mdi-hardware-keyboard-control"></i></a>
+		
+		</div>
+	</div>
+  </div>
+  {% else %}
+  <div class="topic">
+    <div class="open">
+    <h2 class="question">1. Aucun article publié pour cette catégorie
+	</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">La liste des articles des supports s'affichera ici.</p>
+  </div>
+  {% endfor %}
+</main>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false"  id="modalGestionCatalogueSelect" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-hardware-keyboard-alt"></i> Gestion du catalogue <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+</div>
+</div>
+</div>
+</div>	
+
+<div class="modal fade" data-backdrop="false" id="modalFormArticle" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-av-playlist-add"></i> Ajouter un article <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<h4 class="header2">Ajouter un article</h4>
+	
+<div class="row">
+	{{ form_start(form, {'class': 'col s12', 'attr': path('users_adminuser_ajouter_nouveau_service') }}
+   <div class="row">
+	<span style="color:red;">{{ form_errors(form) }}</span>
+	<span style="color:red;">{{ form_errors(form.nom) }}</span>
+	  <div class="input-field col s12">
+		{{ form_widget(form.nom) }}
+		{{ form_label(form.nom,'Nom de l\'article') }}
+	  </div>
+	  
+	  <div class="input-field col s12">
+		<select id="typearticle" name="typearticle" class="frm-field required" style="width: 100%; margin-top: 10px;">
+			<option value="aproposinstitut">À propos de l'institut</option>         
+			<option value="evenement">Evènement</option>         
+			<option value="actualite">Actualité scolaire</option>         
+			<option value="demarcheaz">Démarche {{ site }}</option>         
+			<option value="temoignage">Témoignage</option>         
+			<option value="mediatheque">Médiathèque</option>         
+			<option value="planingcours">Planing des cours</option>         
+			<option value="modepaiement">Mode de paiement</option>    
+			<option value="galeriephoto">Galerie Photo</option>    
+			<option value="aide">Articles d'aide</option> 
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_apropos" style="display: none;">
+		<select id="article_apropos" name="articleapropos" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez une catégorie</option>  
+			{% for type in type_apropos %}
+			<option value="{{ type.id }}">{{ type.nom }}</option>
+			{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_evenement" style="display: none;">
+		<select id="evenement" name="evenement" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_evenement %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_actualite" style="display: none;">
+		<select id="actualite" name="actualite" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_actualite %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_demarcheaz" style="display: none;">
+		<select id="demarcheaz" name="demarcheaz" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_demarcheaz %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_temoignage" style="display: none;">
+		<select id="temoignage" name="temoignage" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_temoignage %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_mediatheque" style="display: none;">
+		<select id="mediatheque" name="mediatheque" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_mediatheque %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12 type_produit prod_planingcours" style="display: none;">
+		<select id="planingcours" name="planingcours" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_planingcours %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  <div class="input-field col s12 type_produit prod_modepaiement" style="display: none;">
+		<select id="modepaiement" name="modepaiement" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_modepaiement %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  <div class="input-field col s12 type_produit prod_aide" style="display: none;">
+		<select id="aide" name="aide" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_aide %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  <div class="input-field col s12 type_produit prod_galeriephoto" style="display: none;">
+		<select id="galeriephoto" name="galeriephoto" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="0">Sélectionnez la catégorie</option>  
+		{% for type in type_galeriephoto %}
+		<option value="{{ type.id }}">{{ type.nom }}</option>
+		{% endfor %}
+		</select>
+	  </div>
+	  
+	  <div class="input-field col s12">
+		{{ form_errors(form.description) }}
+		{{ form_widget(form.description) }}
+		{{ form_label(form.description,'Description de l\'article') }}
+	  </div>
+	   <div class="input-field col s12">
+		{{ form_errors(form.rang) }}
+		{{ form_widget(form.rang) }}
+		{{ form_label(form.rang,'Rang dans le classement') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(form.breve) }}
+		{{ form_widget(form.breve) }}
+		{{ form_label(form.breve,'Titre raccourci') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(form.link) }}
+		{{ form_widget(form.link) }}
+		{{ form_label(form.link,'Ajouter un lien à l\'article') }}
+	  </div>
+  </div>
+
+  <div class="row">	
+	<div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn">
+		  <span>Image Article {{ form_errors(form.imgservice) }}</span>
+		  {{ form_widget(form.imgservice) }}
+		</div>
+	</div>
+	<div class="input-field col s12">
+		{{ form_errors(form.keyword) }}
+		{{ form_widget(form.keyword) }}
+		{{ form_label(form.breve,'Mots clés séparés par les virgules ') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(form.principal) }}
+		{{ form_widget(form.principal) }}
+		{{ form_label(form.principal,'Marquer comme important') }}
+	  </div>
+	<div class="input-field col s12">
+	  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Enregister
+		<i class="mdi-content-send right"></i>
+	  </button>
+	</div>
+  </div>
+  
+ <div class="clear"></div>
+ {{ form_end(form) }}
+</form>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modalFormTypeArt" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-action-receipt"></i> Ajouter un type d'article <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<h4 class="header2">Ajouter un type d'article</h4>
+<div class="row">
+	{{ form_start(formtype, {'class': 'col s12', 'attr': path('users_adminuser_add_type_article') }}
+  <div class="row">
+	<span style="color:red;">{{ form_errors(formtype) }}</span>
+	<span style="color:red;">{{ form_errors(formtype.nom) }}</span>
+	  <div class="input-field col s12">
+		{{ form_widget(formtype.nom) }}
+		{{ form_label(formtype.nom,'Type d\'article') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(formtype.description) }}
+		{{ form_widget(formtype.description) }}
+		{{ form_label(formtype.description,'Description du type') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_errors(formtype.rang) }}
+		{{ form_widget(formtype.rang) }}
+		{{ form_label(formtype.nom,'Rang dans le classement') }}
+	  </div>
+  </div>
+  
+  <div class="row">
+	<div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn">
+		  <span>Image Type</span>
+		  {{ form_widget(formtype.file) }}
+		</div>
+	</div>
+	<div class="input-field col s12">
+	<select id="typeservice" name="typeservice" class="frm-field required" style="width: 100%; margin-top: 10px;">
+	<option value="aproposinstitut">À propos de l'institut</option>         
+	<option value="evenement">Evènement</option>         
+	<option value="actualite">Actualité scolaire</option>         
+	<option value="demarcheaz">Démarche {{ site }}</option>         
+	<option value="temoignage">Témoignage</option>         
+	<option value="mediatheque">Médiathèque</option>     
+	<option value="planingcours">Planing des cours</option>     
+	<option value="modepaiement">Mode de paiement</option>     
+	<option value="aide">Articles d'aide</option>     
+	<option value="galeriephoto">Galerie Photo</option>     
+	</select>
+	</div>
+  </div>
+	
+  <div class="row">	
+	<div class="input-field col s12">
+	  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Enregister
+		<i class="mdi-content-send right"></i>
+	  </button>
+	</div>
+  </div>
+ <div class="clear"></div>
+ {{ form_end(formtype) }}
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'Theme/General/Template/Menu/social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block javascripttemplate %}
+	$('.select_multiple').show();
+	
+$('.update-content-type-article').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_update_type_article') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+{% if add == 1 %}
+	$('#typearticle').val('modepaiement');
+	$('#modalFormArticle').modal('show');
+{% endif %}
+
+$('.open-modal-new-article').click(function(){
+	$('#modalFormArticle').modal('show');
+});
+$('.open-modal-nouv-type').click(function(){
+	$('#modalFormTypeArt').modal('show');
+});
+
+$(".open").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+
+$('a.page-scroll-cgu').click(function(){
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+  var target = $(this.hash);
+  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+  if (target.length) {
+	$('html,body').animate({
+	  scrollTop: target.offset().top - 40
+	}, 900);
+	return false;
+  }
+}
+});
+
+$('#typearticle').change(function(){
+	$('.type_produit').hide();
+	if($(this).val() == 'aproposinstitut')
+	{
+		$('.prod_apropos').show();
+	}else if($(this).val() == 'evenement')
+	{
+		$('.prod_evenement').show();
+	}else if($(this).val() == 'actualite')
+	{
+		$('.prod_actualite').show();
+	}else if($(this).val() == 'demarcheaz')
+	{
+		$('.prod_demarcheaz').show();
+	}else if($(this).val() == 'temoignage')
+	{
+		$('.prod_temoignage').show();
+	}else if($(this).val() == 'mediatheque')
+	{
+		$('.prod_mediatheque').show();
+	}else if($(this).val() == 'planingcours')
+	{
+		$('.prod_planingcours').show();
+	}else if($(this).val() == 'modepaiement')
+	{
+		$('.prod_modepaiement').show();
+	}else if($(this).val() == 'aide')
+	{
+		$('.prod_aide').show();
+	}else if($(this).val() == 'galeriephoto')
+	{
+		$('.prod_galeriephoto').show();
+	}
+});
+{% endblock %}

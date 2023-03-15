@@ -1,0 +1,65 @@
+
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	{{ form_start(formeven, {'class': 'col s12', 'attr': path('users_adminuser_service_modifier_evenement_service', {'id': partie.id}) }}			  
+	   <div class="row">
+		<span style="color:red;">{{ form_errors(formeven) }}</span>
+		<span style="color:red;">{{ form_errors(formeven.nom) }}</span>
+		  <div class="input-field col s12">
+			{{ form_widget(formeven.nom) }}
+			{{ form_label(formeven.nom,'Nom de l\'article') }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_errors(formeven.rang) }}
+			{{ form_widget(formeven.rang) }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_errors(formeven.description) }}
+			{{ form_widget(formeven.description, {'attr': {'class': 'materialize-textarea'}}) }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_errors(formeven.breve) }}
+			{{ form_widget(formeven.breve) }}
+			{{ form_label(formeven.breve,'Description brève') }}
+	      </div>
+		  <div class="input-field col s12">
+				{{ form_errors(formeven.link) }}
+				{{ form_widget(formeven.link) }}
+				{{ form_label(formeven.link,'Ajouter un lien à l\'article') }}
+		  </div>
+	  </div>
+
+	  <div class="row">	
+		<div class="file-field input-field col s12">
+			<input class="file-path validate" type="text"/>
+			<div class="btn">
+			  <span>Image Article {{ form_errors(formeven.imgevenement) }}</span>
+			  {{ form_widget(formeven.imgevenement) }}
+			</div>
+		</div>
+		
+		<div class="input-field col s12">
+		<select id="typearticle" name="typearticle" class="browser-default frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="autres">Autres</option>   
+
+		<option value="imageillustrative" {% if partie.typearticle == 'imageillustrative' %}selected{% endif %}>image Illustrative</option>
+		<option value="textcomplet" {% if partie.typearticle == 'textcomplet' %}selected{% endif %}>Text complémentaire</option>
+		<option value="videoillustrative" {% if partie.typearticle == 'videoillustrative' %}selected{% endif %}>Vidéo Illustrative</option>
+		
+		</select>
+		</div>
+
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+	  
+	 <div class="clear"></div>
+	 {{ form_end(formeven) }}
+
+	<div class="clearfix"></div>
+</div>
+</div>
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>

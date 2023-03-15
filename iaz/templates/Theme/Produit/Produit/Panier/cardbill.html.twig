@@ -1,0 +1,1200 @@
+{% extends "Theme/Users/User/layouthome.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Boutique,e-commerce,{{ site }},site web, hébergement heb Cameroun, hébergement web illimité,hébergement, site internet, site, gratuite,hébergement revendeur,template,domaine, nom de domaine, cameroun, site cameroun,hébergement web cameroun,site moins cher."/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Cameroun | {{ metier }} ,{{ site }},site web, hébergement heb Cameroun, hébergement web illimité,hébergement, site internet, site, gratuite,hébergement revendeur,template,domaine, nom de domaine, cameroun, site cameroun,hébergement web cameroun,site moins cher." />
+	<style>
+		.stat-tld{
+			background: #f2f2f2; border-radius: 4px; padding: 8px; height: 36px; width: 36px; border-radius: 18px; display: inline-block;
+		}
+		.completed{
+			font-size: 15px!important;
+		}
+	</style>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Facture
+{% endblock %}
+
+{% block userblog_body %}
+
+<style>
+#demo {
+  margin: 20px auto;
+  max-width: 960px;
+}
+#demo h1 {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  letter-spacing: 0;
+  font-weight: 300;
+  color: #212121;
+  text-transform: inherit;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+#demo h2 {
+  font-size: 1.5rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.01rem;
+  font-weight: 400;
+  color: #212121;
+  text-align: center;
+}
+.shadow-z-1 {
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+}
+/* -- Material Design Table style -------------- */
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  background-color: #fff;
+}
+.table > thead > tr,
+.table > tbody > tr,
+.table > tfoot > tr {
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  text-align: left;
+  padding: 1.6rem;
+  vertical-align: top;
+  border-top: 0;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.table > thead > tr > th {
+  font-weight: 400;
+  color: #757575;
+  vertical-align: bottom;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.table > tbody + tbody {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.table .table {
+  background-color: #fff;
+}
+.table .no-border {
+  border: 0;
+}
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+  padding: 0.8rem;
+}
+.table-bordered {
+  border: 0;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f5f5f5;
+}
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+@media screen and (max-width: 768px) {
+  .table-responsive-vertical > .table {
+    margin-bottom: 0;
+    background-color: transparent;
+  }
+  .table-responsive-vertical > .table > thead,
+  .table-responsive-vertical > .table > tfoot {
+    display: none;
+  }
+  .table-responsive-vertical > .table > tbody {
+    display: block;
+  }
+  .table-responsive-vertical > .table > tbody > tr {
+    display: block;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 1.6rem;
+  }
+  .table-responsive-vertical > .table > tbody > tr > td {
+    background-color: #fff;
+    display: block;
+    vertical-align: middle;
+    text-align: right;
+  }
+  .table-responsive-vertical > .table > tbody > tr > td[data-title]:before {
+    content: attr(data-title);
+    float: left;
+    font-size: inherit;
+    font-weight: 400;
+    color: #757575;
+  }
+  .table-responsive-vertical.shadow-z-1 {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  .table-responsive-vertical.shadow-z-1 > .table > tbody > tr {
+    border: none;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  }
+  .table-responsive-vertical > .table-bordered {
+    border: 0;
+  }
+  .table-responsive-vertical > .table-bordered > tbody > tr > td {
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .table-responsive-vertical > .table-bordered > tbody > tr > td:last-child {
+    border-bottom: 0;
+  }
+  .table-responsive-vertical > .table-striped > tbody > tr > td,
+  .table-responsive-vertical > .table-striped > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical > .table-striped > tbody > tr > td:nth-child(odd) {
+    background-color: #f5f5f5;
+  }
+  .table-responsive-vertical > .table-hover > tbody > tr:hover > td,
+  .table-responsive-vertical > .table-hover > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical > .table-hover > tbody > tr > td:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}
+.table-striped.table-mc-red > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-red > tbody > tr:nth-child(odd) > th {
+  background-color: #fde0dc;
+}
+.table-hover.table-mc-red > tbody > tr:hover > td,
+.table-hover.table-mc-red > tbody > tr:hover > th {
+  background-color: #f9bdbb;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-red > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-red > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-red > tbody > tr > td:nth-child(odd) {
+    background-color: #fde0dc;
+  }
+  .table-responsive-vertical .table-hover.table-mc-red > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-red > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-red > tbody > tr > td:hover {
+    background-color: #f9bdbb;
+  }
+}
+.table-striped.table-mc-pink > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-pink > tbody > tr:nth-child(odd) > th {
+  background-color: #fce4ec;
+}
+.table-hover.table-mc-pink > tbody > tr:hover > td,
+.table-hover.table-mc-pink > tbody > tr:hover > th {
+  background-color: #f8bbd0;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-pink > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-pink > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-pink > tbody > tr > td:nth-child(odd) {
+    background-color: #fce4ec;
+  }
+  .table-responsive-vertical .table-hover.table-mc-pink > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-pink > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-pink > tbody > tr > td:hover {
+    background-color: #f8bbd0;
+  }
+}
+.table-striped.table-mc-purple > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-purple > tbody > tr:nth-child(odd) > th {
+  background-color: #f3e5f5;
+}
+.table-hover.table-mc-purple > tbody > tr:hover > td,
+.table-hover.table-mc-purple > tbody > tr:hover > th {
+  background-color: #e1bee7;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-purple > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-purple > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-purple > tbody > tr > td:nth-child(odd) {
+    background-color: #f3e5f5;
+  }
+  .table-responsive-vertical .table-hover.table-mc-purple > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-purple > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-purple > tbody > tr > td:hover {
+    background-color: #e1bee7;
+  }
+}
+.table-striped.table-mc-deep-purple > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-deep-purple > tbody > tr:nth-child(odd) > th {
+  background-color: #ede7f6;
+}
+.table-hover.table-mc-deep-purple > tbody > tr:hover > td,
+.table-hover.table-mc-deep-purple > tbody > tr:hover > th {
+  background-color: #d1c4e9;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-deep-purple > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-deep-purple > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-deep-purple > tbody > tr > td:nth-child(odd) {
+    background-color: #ede7f6;
+  }
+  .table-responsive-vertical .table-hover.table-mc-deep-purple > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-deep-purple > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-deep-purple > tbody > tr > td:hover {
+    background-color: #d1c4e9;
+  }
+}
+.table-striped.table-mc-indigo > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-indigo > tbody > tr:nth-child(odd) > th {
+  background-color: #e8eaf6;
+}
+.table-hover.table-mc-indigo > tbody > tr:hover > td,
+.table-hover.table-mc-indigo > tbody > tr:hover > th {
+  background-color: #c5cae9;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-indigo > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-indigo > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-indigo > tbody > tr > td:nth-child(odd) {
+    background-color: #e8eaf6;
+  }
+  .table-responsive-vertical .table-hover.table-mc-indigo > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-indigo > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-indigo > tbody > tr > td:hover {
+    background-color: #c5cae9;
+  }
+}
+.table-striped.table-mc-blue > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-blue > tbody > tr:nth-child(odd) > th {
+  background-color: #e7e9fd;
+}
+.table-hover.table-mc-blue > tbody > tr:hover > td,
+.table-hover.table-mc-blue > tbody > tr:hover > th {
+  background-color: #d0d9ff;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-blue > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-blue > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-blue > tbody > tr > td:nth-child(odd) {
+    background-color: #e7e9fd;
+  }
+  .table-responsive-vertical .table-hover.table-mc-blue > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-blue > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-blue > tbody > tr > td:hover {
+    background-color: #d0d9ff;
+  }
+}
+.table-striped.table-mc-light-blue > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-light-blue > tbody > tr:nth-child(odd) > th {
+  background-color: #e1f5fe;
+}
+.table-hover.table-mc-light-blue > tbody > tr:hover > td,
+.table-hover.table-mc-light-blue > tbody > tr:hover > th {
+  background-color: #b3e5fc;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-light-blue > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-light-blue > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-light-blue > tbody > tr > td:nth-child(odd) {
+    background-color: #e1f5fe;
+  }
+  .table-responsive-vertical .table-hover.table-mc-light-blue > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-light-blue > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-light-blue > tbody > tr > td:hover {
+    background-color: #b3e5fc;
+  }
+}
+.table-striped.table-mc-cyan > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-cyan > tbody > tr:nth-child(odd) > th {
+  background-color: #e0f7fa;
+}
+.table-hover.table-mc-cyan > tbody > tr:hover > td,
+.table-hover.table-mc-cyan > tbody > tr:hover > th {
+  background-color: #b2ebf2;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-cyan > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-cyan > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-cyan > tbody > tr > td:nth-child(odd) {
+    background-color: #e0f7fa;
+  }
+  .table-responsive-vertical .table-hover.table-mc-cyan > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-cyan > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-cyan > tbody > tr > td:hover {
+    background-color: #b2ebf2;
+  }
+}
+.table-striped.table-mc-teal > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-teal > tbody > tr:nth-child(odd) > th {
+  background-color: #e0f2f1;
+}
+.table-hover.table-mc-teal > tbody > tr:hover > td,
+.table-hover.table-mc-teal > tbody > tr:hover > th {
+  background-color: #b2dfdb;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-teal > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-teal > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-teal > tbody > tr > td:nth-child(odd) {
+    background-color: #e0f2f1;
+  }
+  .table-responsive-vertical .table-hover.table-mc-teal > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-teal > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-teal > tbody > tr > td:hover {
+    background-color: #b2dfdb;
+  }
+}
+.table-striped.table-mc-green > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-green > tbody > tr:nth-child(odd) > th {
+  background-color: #d0f8ce;
+}
+.table-hover.table-mc-green > tbody > tr:hover > td,
+.table-hover.table-mc-green > tbody > tr:hover > th {
+  background-color: #a3e9a4;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-green > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-green > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-green > tbody > tr > td:nth-child(odd) {
+    background-color: #d0f8ce;
+  }
+  .table-responsive-vertical .table-hover.table-mc-green > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-green > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-green > tbody > tr > td:hover {
+    background-color: #a3e9a4;
+  }
+}
+.table-striped.table-mc-light-green > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-light-green > tbody > tr:nth-child(odd) > th {
+  background-color: #f1f8e9;
+}
+.table-hover.table-mc-light-green > tbody > tr:hover > td,
+.table-hover.table-mc-light-green > tbody > tr:hover > th {
+  background-color: #dcedc8;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-light-green > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-light-green > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-light-green > tbody > tr > td:nth-child(odd) {
+    background-color: #f1f8e9;
+  }
+  .table-responsive-vertical .table-hover.table-mc-light-green > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-light-green > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-light-green > tbody > tr > td:hover {
+    background-color: #dcedc8;
+  }
+}
+.table-striped.table-mc-lime > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-lime > tbody > tr:nth-child(odd) > th {
+  background-color: #f9fbe7;
+}
+.table-hover.table-mc-lime > tbody > tr:hover > td,
+.table-hover.table-mc-lime > tbody > tr:hover > th {
+  background-color: #f0f4c3;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-lime > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-lime > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-lime > tbody > tr > td:nth-child(odd) {
+    background-color: #f9fbe7;
+  }
+  .table-responsive-vertical .table-hover.table-mc-lime > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-lime > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-lime > tbody > tr > td:hover {
+    background-color: #f0f4c3;
+  }
+}
+.table-striped.table-mc-yellow > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-yellow > tbody > tr:nth-child(odd) > th {
+  background-color: #fffde7;
+}
+.table-hover.table-mc-yellow > tbody > tr:hover > td,
+.table-hover.table-mc-yellow > tbody > tr:hover > th {
+  background-color: #fff9c4;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-yellow > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-yellow > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-yellow > tbody > tr > td:nth-child(odd) {
+    background-color: #fffde7;
+  }
+  .table-responsive-vertical .table-hover.table-mc-yellow > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-yellow > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-yellow > tbody > tr > td:hover {
+    background-color: #fff9c4;
+  }
+}
+.table-striped.table-mc-amber > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-amber > tbody > tr:nth-child(odd) > th {
+  background-color: #fff8e1;
+}
+.table-hover.table-mc-amber > tbody > tr:hover > td,
+.table-hover.table-mc-amber > tbody > tr:hover > th {
+  background-color: #ffecb3;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-amber > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-amber > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-amber > tbody > tr > td:nth-child(odd) {
+    background-color: #fff8e1;
+  }
+  .table-responsive-vertical .table-hover.table-mc-amber > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-amber > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-amber > tbody > tr > td:hover {
+    background-color: #ffecb3;
+  }
+}
+.table-striped.table-mc-orange > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-orange > tbody > tr:nth-child(odd) > th {
+  background-color: #fff3e0;
+}
+.table-hover.table-mc-orange > tbody > tr:hover > td,
+.table-hover.table-mc-orange > tbody > tr:hover > th {
+  background-color: #ffe0b2;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-orange > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-orange > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-orange > tbody > tr > td:nth-child(odd) {
+    background-color: #fff3e0;
+  }
+  .table-responsive-vertical .table-hover.table-mc-orange > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-orange > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-orange > tbody > tr > td:hover {
+    background-color: #ffe0b2;
+  }
+}
+.table-striped.table-mc-deep-orange > tbody > tr:nth-child(odd) > td,
+.table-striped.table-mc-deep-orange > tbody > tr:nth-child(odd) > th {
+  background-color: #fbe9e7;
+}
+.table-hover.table-mc-deep-orange > tbody > tr:hover > td,
+.table-hover.table-mc-deep-orange > tbody > tr:hover > th {
+  background-color: #ffccbc;
+}
+@media screen and (max-width: 767px) {
+  .table-responsive-vertical .table-striped.table-mc-deep-orange > tbody > tr > td,
+  .table-responsive-vertical .table-striped.table-mc-deep-orange > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-striped.table-mc-deep-orange > tbody > tr > td:nth-child(odd) {
+    background-color: #fbe9e7;
+  }
+  .table-responsive-vertical .table-hover.table-mc-deep-orange > tbody > tr:hover > td,
+  .table-responsive-vertical .table-hover.table-mc-deep-orange > tbody > tr:hover {
+    background-color: #fff;
+  }
+  .table-responsive-vertical .table-hover.table-mc-deep-orange > tbody > tr > td:hover {
+    background-color: #ffccbc;
+  }
+}
+
+</style>
+
+
+<div style="background: #f5f5f5;">
+<div class="container">
+<div class="row">
+{% if is_mobile() %}
+<div class="col-md-12">
+<ol class="c-navigation-breadcrumbs__directory">
+<!-- Duplicating the "Home" link in both the global navigation and the breadcrumb trail is not recommended. -->
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="" property="item" typeof="WebPage">
+	<span class="u-visually-hidden" property="name"><span class="fa fa-home"> </span> Accueil</span>
+  </a>
+  <meta property="position" content="1">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="#!" property="item" typeof="WebPage">
+	<span property="name">L'Institut</span>
+  </a>
+  <meta property="position" content="2">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="#!" property="item" aria-current="location">
+	<span property="name">Informations à propos de l'institut</span>
+  </a>
+  <meta property="position" content="3">
+</li>
+
+</ol>
+</div>
+{% else %}
+<div class="col-md-12">
+<div style="padding: 20px 0px;">
+	<div class="btn-group" style="float: right; margin-top: -10px;">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Appliquer un filtre <span class="fa fa-angle-down"></span></button>
+	<ul class="dropdown-menu pull-right">
+		<li class="divider"></li>
+		<li><a href=""><span class="fa fa-angle-double-right"></span> Afficher tous les articles</a></li>
+	</ul>
+	</div>
+
+	<ul class="breadcrumbs">
+	  <li><a href="#"><span class="fa fa-home"></span> Accueil</a></li>
+	  <li><a href="#!">L'Institut</a></li>
+	  <li>Informations à propos de l'institut</li>
+	</ul>
+</div>
+</div>
+{% endif %}
+
+</div>
+</div>
+</div>
+
+
+<div id="content">
+<!--Row featured-->
+<div class="row-featured row-free" style="background: #f2f2f2;  padding: 0px;">
+<div class="container" style="padding: 70px 0px 20px 0px;">
+	<div class="row">
+	<div class="col-md-12">
+		{% for infos in app.session.flashbag.get('information') %}
+		{% if loop.first %}
+			<div style="margin-bottom: 10px;">
+				{% include 'Theme/General/Template/Menu/flasinfos.html.twig' %}
+			</div>
+		{% endif %}
+		{% endfor %}
+	 </div>
+	 <div class="col-md-8">
+		<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 0px 0px 15px 0px; min-width: 100%;">
+		<div class="row">
+			<div class="col-md-6">
+			  <h3>{{ site }}</h3>
+			  <div>Tel: {{ telephone }}</div>
+			  <div>Email: {{ email }}</div>
+			  <div>Site web: {{ siteweb }}</div>
+			  <div style="margin-top: 5px;">
+			  {% if panier.sousmis == false %}
+				<button class="btn" style="background: #f96d00;">En cours..</button>
+			  {% else %}
+			  {% if panier.payer == false %}
+			  <button class="btn" style="background: #f96d00;">En attente..</button>
+			  {% else %}
+			   <button class="btn" style="background: green;">Payée <span class="fa fa-check"></span></button>
+			  {% endif %}
+			  {% endif %}
+			  </div>
+			</div>
+			<div class="col-md-6">
+			  <i>Facture ID: <strong>{{ panier.numFacture }}</strong> du: <strong>{{ panier.dateFacture }}</strong></i>
+			  {% if panier.contact != null %}
+			  <div>Type de compte: {{ panier.contact.type }}</div>
+			  <div>PP: {{ panier.contact.structname }}</div>
+			  <div>ATTN: {{ panier.contact.name(40) }}</div>
+			  <div>Adresse: {{ panier.contact.adresse }}</div>
+			  <div>Région: {{ panier.contact.ville }} ,  {{ panier.contact.pays.nom }}</div>
+			  {% endif %}
+			</div>
+			
+			<div class="clearfix"></div>
+
+			{% if panier.service != null %}
+			<div  style="margin-top: 10px; width: 100%;">
+			<div class="col-md-12" style="color: green;">Faites le transfert sur le Numéro ci-dessous:</div>
+				<div class="col-md-4" style="border: 1px dashed #ddd;">
+					{{ panier.service.nom }}
+				</div>
+				<div class="col-md-4" style="border: 1px dashed #ddd;">
+					{{ panier.service.nomcompte }}
+				</div>
+				<div class="col-md-4" style="border: 1px dashed #ddd;">
+					{{ panier.service.numcompte }}
+				</div>	
+			</div>
+			{% endif %}
+		</div>
+		</main>
+		<div id="demo" style="margin: 0px; padding: 0px;">
+		  <div class="table-responsive-vertical shadow-z-1" style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005);">
+		  <table id="table" class="table table-hover table-mc-light-blue" style="margin: 0px 0px 15px 0px;">
+			  <thead>
+				<tr>
+				  <th>Produits/Services</th>
+				  <th>Désignation</th>
+				  <th>PTTC</th>
+				  <th>Durée</th>
+				  <th>Montant TT</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  {% set cout = 0 %}
+			  {% set qte = 0 %}
+			  {% if app.session.get('devisupdate') != null %}
+				{% set userdevise = app.session.get('devisupdate') %}
+			  {% else %}
+				{% set userdevise = devise %}
+			  {% endif %}
+			  
+
+				{% for propan in panier.produitpaniers %}
+					{% set prixTttc = (propan.quantite * propan.produit.newprise()) + (propan.produit.prixlivraison * propan.quantite) %}
+					
+					{% set name = propan.produit.nom %}
+					{% set servicename = propan.produit.souscategorie.nom %}
+					
+					{% set prixuttc = propan.produit.newprise + propan.produit.prixlivraison %}
+
+					{% set cout = cout + prixTttc %}
+					{% set qte = qte + propan.quantite %}
+					
+					{% set creationuttc = convertPrise(prixuttc,prixuttc,0,userdevise) %}
+					{% set creationTttc = convertPrise(prixTttc,prixTttc,0,userdevise) %}
+					
+					<tr>
+					  <td data-title="Produits">{{ servicename }}</td>
+					  <td data-title="Désignation">{{ name }}</td>
+					  <td data-title="PTTC">
+						{{ creationuttc['ttc'] }} {{ creationuttc['devise']|raw }}
+					  </td>
+					  <td data-title="Durée">{{ propan.quantite }},00 {{ propan.produit.rapport }}</td>
+					  <td data-title="Montant TT">{{ creationTttc['ttc'] }} {{ creationTttc['devise']|raw }}</td>
+					</tr>
+				{% endfor %}
+
+			  </tbody>
+			</table>
+		  </div>
+
+		</div>
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+
+			var table = $('#table');
+
+			// Table bordered
+			$('#table-bordered').change(function() {
+				var value = $( this ).val();
+				table.removeClass('table-bordered').addClass(value);
+			});
+
+			// Table striped
+			$('#table-striped').change(function() {
+				var value = $( this ).val();
+				table.removeClass('table-striped').addClass(value);
+			});
+		  
+			// Table hover
+			$('#table-hover').change(function() {
+				var value = $( this ).val();
+				table.removeClass('table-hover').addClass(value);
+			});
+
+			// Table color
+			$('#table-color').change(function() {
+				var value = $(this).val();
+				table.removeClass(/^table-mc-/).addClass(value);
+			});
+		});
+
+		// jQuery’s hasClass and removeClass on steroids
+		// by Nikita Vasilyev
+		// https://github.com/NV/jquery-regexp-classes
+		(function(removeClass) {
+
+			jQuery.fn.removeClass = function( value ) {
+				if ( value && typeof value.test === "function" ) {
+					for ( var i = 0, l = this.length; i < l; i++ ) {
+						var elem = this[i];
+						if ( elem.nodeType === 1 && elem.className ) {
+							var classNames = elem.className.split( /\s+/ );
+
+							for ( var n = classNames.length; n--; ) {
+								if ( value.test(classNames[n]) ) {
+									classNames.splice(n, 1);
+								}
+							}
+							elem.className = jQuery.trim( classNames.join(" ") );
+						}
+					}
+				} else {
+					removeClass.call(this, value);
+				}
+				return this;
+			}
+
+		})(jQuery.fn.removeClass);
+		</script>
+		
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 0px 0px 15px 0px; min-width: 100%;">
+<div class="row">
+<div class="col-md-12">
+	<h3 style="border-bottom: 2px solid #ddd;">Dites nous si vous avez été satisfait !</h3>
+</div>
+<div class="col-md-5">
+	<div style="margin-top: 7px;">
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="une-etoile evaluate-struct" name="1" value="<strong>1 étoile:</strong> Très mauvais, expérience inacceptable !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="deux-etoile evaluate-struct" name="2" value="<strong>2 étoiles:</strong> Très bas, trop de difficultés"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="trois-etoile evaluate-struct" name="3" value="<strong>3 étoiles:</strong> Moyen, expérience acceptable, mais à améliorer !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="quatre-etoile evaluate-struct" name="4" value="<strong>4 étoiles:</strong> Bon, Aucun problème particulier !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="cinq-etoile evaluate-struct" name="5" value="<strong>5 étoiles:</strong> Excellent, Tout est ok, je recommande vivement !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<div style="margin-top: 10px;"><strong class="text-success">Evaluez sur 5.</strong></div>
+	</div>
+</div>
+<div class="col-md-7 text-warning" style="font-style: italic; height: 50px;">
+<img src="{{ asset('templateofferts/images/quetion.png') }}" alt="avis" style="width: 40px; height:40px; border-radius: 20px; position: absolute; top: 0px; right: 0px; z-index: 2;"/>
+<div class="base-content text-info">Survolez les étoiles avec le curseur puis cliquez pour attribuer une note et ajouter votre commentaire.</div>
+<div class="second-content text-info"></div>
+</div>
+</div>
+</main>
+
+
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 15px 0px; min-width: 100%;">
+	{% for avis in liste_review %}
+	<div class="topic">
+		<div class="open">
+		<h2 class="question">
+		<img src="{% if avis.user != null and avis.user.imgprofil != null %}{{ asset(avis.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ avis.user.name(25) }}" style="width: 50px; height: 50px; float: left; margin-right: 7px;" >  
+		{{ avis.user.name(40) }} - {{ avis.date|date('d') }}.{{ avis.date|date('M') }}.{{ avis.date|date('Y') }}</br>
+		<div class="star-ratings-css" style="margin-left: 0px; display: inline-block; float: left;">
+		  <div class="star-ratings-css-top" style="width: {{ ((avis.avisuser/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+		  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+		</div> 
+		<div style="margin-left: 15px; margin-top: 7px; display: inline-block; width: 50px; text-align: center; background: #1e499b;; color: #fff; border-radius: 10px;">{{ avis.avisuser }}</div>
+		
+		{% if avis.panier.collectionproduit == null %}
+			{% for prodpan in avis.panier.produitpaniers %}
+				{% if prodpan.produit.souscategorie.categorie.rang == 1 %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; float: right; margin: 3px; border-radius: 7px;">Nom de domaine</span>
+				{% else %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; float: right; margin: 3px; border-radius: 7px;">{{ prodpan.produit.souscategorie.nom }}</span>
+				{% endif %}
+			{% endfor %}
+		{% else %}
+			{% set collection = avis.panier.collectionproduit %}
+			{% for renewplan in collection.renewplans %}
+				{% set prodpan = renewplan.produitpanier %}
+				{% if prodpan.produit.souscategorie.categorie.rang == 1 %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; float: right; margin: 3px; border-radius: 7px;">Nom de domaine</span>
+				{% else %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; float: right; margin: 3px; border-radius: 7px;">{{ prodpan.produit.souscategorie.nom }}</span>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		<span style="padding: 3px; float: right; color: #ddd; font-size: 15px;">Services:</span>
+		</h2> <span class="faq-t"></span>
+		</div>
+		<div class="answer">{{ avis.description }}</br>
+		
+		{% for comment in avis.reponsebillets %}
+		<div class="module-comment-block" style="border-top: 1px solid #333;">
+
+		  <div class="module-comment-text">
+			<div>
+			<img src="{% if comment.user != null and comment.user.imgprofil != null %}{{ asset(comment.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ comment.user.name(25) }}" style="float: left; width: 50px; height: 50px; margin-right: 7px;" >  
+			<strong>{{ comment.user.name(25) }}</strong>
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu-avis-{{ avis.id }}">
+			<a href="#!" class="dropdown-item update-content-article-reponse" style="color: #333;" value="{{ comment.id }}"><i class="fa fa-edit" style="font-size: 18px;"></i> Modifier</a>
+			</div>
+			<a id="dropdownMenu-avis-{{ avis.id }}" data-toggle="dropdown" style="float: right; font-size: 30px; color: red;">
+				 <i class="fa fa-angle-down"></i> 
+			</a>
+			</div>
+			<div><em>{{ comment.date|date('d') }}.{{ comment.date|date('M') }}.{{ comment.date|date('Y') }}</em></div>
+
+			<div>
+			  {{ comment.description }}
+			</div>
+		  </div>
+
+		</div> <!-- /module-comment-block -->    
+		{% endfor %}
+		  
+		  <div class="row" style="border-top: 3px solid #333; margin-top: 15px; padding-top:5px; background: #f7f7f7;">
+		  <div class="col-md-3 col s12 m3">
+			<img src="{% if app.user != null and app.user.imgprofil != null %}{{ asset(app.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ app.user.name(25) }}" width="50" height="50" style="float: right;">  
+		  </div>
+
+		  <div class="col-md-9 col s12 m9">
+			<div><strong>{{ app.user.name(25) }}</strong></div>
+			  <form method="post" action="{{ path('users_user_add_new_reponse_billet_user', {'id': avis.id, 'position': 2}) }}">
+			  <div class="form-group">
+				<textarea name="reponse" class="form-control" id="reponsebillet-{{ avis.id }}" style="width: 100%; background: #fff;" required=""></textarea>
+				<label for="reponsebillet-{{ avis.id }}">Ajouter une réponse</label>
+			  </div></br>
+			  <div class="form-group" style="margin-top: 15px;">
+				  <button class="btn btn-primary">Enregister</button>
+			  </div>
+			  </form>
+		  </div>
+		  </div>
+		</div>
+	</div>
+	{% else %}
+	<div class="topic">
+		<div class="open">
+		<h2 class="question">1. Aucun avis disponible pour cette commande</h2> <span class="faq-t"></span>
+		</div>
+		<p class="answer">Vos avis nous permettent d'améliorer notre manière de vos servir.</p>
+	</div>
+	{% endfor %}
+</main>
+</div>
+
+<div class="col-md-4">
+{% set progress = 100 %}
+{% include 'Theme/Produit/Produit/Panier/cardoverview.html.twig' %}
+
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 15px 0px; min-width: 100%;">
+<div style="border-bottom: 1px solid #ddd;"><strong>Mode de paiement acceptés:</strong></div>
+{% for article in liste_article %}
+<div class="text-center" style="margin-top: 10px; width: 100%; {% if loop.index is odd %}background: #f96d00;{% else %}background: #1e499b;{% endif %}">
+	<div class="col-md-12" style="border: 1px dashed #ddd; color: #fff;">
+		{{ article.nom }}
+	</div>
+	<div class="col-md-12" style="border: 1px dashed #ddd; color: #fff;">
+		{{ article.nomcompte }}
+	</div>
+	<div class="col-md-12" style="border: 1px dashed #ddd; color: #fff;">
+		{{ article.numcompte }}
+	</div>	
+	<div class="clearfix"></div>
+</div>
+{% endfor %}
+</main>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="ajouter-avis-user" style="margin-top: 50px; margin-bottom: 15px;">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header color-bottom" style="border-bottom: 4px solid #37c0fb; display: block;">
+	<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button>
+	<h3 class="modal-title"><span class=" fa fa-thumbs-o-up"></span> Complétez votre évaluation </h3>
+</div>
+<div class="modal-body null-bottom null-bottom-in">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 0px; padding-bottom:0px;">
+<div class="result-evaluation-final" style="margin-bottom: 7px;">
+<div style="margin-top: -7px;">
+<div><strong class="evaluation-result-top" style="margin-top: 7px;"></strong></div>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="clone-element clone-element1" value="<strong>1 étoile:</strong> Très mauvais, expérience inacceptable !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="clone-element clone-element2" value="2 étoiles: Très bas, trop de difficultés"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="clone-element clone-element3" value="3 étoiles: Moyen, expérience acceptable, mais à améliorer !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="clone-element clone-element4" value="4 étoiles: Bon, Aucun problème particulier !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+	<strong style="padding: 7px; background: #ddd; color: #fff; border-radius: 5px;" class="clone-element clone-element5" value="5 étoiles: Excellent, Tout est ok, je recommande vivement !"><span class="fa fa-star" style="font-size: 25px;"></span></strong>
+</div>
+</div>
+	
+<div class="help-big" style="padding: 15px 0px; border-top: 1px solid #ddd;">
+<form class="submit-avis-user" id="submit-avis-user" method="post" action="{{ path('produit_produit_afh_panier_bill', {'id': panier.id}) }}" {{ form_enctype(formbillet) }} style="padding-bottom: 30px;">
+
+<div class="form-group avis-description">
+{{ form_widget(formbillet.description, {'attr': {'class': 'form-control', 'placeholder': 'Exprimez-vous !'}}) }}
+</div>
+<div class="alert avis-alert2 alert-block alert-danger text-left" style="display:none;">
+<h5>Erreur !</h5>
+Vous devez entrer entre 5 et 1500 caractères !
+</div>
+
+<input type="hidden" name="avisuser" value="3" class="hidden-input-avis">
+<button class="btn btn-primary pull-right" style="margin-top: -5px;">Partager mon avis <span class="glyphicon glyphicon-send"></span></button>
+{{ form_rest(formbillet) }}
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block;">
+{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade" data-backdrop="false" id="modalGestionCatalogueSelect">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header color-bottom" style="border-bottom: 4px solid #37c0fb; display: block;">
+	<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button>
+	<h3 class="modal-title"><span class=" fa fa-thumbs-o-up"></span> Mise à jour du contenu </h3>
+</div>
+<div class="modal-body null-bottom null-bottom-in">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block;">
+	{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripttemplate %}
+$('a').tooltip();
+
+{% for infos in app.session.flashbag.get('information') %}
+{% if loop.first %}
+	resetNotif();
+    alertify.alert("{{ infos }}");
+{% endif %}
+{% endfor %}
+
+$(".open").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+
+$('.une-etoile').mouseover(function(){
+	$('.evaluate-struct').css('background','#ddd');
+	$('.une-etoile').css('background','#e31a22');
+	$('.base-content').hide();
+	$('.second-content').html($(this).attr('value'));
+});
+
+$('.deux-etoile').mouseover(function() {
+	$('.evaluate-struct').css('background','#ddd');
+	$('.une-etoile').css('background','#f4741f');
+	$('.deux-etoile').css('background','#f4741f');
+	$('.base-content').hide();
+	$('.second-content').html($(this).attr('value'));
+});
+$('.trois-etoile').mouseover(function() {
+	$('.evaluate-struct').css('background','#ddd');
+	$('.une-etoile').css('background','#f9cd10');
+	$('.deux-etoile').css('background','#f9cd10');
+	$('.trois-etoile').css('background','#f9cd10');
+	$('.base-content').hide();
+	$('.second-content').html($(this).attr('value'));
+});
+$('.quatre-etoile').mouseover(function() {
+	$('.evaluate-struct').css('background','#ddd');
+	$('.une-etoile').css('background','#73b143');
+	$('.deux-etoile').css('background','#73b143');
+	$('.trois-etoile').css('background','#73b143');
+	$('.quatre-etoile').css('background','#73b143');
+	$('.base-content').hide();
+	$('.second-content').html($(this).attr('value'));
+})
+$('.cinq-etoile').mouseover(function() {
+	$('.evaluate-struct').css('background','#ddd');
+	$('.une-etoile').css('background','#00804d');
+	$('.deux-etoile').css('background','#00804d');
+	$('.trois-etoile').css('background','#00804d');
+	$('.quatre-etoile').css('background','#00804d');
+	$('.cinq-etoile').css('background','#00804d');
+	$('.base-content').hide();
+	$('.second-content').html($(this).attr('value'));
+})
+$('.evaluate-struct').mouseleave(function(){
+	$('.evaluate-struct').css('background','#ddd');
+	$('.base-content').show();
+	$('.second-content').html('');
+});
+$('.evaluate-struct').css('cursor','pointer');
+
+
+$('.evaluate-struct').click(function(){
+	{% if app.user != null %}
+	nbavis = $(this).attr('name');
+	if(nbavis == 1)
+	{
+		$('.clone-element').css('background','#ddd');
+		$('.clone-element1').css('background','#e31a22');
+		$('.evaluation-result-top').html($('.une-etoile').attr('value'));
+	}else if(nbavis == 2)
+	{
+		$('.clone-element').css('background','#ddd');
+		$('.clone-element1').css('background','#f4741f');
+		$('.clone-element2').css('background','#f4741f');
+		$('.evaluation-result-top').html($('.deux-etoile').attr('value'));
+	}else if(nbavis == 3)
+	{
+		$('.clone-element').css('background','#ddd');
+		$('.clone-element1').css('background','#f9cd10');
+		$('.clone-element2').css('background','#f9cd10');
+		$('.clone-element3').css('background','#f9cd10');
+		$('.evaluation-result-top').html($('.trois-etoile').attr('value'));
+	}else if(nbavis == 4)
+	{
+		$('.clone-element').css('background','#ddd');
+		$('.clone-element1').css('background','#73b143');
+		$('.clone-element2').css('background','#73b143');
+		$('.clone-element3').css('background','#73b143');
+		$('.clone-element4').css('background','#73b143');
+		$('.evaluation-result-top').html($('.quatre-etoile').attr('value'));
+	}else if(nbavis == 5)
+	{
+		$('.clone-element').css('background','#ddd');
+		$('.clone-element1').css('background','#00804d');
+		$('.clone-element2').css('background','#00804d');
+		$('.clone-element3').css('background','#00804d');
+		$('.clone-element4').css('background','#00804d');
+		$('.clone-element5').css('background','#00804d');
+		$('.evaluation-result-top').html($('.cinq-etoile').attr('value'));
+	}
+	$('.hidden-input-avis').attr('value',nbavis);
+	$('#ajouter-avis-user').modal('show');
+	{% else %}
+	$('.infos-action-effectuer').html('<span class="fa fa-thumbs-o-up"></span> Connexion nécessaire pour partager un avis. <a href="{{ path('login') }}">Connectez vous ici</a>');
+	$('#infos-action-effectuer').modal('show');
+	{% endif %}
+});
+
+$('.submit-avis-user').on("submit", function(){
+	if($('#users_userbundle_billetedit_description').val().length < 5 || $('#users_userbundle_billetedit_description').val().length > 1500) {
+		$("div.avis-description").addClass("has-error");
+		$('#users_userbundle_billetedit_description').focus();
+		$("div.avis-alert2").show("slow").delay(6000).hide("slow");
+		return false;
+	}
+	
+	resetNotif();
+	alertify.confirm("À votre attention svp !!!</br>Après publication, vous ne pourrez plus apporter des modifications à cette avis. Veuillez dont vous assurez que votre avis est honnête.  </br></br> Cliquez sur <strong style='font-size: 20px;'>'Cancel'</strong> pour modifier ou sur <strong style='font-size: 20px;'>'Ok'</strong> pour envoyer.", function (e){
+	if(e){
+		document.getElementById("submit-avis-user").submit();
+	}else{
+		alertify.success("Opération annulée avec succès !");
+		return false;
+	}
+	});
+	return false;
+});
+
+$('.update-content-article-reponse').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_user_update_reponse_billet', {'position': 2}) }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});			
+{% endblock %}

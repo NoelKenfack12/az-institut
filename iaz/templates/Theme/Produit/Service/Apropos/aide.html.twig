@@ -1,0 +1,208 @@
+<style>
+.topic{
+  padding:20px;
+  padding-top:0px;
+  padding-bottom:0px;
+  border-bottom:solid 1px #ebebeb;
+  width: 100%;
+}
+.openpanel{
+  cursor:pointer;
+  display:block;
+  padding:0px;
+}
+.openpanel:hover{
+  opacity:0.7;
+}
+.expanded{
+  background-color:#f5f5f5;
+  transition: all .3s ease-in-out;
+}
+.question{
+  padding-top:30px;
+  padding-right: 40px;
+  padding-bottom:20px;
+  font-size: 18px;
+  font-weight:500;
+  color: #526ee4;
+}
+.answer{
+  font-size:16px;
+  line-height:26px;
+  display:none;
+  margin-bottom:30px;
+  text-align:justify;
+  padding-left:20px;
+  padding-right:20px;
+}
+.faq-t{
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  display: inline-block;
+  float:right;
+  position:relative;
+  top:-55px;
+  right:10px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transition: all .3s ease-in-out;
+}
+.faq-o{
+  top:-50px;
+   -moz-transform: rotate(-224deg);
+  -ms-transform: rotate(-224deg);
+  -webkit-transform: rotate(-224deg);
+  transform: rotate(-224deg);
+}
+@media only screen and (max-width: 480px){
+  .faq-t{display:none;}
+  .question{
+  padding-right: 0px;
+}
+  main{
+  padding:10px;
+}
+  .answer{
+  margin-bottom:30px;
+  padding-left:0px;
+  padding-right:0px;
+}
+}
+</style>
+
+<div class="col-md-8">
+
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.02); background: #fff; margin: 0px; min-width: 100%; min-height: 400px; padding: 7px;">
+{% for service in liste_article %}
+<div class="topic">
+	<div class="openpanel">
+	  <h2 class="question"><img src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('templateofferts/images/3132.jpg') }}{% endif %}" alt=".." style="width: 30px; height: 30px; border-radius: 15px;">
+	  {{ service.nom }}
+	  </h2>
+	  <span class="faq-t"></span>
+	</div>
+	
+	<div class="answer" style="margin-bottom: 20px;">
+		<h5>
+			{{ service.description }}
+		</h5>
+	</div>
+</div>
+{% else %}
+<div style="height: 400px; padding-top: 100px; background: #fff; margin-bottom: 15px;">
+	<div style="text-align: center; display: block; width: 100%!important;">
+	<span class="fa fa-frown-o"></span> Aucune données disponible pour cette requête.</br>
+	<hr style="width: 100px; border-bottom: 1px solid red;">
+	</div>
+</div>
+{% endfor %}
+</main>
+
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>
+<script type="text/javascript">
+$('.back_step_one').click(function(){
+	$('.step_card_two').hide();
+	$('.step_card_one').show();
+	$('.step-two-card').removeClass('completed');
+});
+
+$(".openpanel").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")){
+    trigger.removeClass("faq-o");
+  } else {
+    trigger.addClass("faq-o");
+  }
+  
+  if(container.hasClass("expanded")){
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+</script>

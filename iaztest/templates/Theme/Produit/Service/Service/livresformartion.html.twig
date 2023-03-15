@@ -1,0 +1,46 @@
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.02); background: #fff; margin: 0px; min-width: 100%; min-height: 300px; padding: 7px;">
+<a href="#!" class="targetlink">Trouver une formation</a>
+<p>
+<div style="padding: 0px 15px 0px 15px;">
+	<span>Trouver la formation adaptée au métier que vous souhaitez exercé:</span></br>
+	<strong>Type formation</strong>
+	<form method="post">
+		<div class="form-group">
+			<select name="" class="form-control">
+				<option value="1">Formations diplomantes</option>
+				<option value="2">Formations continues</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="typede_formation">Métiers</label>
+			<select name="" class="form-control" id="typede_formation">
+				<option value="1">Formations diplomantes</option>
+				<option value="2">Formations continues</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-primary">Rechercher <span class="fa fa-search"></span></button>
+		</div>
+	</form>
+	Popup Search
+</div>
+</p>
+</main>
+
+{% for i in range(1,2) %}
+<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-top: 7px; margin-bottom: 0px; display: block!important;">
+<div class="card-body" style="margin: 0px;">
+  <h4 class="card-title">Intitulé support</h4>
+  <h6 class="card-subtitle mb-2">Auteur: {{ site }}</h6>
+  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+  
+  <div class="text-center">
+	<img src="{{ asset('template/images/present.png') }}" alt="" style="height: 150px; max-width: 100%;"/>
+  </div>
+  <div>Pour achat ou plus d'information cliquez sur le lien ci-dessous.</div>
+  <div><a href="" class="btn btn-primary">Continuer sur AZ Market</a></div>
+</div>
+</div>
+{% endfor %}

@@ -1,0 +1,219 @@
+{% extends "UsersUserBundle::layouthome.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ categorie.nom }} - {{ categorie.description }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} - {{ categorie.nom }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<link rel="stylesheet" href="{{ asset('template/css/jquery.expandable.css') }}"/>
+<script type="text/javascript" src="{{ asset('template/js/jquery.expandable.js') }}"></script>
+
+
+<div style="background: #f5f5f5;">
+<div class="container">
+<div class="row">
+{% if is_mobile() %}
+<div class="col-md-12">
+<ol class="c-navigation-breadcrumbs__directory">
+
+<!-- Duplicating the "Home" link in both the global navigation and the breadcrumb trail is not recommended. -->
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="" property="item" typeof="WebPage">
+	<span class="u-visually-hidden" property="name"><span class="fa fa-home"> </span> Accueil</span>
+  </a>
+  <meta property="position" content="1">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="{{ path('produit_produit_produit_formation_institut', {'id': categorie.id }) }}" property="item" typeof="WebPage">
+	<span property="name">{{ categorie.nom }}</span>
+  </a>
+  <meta property="position" content="2">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="#!" property="item" aria-current="location">
+	<span property="name">À propos des {{ categorie.nom }}</span>
+  </a>
+  <meta property="position" content="3">
+</li>
+
+</ol>
+</div>
+{% else %}
+<div class="col-md-12">
+<div style="padding: 20px 0px;">
+	<div class="btn-group" style="float: right; margin-top: -10px;">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Appliquer un filtre <span class="fa fa-angle-down"></span></button>
+	<ul class="dropdown-menu pull-right">
+		{% for formation in liste_formation %}
+			<li><a href="{{ path('produit_produit_produit_formation_institut', {'id': formation.id }) }}">{{ formation.nom }}</a></li>
+			<li class="divider"></li>
+		{% endfor %}
+	</ul>
+	</div>
+
+	<ul class="breadcrumbs">
+	  <li><a href="#"><span class="fa fa-home"></span> Accueil</a></li>
+	  <li><a href="{{ path('produit_produit_produit_formation_institut', {'id': categorie.id }) }}">{{ categorie.nom }}</a></li>
+	  <li>À propos des {{ categorie.nom }}</li>
+	</ul>
+</div>
+</div>
+{% endif %}
+
+</div>
+</div>
+</div>
+
+
+<div style="background: #f0f0f2; padding-top: 20px;">
+<div class="container">
+<div class="row">
+	{% include 'ProduitServiceBundle:Apropos:menuleft.html.twig' %}
+	<div class="col-md-9">
+		<div class="my-div">
+		<section class="testing" style="width: 100%;">
+		   <div class="description2 to-expand">
+			<h2>À propos des {{ categorie.nom }} </h2>
+			<p>
+			{{ categorie.description|raw }}
+			</p>
+		   </div>
+		</section>
+		</div>
+		
+		<div class="my-div">
+		<section class="testing" style="width: 100%;">
+		<div class="description2 to-expand" style="padding-bottom: 50px;">
+		<h2>{% if categorie.typeservice == 'diplomante' %}Nos formations Diplomantes {% else %}Nos formations continues{% endif %}</h2>
+		
+  <div class="cards row text-left">
+	{% if categorie.typeservice == 'diplomante' %}
+		{% for diplome in categorie.getScatProduits %}
+		<div class="col-md-6">
+			<div class="main-offert">
+			  <h4 style="margin: 0px 5px; padding: 0px;"><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">{{ diplome.nom }}</a></h4>
+			  <section class="timeline">
+				<ul>
+				  {% for prod in diplome.getProduitScat|slice(0,2) %}
+				  <li>
+					<span></span>
+					<div style="min-height: 50px;"> {{ prod.nom }}</div>
+					<div class="coustom-my-text">  {{ prod.contenu }} </div>
+					<div> info.course </div>
+					<div class="year">
+					  <span> Jun </span>
+					  <span> Sep </span>
+					</div>
+				  </li>
+				  {% endfor %}
+				  
+				</ul>
+				<div><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">Affichez plus <span class="fa fa-angle-right"></span></a></div>
+				<div class="text-center">
+				<a href="#!" class="az-btn-default commande-offer-formation" value="{{ diplome.id }}" name="fd">
+					Souscrire
+				</a>
+				</div>
+			  </section>
+			</div>
+		</div>
+		{% endfor %}
+	{% else %}
+	
+		{% for diplome in categorie.getScatProduits %}
+		<div class="col-md-6">
+		  <div class="cards__item">
+			<div class="actu-card">
+			  <div class="card__image card__image--fence" style="background: url('{% if diplome.src != null %}{{ asset(diplome.getwebpath) }}{% else %}{{ asset('template/images/assistance-bg.jpg') }}{% endif %}') no-repeat center; -webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;"></div>
+			  <div class="card__content" style="padding: 0px; min-height: 300px;">
+				<div class="card__title text-left" style="font-size: 20px;"><a href=""><span class="fa fa-hand-o-right"></span> {{ diplome.nom }}</a></div>
+				<div class="card__text" >
+				  {% for prod in diplome.getProduitScat|slice(0,3) %}
+				  <div class="dropdown dropup" style="margin: 1px 0px;">
+						<button id="dropdownMenuC{{ diplome.id }}" class="btn btn-default btn-lg coustom-my-text" style="width: 100%; white-space: normal; height: auto; border: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  <span class="fa fa-angle-right"></span> {{ prod.nom }}
+						</button>
+						<ul class="dropdown-menu my-panel-souscription" aria-labelledby="dropdownMenuC{{ diplome.id }}">
+						  <li class="dropdown-header">{{ prod.nom }}</li>
+						  <li role="separator" class="divider"></li>
+						  <li style="padding: 7px 15px;">
+							<div>{{ prod.contenu }}</div>
+						  </li>
+						  <li style="padding: 7px 15px;">
+							<div style="margin: 7px 0px;"><a href="#!" class="btn btn-default commande-offer-formation" value="{{ prod.id }}" name="fc">S'incrire à cette formation</a></div>
+							<div style="margin: 7px 0px;"><a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}" class="btn btn-default">Obtenir plus d'informations</a></div>
+						  </li>
+						</ul>
+				  </div>
+				  {% endfor %}
+							  
+				<div style="margin: 10px 0px;"><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">Toutes les offres <span class="fa fa-angle-right"></span></a></div>
+			  </div>
+			  </div>
+			</div>
+		  </div>
+		  </div>
+		{% endfor %}
+  
+	{% endif %}
+
+</div>
+
+
+
+		  </div>
+		</section>
+		</div> 
+	</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.description2').expandable({
+	height: 500,
+	expand_responsive : 960,
+	offset: 30
+});
+
+
+$('.accordion-1 > li:eq(0) a').addClass('active').next().slideDown();
+$('.accordion-2 > li:eq(0) a').addClass('active').next().slideDown();
+
+$('.accordion a.targetlink').click(function(j) {
+	var dropDown = $(this).closest('li').find('p');
+
+	$(this).closest('.accordion').find('p').not(dropDown).slideUp();
+
+	if ($(this).hasClass('active')) {
+		$(this).removeClass('active');
+	} else {
+		$(this).closest('.accordion').find('a.active').removeClass('active');
+		$(this).addClass('active');
+	}
+
+	dropDown.stop(false, true).slideToggle();
+
+	j.preventDefault();
+});
+
+{% endblock %}

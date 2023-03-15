@@ -1,0 +1,233 @@
+
+<style>
+.topic{
+  padding:20px;
+  padding-top:0px;
+  padding-bottom:0px;
+  border-bottom:solid 1px #ebebeb;
+  width: 100%;
+}
+.openpanel{
+  cursor:pointer;
+  display:block;
+  padding:0px;
+}
+.openpanel:hover{
+  opacity:0.7;
+}
+.expanded{
+  background-color:#f5f5f5;
+  transition: all .3s ease-in-out;
+}
+.question{
+  padding-top:30px;
+  padding-right: 40px;
+  padding-bottom:20px;
+  font-size: 18px;
+  font-weight:500;
+  color: #526ee4;
+}
+.answer{
+  font-size:16px;
+  line-height:26px;
+  display:none;
+  margin-bottom:30px;
+  text-align:justify;
+  padding-left:20px;
+  padding-right:20px;
+}
+.faq-t{
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  display: inline-block;
+  float:right;
+  position:relative;
+  top:-55px;
+  right:10px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transition: all .3s ease-in-out;
+}
+.faq-o{
+  top:-50px;
+   -moz-transform: rotate(-224deg);
+  -ms-transform: rotate(-224deg);
+  -webkit-transform: rotate(-224deg);
+  transform: rotate(-224deg);
+}
+@media only screen and (max-width: 480px){
+  .faq-t{display:none;}
+  .question{
+	  padding-right: 0px;
+	}
+  main{
+	  padding:10px;
+	}
+  .answer{
+	  margin-bottom:30px;
+	  padding-left:0px;
+	  padding-right:0px;
+	}
+}
+</style>
+
+<div class="row" style="margin: 0px;">
+
+<div class="col-md-12 text-left">
+	<h2>Poursuivre mon inscription pour les formations ci-dessous</h2>
+</div>
+
+<div class="col-md-8 col-lg-8 text-left" style="border: 1px solid #ddd;">
+	<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.02); background: #fff; margin: 0px; min-width: 100%; min-height: 400px; padding: 7px;">
+	  {% for prodpan in panier.produitpaniers %}
+	  {% set scatfor = prodpan.produit.souscategorie %}
+	  <div class="topic">
+	  
+		<div class="openpanel">
+		  <h2 class="question"><img src="{% if prodpan.produit.imgproduit != null %}{{ asset(prodpan.produit.imgproduit.getwebpath) }}{% else %}{{ asset('templateofferts/images/3132.jpg') }}{% endif %}" alt=".." style="width: 30px; height: 30px; border-radius: 15px;">
+		  {{ prodpan.produit.nom }}
+		  <span style="float: right; font-size: 15px; color: #ddd;"><span class="fa fa-cog"></span> Config</span>
+		  </h2>
+		  <span class="faq-t"></span>
+		</div>
+		
+		<div class="answer" style="margin-bottom: 20px;">
+			<form action="#!" method="post" class="form_data_domaine" id="form_data_domaine-{{ prodpan.id }}" value="{{ prodpan.id }}">
+			<div class="row">
+				<div class="col-md-12" style="margin: 3px 0px; color: #1e499b;"><span class="fa fa-info-circle"></span> Informations suplémentaires et pratique à propos de cette formation.</div>
+			</div>
+			<div class="clearfix"></div>
+			</form>
+		</div>
+
+	  </div>
+	  {% else %}
+	  
+	  <div class="topic">
+		<div class="openpanel">
+		<h2 class="question">1. Aucun produit dans votre panier
+		</h2><span class="faq-t"></span>
+		</div>
+		<p class="answer">La liste des produits du panier s'affichera ici.</p>
+	  </div>
+	  
+	  {% endfor %}
+	</main>
+</div>
+
+<div class="col-md-4 col-lg-4" style="border: 1px solid #ddd;">
+	{% set progress = 50 %}
+	{% include 'Theme/Produit/Produit/Panier/cardoverview.html.twig' %}
+</div>
+
+<div class="col-md-12 col-lg-12" style="border-top: 1px solid #ddd;">
+	<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 15px 0px; min-width: 100%; border-top: 1px soild #ddd;">
+		<div class="comparison" style="padding: 0px 0px;">
+			
+		</div>
+		<a href="#!" class="btn btn-default back_step_one" style="display: inline-block!important;  margin: 20px 0px 0px 0px; float: left; border-radius: 0px;"><span class="fa fa-chevron-left"></span> Retourner </a>
+		<a href="#!" class="btn btn-primary next_step_order_two"  style="color: #fff; display: inline-block!important; margin: 20px 0px 0px 0px; float: right; border-radius: 0px;"> Poursuivre mon inscription <span class="fa fa-chevron-right"></span></a>
+		<div class="clearfix"></div>
+	</main>
+</div>
+</div>
+<div class="clearfix"></div>
+
+
+<script type="text/javascript">
+$('.back_step_one').click(function(){
+	$('.step_card_two').hide();
+	$('.step_card_one').show();
+	$('.step-two-card').removeClass('completed');
+});
+
+$(".openpanel").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+
+$('form.form_data_domaine').on('submit', function(){
+	var id = $(this).attr('value');	
+	var $this = $('form#form_data_domaine-'+id);	
+	var formdata = (window.FormData) ? new FormData($this[0]) : null;
+	var data = (formdata !== null) ? formdata : $this.serialize();
+	
+	var height = ($(window).height() + $(window).scrollTop());
+	var width = $(window).width() + 100;
+	var scrolltop = $(window).scrollTop();
+	$('.panel-result-action-hosting-user').show();
+	$('.content-alert-action-hosting-user').show();
+	$('.content-alert-action-hosting-user').html('<div style="position: fixed; top: 0px; margin-bottom: '+scrolltop+'px; left: 0px; z-index: 9000; width: '+width+'px; height: '+height+'px; background: rgba(0,0,0,0.5);"></div>');
+
+	$.ajax({
+          url: '{{ path('produit_produit_custom_parameter_prodpan', {'id': panier.id }) }}', // Le nom du fichier indiqué dans le formulaire
+          type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
+          contentType: false, // obligatoire pour de l'upload
+          processData: false, // obligatoire pour de l'upload
+          data: data, // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+          dataType: 'html', // html
+          success: function(donnee){
+			if(donnee == 0)
+			{
+				resetNotif();
+				alertify.alert("Echec, Une erreur a été rencontrée lors de la mise à jour des paramètres.");
+				$('.panel-result-action-hosting-user').hide();
+				$('.content-alert-action-hosting-user').hide();
+			}else{
+				$('.step_card_one').hide();
+				$('.step_card_two').html(donnee);
+				$('.step_card_two').show();
+				$('.step-two-card').addClass('completed');
+				$('.panel-result-action-hosting-user').hide();
+				$('.content-alert-action-hosting-user').hide();
+			}
+		}
+	});
+	return false;
+});
+
+$('.next_step_order_two').on('click', function(){
+	var hauteur = $('.card_content_update').height() + 2;
+	var largeur = $('.card_content_update').width() + 32;
+	var padding = Math.round(hauteur/2 - 50);
+	$('.card_content_update').before('<div class="attente-resultat col-md-12" style="padding-top: 250px; z-index: 10000; height: '+hauteur+'px; text-align: center; vertical-align: center; width: '+largeur+'px; position: absolute; background: rgba(221, 221, 221, 0.48);; margin-top: 25px;"><span><img src="{{ asset('template/images/loader.gif') }}" alt="..." style="width: 30px; height: 30px;" /></span></div>');
+
+	$.post('{{ path('produit_produit_manage_contacts_panier_user', {'id': panier.id}) }}', function(data){
+	  if(data != 0)
+	  {
+		  $('.step_card_one').hide();
+		  $('.step_card_two').hide();
+		  $('.step_card_tree').html(data);
+		  $('.step_card_tree').show();
+		  $('.step-tree-card').addClass('selected');
+		  $('.attente-resultat').hide();
+	  }else{
+		  resetNotif();
+		  alertify.alert("Echec, Une erreur a été rencontrée lors de la configuration de la commande.");
+		  $('.attente-resultat').hide();
+	  }
+	});
+});
+</script>

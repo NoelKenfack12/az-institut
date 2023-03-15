@@ -1,0 +1,52 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	{{ form_start(formcat, {'style': 'margin-top: 15px', 'attr': path('users_adminuser_modifier_sous_categorie_produit', {'id': scat.id}) }}) }}
+		<div class="row">
+			 <div class="input-field col s12">
+				{{ form_widget(formcat.nom) }}
+				{{ form_label(formcat.nom,'Nom de la sous-catégorie') }}
+			</div>
+			
+			<div class="input-field col s12">
+			{{ form_widget(formcat.rang) }}
+			{{ form_label(formcat.nom,'Numéro de classement de la sous-catégorie') }}
+			</div>
+			
+			<div class="input-field col s12">
+		     {{ form_widget(formcat.categorie, {'attr': {'class': 'browser-default', 'style': 'border: 1px solid #ddd; padding: 7px;'}}) }}
+		    </div>
+			
+			<div class="input-field col s12">
+		     {{ form_widget(formcat.cataloguechantier, {'attr': {'class': 'browser-default', 'style': 'border: 1px solid #ddd; padding: 7px;'}}) }}
+		    </div>
+
+			<div class="input-field col s12">
+				{{ form_widget(formcat.description) }}
+				{{ form_label(formcat.description,'Description de la sous-catégorie') }}
+			</div>
+			
+			<div class="input-field col s12">
+				{{ form_widget(formcat.helpdashboard) }}
+				{{ form_label(formcat.helpdashboard,'Description plus complète') }}
+			</div>
+			
+			<div class="input-field col s12">
+				{{ form_widget(formcat.link) }}
+				{{ form_label(formcat.link,'Ajouter un lien à la sous-catégorie') }}
+			</div>
+			
+			<div class="input-field col s12">
+				{{ form_widget(formcat.file, {'attr': {'class': 'form-control', 'style': 'opacity: 1, color: #333;'}}) }}
+			</div>
+			
+			<div class="col s12" style="margin-top: 15px;">
+			   <button class="btn btn-primary">Modifiez la sous-catégorie</button>
+			</div>
+		 </div>
+		 <div class="clear"></div>
+		 {{ form_end(formcat) }}
+	<div class="clearfix"></div>
+</div>
+</div>
+
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>

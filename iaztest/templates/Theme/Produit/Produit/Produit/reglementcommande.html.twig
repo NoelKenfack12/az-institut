@@ -1,0 +1,521 @@
+<style>
+.comparison {
+  max-width:100%;
+  margin:0 auto;
+  font:13px/1.4 "Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-align:center;
+  padding:0px;
+}
+
+.comparison table {
+  width:100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  border-bottom:1px solid #CCC;
+}
+
+.comparison td, .comparison th {
+  border-right:1px solid #CCC;
+  empty-cells: show;
+  padding:10px;
+}
+
+.compare-heading {
+  font-size:18px;
+  font-weight:bold !important;
+  border-bottom:0 !important;
+  padding-top:10px !important;
+  text-align: center;
+}
+
+.comparison tbody tr:nth-child(odd) {
+  display:none;
+}
+
+.comparison .compare-row {
+  background:#fff;
+  border-top: 1px solid #ddd;
+}
+
+.comparison .tickblue {
+  color:#0078C1;
+}
+
+.comparison .tickgreen {
+  color:#009E2C;
+}
+
+.comparison th {
+  font-weight:normal;
+  padding:0;
+  border-bottom:1px solid #CCC;
+}
+
+.comparison tr td:first-child {
+  text-align:left;
+}
+  
+.comparison .qbse, .comparison .qbo, .comparison .tl {
+  color:#FFF;
+  padding:10px;
+  font-size:13px;
+  border-right:1px solid #CCC;
+  border-bottom:0;
+}
+
+.comparison .tl2 {
+  border-right:0;
+}
+
+.comparison .qbse {
+  background:#0078C1;
+  border-top-left-radius: 3px;
+  border-left:0px;
+}
+
+.comparison .qbo {
+  background:#009E2C;
+  border-top-right-radius: 3px;
+  border-right:0px;
+}
+
+.comparison .price-info {
+  padding:5px 15px 15px 15px;
+  text-align: center!important;
+}
+
+.comparison .price-was {
+  color:#999;
+  text-decoration: line-through;
+}
+
+.comparison .price-now, .comparison .price-now span {
+  color:#ff5406;
+}
+
+.comparison .price-now span {
+  font-size:32px;
+}
+
+.comparison .price-small {
+    font-size: 18px !important;
+    position: relative;
+    top: -11px;
+    left: 2px;
+}
+
+.comparison .price-buy {
+  background:#ff5406;
+  padding:10px 20px;
+  font-size:12px;
+  display:inline-block;
+  color:#FFF;
+  text-decoration:none;
+  border-radius:3px;
+  text-transform:uppercase;
+  margin:5px 0 10px 0;
+}
+
+.comparison .price-try {
+  font-size:12px;
+}
+
+.comparison .price-try a {
+  color:#202020;
+}
+
+@media (max-width: 767px) {
+  .comparison td:first-child, .comparison th:first-child {
+    display: none;
+  }
+  .comparison tbody tr:nth-child(odd) {
+    display:table-row;
+    background:#F7F7F7;
+  }
+  .comparison .row {
+    background:#FFF;
+  }
+  .comparison td, .comparison th {
+    border:1px solid #CCC;
+  }
+  .price-info {
+  border-top:0 !important;
+  
+}
+  
+}
+
+@media (max-width: 639px){
+  .comparison .price-buy {
+    padding:5px 10px;
+  }
+  .comparison td, .comparison th {
+    padding:10px 5px;
+  }
+  .comparison .hide-mobile {
+    display:none;
+  }
+  .comparison .price-now span {
+  font-size:16px;
+}
+
+.comparison .price-small {
+    font-size: 16px !important;
+    top: 0;
+    left: 0;
+}
+  .comparison .qbse, .comparison .qbo {
+    font-size:12px;
+    padding:10px 5px;
+  }
+  .comparison .price-buy {
+    margin-top:10px;
+  }
+  .compare-heading {
+  font-size:13px;
+}
+}
+.card-select-plan{
+  margin: -10px; margin-bottom: 20px; padding: 15px 0px; background: #36ac91;
+}
+.compare-row:hover{
+background: #DDD; color: #333;
+cursor: pointer;
+}
+.compare-row2:hover{
+background: #DDD; color: #333;
+cursor: pointer;
+}
+
+.reset {
+  border: 0;
+  list-style: none outside none;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+.steps {
+  border-radius: 2px;
+  display: flex;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.no-flexbox .steps {
+  border-collapse: separate;
+  display: table;
+  width: 100%;
+}
+.no-flexbox .steps li {
+  display: table-cell;
+  overflow: hidden;
+  text-indent: 0;
+}
+.no-flexbox .steps li:after {
+  right: 0;
+}
+.steps li {
+  background: rgba(30, 144, 255, 0.6);
+  color: white;
+  flex-grow: 1;
+  margin: 0 4px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-indent: 8px;
+}
+.steps li:before, .steps li:after {
+  border-bottom: 1.5em solid transparent;
+  border-left: 8px solid rgba(30, 144, 255, 0.6);
+  border-top: 1.5em solid transparent;
+  content: "";
+  height: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 0;
+}
+.steps li:before {
+  border-left-color: white;
+  left: 0;
+}
+.steps li:after {
+  background: white;
+  right: -8px;
+}
+.steps li:first-child {
+  margin-left: 0;
+  text-indent: 0;
+}
+.steps li:first-child:before {
+  display: none;
+}
+.steps li:last-child {
+  margin-right: 0;
+}
+.steps li:last-child:after {
+  display: none;
+}
+.steps li.selected {
+  background: #444;
+}
+.steps li.selected:after {
+  border-left-color: #444;
+}
+
+</style>
+<div id="content">
+	<div class="container" style="background: #fff; padding: 0px 0px 20px 0px; border: 1px solid #ddd;">
+		<div class="row" style="margin: 0px;">
+			
+		<div class="col-md-12" style="margin-bottom: 15px;">
+		<div style="display: inline-block; width: 100%; margin: 0px; background: #fff; position: fixed; width: 100%; z-index: 500; left: 0px; margin-top: -10px;">
+
+			<div class="no-flexbox">
+			  <ul class="steps reset clearfix">
+				<li class="selected step-one-card">Vérification</li>
+				<li class="step-two-card">Configuration</li>
+				<li class="step-tree-card">Contacts</li>
+				<li class="step-four-card">Paiement</li>
+			  </ul>
+			</div>
+		
+		</div>
+		</div>
+		 <div class="col-md-12">
+			<div class="step_card_one">
+			<div class="row">
+				<div class="col-md-12 text-left">
+					<h2>Mon panier actuel</h2>
+				</div>
+				<div class="col-lg-12 text-left">
+				<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 0px; min-width: 100%; min-height: 400px;">
+					<div class="comparison" style="padding: 0px 0px;">
+					<table id="myTable">
+					<thead style="background: #1e499b; color: #fff;">
+					  <tr>
+						<th class="tl" >
+							<strong style="font-size: 20px; float: left;">Formations</strong>
+						</th>
+						<th class="compare-heading">
+						  Opération
+						</th>
+						<th class="compare-heading">
+						  Durée
+						</th>
+						<th class="compare-heading">
+						  Prix HT
+						</th>
+						<th class="compare-heading">
+						  Prix TTC + Documentation
+						</th>
+					  </tr>
+					</thead>
+					<tbody>
+					{% if app.session.get('devisupdate') != null %}
+						{% set userdevise = app.session.get('devisupdate') %}
+					{% else %}
+						{% set userdevise = devise %}
+					{% endif %}
+				
+					{% set prixprodint = 0 %}
+					{% set prixproddec = 0 %}
+					{% set prixprodttc = 0 %}
+					
+					{% set prixht_local = 0 %}
+					{% set prixtt_local = 0 %}
+					
+					{% set devisedom = '' %}
+					
+					{% for prodpan in produitpanier %}
+					  {% set scatfor = prodpan.produit.souscategorie %}
+					  <tr class="compare-row" title="">
+						<td></td>
+						<td style="font-weight: bold;" colspan="4">{% if scatfor.categorie.rang == 1 %}Domaine .{{ prodpan.produit.nom }}{% else %}{{ prodpan.produit.nom }}{% endif %}</td>
+					  </tr>
+					
+					  <tr class="compare-row" title="">
+						<td style="font-weight: bold;">{{ prodpan.produit.nom }}</td>
+						<td class="text-center"><span class="tickblue" style="color: #333;">Inscription</span></td>
+						<td class="text-center">
+							{{ prodpan.produit.rapport }}
+						</td>
+						{% set creation = convertPrise((prodpan.produit.newprise*prodpan.quantite),(prodpan.produit.ancienPrixProduit*prodpan.quantite),(prodpan.produit.prixlivraison*prodpan.quantite),userdevise) %}
+						<td class="text-center"><span class="tickblue" style="color: #333;">{{ creation['prixint'] }},{{ creation['decimal'] }} {{ creation['devise']|raw }}</span></td>
+						<td class="text-center"><span class="tickblue" style="color: #333;">{{ creation['ttc'] }} {{ creation['devise']|raw }}</span> <a href="#!" class="text-center update-hosting-card" value="{{ prodpan.id }}" style="float: right; padding-top: 5px;background: #f2f2f2; color: red; display: inline-block; width: 25px; height: 25px; border-radius: 50%;"><span class="fa fa-times"></span></a></td>
+					   
+					   {% set prixprodint = prixprodint + creation['prixint'] %}
+					   {% set prixproddec = prixproddec + creation['decimal'] %}
+					   {% set prixprodttc = prixprodttc + creation['ttc'] %}
+					   {% set devisedom = creation['devise'] %}
+					
+					   {% set prixht_local = prixht_local + (prodpan.produit.newprise*prodpan.quantite) %}
+					   {% set prixtt_local = prixtt_local + (prodpan.produit.newprise*prodpan.quantite) + (prodpan.produit.prixlivraison*prodpan.quantite) %}
+					  </tr>
+					 {% endfor %}
+					</tbody>
+					<tfoot style="background: #1e499b; color: #fff;">
+					  <tr>
+						<th class="tl" >
+							<strong style="font-size: 20px; float: left;">Formations</strong>
+						</th>
+						<th class="compare-heading">
+						  Opération
+						</th>
+						<th class="compare-heading">
+						  Durée
+						</th>
+						<th class="compare-heading">
+						  Prix HT
+						</th>
+						<th class="compare-heading">
+						  Prix TT
+						</th>
+					  </tr>
+					</tfoot>
+					
+					</table>
+					<table style="margin-top: 20px;">
+					<tbody>
+
+					  <tr class="compare-row" title="">
+						<td></td>
+						<td style="font-weight: bold;" colspan="4">
+						{% if panier.couponcard == null %}
+						<strong><img src="{{ asset('templateofferts/images/checknuage.png') }}" alt="" style="width: 20px; height: 20px;"> Avez-vous un coupon de réduction {{ site }} ?</strong>
+						<div>
+						<form action="" method="post">
+							<div class="form-group" style="margin-top: 15px;">
+							<input type="text" name="code" style="width: 200px; display: inline-block; font-size: 12px;" class="form-control" placeholder="Rentrez votre code du coupon ici" required=""/>
+							<button class="btn btn-primary">Appliquer</button>
+							</div>
+						</form>
+						</div>
+						{% else %}
+						{% set creation = convertPrise(panier.couponcard.montant,panier.couponcard.montant,0,userdevise) %}
+						<strong><img src="{{ asset('templateofferts/images/checknuage.png') }}" alt="" style="width: 20px; height: 20px;"> Coupon de réduction</strong>
+						<div>Code: {{ panier.couponcard.code }}; Réduction: {{ creation['prixint'] }},{{ creation['decimal'] }} {{ creation['devise']|raw }}</div>
+						{% endif %}
+						</td>
+					  </tr>
+
+					  <tr class="compare-row" title="">
+						<td colspan="3" style="font-weight: bold; height: 70px; background: #f2f2f2;">
+						{% set reduction = 0 %}
+						{% if panier.couponcard == null %}
+						<strong><img src="{{ asset('templateofferts/images/checknuage.png') }}" alt="" style="width: 20px; height: 20px;"> Avez-vous un coupon de réduction {{ site }} ?</strong>
+						<div>
+						<form action="" method="post">
+							<div class="form-group" style="margin-top: 15px;">
+							<input type="text" name="code" style="width: 200px; display: inline-block; font-size: 12px;" class="form-control" placeholder="Rentrez votre code du coupon ici" required=""/>
+							<button class="btn btn-primary">Appliquer</button>
+							</div>
+						</form>
+						</div>
+						{% else %}
+						{% set creation = convertPrise(panier.couponcard.montant,panier.couponcard.montant,0,userdevise) %}
+						{% set reduction = creation['ttc'] %}
+						{% set prixht_local = prixht_local - panier.couponcard.montant %}
+						{% set prixtt_local = prixtt_local - panier.couponcard.montant %}
+						<strong><img src="{{ asset('templateofferts/images/checknuage.png') }}" alt="" style="width: 20px; height: 20px;"> Coupon de réduction</strong>
+						<div style="margin: 7px 0px;"><strong>Code:</strong> <span style="text-decoration: underline; margin-right: 15px;">{{ panier.couponcard.code }};</span> <strong>Réduction:</strong> <span style="text-decoration: underline; margin-right: 15px;">{{ creation['prixint'] }},{{ creation['decimal'] }} {{ creation['devise']|raw }}</span></div>
+						{% endif %}
+						</td>
+						<td class="text-center"><span class="tickblue" style="color: #333;">Total HT: {{ (prixprodint + prixproddec/100) - reduction }} {{ devisedom|raw }}</span></td>
+						<td class="text-center"><span class="tickblue" style="color: #333;">Total TT: {{ prixprodttc - reduction }} {{ devisedom|raw }}</span></td>
+					  </tr>
+
+					</tbody>
+					</table>
+					</div>
+					
+					<div class="col-md-8=12 col-lg-12" style="border-top: 1px solid #ddd; margin-top: 15px;">
+						<a href="#!" class="btn btn-default" style="background: #f7f7f7; color: #DDD; display: inline-block!important;  margin: 20px 0px 0px 0px; float: left; border-radius: 0px;"><span class="fa fa-chevron-left"></span> Retourner </a>
+						<a href="#!" class="btn btn-primary next_step_order_one" value="{{ prixht_local }}" name="{{ prixtt_local }}" style="color: #fff;  display: inline-block!important; margin: 20px 0px 0px 0px; float: right; border-radius: 0px;"> Poursuivre mon inscription <span class="fa fa-chevron-right"></span></a>
+					</div>
+					<div class="clearfix"></div>
+				</main>
+				</div>
+			</div>
+			</div>
+			
+			<div class="step_card_two" style="display: none;">
+			
+			</div>
+			<div class="step_card_tree" style="display: none;">
+			
+			</div>
+			
+			<div class="step_card_four" style="display: none;">
+			
+			</div>
+		 </div>
+		
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+$('.update-hosting-card').click(function(){
+	
+	var id = $(this).attr('value');
+	resetNotif();
+	alertify.confirm("êtes vous certain de vouloir retirer ce produit de votre panier ?", function (e) {
+		if (e){
+			  closeCardPanel();
+			  var height = ($(window).height() + $(window).scrollTop());
+			  var width = $(window).width() + 100;
+			  var scrolltop = $(window).scrollTop();
+			  $('.panel-result-action-hosting-user').show();
+			  $('.content-alert-action-hosting-user').show();
+			  $('.content-alert-action-hosting-user').html('<div style="position: fixed; top: 0px; margin-bottom: '+scrolltop+'px; left: 0px; z-index: 9000; width: '+width+'px; height: '+height+'px; background: rgba(0,0,0,0.5);"></div>');
+
+
+			  $.get('{{ path('produit_produit_elever_produit_commande') }}',{ id: id }, function(data){
+				  if(data == 1)
+				  {
+					  $('.panel-result-action-hosting-user').hide();
+					  $('.content-alert-action-hosting-user').hide();
+					  rafraichissementpanier();
+				  }else{
+					  resetNotif();
+					  alertify.alert("Echec, Une erreur a été rencontrée lors de la modification de la commande.");
+					  $('.panel-result-action-hosting-user').hide();
+					  $('.content-alert-action-hosting-user').hide();
+				  }
+			  });
+
+		}else{
+			alertify.success("Opération annulée avec succès !");
+		}
+	});
+});
+
+$('.next_step_order_one').on('click', function(){
+	var montantht = $(this).attr('value');
+	var montantttc = $(this).attr('name');
+
+	var hauteur = $('.card_content_update').height() + 2;
+	var largeur = $('.card_content_update').width() + 32;
+	var padding = Math.round(hauteur/2 - 50);
+	$('.card_content_update').before('<div class="attente-resultat col-md-12" style="padding-top: 250px; z-index: 10000; height: '+hauteur+'px; text-align: center; vertical-align: center; width: '+largeur+'px; position: absolute; background: rgba(221, 221, 221, 0.48);; margin-top: 25px;"><span><img src="{{ asset('template/images/loader.gif') }}" alt="..." style="width: 30px; height: 30px;" /></span></div>');
+
+	$.post('{{ path('produit_produit_manage_parametres_commande', {'id': panier.id}) }}',{ montantht: montantht, montantttc: montantttc }, function(data){
+	  if(data != 0)
+	  {
+		  $('.step_card_one').hide();
+		  $('.step_card_two').html(data);
+		  $('.step_card_two').show();
+		  $('.step-two-card').addClass('selected');
+		  $('.attente-resultat').hide();
+	  }else{
+		  resetNotif();
+		  alertify.alert("Echec, Une erreur a été rencontrée lors de la vérification de la commande.");
+		  $('.attente-resultat').hide();
+	  }
+	});
+})
+</script>

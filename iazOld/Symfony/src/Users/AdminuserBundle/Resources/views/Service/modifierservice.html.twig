@@ -1,0 +1,216 @@
+
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	<form class="col s12" action="{{ path('users_adminuser_modifier_un_service', {'id': article.id}) }}" method="post" {{ form_enctype(form) }}>		  
+
+		<span style="color:red;">{{ form_errors(form) }}</span>
+		<span style="color:red;">{{ form_errors(form.nom) }}</span>
+		  
+		<div class="row">
+		<span style="color:red;">{{ form_errors(form) }}</span>
+		<span style="color:red;">{{ form_errors(form.nom) }}</span>
+		  <div class="input-field col s12">
+			{{ form_widget(form.nom) }}
+			{{ form_label(form.nom,'Nom de l\'article') }}
+		  </div>
+		  
+		  <div class="input-field col s12">
+			<select id="typearticle-update" name="typearticle" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">   
+			<option value="aproposinstitut" {% if article.typearticle == 'aproposinstitut' %}selected{% endif %}>À propos de l'institut</option>
+			<option value="evenement" {% if article.typearticle == 'evenement' %}selected{% endif %}>Evènement</option>
+			<option value="actualite" {% if article.typearticle == 'actualite' %}selected{% endif %}>Actualité scolaire</option> 
+			
+			<option value="demarcheaz" {% if article.typearticle == 'demarcheaz' %}selected{% endif %}>Démarche {{ site }}</option>         
+			<option value="temoignage" {% if article.typearticle == 'temoignage' %}selected{% endif %}>Témoignage</option>         
+			<option value="mediatheque" {% if article.typearticle == 'mediatheque' %}selected{% endif %}>Médiathèque</option> 
+			<option value="planingcours" {% if article.typearticle == 'planingcours' %}selected{% endif %}>Planing des cours</option> 
+			<option value="modepaiement" {% if article.typearticle == 'modepaiement' %}selected{% endif %}>Mode de paiement</option> 
+			<option value="aide" {% if article.typearticle == 'aide' %}selected{% endif %}>Articles d'aide</option> 
+			<option value="galeriephoto" {% if article.typearticle == 'galeriephoto' %}selected{% endif %}>Galerie Photo</option> 
+			</select>
+		  </div>
+		
+		  <div class="input-field col s12 type_produit prod_apropos" style="{% if article.typearticle != 'aproposinstitut' %}display: none;{% endif %}">
+			<select id="article_apropos" name="articleapropos" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez une catégorie</option>  
+				{% for type in type_apropos %}
+				<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+				{% endfor %}
+			</select>
+		  </div>
+
+		  <div class="input-field col s12 type_produit prod_evenement" style="{% if article.typearticle != 'evenement' %}display: none;{% endif %}">
+			<select id="evenement" name="evenement" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez une catégorie</option>  
+				{% for type in type_evenement %}
+				<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+				{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_actualite" style="{% if article.typearticle != 'actualite' %}display: none;{% endif %}">
+			<select id="actualite" name="actualite" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_actualite %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_demarcheaz" style="{% if article.typearticle != 'demarcheaz' %}display: none;{% endif %}">
+			<select id="demarcheaz" name="demarcheaz" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_demarcheaz %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_temoignage" style="{% if article.typearticle != 'temoignage' %}display: none;{% endif %}">
+			<select id="temoignage" name="temoignage" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_temoignage %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_mediatheque" style="{% if article.typearticle != 'mediatheque' %}display: none;{% endif %}">
+			<select id="mediatheque" name="mediatheque" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_mediatheque %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_planingcours" style="{% if article.typearticle != 'planingcours' %}display: none;{% endif %}">
+			<select id="planingcours" name="planingcours" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_planingcours %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_modepaiement" style="{% if article.typearticle != 'modepaiement' %}display: none;{% endif %}">
+			<select id="modepaiement" name="modepaiement" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_modepaiement %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_aide" style="{% if article.typearticle != 'aide' %}display: none;{% endif %}">
+			<select id="aide" name="aide" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_aide %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12 type_produit prod_galeriephoto" style="{% if article.typearticle != 'galeriephoto' %}display: none;{% endif %}">
+			<select id="aide" name="aide" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="0">Sélectionnez la catégorie</option>  
+			{% for type in type_galeriephoto %}
+			<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
+			{% endfor %}
+			</select>
+		  </div>
+		  
+		  <div class="input-field col s12">
+			{{ form_errors(form.description) }}
+			{{ form_widget(form.description) }}
+			{{ form_label(form.description,'Description de l\'article') }}
+		  </div>
+		   <div class="input-field col s12">
+			{{ form_errors(form.rang) }}
+			{{ form_widget(form.rang) }}
+			{{ form_label(form.rang,'Rang dans le classement') }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_errors(form.breve) }}
+			{{ form_widget(form.breve) }}
+			{{ form_label(form.breve,'Titre raccourci') }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_errors(form.link) }}
+			{{ form_widget(form.link) }}
+			{{ form_label(form.link,'Ajouter un lien à l\'article') }}
+		  </div>
+	  </div>
+
+	  <div class="row">	
+		<div class="file-field input-field col s12">
+			<input class="file-path validate" type="text"/>
+			<div class="btn">
+			  <span>Image Article {{ form_errors(form.imgservice) }}</span>
+			  {{ form_widget(form.imgservice) }}
+			</div>
+		</div>
+		
+		<div class="input-field col s12">
+			{{ form_errors(form.keyword) }}
+			{{ form_widget(form.keyword) }}
+			{{ form_label(form.breve,'Mots clés séparés par les virgules ') }}
+		</div>
+		 
+		 <div class="input-field col s12">
+			{{ form_errors(form.principal) }}
+			{{ form_widget(form.principal) }}
+			{{ form_label(form.principal,'Marquer comme important') }}
+		  </div>
+	  
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+		  
+		 <div class="clear"></div>
+		 {{ form_rest(form) }}
+	   </form>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>
+<script type="text/javascript">
+$('#typearticle-update').change(function(){
+	$('.type_produit').hide();
+	if($(this).val() == 'aproposinstitut')
+	{
+		$('.prod_apropos').show();
+	}else if($(this).val() == 'evenement')
+	{
+		$('.prod_evenement').show();
+	}else if($(this).val() == 'actualite')
+	{
+		$('.prod_actualite').show();
+	}else if($(this).val() == 'demarcheaz')
+	{
+		$('.prod_demarcheaz').show();
+	}else if($(this).val() == 'temoignage')
+	{
+		$('.prod_temoignage').show();
+	}else if($(this).val() == 'mediatheque')
+	{
+		$('.prod_mediatheque').show();
+	}else if($(this).val() == 'planingcours')
+	{
+		$('.prod_planingcours').show();
+	}else if($(this).val() == 'modepaiement')
+	{
+		$('.prod_modepaiement').show();
+	}else if($(this).val() == 'aide')
+	{
+		$('.prod_aide').show();
+	}else if($(this).val() == 'galeriephoto')
+	{
+		$('.prod_galeriephoto').show();
+	}
+});
+</script>

@@ -1,0 +1,1015 @@
+{% extends "UsersUserBundle::layouthome.html.twig" %}
+	{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Accueil
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+	.card{
+	  background: -webkit-linear-gradient(to left, #16A085, #F4D03F);background: linear-gradient(to left, #00c6d7, #052963);
+	  border: 2px solid #fff;
+	  margin-bottom: 7px;
+	  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	}
+	.card:hover{
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	}
+	</style>
+{% endblock %}
+{% block userblog_body %}
+
+<div class="container" style="margin-top: 7px;">
+
+<link rel="stylesheet" href="{{ asset('template/test/css/style.css') }}">
+	<style>
+		.silder_intro {
+		  display: block;
+		  position: absolute;
+		  right: 0px!important;
+		  top: 0px!important;
+		  z-index: 9;
+		  width: 400px;
+		  height: 400px;
+		  padding: 25px 15px;
+		  overflow: hidden;
+		  background: rgba(0, 0, 0, .8);
+		  color: #f0f0f0;
+		  padding-left: 20px;
+		  box-shadow: 0 0 5px 0 #ddd;
+		  border-radius: 2px;
+		  text-indent: 0;
+		  text-decoration: none;
+		}
+		.silder_intro:hover{
+			color: #fff;
+		}
+		.img-slide-lg{
+			height: 400px;
+		}
+	</style>
+<section class="diaporama-accueil" style="">
+	<div id="panel-slide-size" style="padding: 5px; margin: 0px; box-shadow:0px 0px 2px rgba(0,0,0,0.1); background: #fff;">	
+	<div>
+		<div class="slider_box" style="height: 400px;">
+			<!-- slide & description -->
+			<div class="silder_con">
+
+			  {% for slide in liste_slide %}
+			  <div class="silder_panel">
+				<a href="#" class="silder_panel_item">
+				  <img src="{% if slide.src != null %}{{ asset(slide.getwebpath) }}{% else %}{{ asset('template/images/1.jpg') }}{% endif %}" class="img-slide-lg"/>
+				</a>
+				<a href="{% if slide.link != null %}{{ slide.link }}{% else %}#!{% endif %}" class="silder_intro">
+				  <div class="silder_intro_content">
+					<h2>{{ slide.titre }}</h2>
+					<div>{{ slide.description }}</div>
+				  </div>
+				</a>
+			  </div>
+			  {% endfor %}
+
+			</div>
+			<!-- contorl nav (created by JS)-->
+			<div class="silder_nav_mask"></div>
+			<div class="silder_nav"></div>
+		</div>
+	</div>
+
+	<script src="{{ asset('template/test/js/slides.js') }}"></script>
+	</div>
+
+<!--Adding demo page css file -->
+<link rel="stylesheet" type="text/css" href="{{ asset('hometemplate/css/demo-page-styles.css') }}">
+<!--Adding plugin css file -->
+<link rel="stylesheet" type="text/css" href="{{ asset('hometemplate/css/breaking-news-ticker.css') }}">
+
+	<!-- DEMO1 HTML STARTS HERE *-->
+	<!-- *********************** -->
+	<div class="breaking-news-ticker" id="newsTicker1">
+		<div class="bn-label"><span class="fa fa-bullhorn"></span> Flash</div>
+		<div class="bn-news">
+			<ul>
+				{% for article in liste_actualite %}
+				<li><a href="{{ path('produit_service_detail_actualite', {'id': article.id }) }}">{{ loop.index }}. {{ article.nom }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="bn-controls">
+			<button><span class="bn-arrow bn-prev"></span></button>
+			<button><span class="bn-action"></span></button>
+			<button><span class="bn-arrow bn-next"></span></button>
+		</div>
+	</div>
+	<!-- *********************** -->
+	<!-- DEMO1 HTML END HERE *** -->
+
+
+<script src="{{ asset('hometemplate/js/breaking-news-ticker.min.js') }}"></script>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+
+		$('#newsTicker1').breakingNews();
+	});
+</script>
+		
+
+</div>
+</section>
+
+
+<style>
+.list-group .list-group-item {
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px dashed #e1e3ea;
+  border-width: 1px 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.list-group .list-group-item:hover {
+  padding-left: 10px;
+}
+.list-group .list-group-item:first-child {
+  border-radius: 0;
+}
+.list-group .list-group-item:last-child {
+  border-radius: 0;
+}
+
+</style>
+
+<div style="background: #f5f5f5;">
+<div class="container">
+	<style>
+		.main-offert {
+		  width: 100%;
+		  height: auto;;
+		  padding: 15px 10px;
+		  background: #fff;
+		  border-radius: 4px;
+		  margin-bottom: 7px;
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		  -webkit-transition: transform 200ms ease-in-out;
+			-moz-transition: transform 200ms ease-in-out;
+			-o-transition: transform 200ms ease-in-out;
+			transition: 200ms ease-in-out;
+		}
+		
+		.main-offert:hover{
+			border-color: transparent;
+			transform: translateY(-5px);
+			box-shadow: 0 .5rem 1rem rgba(0,0,0,0.15);
+			cursor: pointer;
+		}
+
+		.timeline {
+		  padding: 5px 45px;
+		}
+		.timeline ul {
+		  position: relative;
+		}
+		.timeline ul::before {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  height: 100%;
+		}
+		.timeline li {
+		  position: relative;
+		  margin: 60px 35px;
+		  width: 100%;
+		  list-style: none;
+		  line-height: 25px;
+		}
+		.timeline li > span {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  left: -25px;
+		  height: 110%;
+		  border: 2px solid #2E4A62;
+		  border-radius: none;
+		}
+		.timeline li > span::before, .timeline li > span::after {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  width: 14px;
+		  height: 14px;
+		  border: 3px solid #fd784b;
+		  border-radius: 50%;
+		  left: -7px;
+		  background: #4e9bfa;
+		}
+		.timeline li > span::before {
+		  top: -15px;
+		}
+		.timeline li > span::after {
+		  top: 100%;
+		}
+		.timeline li div:nth-child(2) {
+		  font-size: 1.2em;
+		}
+		.timeline li div:nth-child(3), .timeline li div:nth-child(4) {
+		  font-size: 1em;
+		  font-style: italic;
+		  color: #bfbfbf;
+		}
+		.timeline li .year span {
+		  position: absolute;
+		  font-size: 1em;
+		  left: -85px;
+		  width: 40px;
+		  text-align: right;
+		}
+		.timeline li .year span:first-child {
+		  top: -20px;
+		}
+		.timeline li .year span:last-child {
+		  top: 100%;
+		}
+		
+		.az-btn-default {
+			min-width: 84px;
+			height: 34px;
+			font-family: OpenSans-Bold;
+			font-size: 11px;
+			text-align: center;
+			color: #030303;
+			background: linear-gradient(#FFFFFF,#E6E6E6);
+			border: 1px solid #CDCDCD;
+			border-radius: 3px;
+			display: inline-block;
+			padding: 7px 15px!important;
+		}
+		.bn-label{
+			background-color: #092759!important;
+		}
+		.breaking-news-ticker{
+			border: solid 1px #092759!important;
+		}
+		
+		.card-with-transparent-card-block{
+			width: 100%; background: #fff; min-height: 455px; 
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		  padding: 7px; border-radius: 4px;
+		  transition: all 0.3s cubic-bezier(.25,.8,.25,1); 
+		  -webkit-transition: transform 200ms ease-in-out;
+			-moz-transition: transform 200ms ease-in-out;
+			-o-transition: transform 200ms ease-in-out;
+			transition: 200ms ease-in-out;
+		}
+		.card-with-transparent-card-block:hover{
+			border-color: transparent;
+			transform: translateY(-5px);
+			box-shadow: 0 .5rem 1rem rgba(0,0,0,0.15);
+			cursor: pointer;
+		}
+		.card-application{
+			padding: 20px 7px 1px 7px; background: #fff; margin-top: 7px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		  padding: 7px; border-radius: 4px;
+		  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		  -webkit-transition: transform 200ms ease-in-out;
+			-moz-transition: transform 200ms ease-in-out;
+			-o-transition: transform 200ms ease-in-out;
+			transition: 200ms ease-in-out;
+		}
+		.card-application:hover{
+			border-color: transparent;
+			transform: translateY(-5px);
+			box-shadow: 0 .5rem 1rem rgba(0,0,0,0.15);
+			cursor: pointer;
+		}
+	</style>
+
+{% set formationdiplome = null %}
+{% set formationcontinue = null %}
+{% for categorie in liste_formation %}
+	{% if loop.first %}
+		{% set formationdiplome = categorie %}
+	{% else %}
+		{% set formationcontinue = categorie %}
+	{% endif %}
+{% endfor %}
+
+{% if formationdiplome != null %}
+<div class="row">
+	<div class="col-md-12">
+		<h2>Formations Diplomantes <a href="{{ path('produit_produit_produit_formation_institut', {'id': formationdiplome.id }) }}" class="btn btn-primary" style="float: right; color: #fff;">Toutes les formations <span class="fa fa-long-arrow-right"></span></a></h2>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+		{% for diplome in formationdiplome.getScatProduits|slice(0,4) %}
+		<div class="col-md-6">
+			<div class="main-offert">
+			  <h4 style="margin: 0px 5px; padding: 0px;"><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">{{ diplome.nom }}</a></h4>
+			  <section class="timeline">
+				<ul>
+				  {% for prod in diplome.getProduitScat|slice(0,1) %}
+				  <li>
+					<span></span>
+					<div style="min-height: 50px;"> {{ prod.nom }}</div>
+					<div class="coustom-my-text">  {{ prod.contenu }} </div>
+					<div> info.course </div>
+					<div class="year">
+					  <span> Jun </span>
+					  <span> Sep </span>
+					</div>
+				  </li>
+				  {% endfor %}
+				  
+				</ul>
+				<div><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">Affichez plus <span class="fa fa-angle-right"></span></a></div>
+				<div class="text-center">
+				<a href="#!" class="az-btn-default commande-offer-formation" value="{{ diplome.id }}" name="fd">
+					Souscrire
+				</a>
+				</div>
+			  </section>
+			</div>
+		</div>
+		{% endfor %}
+		<div class="col-md-12">
+			<div style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1); background: #fff; padding: 7px; min-height: 100px; margin-bottom: 7px;">
+  
+				<img src="{{ asset('template/images/present.png') }}" alt="" style="float: left; margin-right: 7px; height:80px;"/>
+				<h2 style="margin: 0px;">À propos des formations diplomantes</h2>
+				<div>Message à propos des formations diplômantes </div>
+				<a href="{{ path('produit_produit_produit_formation_institut', {'id': formationdiplome.id }) }}"><span class="badge badge-succes">Toutes nos formations</span></a>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+	
+		<div class="card-with-transparent-card-block">
+			<div class="has-card-hover">
+				<img class="card-img-top img-fluid" src="{{ asset('template/images/present.png') }}" alt="Card image cap" style="width: 100%;">
+				<div class="card-hover slide-down">
+					<div class="card-hover-content">
+						<p>This is a short teaser to the content in the video that shows on hover.</p>
+						<button class="btn btn-primary">I'm a button</button>
+					</div>
+				</div>
+			</div>
+			<div class="card-block text-xxs-center" style="padding: 7px;">
+				<h4 class="card-title d-inline" style="display: inline!important;"><em>Formation en ligne</em></h4>
+				
+				<div>Suivez votre formation à distance à travers les vidéos, tutoriels, etc..</div>
+				<p class="card-text d-inline"  style="display: inline!important;"><a href="">www.elearning.az...com</a></p>
+			</div>
+		</div>
+		
+		<div class="card-application">
+			 <div>Autres plateformes AZ Corporation</div>
+			 <div id="accordion">
+				<div class="panel list-group">
+				  <!-- panel class must be in -->
+				  <a href="#web_dev" data-parent="#accordion" data-toggle="collapse" class="list-group-item">
+					<h4>AZ Corp Market</h4>
+				  </a>
+				  <div class="collapse in" id="web_dev" style="padding: 2px 10px;">
+					<ul class="list-group-item-text">
+					  <li>Vente des équipements informatiques</li>
+					  <li>PHP</li>
+					  <li>Wordpress</li>
+					  <li>MYSQL</li>
+					</ul>
+				  </div>
+
+				  <a href="#desktop" data-parent="#accordion" data-toggle="collapse" class="list-group-item" `>
+					<h4>AZ Corp Assurance</h4>
+				  </a>
+				  <div class="collapse" id="desktop" style="padding: 2px 10px;">
+					<ul class="list-group-item-text">
+					  <li>Vente des équipements informatiques</li>
+					  <li>Java</li>
+					  <li>Python</li>
+					</ul>
+				  </div>
+
+
+				  <a href="#mobile" data-parent="#accordion" data-toggle="collapse" class="list-group-item">
+					<h4>Entreprises Az Corp</h4>
+				  </a>
+				  <div class="collapse" id="mobile" style="padding: 2px 10px;">
+					<ul class="list-group-item-text">
+					  <li>Services</li>
+					  <li>IOS</li>
+					  <li>Windows</li>
+					  <li>Linux</li>
+					</ul>
+				  </div>
+				</div>
+			  </div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+</div>
+</div>
+
+{% if formationcontinue != null %}
+<div style="background: #fff; padding-bottom: 15px;">
+<section class="section1" style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);">
+	<div class="container">
+	<div class="p-t-1-xxs" style="margin-top: 15px; margin-bottom: 15px;">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 style="margin-top: 0px; color: #fff;"><strong>Les formations continues de l'institut Az pour permettre de suivre une formation au centre à votre rithme.</strong></h2>
+				<div style="padding-top: 15px;">
+				<a href="{{ path('produit_produit_produit_formation_institut', {'id': formationcontinue.id }) }}" class="btn btn-primary" style="color: #fff;">S'inscrire</a>
+			</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+</div>
+
+<div style="background: #fff;">      
+  <div class="container">
+	  <div class="row">
+	  <div class="col-md-12">
+		<h2 style="margin-top: 0px; color: #333;"><strong>Nos Formations Continues</strong> <a href="{{ path('produit_produit_produit_formation_institut', {'id': formationcontinue.id }) }}" class="btn btn-primary" style="float: right; color: #fff;">Toutes les formations <span class="fa fa-long-arrow-right"></span></a></h2>
+	  </div>
+      </div>
+  </div>
+</div>
+
+
+<div style="background: #fff; padding-top: 15px;">
+<div class="container">
+<div class="row">
+
+{% for diplome in formationcontinue.getScatProduits|slice(0,3) %}
+  <div class="col-md-4">
+  <div class="cards__item">
+    <div class="actu-card">
+      <div class="card__image card__image--fence" style="background: url('{% if diplome.src != null %}{{ asset(diplome.getwebpath) }}{% else %}{{ asset('template/images/assistance-bg.jpg') }}{% endif %}') no-repeat center; -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+ 	background-size: cover;"></div>
+      <div class="card__content" style="padding: 0px; min-height: 300px;">
+        <div class="card__title text-left" style="font-size: 20px;"><a href=""><span class="fa fa-hand-o-right"></span> {{ diplome.nom }}</a></div>
+        <div class="card__text" >
+		  {% for prod in diplome.getProduitScat|slice(0,3) %}
+		  <div class="dropdown dropup" style="margin: 1px 0px;">
+				<button id="dropdownMenuC{{ diplome.id }}" class="btn btn-default btn-lg coustom-my-text" style="width: 100%; white-space: normal; height: auto; border: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <span class="fa fa-angle-right"></span> {{ prod.nom }}
+				</button>
+				<ul class="dropdown-menu my-panel-souscription" aria-labelledby="dropdownMenuC{{ diplome.id }}">
+				  <li class="dropdown-header">{{ prod.nom }}</li>
+				  <li role="separator" class="divider"></li>
+				  <li style="padding: 7px 15px;">
+					<div>{{ prod.contenu }}</div>
+				  </li>
+				  <li style="padding: 7px 15px;">
+					<div style="margin: 7px 0px;"><a href="#!" class="btn btn-default commande-offer-formation" value="{{ prod.id }}" name="fc">S'incrire à cette formation</a></div>
+					<div style="margin: 7px 0px;"><a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}" class="btn btn-default">Obtenir plus d'informations</a></div>
+				  </li>
+				</ul>
+		  </div>
+		  {% endfor %}
+					  
+		<div style="margin: 10px 0px;"><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}">Toutes les offres <span class="fa fa-angle-right"></span></a></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ {% endfor %}
+
+</div>
+
+</div>
+
+
+<div class="clearfix"></div>
+</div>
+{% endif %}
+
+
+<style>
+.pricing-grid:nth-child(2) {
+    margin: 0 1em;
+}
+/*Pricing table and price blocks*/ 
+.price-head h3 {
+	color: #404042;
+	font-size: 3em;
+	text-decoration: none;
+	font-weight: 700;
+} 
+/*----*/  
+.agileinfo-price  h2,.agileinfo-price  h3{
+	font-size: 1.5em;
+	color: #fff;
+	font-weight: 300;
+}
+.agileinfo-price, .agileinfo-price .two, .agileinfo-price .three {
+    background: #c8102e;
+    padding: 0.8em 0;
+    text-align: center;
+}
+.agileinfo-price.two{
+	background: #862633; 
+}
+.agileinfo-price.three {
+	background: #003a70; 
+}
+.agileinfo-price  ul,.pricing-grid1 ul,.pricing-grid2 ul,.pricing-grid3 ul{
+	padding: 0;
+}
+.agileinfo-price  ul li,.pricing-grid1,.pricing-grid2 ul li,.pricing-grid3 ul li {
+	list-style: none;
+}
+.agileinfo-price  ul li{
+	list-style: none;
+}
+.agileinfo-price  h5 {
+	padding: 11px 0;
+	font-style: italic;
+	font-size: 13px;
+	color: #F0EBEB;
+}
+ul.count,.pricing-grid1 ul li a,ul.count,.pricing-grid2 ul li a,ul.count,.pricing-grid3 ul li a{
+	font-size: 15px;
+	display: block;
+	text-decoration: none;
+	font-weight: 400;
+	padding: 10px 20px;
+}
+.price-bg {
+    background: #fff; 
+    padding: 1.5em;
+}
+p.price-label-1 {
+	color: #c8102e;
+	text-align: center;
+	margin-top:1.5em;
+}
+p.price-label-2 {
+	color: #862633;
+	text-align: center;
+	margin-top:1.5em;
+}
+p.price-label-3 {
+	color: #003a70;
+	text-align: center;
+	margin-top:1.5em;
+}
+.price-bg p span {
+    font-weight: bold;
+    font-size: 2.5em;
+    line-height: 0.8em;
+    margin-right: 5px;
+}
+.price-bg p i {
+	vertical-align: super;
+}
+.price-bg ul {
+	padding: 0;
+	margin-top: 1em;
+}
+.price-bg ul li{
+	list-style: none;
+} 
+.buy {
+    padding: 1em 0 0;
+    text-align: center;
+}
+.buy a {
+    background: #c8102e; 
+    font-size: 1em;
+    color: #fff; 
+    padding: .5em 1.5em;
+    display: inline-block;
+	-webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+	-ms-transition: 0.5s all;
+	transition: 0.5s all;
+}
+.buy a:hover {  
+    border: 1px solid #c8102e;
+    background: none;
+    color: #c8102e; 
+}
+.buy.buy-two a {
+    background: #862633;
+}
+.buy.buy-two a:hover {  
+    border: 1px solid #862633;
+    background: none;
+    color: #862633;
+    font-weight: 500;
+}
+.buy.buy-three a {
+    background: #003a70;  
+}
+.buy.buy-three a:hover {  
+    border: 1px solid #003a70;
+    background: none;
+    color: #003a70;
+    font-weight: 500;
+} 
+
+.custom-item-list:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.custom-item-list:before {
+	content: '◊';
+}
+.custom-item-list-second:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.custom-item-list-second:before {
+	content: '→';
+}
+
+ul.count li {
+    border-bottom: 1px dashed #dadada;
+    padding: 1em 0;
+    text-align: left;
+    color: #888;
+    font-size: 1em;
+    line-height: 1.8em;
+    font-weight: 400;
+}
+a.popup-with-zoom-anim {
+  outline: none; 
+}
+/*-- start-pricing-tabels --*/
+/*-- cube shadow --*/ 
+.w3ls-main {
+    width: 270px; 
+    position: relative;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -o-perspective: 1000px;
+	-ms-perspective: 1000px;
+    perspective: 1000px;
+} 
+.show-front { 
+	position: absolute;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition: -webkit-transform 1s;
+	-moz-transition: -moz-transform 1s;
+	-o-transition: -o-transform 1s;
+	transition: transform 1s;
+	left:-2px;
+}
+
+.show-front figure {
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 62px;
+}
+
+.show-front.panels-backface-invisible figure {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+} 
+.show-front .top    {  
+	background: -webkit-linear-gradient(13deg, #c8102e 0%, #c8102e 75%);
+	background: -moz-linear-gradient(13deg, #c8102e 0%, #c8102e 75%); 
+} 
+.show-front .top.top-two { 
+	background:-webkit-linear-gradient(33deg, #862633 0%, #862633 75%); 
+	background:-moz-linear-gradient(33deg, #862633 0%, #862633 75%); 
+}
+.show-front .top.top-three { 
+	background: -webkit-linear-gradient(54deg, #003a70 0%, #003a70 75%);  
+	background: -moz-linear-gradient(54deg, #003a70 0%, #003a70 75%);  
+}
+
+.show-front .front  {
+	-webkit-transform: translateZ( 100px );
+	-moz-transform: translateZ( 100px );
+	-o-transform: translateZ( 100px );
+	-ms-transform: translateZ( 100px );
+	transform: translateZ( 100px );
+}  
+.show-front .top {
+    -webkit-transform: rotateX( 103deg ) translateZ( 24px );
+    -moz-transform: rotateX( 103deg ) translateZ( 24px );
+    -o-transform: rotateX( 103deg ) translateZ( 24px );
+	-ms-transform: rotateX( 103deg ) translateZ( 24px );
+    transform: rotateX( 103deg ) translateZ( 24px );
+} 
+.show-front.show-front {
+	-webkit-transform: translateZ( -63px );
+	-moz-transform: translateZ( -63px );
+	-o-transform: translateZ( -63px );
+	-ms-transform: translateZ( -63px );
+	transform: translateZ( -63px );
+} 
+.show-front.show-top {
+	-webkit-transform: translateZ( -100px ) rotateX(  -90deg );
+	-moz-transform: translateZ( -100px ) rotateX(  -90deg );
+	-o-transform: translateZ( -100px ) rotateX(  -90deg );
+	-ms-transform: translateZ( -100px ) rotateX(  -90deg );
+	transform: translateZ( -100px ) rotateX(  -90deg );
+}
+
+.agileits-shadow {
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0); 
+	-o-transform: translateZ(0); 
+	-ms-transform: translateZ(0); 
+    transform: translateZ(0); 
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s; 
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+	-moz-transition-property: transform; 
+    transition-property: transform;
+	border-right: 1px dashed #dadada;
+}
+.agileits-shadow:hover, .agileits-shadow:focus, .agileits-shadow:active {
+    -webkit-transform: translateY(-5px);
+	-moz-transform: translateY(-5px);
+	-o-transform: translateY(-5px);
+	-ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+.agileits-shadow:before { 
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 94%;
+    left: 5%;
+    height: 48px;
+    width: 90%;
+    opacity: 1;
+    background: -webkit-radial-gradient(center, ellipse, #191918 0%, rgba(0, 0, 0, 0) 81%);
+    background: radial-gradient(ellipse at center, #191918 0%, rgba(0, 0, 0, 0) 81%);
+    -webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s; 
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform, opacity;
+	-moz-transition-property: transform, opacity;
+	-o-transition-property: transform, opacity;
+    transition-property: transform, opacity;
+}
+.agileits-shadow:hover:before, .agileits-shadow:focus:before, .agileits-shadow:active:before {
+    opacity: 1;
+    -webkit-transform: translateY(5px);
+	-moz-transform: translateY(5px);
+	-o-transform: translateY(5px);
+	-ms-transform: translateY(5px);
+    transform: translateY(5px);
+} 
+a.btn:hover{
+	text-decoration: underline!important;
+	color: #fff!important;
+}
+</style>
+
+
+<style>
+.wrapper {
+	width:960px;
+	margin:150px auto;
+}
+.demof {
+border: 1px solid #ccc;
+margin: 25px 0;
+}
+.demof ul {
+padding: 0;
+list-style: none;
+}
+.demof li {
+padding: 20px;
+border-bottom: 1px dashed #ccc;
+}
+.demof li.odd {
+background: #fafafa;
+}
+.demof li:after {
+content: '';
+display: block;
+clear: both;
+}
+.demof img {
+float: left;
+width: 177px;
+margin: 5px 15px 0 0;
+}
+.demof a {
+font-family: Arial, sans-serif;
+font-size: 20px;
+font-weight: bold;
+color: #06f;
+}
+.demof p {
+margin: 15px 0 0;
+font-size: 14px;
+}
+.demo3 {
+font-family: Arial, sans-serif;
+border: 1px solid #C20;
+margin: 50px 0;
+font-style: italic;
+position: relative;
+padding: 0 0 0 80px;
+box-shadow: 0 2px 5px -3px #000;
+border-radius: 3px;
+}
+.demo3:before {
+content: "Latest News";
+display: inline-block;
+font-style: normal;
+background: #C20;
+padding: 10px;
+color: #FFF;
+font-weight: bold;
+position: absolute;
+top: 0;
+left: 0;
+}
+.demo3:after {
+content: '';
+display: block;
+top: 0;
+left: 80px;
+background: linear-gradient(#FFF, rgba(255, 255, 255, 0));
+height: 20px;
+}
+.demo3 ul li {
+list-style: none;
+padding: 10px 0;
+}
+.demo5 {
+border: 2px solid #FF3333;
+margin-top: 10px;
+border-radius: 10px;
+width: 500px;
+-webkit-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+-moz-box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+}
+.demo5 ul {
+padding: 0;
+}
+.demo5 ul li {
+padding: 10px 10px 10px 10px;
+border-bottom: 1px solid #FF3333;
+border-radius: 10px;
+list-type: none;
+margin: 0;
+}
+.et-run {
+background-color: #0cf;
+color: white;
+border: 1px solid black;
+}
+</style>
+<div style="background: #f4f4f4; padding-top: 15px;">      
+  <div class="container">
+	  <div class="row">
+	  <div class="col-md-12">
+		<h2 style="margin-top: 0px; color: #333;"><strong>En ce moment sur {{ site }} </strong> <a href="{{ path('produit_service_apropos_denous', {'position': 'evenement' }) }}" class="btn btn-primary" style="float: right; color: #fff;">Tous évènements <span class="fa fa-long-arrow-right"></span></a></h2>
+	  </div>
+      </div>
+  </div>
+</div>
+
+<div style="background: #f4f4f4; padding-top: 15px;">
+	<div class="container o-links1">
+    <div class="row">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+		<div class="" style="box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);">
+			<h3 class="text-left" style="padding: 0px 7px; margin: 0px;">Evènement <br>Blablablablabla...</h3>
+		</div>
+		<div class="w3ls-main">
+			<div id="cube3" class="show-front"> 
+				<figure class="top top-three"> </figure> 
+			</div>
+		</div>
+		<div class="price-bg">
+			<div class="demo1 demof">
+				<ul>
+				{% for even in liste_article %}
+				<li>
+					<img src="{% if even.imgservice != null %}{{ asset(even.imgservice.getwebpath) }}{% else %}http://www.jqueryscript.net/small/images/Creating-A-Full-Page-Photo-Gallery-with-jQuery-Photor-Plugin.jpg{% endif %}" alt="Expandable Input" />
+					<a href="{{ path('produit_service_detail_actualite', {'id': even.id}) }}">
+					{{ even.nom }}
+					</a>
+					<p>{{ even.description }}</p>
+				</li>
+				{% endfor %}
+				</ul>
+			</div> 
+		</div>
+	</div> 
+<script src="{{ asset('template/js/jquery.easy-ticker.min.js') }}"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.demo1').easyTicker({
+		direction: 'up',
+		easing: 'swing'
+	});
+});
+</script>
+      <div class="col-xs-12 col-md-4">
+        <div class="o-links1__header" style="background: #3565ae; height: 80px; padding: 7px;">
+          <h2 style="color: #fff;">Réseaux sociaux</h2>
+        </div>
+        <div style="padding: 0px; margin: 0px; border: 1px solid #3565ae; width: 100%;">
+			<div style="min-width: 100%;">
+			  <div style="">
+			  <div class="fb-page" 
+			  data-href="https://www.facebook.com/AZcorpAfrica"
+			  data-width="700" 
+			  data-height="700" 
+			  data-hide-cover="false"
+			  data-show-facepile="true" 
+			  data-show-posts="false"></div>
+			  </div>
+			</div>
+			<div id="fb-root"></div>
+			
+			<script>
+			(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId=346098072408344";
+			  fjs.parentNode.insertBefore(js, fjs);
+			  }(document, 'script', 'facebook-jssdk'));
+
+			  var largeur = ($(window).width());
+				if (largeur < 768)
+				{
+					$('.nos-services').css('height','2450px');
+					$('.autres-applications').css('height','1500px');
+				}else{
+					$('.nos-services').css('height','980px');
+					$('.autres-applications').css('height','420px');
+				}
+
+			</script>
+			
+			<div style="height: 400px; overflow: auto;">
+				<a class="twitter-timeline" href="https://twitter.com/gaielbleriot?ref_src=twsrc%5Etfw">Tweets by afh_host</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block srcjavascripttemplate %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+	$('.page-item-8').addClass('current-active');
+	
+	$('.mydiv').hover(function(){
+		$(this).find('span').show('slow');
+	});
+	$('.mydiv').bind('mouseleave.dragged',function(){
+		$(this).find('span').hide('slow');
+	});
+{% endblock %}

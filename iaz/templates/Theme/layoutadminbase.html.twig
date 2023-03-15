@@ -1,0 +1,552 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+  {% block meta %} {% endblock %}
+
+	<!-- Favicons-->
+	<link rel="icon" href="{{ asset('admintemplate/images/logo.png') }}" sizes="32x32">
+	<!-- Favicons-->
+
+	<title>{% block title %}{{ site }}{% endblock %}</title>
+	{% block stylesheets %}
+		<!-- CORE CSS-->
+		<link href="{{ asset('admintemplate/css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="{{ asset('admintemplate/css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<!-- Custome CSS-->    
+		<link href="{{ asset('admintemplate/css/custom-style.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+		<link rel="stylesheet" href="{{ asset('admintemplate/css/bootstrap.css') }}" type="text/css" />
+		<link rel="stylesheet" href="{{ asset('admintemplate/css/font-awesome.css') }}" type="text/css"/>
+
+		<!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+		<link href="{{ asset('admintemplate/css/prism.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+		<link href="{{ asset('admintemplate/js/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+		<link href="{{ asset('admintemplate/js/plugins/chartist-js/chartist.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+		<link href="{{ asset('admintemplate/js/plugins/data-tables/css/jquery.dataTables.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+	{% endblock %}
+	
+	<link rel="stylesheet" href="{{ asset('admintemplate/notify/themes/alertify.core.css') }}" />
+	<link rel="stylesheet" href="{{ asset('admintemplate/notify/themes/alertify.default.css') }}" id="toggleCSS" />
+	<style>
+		.adminlink{
+			display: block; border-bottom: 1px solid #ddd;
+		}
+		.collection-item:hover{
+			background: #f2f2f2!important;
+			color: #333!important;
+		}
+		.current-position-page{
+			background: #66afe9!important;
+			color: #fff!important;
+		}
+
+		.breadcrumb > li + li:before {
+		padding: 0 5px;
+		color: #333;
+		content: "/\00a0";
+		}
+		.bg-struct{
+		background: #3565ae!important;
+		}
+
+		@media (min-width: 768px){
+		.slide-out-first{
+		background: transparent!important; margin-top: 0px!important; position: relative!iportant; z-index: 10!important;  top: 0px!important; margin-left: 300px!important;;
+		}
+		.slide-out-second{
+		background: transparent!important; padding-bottom: 40px!important;
+		}
+		.user-menu-bar-lg{
+		display: visible;
+		}
+		.user-menu-bar-sm{
+		display: none;
+		}
+		.margin-medium{
+			padding-left: 50px!important; padding-right: 50px!important;
+		}
+		.taille-footer-user{
+		min-height: 180px!important;
+		}
+		}
+		@media (max-width: 768px){
+		.slide-out-first{
+			background: #333!important; padding-bottom: 40px!important;
+		}
+		.slide-out-second{
+		}
+		.user-menu-bar-lg{
+		display: none;
+		}
+		.user-menu-bar-sm{
+		display: visible;
+		}
+		.margin-medium{
+			padding-left: 3px!important; padding-right: 3px!important;
+		}
+		.taille-footer-user{
+		min-height: 400px!important;
+		}
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+		.coustom-my-text{
+			text-align: left;word-wrap: break-word;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;
+		}
+
+		.cardd {
+		  background: #fff;
+		  border-radius: 2px;
+		  display: inline-block;
+		  position: relative;
+		  width: 100%;
+		  cursor: pointer;
+		  padding: 7px;
+		  border-top: 3px solid #3565ae;
+		}
+		.title-1{
+			font-size: 20px!important;
+		}
+		.card-1 {
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		}
+
+		.card-1:hover {
+		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+
+		.card-2 {
+		  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+
+		.card-3 {
+		  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+		}
+
+		.card-4 {
+		  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+
+		.card-5 {
+		  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+		}
+		.coustom-my-text:hover{
+			text-decoration: underline!important;
+		}
+			
+			
+		.block {
+		  position: relative;
+		  height: 460px;
+		  max-height: 500px;
+		  margin-right: 1em;
+		  border: 1px solid #ccc;
+		  overflow: hidden;
+		}
+		.block:hover .block__body {
+		  position: absolute;
+		  top: 0;
+		  background-image: linear-gradient(-1deg, #F6FCFF 0%, #EAF7FF 98%);
+		  height: 100%;
+		  transition: top .5s;
+		}
+		.block:hover .block__body h3 {
+		  color: #fff;
+		}
+
+		.block__body {
+		  padding: 1em;
+		  top: 100%;
+		}
+
+		.main-billets{
+		  display:block;
+		  position:relative;
+		  box-sizing:border-box;
+		  padding:30px;
+		  width:100%;
+		  background-color:#fff;
+		  margin:0 auto;
+		  box-shadow:0px 0px 5px rgba(0,0,0,0.1);
+		}
+		h1{
+		  padding-left:20px;
+		  padding-right:20px;
+		  font-size:32px;
+		  font-weight:300;
+		}
+		.topic{
+		  padding:20px;
+		  padding-top:0px;
+		  padding-bottom:0px;
+		  border-bottom:solid 1px #ebebeb;
+		  width: 100%;
+		}
+		.open{
+		  cursor:pointer;
+		  display:block;
+		  padding:0px;
+		}
+		.open:hover{
+		  opacity:0.7;
+		}
+		.expanded{
+		  background-color:#f5f5f5;
+		  transition: all .3s ease-in-out;
+		}
+		.question{
+		  padding: 20px; margin: 0px;
+		  font-size: 18px;
+		  font-weight:500;
+		  color: #526ee4;
+		}
+		.answer{
+		  font-size:16px;
+		  line-height:26px;
+		  display:none;
+		  margin-bottom:30px;
+		  text-align:justify;
+		  padding-left:20px;
+		  padding-right:20px;
+		}
+		.faq-t{
+		  -moz-transform: rotate(-45deg);
+		  -ms-transform: rotate(-45deg);
+		  -webkit-transform: rotate(-45deg);
+		  transform: rotate(-45deg);
+		  display: inline-block;
+		  float:right;
+		  position:relative;
+		  top:-40px;
+		  right:10px;
+		  width: 10px;
+		  height: 10px;
+		  background: transparent;
+		  border-left: 2px solid #ccc;
+		  border-bottom: 2px solid #ccc;
+		  transition: all .3s ease-in-out;
+		}
+		.faq-o{
+		  top:-40px;
+		   -moz-transform: rotate(-224deg);
+		  -ms-transform: rotate(-224deg);
+		  -webkit-transform: rotate(-224deg);
+		  transform: rotate(-224deg);
+		}
+		@media only screen and (max-width: 480px) {
+		  .faq-t{display:none;}
+		  .question{
+		  padding-right: 0px;
+		}
+		  .main-billets{
+		  padding:10px;
+		}
+		  .answer{
+		  margin-bottom:30px;
+		  padding-left:0px;
+		  padding-right:0px;
+		}
+		}
+
+		@media (max-width: 767px){
+			.coustom-md-acc {
+				width: 100%!important;
+			}
+		}
+		@media (min-width: 767px){
+			.coustom-md-acc {
+				width: 50%!important;
+			}
+		}
+		.alert-info {
+			color: #0c5460;
+			background-color: #d1ecf1;
+			border-color: #bee5eb;
+		}
+		.alert{
+			position: relative;
+			padding: .75rem 1.25rem;
+			margin-bottom: 1rem;
+			border: 1px solid transparent;
+			border-radius: .25rem;
+			line-height: 18px;
+		}
+
+		.module-comment-block {
+		  width: 100%;
+		  display: flex;
+		  flex-direction: row;
+		}
+
+		.module-comment-avatar {
+		  flex-shrink: 0;
+		}
+
+		.module-comment-text {
+		  padding-left: 10px;
+		}
+		.module-comment-block{
+			padding-top: 5px;
+		}
+		.module-comment-block:hover{
+			background: #fff;
+			cursor: pointer;
+		}
+		.hover-article-aide{
+			display: block;
+			border-bottom: 1px solid #fff;
+			padding: 0px 3px 3px 3px!important;
+		}
+		.hover-article-aide:hover{
+			background: #f2f2f2;
+			border-bottom: 1px solid #ddd;
+		}
+		
+
+		.tag {
+		  font-family: Arial, sans-seif;
+		  display: inline-flex;
+		  padding: 6px 6px 6px 16px;
+		  border-radius: 30px;
+		  background-color: #ef2f2f;
+		  color: white;
+		  align-items: center;
+		  margin: 0 3px 0 3px;
+		}
+		.tag.blue {
+		  background-color: dodgerblue;
+		}
+		.tag.purple {
+		  background-color: #9b0fff;
+		}
+		.tag:last-child:not(:first-child) {
+		  margin: 0 0 0 3px;
+		}
+		.tag:first-child:not(:last-child) {
+		  margin: 0 3px 0 0;
+		}
+		.tag .tag-exit {
+		  display: inline-flex;
+		  align-items: center;
+		  justify-content: center;
+		  margin-left: 6px;
+		  border: 0;
+		  border-radius: 50%;
+		  width: 25px;
+		  height: 25px;
+		  background-color: rgba(0, 0, 0, 0);
+		  transition: background-color .2s ease;
+		  outline: 0;
+		  padding: 0;
+		  cursor: pointer;
+		}
+		.tag .tag-exit i {
+		  color: white;
+		  font-size: 14px;
+		  display: inline-flex;
+		  justify-content: center;
+		  align-items: center;
+		}
+		.tag .tag-exit:hover {
+		  background-color: rgba(0, 0, 0, 0.35);
+		}
+		.tag .tag-exit:active {
+		  transition: 0;
+		  background-color: rgba(0, 0, 0, 0.55);
+		}
+		
+		.resize-sm-left-navigation{
+				padding-left: 0px!important;
+				-webkit-transition: all 0.5s ease;
+				-moz-transition: all 0.5s ease;
+				-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+			}
+			.resize-lg-left-navigation{
+				padding-left: 240px!important;
+				-webkit-transition: all 0.5s ease;
+				-moz-transition: all 0.5s ease;
+				-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+			}
+
+			.hamburger-icon-container {
+				position: relative;
+				cursor: pointer;
+				width: 30px;
+				height: 30px;
+				display: inline-block;
+			}
+			.hamburger-icon {
+			transform: translateY(-50%); /* center centerpoint of icon-element in container*/
+			}
+			.hamburger-icon,
+			.hamburger-icon:before,
+			.hamburger-icon:after {
+				content: '';
+				position: absolute;
+				height: 4px;
+				width: 100%;
+				background: white;
+				transition: all .2s ease;
+			}
+
+			.hamburger-icon {
+				top: 50%
+			}
+
+			.hamburger-icon:before {
+				top: -200%
+			}
+
+			.hamburger-icon:after {
+				top: 200%
+			}
+
+			/* Darstellung wenn das Close-Icon angezeigt werden soll */
+
+			.hamburger-active .hamburger-icon {
+				transform: rotate(45deg) translate(-3px,-3px); /* translate to raise cross to optically centered position*/
+			}
+
+			.hamburger-active .hamburger-icon:before,
+			.hamburger-active .hamburger-icon:after {
+				top: 0
+			}
+
+			.hamburger-active .hamburger-icon:before {
+				transform: rotate(90deg)
+			}
+
+			.container{
+				width: 1200px;
+				margin: 0px auto;
+			}
+			.user-details {
+				background: #f6f6f6!important;
+			}
+			#content{
+				padding-top: 100px;
+			}
+			.inner-content{
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+				padding: 15px 20px;
+			}
+	</style>
+	
+	<script type="text/javascript" src="{{ asset('admintemplate/js/jquery-1.11.2.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('admintemplate/js/bootstrap.min.js') }}"></script>  
+	<script src="{{ asset('admintemplate/notify/lib/alertify.min.js') }}"></script>
+	<script>
+		function resetNotif() {
+			$("#toggleCSS").attr("href", "{{ asset('admintemplate/notify/themes/alertify.default.css') }}");
+			alertify.set({
+				labels : {
+					ok     : "OK",
+					cancel : "Cancel"
+				},
+				delay : 5000,
+				buttonReverse : false,
+				buttonFocus   : "ok"
+			});
+		}
+	</script>
+</head> 
+ <body>
+	<div id="loader-wrapper">
+        <div id="loader"></div>        
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+  {{ render(controller("App\\Controller\\General\\Template\\MenuController:menubare", {'position': 'admin'})) }}
+  
+  <div id="main">
+	<!-- START WRAPPER -->
+	<div class="wrapper">
+		{% block menuleft %}
+			
+		{% endblock %}
+
+		{% block body %}
+			
+		{% endblock %}
+	</div>
+	</div>
+  
+    {{ render(controller("App\\Controller\\General\\Template\\MenuController:footer", {'position': 'admin'})) }}
+	{{ render(controller("App\\Controller\\General\\Template\\MenuController:menuright", {'position': 'site'})) }}
+	
+    <!--materialize js-->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>
+    <!--prism-->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/prism.js') }}"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins/data-tables/js/jquery.dataTables.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('admintemplate/js/plugins/data-tables/data-tables-script.js') }}"></script>
+
+	<!-- chartist -->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins/chartist-js/chartist.min.js') }}"></script> 
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins/sparkline/sparkline-script.js') }}"></script>
+	
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="{{ asset('admintemplate/js/plugins.js') }}"></script>
+	
+	{% block srcjavascript %}
+
+	{% endblock %}
+	<script type="text/javascript">
+	
+	document.getElementById('hamburger').addEventListener('click', navStatus);
+
+		// Prüfen ob die Navigation geöffnet oder geschlossen ist
+		function navStatus(){
+			if (document.body.classList.contains('hamburger-active')) {
+				navClose();
+			}
+			else {
+				navOpen();
+			}
+		}
+
+		// Wenn die Navi geschlossen wird, Klasse für »offen« entfernen
+		function navClose(){
+			document.body.classList.remove('hamburger-active');
+		}
+
+		// Wenn die Navi geöffnet wird, Klasse für »geschlossen« entfernen
+		function navOpen(){
+			document.body.classList.add('hamburger-active');
+		}
+
+
+		$( ".toggle-dashboard-nav").click(function(){
+			$( "#left-sidebar-nav").toggle(10, function(){
+			  if ($("#left-sidebar-nav").is(":hidden")){
+				$("#left-sidebar-nav").hide('slow');
+				
+				$("#main").removeClass("resize-lg-left-navigation");
+				$("#main").addClass("resize-sm-left-navigation");
+			  }else{
+				$("#main").addClass("resize-lg-left-navigation");
+				$("#main").removeClass("resize-sm-left-navigation");
+				$("#left-sidebar-nav").show('slow');
+			  }
+			});
+		});
+		
+	{% block javascript %}
+
+	{% endblock %}
+	</script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+{% extends "UsersUserBundle::layouthome.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ categorie.nom }} - {{ categorie.description }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} - {{ categorie.nom }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<link rel="stylesheet" href="{{ asset('template/css/jquery.expandable.css') }}"/>
+<script type="text/javascript" src="{{ asset('template/js/jquery.expandable.js') }}"></script>
+
+<div style="background: #f5f5f5;">
+<div class="container">
+<div class="row">
+
+	{% if is_mobile() %}
+	<div class="col-md-12">
+		<ol class="c-navigation-breadcrumbs__directory">
+
+		<!-- Duplicating the "Home" link in both the global navigation and the breadcrumb trail is not recommended. -->
+		<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+		  <a class="c-navigation-breadcrumbs__link" href="" property="item" typeof="WebPage">
+			<span class="u-visually-hidden" property="name"><span class="fa fa-home"> </span> Accueil</span>
+		  </a>
+		  <meta property="position" content="1">
+		</li>
+
+		<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+		  <a class="c-navigation-breadcrumbs__link" href="{{ path('produit_produit_produit_formation_institut', {'id': categorie.id }) }}" property="item" typeof="WebPage">
+			<span property="name">{{ categorie.nom }}</span>
+		  </a>
+		  <meta property="position" content="2">
+		</li>
+
+		<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+		  <a class="c-navigation-breadcrumbs__link" href="#!" property="item" aria-current="location">
+			<span property="name">À propos des {{ categorie.nom }}</span>
+		  </a>
+		  <meta property="position" content="3">
+		</li>
+
+		</ol>
+	</div>
+	{% else %}
+	<div class="col-md-12">
+	<div style="padding: 20px 0px;">
+		<div class="btn-group" style="float: right; margin-top: -10px;">
+		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Appliquer un filtre <span class="fa fa-angle-down"></span></button>
+		<ul class="dropdown-menu pull-right">
+			{% for i in range(0,4) %}
+				<li><a href=""> formation.nom </a></li>
+				<li class="divider"></li>
+			{% endfor %}
+		</ul>
+		</div>
+
+		<ul class="breadcrumbs">
+		  <li><a href="#"><span class="fa fa-home"></span> Accueil</a></li>
+		  <li><a href="{{ path('produit_produit_produit_formation_institut', {'id': categorie.id }) }}">{{ categorie.nom }}</a></li>
+		  <li>À propos des {{ categorie.nom }}</li>
+		</ul>
+	</div>
+	</div>
+	{% endif %}
+
+</div>
+</div>
+</div>
+
+
+<style>
+#timeline {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#timeline:after {
+  border: 4px solid;
+  border-radius: 50%;
+  border-color: #374A67;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 17px;
+}
+.timeline-item {
+  border-left: 2px solid #282F44;
+  margin: 0 20px;
+  padding: 0px 25px 20px 25px;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline-item:before {
+  border: 10px solid #374A67;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  position: absolute;
+  left: -11px;
+  width: 20px;
+  height: 20px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline-body {
+  background-color: #fbfbfb;
+  padding: 10px 20px;
+  position: relative;
+  top: -20px;
+}
+.timeline-lead {
+  line-height: 2px;
+  padding-bottom: 5px;
+}
+.timeline-date {
+  font-size: .7rem;
+  color: #757780;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.timeline-title{
+  color: #374A67;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.timeline-content {
+  color: #070707;
+}
+
+
+
+.card-group {
+  position: relative;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.05);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-group:hover{
+box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card-group .card-header {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+          flex-direction: column-reverse;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  -webkit-transition: height 0.3s;
+  transition: height 0.3s;
+}
+.card-group .card-header:hover {
+  height: 200px;
+}
+.card-group .card-header:hover + .card-body {
+  height: 29px;
+}
+.card-group .card-header .card-title {
+  font-size: 16px;
+  color: inherit;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  padding-top: 1.2rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, white));
+  background: linear-gradient(transparent, white 60%);
+}
+.card-group .card-body {
+  height: 150px;
+  overflow: hidden;
+  padding: 0 1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.card-group .card-body .sub-text {
+  font-size: 0.9rem;
+  color: #646b75;
+}
+.card-group .card-link-footer {
+  display: block;
+  padding: 1rem;
+  font-weight: bold;
+  color: #d96c0f;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.card-group .card-link-footer:hover {
+  color: white;
+  box-shadow: inset 0 -56px 0 #23445e;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.4rem;
+}
+
+.list-episodes {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 -1rem;
+  color: #646b75;
+}
+.list-episodes li {
+  padding-left: 0.6rem;
+}
+.list-episodes li a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.4rem 1rem;
+  padding-left: 0.4rem;
+  -webkit-transition: -webkit-transform 0.1s;
+  transition: -webkit-transform 0.1s;
+  transition: transform 0.1s;
+  transition: transform 0.1s, -webkit-transform 0.1s;
+}
+.list-episodes li a:hover {
+  -webkit-transform: translateX(4px);
+          transform: translateX(4px);
+  -webkit-transition: -webkit-transform 0.1s;
+  transition: -webkit-transform 0.1s;
+  transition: transform 0.1s;
+  transition: transform 0.1s, -webkit-transform 0.1s;
+}
+.list-episodes li a b {
+  font-size: 0.8rem;
+  margin-right: 4px;
+}
+.list-episodes li:nth-child(even) div {
+  border-radius: 4px 0 0 4px;
+  background: rgba(239, 241, 245, 0.9);
+}
+
+</style>
+
+
+<div style="background: #f0f0f2; padding-top: 20px;">
+<div class="container">
+<div class="row">
+	{{ render(controller("ProduitServiceBundle:Service:menuleft")) }}
+	
+	<div class="col-md-9">
+		<div class="my-div">
+		<section class="testing" style="width: 100%;">
+		   <div class="description2 to-expand">
+			<h2>{{ souscategorie.nom }} </h2>
+			<p>
+			{{ souscategorie.description|raw }}
+			</p>
+		   </div>
+		</section>
+		</div>
+		
+		<div class="my-div">
+		<section class="testing" style="width: 100%;">
+		<div class="description2 to-expand">
+		<h2 style="margin-bottom: 20px;">Offres de formation</h2>
+			{% if categorie.typeservice == 'diplomante' %}
+					<ul id="timeline">
+					  {% for prod in liste_produit %}
+					  <li class="timeline-item">
+						<div class="timeline-icon"></div>
+						<div class="timeline-body">
+						  <div class="timeline-lead">
+							<h3 class="timeline-title"><a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}">{{ prod.nom }}</a></h3>
+							<span class="timeline-date">${date}</span>
+						  </div>
+						  <p class="timeline-content">{{ prod.contenu }}</p>
+						</div>
+					  </li>
+					  {% endfor %}
+					</ul>
+			{% else %}
+			  <div class="cards row">
+			  {% for prod in liste_produit %}
+			  <div class="col-md-4">
+			  
+				<div class="card-group">
+				  <div class="card-header" style="background-image: url({% if prod.imgproduit != null %}{{ asset(prod.imgproduit.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %});">
+					<h2 class="card-title text-left">
+					  <a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}">{{ prod.nom }}</a>
+					</h2>
+				  </div>
+				  <div class="card-body text-left">
+					<p class="sub-text">{{ prod.contenu }}</p>
+					<h4 class="mt-0 mb-1">Caractéristiques</h4>
+					<ol class="list-episodes">
+					  <li>
+						<div>
+						  <a href="#!"><span class="fa fa-check"></span> The Greatest World!</a>
+						</div>
+					  </li>
+					  <li>
+						<div>
+						  <a href="#!"><span class="fa fa-check"></span> The Eizouken Takes the Stage!</a>
+						</div>
+					  </li>
+					  <li>
+						<div>
+						  <a href="#!"><span class="fa fa-check"></span> Let's Accomplish Something!</a>
+						</div>
+					  </li>
+					  <li>
+						<div>
+						  <a href="#!"><span class="fa fa-check"></span> Hold That Machete Tight!</a>
+						</div>
+					  </li>
+					</ol>
+				  </div>
+				  <a class="card-link-footer commande-offer-formation" value="{{ prod.id }}" name="fc" href="#!"><span class="fa fa-hand-pointer-o"></span> S'inscrire</a>
+				</div>
+			  </div>
+			  {% endfor %}
+
+			</div>
+
+
+			<script type="text/javascript">
+			$(document).ready(function(){
+			  var zindex = 10;
+			  
+			  $("div.card").click(function(e){
+				e.preventDefault();
+
+				var isShowing = false;
+
+				if ($(this).hasClass("show")) {
+				  isShowing = true
+				}
+
+				if ($("div.cards").hasClass("showing")) {
+				  // a card is already in view
+				  $("div.card.show")
+					.removeClass("show");
+
+				  if (isShowing) {
+					// this card was showing - reset the grid
+					$("div.cards")
+					  .removeClass("showing");
+				  } else {
+					// this card isn't showing - get in with it
+					$(this)
+					  .css({zIndex: zindex})
+					  .addClass("show");
+
+				  }
+
+				  zindex++;
+
+				} else {
+				  // no cards in view
+				  $("div.cards")
+					.addClass("showing");
+				  $(this)
+					.css({zIndex:zindex})
+					.addClass("show");
+
+				  zindex++;
+				}
+				
+			  });
+			});
+			</script>
+		  {% endif %}
+		  </div>
+		</section>
+		</div> 
+	</div>
+</div>
+</div>
+</div>
+
+
+<div style="background: #fff;">
+<div class="container">
+<div class="row">
+	<div class="col-md-12" style="height: 50px;">
+		Avis Utilisateurs
+	</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.description2').expandable({
+	height: 600,
+	expand_responsive : 960,
+	offset: 30
+});
+
+
+$('.accordion-1 > li:eq(0) a').addClass('active').next().slideDown();
+$('.accordion-2 > li:eq(0) a').addClass('active').next().slideDown();
+
+$('.accordion a.targetlink').click(function(j) {
+	var dropDown = $(this).closest('li').find('p');
+
+	$(this).closest('.accordion').find('p').not(dropDown).slideUp();
+
+	if ($(this).hasClass('active')) {
+		$(this).removeClass('active');
+	} else {
+		$(this).closest('.accordion').find('a.active').removeClass('active');
+		$(this).addClass('active');
+	}
+
+	dropDown.stop(false, true).slideToggle();
+
+	j.preventDefault();
+});
+
+{% endblock %}

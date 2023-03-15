@@ -1,0 +1,89 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    nbcategorie: 10
+    nbsouscategorie: 7
+    nbslide: 7
+    nbproduitsouscat: 10
+    nbimgparproduit: 5
+    username: africexplorer
+    devise: XAF
+    password: 91122219
+    namedns1: ns1.afhserver.com
+    namedns2: ns2.afhserver.com
+    registrat1: dnsfrance
+    systemelg: UBUNTU(PHP.v7,Mysql,QLITE)
+    serveurmap: USA(TORENCE)
+    managerhosting: HWM(TORENCE)
+    saltcookies: dkjdlkdsfnksdfsd
+    typesuivi: Live chat, Tél,Email
+    siteweb: http://host.afhunt.com/
+    sitename: Afex Hosting
+    emailadmin: support@afhunt.com
+    curentwebsite: 0123-4567-8901
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    general_service.servicetext:
+        class: App\Service\Servicetext\GeneralServicetext
+#    general_service.myuserauthentification:
+#        class: App\Service\UserAuthentification\Curentwebsite
+#        arguments: [ '@doctrine.orm.entity_manager' ,'%curentwebsite%']
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+#    twig.extension:
+#        class: App\Service\Servicetext\TwigExtensions
+#        tags:
+#          -  { name: twig.extension }
+    general_validatortext.emailuser:
+        class: App\Validator\Validatortext\EmailValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags:
+            - { name: validator.constraint_validator, alias: email_user }
+    general_validatortext.sitewebuser:
+        class: App\Validator\Validatortext\SitewebValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags:
+            - { name: validator.constraint_validator, alias: siteweb_user }
+    general_validatortext.passworduser:
+        class: App\Validator\Validatortext\PasswordValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags:
+            - { name: validator.constraint_validator, alias: password_user }
+    general_validator.telephone:
+        class: App\Validator\Validatortext\TelephoneValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags:
+            - { name: validator.constraint_validator, alias: adresse_telephone }
+    general_validatorfile.image:
+        class:   App\Validator\Validatorfile\ImgValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags: 
+            - { name: validator.constraint_validator, alias: my_image }
+    general_validatorfile.yourfile:
+        class:   App\Validator\Validatorfile\YfileValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags: 
+            - { name: validator.constraint_validator, alias: your_file }
+    general_validator.telemail:
+        class: App\Validator\Validatortext\TelemailValidator
+        arguments: [ '@general_service.servicetext' ]
+        tags:
+            - { name: validator.constraint_validator, alias: adresse_telemail }
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

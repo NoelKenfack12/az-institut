@@ -1,0 +1,35 @@
+produit_service:
+    resource: "@ProduitServiceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+produit_produit:
+    resource: "@ProduitProduitBundle/Resources/config/routing.yml"
+    prefix:   /
+
+general_service:
+    resource: "@GeneralServiceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+general_validator:
+    resource: "@GeneralValidatorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+general_template:
+    resource: "@GeneralTemplateBundle/Resources/config/routing.yml"
+    prefix:   /
+
+users_user:
+    resource: "@UsersUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+users_adminuser:
+    resource: "@UsersAdminuserBundle/Resources/config/routing.yml"
+    prefix:   /packagewebsiteadmin
+login:
+    pattern: /login/{special}
+    defaults: { _controller: UsersUserBundle:Security:login, special: 0 }
+login_check:
+    pattern: /login_check
+logout: 
+    pattern: /logout
+

@@ -1,0 +1,49 @@
+parameters:
+#    general_validator.example.class: General\ValidatorBundle\Example
+
+services:
+#    general_validator.example:
+#        class: %general_validator.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    general_validatortext.emailuser:
+        class: General\ValidatorBundle\Validatortext\EmailValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags:
+            - { name: validator.constraint_validator, alias: email_user }
+    general_validatortext.sitewebuser:
+        class: General\ValidatorBundle\Validatortext\SitewebValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags:
+            - { name: validator.constraint_validator, alias: siteweb_user }
+    general_validatortext.passworduser:
+        class: General\ValidatorBundle\Validatortext\PasswordValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags:
+            - { name: validator.constraint_validator, alias: password_user }
+    general_validator.telephone:
+        class: General\ValidatorBundle\Validatortext\TelephoneValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags:
+            - { name: validator.constraint_validator, alias: adresse_telephone }
+    general_validatorfile.image:
+        class:   General\ValidatorBundle\Validatorfile\ImgValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags: 
+            - { name: validator.constraint_validator, alias: my_image }
+    general_validatorfile.yourfile:
+        class:   General\ValidatorBundle\Validatorfile\YfileValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags: 
+            - { name: validator.constraint_validator, alias: your_file }
+    general_validator.telemail:
+        class: General\ValidatorBundle\Validatortext\TelemailValidator
+        arguments: [@general_service.servicetext]
+        scope: request
+        tags:
+            - { name: validator.constraint_validator, alias: adresse_telemail }

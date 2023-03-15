@@ -1,0 +1,81 @@
+users_user_inscription_user:
+    path: /inscription/user
+    controller: App\Controller\Users\User\UserController::inscriptionuser
+users_user_user_accueil:
+    path: /accueil/user/{id}
+    controller: App\Controller\Users\User\UserController::accueiluser
+    requirements:
+        id: \d+
+users_user_connexion_user:
+    path: /login
+    controller: App\Controller\Users\User\SecurityController::login
+users_user_acces_plateforme:
+    path: /
+    controller: App\Controller\Users\User\SecurityController::accueilsite
+users_user_courant_noel_website_alert:
+    path: /noel/kenfack/courant/website
+    controller: App\Controller\Users\User\UserController::alertnoel
+users_user_modifier_profil:
+    path: /modifier/profil/user/{id}
+    controller: App\Controller\Users\User\UserController::modifierprofil
+    requirements:
+        id: \d+
+users_user_detail_panier_user:
+    path: /detail/user/panier/{id}
+    controller: App\Controller\Produit\Produit\PanierController::detailpanieruser
+    requirements:
+        id: \d+
+users_user_ajout_super_admin:
+    path: /ajouter/supper/admin
+    controller: App\Controller\Users\User\UserController::ajouteradmin
+    requirements:
+        id: \d+
+users_user_presentation_service_even:
+    path: /presentation/service/evenement/{id}
+    controller: App\Controller\Produit\Service\ServiceController::presentation
+    defaults:
+        id: 0
+    requirements:
+        id: \d+
+users_user_create_newsletter_account:
+    path: /create/newsletter/account
+    controller: App\Controller\Users\User\NewsletterController::createaccount
+users_user_validation_social_login:
+    path: /validation/social/login/{agent}
+    controller: App\Controller\Users\User\SecurityController::checksociallogin
+    defaults:
+        agent: 'ordi'
+    requirements:
+        agent: ordi|phone
+users_user_clearpidsessid:
+    path: /clear/pidsessid 
+    controller: App\Controller\Users\User\SecurityController::logout
+users_user_add_new_reponse_billet_user:
+    path: /user/add/new/reponse/billet/{id}/{position}
+    controller: App\Controller\Users\User\BilletController::addnewreponse
+    defaults:
+        position: 1
+    requirements:
+        id: \d+
+        position: \d+
+users_user_update_billet_principale:
+    path: /user/update/billet/principale/{id}
+    controller: App\Controller\Users\User\BilletController::updatebillet
+    defaults:
+        id: 0
+    requirements:
+        id: \d+
+users_user_update_reponse_billet:
+    path: /user/update/reponse/billet/{id}/{position}
+    controller: App\Controller\Users\User\BilletController::updatereponse
+    defaults:
+        id: 0
+        position: 1
+    requirements:
+        id: \d+
+        position: \d+
+users_user_reset_user_password:
+    path: /reset/user/password/{etape}
+    controller: App\Controller\Users\User\SecurityController::resetpassword
+    requirements:
+        etape: \d+

@@ -1,0 +1,70 @@
+users_user_inscription_user:
+    path: /inscription/user
+    defaults: { _controller: UsersUserBundle:User:inscriptionuser }
+users_user_user_accueil:
+    path: /accueil/user/{id}
+    defaults: { _controller: UsersUserBundle:User:accueiluser }
+    requirements:
+        id: \d+
+users_user_connexion_user:
+    path: /login
+    defaults: { _controller: UsersUserBundle:Security:login }
+users_user_acces_plateforme:
+    path: /
+    defaults: { _controller: UsersUserBundle:Security:accueilsite }
+users_user_courant_noel_website_alert:
+    path: /noel/kenfack/courant/website
+    defaults: { _controller: UsersUserBundle:User:alertnoel }
+users_user_modifier_profil:
+    path: /modifier/profil/user/{id}
+    defaults: { _controller: UsersUserBundle:User:modifierprofil }
+    requirements:
+        id: \d+
+users_user_detail_panier_user:
+    path: /detail/user/panier/{id}
+    defaults: { _controller: ProduitProduitBundle:Panier:detailpanieruser }
+    requirements:
+        id: \d+
+users_user_ajout_super_admin:
+    path: /ajouter/supper/admin
+    defaults: { _controller: UsersUserBundle:User:ajouteradmin }
+    requirements:
+        id: \d+
+users_user_presentation_service_even:
+    path: /presentation/service/evenement/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:presentation, id: 0 }
+    requirements:
+        id: \d+
+users_user_create_newsletter_account:
+    path: /create/newsletter/account
+    defaults: { _controller: UsersUserBundle:Newsletter:createaccount }
+users_user_validation_social_login:
+    path: /validation/social/login/{agent}
+    defaults: { _controller: UsersUserBundle:Security:checksociallogin, agent: 'ordi' }
+    requirements:
+        agent: ordi|phone
+users_user_clearpidsessid:
+    path: /clear/pidsessid 
+    defaults: { _controller: UsersUserBundle:Security:logout }
+users_user_add_new_reponse_billet_user:
+    path: /user/add/new/reponse/billet/{id}/{position}
+    defaults: { _controller: UsersUserBundle:Billet:addnewreponse, position: 1 }
+    requirements:
+        id: \d+
+        position: \d+
+users_user_update_billet_principale:
+    path: /user/update/billet/principale/{id}
+    defaults: { _controller: UsersUserBundle:Billet:updatebillet, id: 0 }
+    requirements:
+        id: \d+
+users_user_update_reponse_billet:
+    path: /user/update/reponse/billet/{id}/{position}
+    defaults: { _controller: UsersUserBundle:Billet:updatereponse, id: 0, position: 1 }
+    requirements:
+        id: \d+
+        position: \d+
+users_user_reset_user_password:
+    path: /reset/user/password/{etape}
+    defaults: { _controller: UsersUserBundle:Security:resetpassword }
+    requirements:
+        etape: \d+

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="msapplication-tap-highlight" content="no"/>
+	{% block meta %} {% endblock %}
+
+	<!-- Favicons-->
+	<link rel="icon" href="{{ asset('admintemplate/images/logo.png') }}" sizes="32x32"/>
+	<!-- Favicons-->
+
+	<title>{% block title %}{{ site }}{% endblock %}</title>
+	{% block stylesheets %}
+	<!-- CORE CSS-->
+	<link href="{{ asset('templatedashboard/css/style-main.css') }}" rel="stylesheet"/>
+    {% endblock %}
+	<style> 
+		.coustom-my-text{
+			text-align: left;word-wrap: break-word;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;
+		}
+	</style> 
+</head> 
+
+<body>
+  <div class="app-container app-theme-white">
+	  {{ render(controller("GeneralTemplateBundle:Menu:menubare", {'position': 'dashboard'})) }}
+
+	  <div class="app-main">
+		<div class="app-main__outer">
+			<div class="app-main__inner">
+			{% block body %}
+				
+			{% endblock %}
+			</div>
+			{{ render(controller("GeneralTemplateBundle:Menu:footer", {'position': 'dashboard'})) }} 
+		</div>
+	  </div>
+  </div>
+  {{ render(controller("GeneralTemplateBundle:Menu:menuright")) }}
+    
+    <script type="text/javascript" src="{{ asset('templatedashboard/js/main.js') }}"></script>
+	
+	{% block srcjavascript %}
+
+	{% endblock %}
+	
+	<script type="text/javascript">
+		{% block javascript %}
+
+		{% endblock %}
+	</script>
+</body>
+</html>

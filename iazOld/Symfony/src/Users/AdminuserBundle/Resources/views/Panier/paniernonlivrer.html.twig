@@ -1,0 +1,85 @@
+{% extends "UsersAdminuserBundle::layoutadmin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Administration | Cameroun | {{ metier }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Accueil Admin
+{% endblock %}
+
+
+{% block userblog_menuleft %}
+	{{ render(controller("UsersAdminuserBundle:Accueil:menuadmin")) }}
+{% endblock %}
+
+
+{% block userblog_body %}
+<div id="content">
+	<div class="container">
+	{% include 'GeneralTemplateBundle:Menu:descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+	<div class="inner-content">
+
+				<div class="col s12 m12 l6">
+					<div class="mens-toolbar" style="background: #f7f7f7; margin-bottom: 7px; padding-bottom: 10px;">
+							<h5>Liste des commandes payées et non livrées .</h5>	
+					</div>
+					<div class="divider" style="border-top: 2px dashed #999;"></div>
+				<div class="mid-popular" style="min-height: 500px; background: #fff;">
+						{% for panier in liste_panier %}
+					<div class="col-sm-4 item-grid item-gr  simpleCart_shelfItem">
+						<div class="grid-pro">
+							<div  class=" grid-product " >
+								<figure>		
+									<a href="{{ path('users_adminuser_contenu_panier_user', {'id': panier.id }) }}">
+										<div class="grid-img">
+											<img src="{{ asset('template/images/panier.jpg') }}" alt="" class="img-responsive" alt="" style="height: 180px;"/>
+										</div>
+										<div class="grid-img">
+											{% if panier.produitpaniers|length != 0 %}
+										   {% for propan in panier.produitpaniers|slice(0,1) %}
+										   {% for img in propan.produit.imgproduits|slice(0,1) %}
+										   <img src="{{ asset(img.getWebPath) }}" alt="" class="img-responsive" alt="" style="height: 180px;"/>
+										   {% endfor %}
+										   {% endfor %}
+										   {% else %}
+										   <img src="{{ asset('template/images/panier.jpg') }}" alt="" style="height: 180px;"/>
+										   {% endif %}
+										</div>			
+									</a>		
+								</figure>	
+							</div>
+							{% set nbr = 0 %}
+							{% for propan in panier.produitpaniers %}
+							{% set nbr = nbr + propan.quantite %}
+							{% endfor %}
+							<div class="women">
+								<h6>Panier N°: {{ panier.date|date('d') }}_{{ panier.id }}_{{ panier.date|date('m') }}_{{ panier.date|date('y') }}</h6>
+								<h6>{{ nbr }} Produits </h6>
+								<h6>{{ panier.user.name(20) }}</h6>
+								<h6>{{ panier.user.tel }}</h6>
+								<h6>{{ panier.user.username }}</h6>
+								<h6>{% if panier.livraisonpayer == true %}Livraison payée: {{ panier.coastlivraison }} {{ devise }}{% else %}Livraison non payée.{% endif %}</h6>
+								<a href="{{ path('users_adminuser_livraison_panier_commander',{'id': panier.id}) }}" data-text="{% if panier.livraisonpayer == true %}Livrer {% else %}Valider{% endif %}" class="but-hover1 item_add">{% if panier.livraisonpayer == true %}Livrer {% else %}Valider{% endif %}</a>
+								<a href="{{ path('users_adminuser_contenu_panier_user', {'id': panier.id }) }}" data-text="Détail" class="but-hover1 item_add">Détail</a>
+							</div>
+						</div>
+					</div>
+					{% else %}
+					<div class="text-warning"> Aucune commande passé récemment</div>
+					{% endfor %}
+					<div class="clearfix"></div>
+				</div>
+				
+				</div>
+			<div class="clearfix"></div></div>
+		</div>	
+		</div>	
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

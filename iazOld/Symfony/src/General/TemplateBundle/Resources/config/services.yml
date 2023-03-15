@@ -1,0 +1,8 @@
+parameters:
+    curentwebsite: 0123-4567-8901
+#    general_template.example.class: General\TemplateBundle\Example
+
+services:
+#    general_template.example:
+#        class: %general_template.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

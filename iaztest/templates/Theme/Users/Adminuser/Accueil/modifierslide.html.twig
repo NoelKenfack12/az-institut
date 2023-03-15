@@ -1,0 +1,102 @@
+{% extends "Theme/Users/Adminuser/layoutadmin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Accueil Admin
+{% endblock %}
+
+{% block userblog_body %}
+
+<!--content-->
+		<div class="product">
+			<div class="container">
+				<div class="col-md-3 product-bottom">
+				{{ render(controller("App\\Controller\\Users\\Adminuser\\AccueilController:menuadmin")) }}
+				<!---->
+				</div>
+				<div class="col-md-9 animated wow fadeInRight" data-wow-delay=".5s">
+				<div class="mens-toolbar" style="background: #f7f7f7; border: 1px solid #ddd; margin-bottom: 7px; padding-bottom: 10px;">
+					<h2 style="margin: 5px 2px 5px 0px;">Modification du slide {{ slide.titre }}</h2>	
+				</div>
+				<div>
+    	        <h4 class="title">
+			    <span style="color: red;">
+				{% for infos in app.session.flashbag.get('imgslide') %}
+				{% if loop.first %}
+				{{ infos|raw }}
+				{% endif %}
+				{% endfor %}
+				</span>
+				</h4>
+				{{ form_start(formslide, {'attr': {'action': path('users_adminuser_modification_image_slide_accueil', {'id': slide.id}) }}) }}
+    			  <div class="col-sm-6">
+				     <span style="color:red;">{{ form_errors(formslide) }}</span>
+					 <span style="color:red;">{{ form_errors(formslide.titre) }}</span>
+					 <div class="login-mail">
+					 {{ form_widget(formslide.titre) }}
+				     </div>
+					 <span style="color:red;">{{ form_errors(formslide.description) }}</span>
+					 <div class="login-mail">
+					 {{ form_widget(formslide.description) }}
+				     </div>
+					 <span>{{ form_label(formslide.backgroundslide,'Ajouter une image du background') }}</span>
+				     <div style="margin-top: 10px;">{{ form_widget(formslide.backgroundslide) }}</div>
+				     <div style="margin-top: 10px;">
+					 <input type="radio" name="nature" value="service" id="service"/>
+					 <strong class="text-danger"><label for="service"> Slider de service</label></strong>
+					 </div>
+					 <span style="color:red;">{{ form_errors(formslide.rang) }}</span>
+					 <div class="login-mail" style="margin-top: 7px;">
+					 {{ form_widget(formslide.rang) }}
+				     </div>
+		    	  </div>
+		    	  <div class="col-sm-6">	
+					 <span style="color:red;">{{ form_errors(formslide.souscategorie) }}</span>
+					 <div class="login-mail">
+					 {{ form_widget(formslide.souscategorie, {'attr': {'style':'border: 1px solid white; width: 100%;'}}) }}
+				     </div>
+					 
+					 <span style="color:red;">{{ form_errors(formslide.service) }}</span>
+					 <div class="login-mail">
+					 {{ form_widget(formslide.service, {'attr': {'style':'border: 1px solid white; width: 100%;'}}) }}
+				     </div>
+				  <span>{{ form_label(formslide.file,'Ajouter une image du slide') }}</span>
+				  <div style="margin-top: 10px;">{{ form_widget(formslide.file) }}</div>
+				  <div style="margin-top: 10px;">
+				  <input type="radio" name="nature" value="produit" id="produit" checked/>
+				  <strong class="text-danger"><label for="produit"> Slider pour les produits en vente</label></strong>
+				  </div>
+				  <div class="login-do animated wow fadeInRight" data-wow-delay=".5s" style="margin-top: 15px;">
+				  <label class="hvr-sweep-to-top login-sub">
+					<input type="submit" value="Enregistrer"/>
+				  </label>
+		          </div>
+		          </div>
+		         <div class="clear"></div>
+				 {{ form_end(formslide) }}
+				<div class="clearfix"></div>
+				</div>
+				
+				<div class="mens-toolbar" style="background: #f7f7f7; border: 1px solid #ddd; margin-bottom: 7px; padding-bottom: 10px;">
+					<h2 style="margin: 5px 2px 5px 0px;">Liste des images à l'accueil (slider et background)</h2>	
+				</div>
+				<div class="mid-popular">
+				{{ render(controller("App\\Controller\\Users\\User\\ImgslideController:listeslide")) }}
+						<div class="clearfix"></div>
+				</div>
+				</div>
+				
+
+				</div>
+			</div class="clearfix"></div>
+			</div>	
+{% endblock %}
+
+{% block javascripttemplate %}
+$('.active').removeClass('active');
+{% endblock %}

@@ -1,0 +1,92 @@
+<div class="row">
+{% for partie in article.evenements %}
+	<div class="col s12" style="margin-top: 20px; padding: 5px 20px; border-top: 1px solid #ddd; display: block!important;">
+	<h2 style="font-size: 25px; margin: 0px;">{{ partie.nom }}
+	<ul id="dropdownarticle-partie-{{ partie.id }}" class="dropdown-content" style="float: right; min-width: 250px;">
+		<li>
+			<a href="#!" class="update-content-partie-article" value="{{ partie.id }}"><i class="mdi-editor-border-color"></i> Modifier</a>
+		</li>
+		
+		<li>
+			<a href="{{ path('users_adminuser_supprim_service_evenement', {'id': partie.id}) }}"><i class="mdi-action-highlight-remove"></i> Supprimer</a>
+		</li>
+	</ul>
+	<a class="dropdown-button right" href="#!" data-activates="dropdownarticle-partie-{{ partie.id }}"><i class="mdi-navigation-arrow-drop-down"></i></a>
+	  
+	</h2>
+
+	{% if partie.imgevenement != null %}
+		<div>
+		<img src="{{ asset(partie.imgevenement.getWebPath) }}" alt="" style="height: 250px; width: 100%; margin: 7px 0px;">
+		</div>
+	{% endif %}
+
+	{{ partie.description|raw }}
+	</div>
+{% endfor %}
+<div class="clearfix"></div>
+</div>
+
+<div style="margin-top: 20px; padding: 5px 20px; border-top: 1px solid #ddd;">
+<h4 class="header2">Ajouter une nouvelle partie</h4>
+<div class="row">
+	{{ form_start(formeven, {'class': 'col s12', 'attr': path('users_adminuser_add_un_evenement', {'id': article.id}) }}
+	<div class="row">
+	<span style="color:red;">{{ form_errors(formeven) }}</span>
+	<span style="color:red;">{{ form_errors(formeven.nom) }}</span>
+	  <div class="input-field col s6">
+		{{ form_widget(formeven.nom) }}
+		{{ form_label(formeven.nom,'Titre de la nouvelle partie') }}
+	  </div>
+	  <div class="input-field col s6">
+		{{ form_errors(formeven.rang) }}
+		{{ form_widget(formeven.rang) }}
+		{{ form_label(formeven.rang,'Rang dans le classement') }}
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="input-field col s6">
+		{{ form_errors(formeven.description) }}
+		{{ form_widget(formeven.description, {'attr': {'class': 'materialize-textarea'}}) }}
+		{{ form_label(formeven.description,'Sous catégorie') }}
+	  </div>
+	  <div class="input-field col s6">
+			{{ form_errors(formeven.link) }}
+			{{ form_widget(formeven.link) }}
+			{{ form_label(formeven.link,'Ajouter un lien à l\'article') }}
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="file-field input-field col s6">
+			<input class="file-path validate" type="text"/>
+			<div class="btn">
+			  <span>Image Article {{ form_errors(formeven.imgevenement) }}</span>
+			  {{ form_widget(formeven.imgevenement) }}
+			</div>
+	  </div>
+	  <div class="input-field col s6">
+		<select id="typearticle" name="typearticle" class="frm-field required" style="width: 100%; margin-top: 10px;">
+		<option value="autres">Autres</option>         
+		<option value="imageillustrative">image Illustrative</option>
+		<option value="textcomplet">Text complémentaire</option>
+		<option value="videoillustrative">Vidéo Illustrative</option>
+		</select>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="input-field col s6">
+			{{ form_errors(formeven.breve) }}
+			{{ form_widget(formeven.breve) }}
+			{{ form_label(formeven.breve,'Description brève') }}
+	  </div>
+	  <div class="input-field col s6">
+		<button class="btn cyan waves-effect waves-light" type="submit" name="action">
+		  Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+	  </div>
+	</div>
+
+	{{ form_end(formeven) }}
+</div>
+</div>

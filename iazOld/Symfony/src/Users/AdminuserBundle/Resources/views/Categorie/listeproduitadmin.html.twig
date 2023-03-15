@@ -1,0 +1,433 @@
+{% extends "UsersAdminuserBundle::layoutadmin.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Administration | Cameroun | {{ metier }}"/>
+{% endblock %}
+{% block title %}
+{{ parent() }} | Accueil Admin
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("UsersAdminuserBundle:Accueil:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="main">
+<!--start container-->
+<div class="container">
+
+<div class="col s12 m12 l6">
+ <!--Borderless Table-->
+<div class="section" style="padding: 5px 0px 0px 0px;">
+ <div class="row" style="background: #fafafa; border-bottom: 2px dashed #999;">
+  <div class="col s12 m6 16">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a></li>
+	  <li>{{ souscategorie.nom|trans }}</li>
+	</ol>
+  </div>
+  <div class="col s12 m6 16">
+	<div class="row">
+	
+	</div>
+  </div>
+</div>
+
+<div class="row">
+   <div class="col s12 m6">
+    <div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#all-offert-reseller" class="page-scroll-cgu" style="display: block;">
+		Nombre de produits <span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ souscategorie.produits|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-new-produit" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+  
+  <div class="col s12 m6">
+	<div class="cardd card-1">
+        <h4 class="title-1">
+		<a href="#caracteristique-offert-reseller" class="page-scroll-cgu" style="display: block;">
+		Caractéristiques des produits <span style="float: right; display: inline-block; width: 30px;height: 30px; border-radius: 15px; color: #fff; background: #333; text-align: center;">{{ liste_caract|length }}</span>
+		</a>
+		</h4>
+        <a href="#!" class="open-modal-nouv-caracteristique" style="background: #3565ae; padding: 7px; color: #fff;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col s12 m12">
+
+{% set id = '' %}
+{% for infos in app.session.flashbag.get('supprime_prod') %}
+	{% if loop.last %}
+		<div class="card-panel" style="margin-top: 0px;">
+		<strong style="color: red;"><span class="fa fa-warning"></span> Êtes vous certain de vouloir supprimer produit {{ infos|lower }} </strong>
+		<form action="{{ path('users_adminuser_supprimer_courant_produit',{'id': id }) }}" method="post">
+		<input type="submit" value="Supprimer" style="background: red;"/>
+		{{ form_rest(formsupp) }}
+		</form>
+		</div>
+	{% else %}
+		{% set id = infos %}
+	{% endif %}
+{% endfor %}
+
+{% for infos in app.session.flashbag.get('information') %}
+	{% if loop.first %}
+		{% include 'GeneralTemplateBundle:Menu:flasinfos.html.twig' %}
+	{% endif %}
+{% endfor %}
+
+</div>
+</div>
+
+<h5 id="all-offert-reseller" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: -10px;">
+	{{ 'Toutes les offres'|trans }} {{ souscategorie.nom|trans }}:
+</h5>
+
+<div class="row">
+<section class="plans-container" id="plans">
+   {% for produit in souscategorie.produits %}
+	<article class="col s12 m6 l4">
+	  <div class="card z-depth-4" style="box-shadow: 0px 0px 2px rgba(0,0,0,0.5);">
+		<div class="card-image cyan waves-effect">
+		  <div class="card-title" style="text-align: left!important; display: block; font-size: 12px;">
+		  <div style="white-space: nowrap; overflow: hidden;">
+		  <img src="{% if produit.imgproduit != null %}{{ asset(produit.imgproduit.getWebpath) }}{% else %}{{ asset('template/images/avatar.jpg') }}{% endif %}" alt="" class="left" style="height: 18px; width: 25px; margin-top: 7px; margin-right: 5px;"/>
+		  {{ produit.nom }} {% if produit.choixauteur %}✓{% endif %}
+		  </div>
+		  <ul id="dropdownproduit-{{ produit.id }}" class="dropdown-content" style="min-width: 150px; margin-left: -125px!important;">
+			<li>
+				<a href="#!" class="update-content-produit" value="{{ produit.id }}"><i class="mdi-editor-border-color"></i> Modifier</a>
+			</li>
+			<li>
+				<a href=""><i class="mdi-action-highlight-remove"></i> Supprimer</a>
+			</li>
+		  </ul>
+		  <a class="dropdown-button right" href="#!" data-activates="dropdownproduit-{{ produit.id }}" style="color: #fff;"><i class="mdi-navigation-arrow-drop-down"></i></a>
+		  </div>
+		  <div class="price" style="font-size: 30px; margin-top: 30px;"><sup style="text-decoration: line-through;">{{ produit.ancienPrixProduit }}</sup> <sup>{{ devise }}</sup>{{ produit.newprise }}<sub>/an</sub></div>
+		  <div class="price-desc" style="overflow: hidden; margin: 15px; border-radius: 10px; background: #f2f2f2; padding: 4px; color: #333; height: 100px;">
+		  {{ produit.contenu }}
+		  
+		  </div>
+		</div>
+		<div class="card-content">
+		  <ul class="collection" style="padding: 7px;">
+		   {% for caract in produit.souscategorie.caracteristiques %}
+			<li style="border-top: 1px solid #ddd; padding: 7px 0px;"><span>{{ caract.nom }} </span>
+				{% set break = false %}						
+				{% for caractp in caract.caracteristiqueproduits if not break %}
+					{% if caractp.produit == produit %}
+					{% set break = true %}
+					</br>
+					<div class="coustom-my-text"><a href="#!" title="Ajouter la valeur pour ce pack" class="update-content-article" value="{{ caract.id }}" name="{{ produit.id }}"><span class="mdi-editor-mode-edit" style="font-size: 10px;"></span> {{ caractp.valeur|raw }} </a></div>
+					{% endif %}
+				{% endfor %}
+				
+				{% if break == false %}
+				<span class="right"><a href="#!" title="Ajouter la valeur pour ce pack" class="update-content-article" value="{{ caract.id }}" name="{{ produit.id }}"><span class="mdi-content-add-circle" style="font-size: 10px;"></span> Ajouter</a></span>
+				{% endif %}
+			</li>
+			{% endfor %}
+		  </ul>
+		</div>
+		<div class="card-action" style="background: #f6f6f6;">                      
+		  <div class="row">
+			  <div class="col s12">
+				<img src="{% if produit.user.imgprofil == null %}{{ asset('template/images/avatar.jpg') }}{% else %}{{ asset(produit.user.imgprofil.getWebPath) }}{% endif %}" alt="" class="circle responsive-img valign profile-image" style="height: 30px; width: 30px; border-radius: 15px; float: left; margin-right: 5px;margin-top: -7px;">
+				Par <a href="#">{{ produit.user.name(25) }}</a>
+			  </div>
+			</div>
+		</div>
+	  </div>
+	</article>
+	
+	{% endfor %}
+</section>
+</div>
+	
+<h5 id="caracteristique-offert-reseller" style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: -10px;">
+	{{ 'Caractéristiques des offres'|trans }} "{{ souscategorie.nom|trans }}":
+</h5>
+
+<div class="row">
+  {% for caract in liste_caract %}
+	<div class="col s12 m12 l4">
+	<ul id="profile-page-about-details" class="collection z-depth-1" style="overflow: visible; box-shadow: 0px 0px 2px rgba(0,0,0,0.5);">
+	  <li class="collection-item">
+		<div class="row">
+		  <div class="col s10">
+			<img src="{% if caract.user.imgprofil == null %}{{ asset('template/images/avatar.jpg') }}{% else %}{{ asset(caract.user.imgprofil.getWebPath) }}{% endif %}" alt="" class="circle responsive-img valign profile-image left" style="width: 30px; height: 30px;">
+		  <span style="margin-left: 7px;">{{ caract.user.name(25) }} - {{ caract.nom }}</span>
+		  </div>
+		  <div class="col s2 grey-text text-darken-4 right-align" >
+		  <ul id="dropdowncat-{{ caract.id }}" class="dropdown-content" style="min-width: 150px;">
+			<li>
+				<a href="#!" class="update-content-caracteristique" value="{{ caract.id }}"><i class="mdi-editor-border-color"></i> Modifier</a>
+			</li>
+			<li>
+				<a href="{{ path('users_adminuser_supprimer_caracteristique_offre_user', {'id': caract.id}) }}" onclick="return(confirm('Etes-vous certain de vouloir supprimer cette offre ? \n\n - Attention !!! Toutes les valeurs renseignées pour cette offre seront supprimées de façon permanante et ceci pour tous les produits.'));"><i class="mdi-action-highlight-remove"></i> Supprimer</a>
+			</li>
+		  </ul>
+		  <a class="dropdown-button right" href="#!" data-activates="dropdowncat-{{ caract.id }}"><i class="mdi-navigation-arrow-drop-down "></i></a>
+		  </div>
+		</div>
+	  </li>
+	</ul>
+	</div>
+  {% endfor %}
+</div>
+			
+{% include 'GeneralTemplateBundle:Menu:bottomligne.html.twig' %}			
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false"  id="modalGestionCatalogueSelect" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-content-create"></i> Mise à jour de l'article <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+			  
+
+<div class="modal fade" data-backdrop="false" id="modalFormProduit" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-av-playlist-add"></i> Ajouter un nouveau produit <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<h4 class="header2">Ajout de nouveaux produits</h4>
+<div class="row">
+  <form class="col s12" action="{{ path('users_adminuser_liste_produit_souscategorie',{'id': souscategorie.id }) }}" method="post" {{ form_enctype(formpro) }}>
+	<div class="row">
+	<span style="color:red;">{{ form_errors(formpro) }}</span>
+	<span style="color:red;">{{ form_errors(formpro.nom) }}</span>
+	  <div class="input-field col s12">
+		{{ form_widget(formpro.nom) }}
+		{{ form_label(formpro.nom,'Nom du produit') }}
+	  </div>
+	  {{ form_errors(formpro.contenu) }}
+	  <div class="input-field col s12">
+		{{ form_widget(formpro.contenu) }}
+		{{ form_label(formpro.contenu,'Description du produit') }}
+	  </div>
+	</div>
+	<div class="row">
+	  {{ form_errors(formpro.newprise) }}
+	  <div class="input-field col s12">
+		  {{ form_widget(formpro.newprise) }}
+		  {{ form_label(formpro.newprise,'Nouveau prix') }}
+	  </div>
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn">
+		  <span>Image</span>
+		  {{ form_widget(formpro.imgproduit) }}
+		</div>
+	  </div>
+	  <div class="input-field col s12">
+		  {{ form_widget(formpro.rapport) }}
+		  {{ form_label(formpro.rapport,'Rapport(an/mois)') }}
+	  </div>
+	</div>
+	<div class="row">
+	  {{ form_errors(formpro.prixlivraison) }}
+	  <div class="input-field col s12">
+		{{ form_widget(formpro.prixlivraison) }}
+		{{ form_label(formpro.prixlivraison,'Prix Taxes') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_widget(formpro.souscategorie) }}
+		{{ form_label(formpro.souscategorie,'Sous catégorie') }}
+	  </div>
+	</div>
+	  <div class="row">
+		  <div class="input-field col s12">
+		  {{ form_widget(formpro.rang) }}
+		  {{ form_label(formpro.rang,'N° de classement') }}
+		  </div>
+		  <div class="input-field col s12">
+			{{ form_widget(formpro.choixauteur) }}
+			{{ form_label(formpro.choixauteur,'Important') }}
+		  </div>
+	  
+		  <div class="input-field col s12">
+			<button class="btn cyan waves-effect waves-light right" type="submit" name="action">Enregister
+			  <i class="mdi-content-send right"></i>
+			</button>
+		  </div>
+	  </div>
+	{{ form_rest(formpro) }}
+	</form> 
+</div>
+
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade" data-backdrop="false" id="modalFormCaracteristique" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-action-receipt"></i> Ajouter une option sur les produits <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<h4 class="header2">Ajouter une nouvelle offre sur les produits</h4>
+<div class="row">
+  <form class="col s12" action="{{ path('users_adminuser_add_new_caracteristique',{'id': souscategorie.id }) }}" method="post" {{ form_enctype(formcarac) }}>
+	<div class="row">
+	<span style="color:red;">{{ form_errors(formcarac) }}</span>
+	<span style="color:red;">{{ form_errors(formcarac.nom) }}</span>
+	  <div class="input-field col s12">
+		{{ form_widget(formcarac.nom) }}
+		{{ form_label(formcarac.nom,'Titre de l\'offre') }}
+	  </div>
+	  {{ form_errors(formcarac.description) }}
+	  <div class="input-field col s12">
+		{{ form_widget(formcarac.description) }}
+		{{ form_label(formcarac.description,'Description du produit') }}
+	  </div>
+	</div>
+	<div class="row">
+	  {{ form_errors(formcarac.icon) }}
+	  <div class="input-field col s12">
+		  {{ form_widget(formcarac.icon) }}
+		  {{ form_label(formcarac.icon,'Icone de présentation') }}
+	  </div>
+	  <div class="input-field col s12">
+		{{ form_widget(formcarac.souscategorie) }}
+		{{ form_label(formcarac.souscategorie,'Sous catégorie') }}
+	  </div>
+	</div>
+
+	  <div class="row">
+		<div class="input-field col s12">
+		{{ form_widget(formcarac.rang) }}
+		{{ form_label(formcarac.rang) }}
+		</div>
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+	{{ form_rest(formcarac) }}
+	</form> 
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.update-content-article').click(function(){
+	var idoffre = $(this).attr('value');
+	var idproduit = $(this).attr('name');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_update_caracteristique_produit') }}',{ idproduit: idproduit, idoffre: idoffre }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.update-content-produit').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_update_courant_produit') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.update-content-caracteristique').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_modifcation_caracteristique_produit') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.open-modal-new-produit').click(function(){
+	$('#modalFormProduit').modal('show');
+});
+$('.open-modal-nouv-caracteristique').click(function(){
+	$('#modalFormCaracteristique').modal('show');
+});
+
+$('a.page-scroll-cgu').click(function(){
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+  var target = $(this.hash);
+  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+  if (target.length) {
+	$('html,body').animate({
+	  scrollTop: target.offset().top - 40
+	}, 900);
+	return false;
+  }
+}
+});
+{% endblock %}

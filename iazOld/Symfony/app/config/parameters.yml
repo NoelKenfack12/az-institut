@@ -1,0 +1,33 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: institutaz
+    database_user: root
+    database_password: secret
+    mailer_transport: smtp
+    mailer_host: server1.akiba01.com
+    mailer_user: infos@azcorporation.net
+    mailer_password: site-info
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    site: AZ CORPORATION 
+    metier: Produits et services Informatiques
+    devise: FCFA
+    ville: Yaounde
+    telephone: +237 676264027
+    telwath: +237 676264027
+    facebook: AZCorpAfrica
+    twitter: #
+    google: #
+    linkedin: 
+    slogan: La solution Informatique dont vous avez besoin
+    description: AZ Corporation est une sociétés de services en Ingénierie Informatique 
+    localisation: BP 30020 YAOUNDE CAMEROUN, BYEMASSI-BAMBIS 
+    email: infos@azcorporation.com
+    regex_mail: /[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}/i
+    siteweb: http://afex.com

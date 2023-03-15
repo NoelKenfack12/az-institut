@@ -1,0 +1,20 @@
+<div class="row">
+<div class="col-md-12">
+	<span style="color:red;">{{ form_errors(formbillet) }}</span>
+</div>
+<div class="col-md-12">
+	<span style="color:red;">{{ form_errors(formbillet.titre) }}</span>
+</div>
+<div class="input-field col-md-12">
+	{{ form_widget(formbillet.titre) }}
+	{{ form_label(formbillet.titre,'Quel est votre difficulté '~ app.user.name(25) ~ ' ?') }}
+</div>
+
+<div class="col-md-12">
+	<span style="color:red;">{{ form_errors(formbillet.description) }}</span>
+</div>
+<div class="input-field col-md-12">
+	{{ form_widget(formbillet.description) }}
+	{{ form_label(formbillet.description,'Faites une description complète pour nous aider à vous assister efficacement.') }}
+</div>
+</div>

@@ -1,0 +1,145 @@
+<div class="col-md-9">
+
+<div class="" style="width: 100%!important;">
+
+<div class="row cards">
+	  {% for i in range(0,1) %}
+      <div class="col-12 col-md-6">
+        <div class="card card2 card-large">
+          <a href="#" class="">
+            <img class="card-img-top " src="https://images.pexels.com/photos/2529973/pexels-photo-2529973.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Card #1 img alt." style="max-width: 100%;">
+          <div class="card-body">
+            <span class="card-title">Card #1 title</span>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <div class="card-footer">
+            Footer call-to-action<span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+          </div>
+        </a>
+        </div>
+      </div>
+	  {% endfor %}
+</div>
+	
+<div class="cards" style="width: 100%!important;">
+{% for service in liste_article %}
+  {% if loop.index is odd %}
+  <div class="col-xs-12 col-md-12" style="padding: 0px;">
+	<div class="card card2 card-fw card-row-layout" style="min-width: 100%!important; box-shadow: none;">
+	  <a href="#" class="toggle-overlay-article" value="{{ service.id }}">
+		  <img class="card-img-top" src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/bglogin.png') }}{% endif %}" alt="{{ service.nom }}">
+		<div class="card-body">
+		  <span class="card-title">{{ service.nom }}</span>
+		  <p class="card-text">{{ service.description }}</p>
+		  <button class="btn-home btn-4 btn-mulberry">En savoir plus</button>
+		</div>
+		<div class="card-footer">
+		  <span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+		</div>
+	  </a>
+	</div>
+  </div>
+  
+  {% else %}
+  <div class="col-xs-12 col-md-12" style="padding: 0px;">
+	<div class="card card4 card-fw card-row-layout" style="min-width: 100%!important; box-shadow: none;">
+	  <a href="#" class="toggle-overlay-article" value="{{ service.id }}">
+		  <img class="card-img-top" src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/bglogin.png') }}{% endif %}" alt="{{ service.nom }}">
+		<div class="card-body">
+		  <span class="card-title">{{ service.nom }}</span>
+		  <p class="card-text">{{ service.description }}</p>
+		  <button class="btn-home btn-4 btn-mulberry">En savoir plus</button>
+		</div>
+		<div class="card-footer">
+		  <span class="vfi vfi-fleche-droite" aria-hidden="true"></span>
+		</div>
+	  </a>
+	</div>
+  </div>
+  {% endif %}
+{% else %}
+<div style="height: 400px; padding-top: 100px; background: #fff; margin-bottom: 15px;">
+	<div style="text-align: center; display: block; width: 100%!important;">
+	<span class="fa fa-frown-o"></span> Aucune données disponible pour cette requête.</br>
+	<hr style="width: 100px; border-bottom: 1px solid red;">
+	</div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>

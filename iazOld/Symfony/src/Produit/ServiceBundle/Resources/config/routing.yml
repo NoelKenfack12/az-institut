@@ -1,0 +1,69 @@
+produit_service_contact_us:
+    path: /nous/contacter
+    defaults: { _controller: ProduitServiceBundle:Message:contactus }
+produit_service_apropos_denous:
+    path: /info/azcorp/{position}/{idtype}/{idart}/{page}
+    defaults: { _controller: ProduitServiceBundle:Service:aproposdenous, idtype: 0, idart: 0, page: 1 }
+    requirements:
+        idtype: \d+
+        idart: \d+
+        page: \d+
+produit_service_assistance_entreprise:
+    path: /assistance/entreprise/{entreprise}
+    defaults: { _controller: ProduitServiceBundle:Message:assistanceentreprise, entreprise: 1 }
+    requirements:
+        entreprise: \d+
+produit_service_visiter_notre_blog:
+    path: /offres/speciales/{id}/{page}
+    defaults: { _controller: ProduitServiceBundle:Service:notreblog, id: 0, page: 1 }
+    requirements:
+        id: \d+
+        page: \d+
+produit_service_az_evenements:
+    path: /evenements/az/{id}/{page}
+    defaults: { _controller: ProduitServiceBundle:Service:evenements, id: 0, page: 1 }
+    requirements:
+        id: \d+
+        page: \d+
+produit_service_yourcv_recrutement:
+    path: /azcorp/careers/{stage}
+    defaults: { _controller: ProduitServiceBundle:Recrutement:votredossier, stage: 0 }
+produit_service_dossier_derecrutement_user:
+    path: /dossier/user/pour/recrutement/lancer
+    defaults: { _controller: ProduitServiceBundle:Recrutement:ajoutdossieruser }
+produit_service_key_of_product_authentification:
+    path: /key/of/product/authentification
+    defaults: { _controller: ProduitServiceBundle:Curentwebsite:curentwebsite }
+produit_service_affiche_contenu_detaille_article_blog:
+    path: /affiche/contenu/detaill/article/blog/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:affichearticle }
+    requirements:
+        id: \d+
+produit_service_ajouter_commentaire_article_user:
+    path: /ajouter/commentaire/article/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:ajoutercommentaire }
+    requirements:
+        id: \d+
+produit_service_supprimer_commentaire_courant_article:
+    path: /supprimer/commentaire/courant/article/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:supprimercommentaire }
+    requirements:
+        id: \d+
+produit_service_detail_article_support:
+    path: /detail/article/support/{position}
+    defaults: { _controller: ProduitServiceBundle:Service:detailarticlesupport, position: 'article' }
+users_adminuser_telecharg_cv_user:
+    path: /telecharge/doc/fichier/prog/{id}
+    defaults: { _controller: ProduitServiceBundle:Recrutement:telechargercv }
+    requirements:
+        id: \d+
+users_adminuser_telecharg_lettre_motivation_user:
+    path: /telecharge/doc/image/programme/{id}
+    defaults: { _controller: ProduitServiceBundle:Recrutement:telechargerlettre }
+    requirements:
+        id: \d+
+produit_service_detail_actualite:
+    path: /details/actualite/{id}
+    defaults: { _controller: ProduitServiceBundle:Service:detailactualite }
+    requirements:
+        id: \d+

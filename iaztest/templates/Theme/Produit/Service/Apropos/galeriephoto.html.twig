@@ -1,0 +1,230 @@
+<style>
+.hover-effect {
+    float: left;
+    text-align: center;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 7px 0px;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+}
+
+    .hover-effect img {
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        background-size: cover;
+        height: 100%;
+       width: 100%;
+    }
+
+    .hover-effect .description {
+        position: absolute;
+        top: 0;
+        background: rgba(0,0,0,0.8);
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+    }
+
+.hover-effect .description h2,
+.hover-effect .description p{
+   max-width: 90%;
+   display: block;
+   margin: 0 auto;
+}
+
+
+        .hover-effect .description h2 {
+            font-size: 36px;
+            -moz-transform: translateY(-25px);
+            -ms-transform: translateY(-25px);
+            -o-transform: translateY(-25px);
+            -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+            -moz-transition: 0.3s;
+            -o-transition: 0.3s;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            padding-top: 55px;
+        }
+
+    .hover-effect .description p {
+        font-size: 24px;
+        -moz-transform: translateY(25px);
+        -ms-transform: translateY(25px);
+        -o-transform: translateY(25px);
+        -webkit-transform: translateY(25px);
+        transform: translateY(25px);
+        -moz-transition: 0.3s;
+        -o-transition: 0.3s;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+    }
+
+    .hover-effect:hover img {
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+.hover-effect:hover .description{
+   opacity: 1;
+   cursor: pointer;
+}
+
+    .hover-effect:hover .description h2,
+    .hover-effect:hover .description p {
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+@media(max-width: 1200px){
+   .hover-effect {
+    width: calc(50% - 30px);
+}
+}
+
+@media(max-width: 480px){
+   .hover-effect {
+    width: calc(100% - 30px);
+      float: none;
+}
+   .hover-effect .description h2{
+    font-size: 30px;
+}
+   .hover-effect .description p{
+    font-size: 18px;
+}
+}
+</style>
+
+<div class="col-md-8">
+
+<main style="min-width: 100%; min-height: 300px; ">
+
+<div class="row">
+{% for service in liste_article %}
+<div class="col-md-6">
+<a href="#!" class="toggle-overlay-article" value="{{ service.id }}" style="margin-bottom: 7px; min-height: 300px; padding: 15px; display: block!important; box-shadow:0px 0px 2px rgba(0,0,0,0.02); background: #fff;">
+<div class="hover-effect">
+<img src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="{{ service.nom }}" />
+<div class="description" style="color: #fff;">
+	<h2 style="font-size: 20px;">
+		{{ service.nom }}
+	</h2>
+	<p style="font-size: 13px;">
+		{{ service.description }}
+	</p>
+	<button class="btn btn-primary" style="margin-top: 15px;">
+		Galerie <span class="fa fa-angle-right"></span>
+	</button>
+</div>
+</div>
+</a>
+</div>
+{% else %}
+<div style="height: 400px; padding-top: 100px; background: #fff; margin-bottom: 15px;">
+	<div style="text-align: center; display: block; width: 100%!important;">
+	<span class="fa fa-frown-o"></span> Aucune données disponible pour cette requête.</br>
+	<hr style="width: 100px; border-bottom: 1px solid red;">
+	</div>
+</div>
+{% endfor %}
+
+</div>
+</main>
+
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>
+<script type="text/javascript">
+
+</script>

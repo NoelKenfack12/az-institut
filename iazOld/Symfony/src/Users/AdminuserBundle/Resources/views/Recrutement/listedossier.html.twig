@@ -1,0 +1,265 @@
+{% extends "UsersAdminuserBundle::layoutadmin.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Documents téléchargeables
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("UsersAdminuserBundle:Accueil:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="content">
+	<div class="container">
+	{% include 'GeneralTemplateBundle:Menu:descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+<div class="inner-content">
+
+ <div class="row" style="background: #fafafa;">
+  <div class="col s12 m12 16">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	<a href="#!" class="open-modal-nouv-categorie btn bg-struct" style="float: right;"><span class="mdi-av-playlist-add" style="font-size: 12px;"></span> Ajouter</a>
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Accueil'|trans }}</a></li>
+	  <li>{{ 'Documents téléchargeables'|trans }}</li>
+	</ol>
+  </div>
+  <div class="col s12 m6 16">
+	<div class="row">
+	
+	</div>
+  </div>
+</div>
+
+<h5 style="border-bottom: 2px dashed #999; margin-bottom: 7px; margin-top: -10px;">
+	Liste des documents téléchargeables sur {{ site }}
+</h5>
+
+<div class="row">
+<div class="col s12 m12">
+   
+<h6>
+{% set id = '' %}
+{% for infos in app.session.flashbag.get('supprime_dossier') %}
+{% if loop.last %}
+	<strong style="color: red;"><span class="fa fa-warning"></span> Êtes vous certain de vouloir supprimer le document {{ infos|lower }} </strong>
+	<form action="{{ path('users_adminuser_delete_dossier_recrut',{'id': id }) }}" method="post">
+	<input type="submit" value="Supprimer" style="background: red;"/>
+	{{ form_rest(formsupp) }}
+	</form>
+{% else %}
+{% set id = infos %}
+{% endif %}
+{% endfor %}
+<span style="color: red;">
+{% for infos in app.session.flashbag.get('information') %}
+{% if loop.first %}
+{{ infos|raw }}
+{% endif %}
+{% endfor %}
+</span>
+</h6>
+</div>
+</div>
+
+<div class="row">
+<div class="col s12 m12 14">
+<main style="box-shadow:0px 0px 2px rgba(0,0,0,0.05); background: #fff;">
+  {% for dossier in liste_dossier %}
+  <div class="topic">
+    <div class="open">
+      <h2 class="question"><img src="{% if dossier.src != null %}{{ asset(dossier.getWebPath) }}{% else %}{{ asset('templateofferts/images/3132.jpg') }}{% endif %}" alt="" style="width: 30px; height: 30px; margin-bottom: -8px!important;"/> {{ dossier.typedocument }} <span class="mdi-hardware-keyboard-arrow-right" style="font-size: 11px;"></span> {{ dossier.message }}</h2>
+      <span class="faq-t"></span>
+    </div>
+    <div class="answer">
+		<div class="module-comment-block">
+		<div>
+			<a href="#">{{ dossier.user.name(250) }}</a>
+			<h6><a href="#a">{{ dossier.date|date('d/m/y') }}</a></h6>
+
+			<a href="{{ path('users_adminuser_telecharg_cv_user',{'id': dossier.id}) }}" data-text="CV" class="but-hover1 item_add" target="_blank"><i class=" fa fa-paperclip "></i> Version PDF</a>
+			<a href="{{ path('users_adminuser_telecharg_lettre_motivation_user', {'id': dossier.id }) }}" data-text="Lettre" class="but-hover1 item_add" target="_blank"><i class=" fa fa-paperclip "></i> Vesion JPG</a>
+			
+		</div>
+		<ul id="dropdowntype-{{ dossier.id }}" class="dropdown-content right" style="min-width: 150px;">
+			<li>
+			<a href="#!" class="update-content-type-article" value="{{ dossier.id }}"><i class="mdi-editor-border-color"></i> Modifier</a>
+			</li>
+			<li>
+			<a href="{{ path('users_adminuser_delete_dossier_recrut', {'id': dossier.id }) }}"><i class="mdi-action-highlight-remove"></i> Supprimer</a>
+			</li>
+		</ul>
+		<a class="dropdown-button right" href="#!" data-activates="dropdowntype-{{ dossier.id }}" style="position: absolute; right: 50px;"><i class="mdi-hardware-keyboard-control"></i></a>
+		
+		</div>
+	</div>
+  </div>
+  {% else %}
+  <div class="topic">
+    <div class="open">
+    <h2 class="question">1. Aucune donnée disponible pour cette catégorie.
+	</h2><span class="faq-t"></span>
+    </div>
+    <p class="answer">La liste des documents téléchargeables s'affichera ici.</p>
+  </div>
+  {% endfor %}
+</main>
+</div>
+</div>
+		
+
+</div>	
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false"  id="modalGestionCatalogueSelect" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-hardware-keyboard-alt"></i> Gestion du catalogue <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+</div>
+</div>
+</div>	
+
+<div class="modal fade" data-backdrop="false" id="modalFormDocument" style="margin-top: 60px;">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red" style="background: #3565ae!important;">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Ajouter un document téléchargeables <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row">
+  <form class="col s12" action="{{ path('users_adminuser_liste_dossier_recrutement') }}" method="post" {{ form_enctype(form) }}>
+	<div class="row">
+	<span style="color:red;">{{ form_errors(form) }}</span>
+	<span style="color:red;">{{ form_errors(form.message) }}</span>
+	  <div class="input-field col s12">
+		{{ form_errors(form.message) }}
+		{{ form_widget(form.message) }}
+		{{ form_label(form.message,'Titre du document') }}
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>Image</span>
+		  {{ form_widget(form.file) }}
+		</div>
+	  </div>
+
+	  <div class="input-field col s12">
+		  <select name="typedocument">
+			<option value="depliant">Type de document</option>
+			<option value="depliant">Dépliant</option>
+			<option value="planing">Planing de formation</option>
+		  </select>
+	  </div>
+	  
+	  <div class="file-field input-field col s12">
+		<input class="file-path validate" type="text"/>
+		<div class="btn bg-struct">
+		  <span>PDF</span>
+		  {{ form_widget(form.yourcv) }}
+		</div>
+	  </div>
+	</div>
+	  <div class="row">
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light bg-struct" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+	{{ form_rest(form) }}
+	</form> 
+</div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid #ddd;">
+	{% include 'GeneralTemplateBundle:Menu:social.html.twig' %}
+</div>
+
+</div>
+</div>
+</div>
+	
+{% endblock %}
+
+{% block javascripttemplate %}
+$('.open-modal-nouv-categorie').click(function(){
+	$('#modalFormDocument').modal('show');
+});
+
+$(".open").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+
+$('.update-content-type-article').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_adminuser_alter_document_telechargeable') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+{% endblock %}

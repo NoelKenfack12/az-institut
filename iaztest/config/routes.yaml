@@ -1,0 +1,14 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_directory_users:
+    resource: '../src/Routing/Users/'
+    type: directory
+
+app_directory_produit:
+    resource: '../src/Routing/Produit/'
+    type: directory
+
+app_directory_general:
+    resource: '../src/Routing/General/'
+    type: directory

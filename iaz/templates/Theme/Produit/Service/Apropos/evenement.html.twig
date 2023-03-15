@@ -1,0 +1,290 @@
+<style>
+	.card_event {
+	  float: left;
+	  width: 100%!important;
+	}
+	.card_event .menu-content {
+	  margin: 0;
+	  padding: 0;
+	  list-style-type: none;
+	}
+	.card_event .menu-content::before, .card_event .menu-content::after {
+	  content: '';
+	  display: table;
+	}
+	.card_event .menu-content::after {
+	  clear: both;
+	}
+	.card_event .menu-content li {
+	  display: inline-block;
+	}
+	.card_event .menu-content a {
+	  color: #fff;
+	}
+	.card_event .menu-content span {
+	  position: absolute;
+	  left: 50%;
+	  top: 0;
+	  font-size: 10px;
+	  font-weight: 700;
+	  font-family: 'Open Sans';
+	  -webkit-transform: translate(-50%, 0);
+			  transform: translate(-50%, 0);
+	}
+	.card_event .wrapper {
+	  background-color: #fff;
+	  min-height: 540px;
+	  position: relative;
+	  overflow: hidden;
+	}
+	.card_event .wrapper:hover .data {
+	  -webkit-transform: translateY(0);
+			  transform: translateY(0);
+	}
+	.card_event .data {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  -webkit-transform: translateY(calc(70px + 1em));
+			  transform: translateY(calc(70px + 1em));
+	  transition: -webkit-transform 0.3s;
+	  transition: transform 0.3s;
+	  transition: transform 0.3s, -webkit-transform 0.3s;
+	}
+	.card_event .data .content {
+	  padding: 1em;
+	  position: relative;
+	  z-index: 1;
+	}
+	.card_event .author {
+	  font-size: 12px;
+	}
+	.card_event .title {
+	  margin-top: 10px;
+	}
+	.card_event .text {
+	  height: 70px;
+	  margin: 0;
+	}
+	.card_event input[type='checkbox'] {
+	  display: none;
+	}
+	.card_event input[type='checkbox']:checked + .menu-content {
+	  -webkit-transform: translateY(-60px);
+			  transform: translateY(-60px);
+	}
+
+	.example-1 .wrapper {
+	  
+	}
+	.example-1 .date {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  background-color: #3565ae;
+	  color: #fff;
+	  padding: 0.8em;
+	  width: 80px;
+	}
+	.example-1 .date span {
+	  display: block;
+	  text-align: center;
+	}
+	.example-1 .date .day {
+	  font-weight: 700;
+	  font-size: 24px;
+	  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+	}
+	.example-1 .date .month {
+	  text-transform: uppercase;
+	}
+	.example-1 .date .month,
+	.example-1 .date .year {
+	  font-size: 12px;
+	}
+	.example-1 .content {
+	  background-color: #fff;
+	  box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
+	}
+	.example-1 .title a {
+	  color: #38488f;
+	  font-size: 20px;
+	}
+	.example-1 .title a:hover {
+	  text-decoration: underline;
+	}
+
+	.example-1 .menu-button {
+	  position: absolute;
+	  z-index: 999;
+	  top: 16px;
+	  right: 16px;
+	  width: 25px;
+	  text-align: center;
+	  cursor: pointer;
+	}
+	.example-1 .menu-button span {
+	  width: 5px;
+	  height: 5px;
+	  background-color: gray;
+	  color: gray;
+	  position: relative;
+	  display: inline-block;
+	  border-radius: 50%;
+	}
+	.example-1 .menu-button span::after, .example-1 .menu-button span::before {
+	  content: '';
+	  display: block;
+	  width: 5px;
+	  height: 5px;
+	  background-color: currentColor;
+	  position: absolute;
+	  border-radius: 50%;
+	}
+	.example-1 .menu-button span::before {
+	  left: -10px;
+	}
+	.example-1 .menu-button span::after {
+	  right: -10px;
+	}
+	.example-1 .menu-content {
+	  text-align: center;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  z-index: -1;
+	  transition: -webkit-transform 0.3s;
+	  transition: transform 0.3s;
+	  transition: transform 0.3s, -webkit-transform 0.3s;
+	  -webkit-transform: translateY(0);
+			  transform: translateY(0);
+	}
+	.example-1 .menu-content li {
+	  width: 33.333333%;
+	  float: left;
+	  background-color: #3565ae;
+	  height: 60px;
+	  position: relative;
+	}
+	.example-1 .menu-content a {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -webkit-transform: translate(-50%, -50%);
+			  transform: translate(-50%, -50%);
+	  font-size: 24px;
+	}
+	.example-1 .menu-content span {
+	  top: -10px;
+	}
+
+	
+	.shadow {
+	  color: white;
+	  text-shadow: 2px 2px 4px #000000;
+	}
+</style>
+
+<div class="col-md-8" style="padding: 0px;">
+
+<div class="row">
+{% for service in liste_article %}
+
+	<div class="col-md-6">
+		<a href="{{ path('produit_service_detail_actualite', {'id': service.id}) }}" class="card h-100" data-original-title="" title="" style="min-height: 500px;">
+			<div class="card-body p-5">
+				<div class="text-center">
+					<img src="{% if service.imgservice != null %}{{ asset(service.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="" style="width: 100%;">
+				</div>
+				<h5>{{ service.nom }}</h5>
+				<p class="card-text">{{ service.description }}</p>
+			</div>
+		</a>
+    </div>
+ 
+{% else %}
+<div style="height: 400px; padding-top: 100px; background: #fff; margin-bottom: 15px;">
+	<div style="text-align: center; display: block; width: 100%!important;">
+	<span class="fa fa-frown-o"></span> Aucune données disponible pour cette requête.</br>
+	<hr style="width: 100px; border-bottom: 1px solid red;">
+	</div>
+</div>
+{% endfor %}
+</div>
+
+
+<span class="clearfix"></span>
+{% if nombrepage > 0 %}
+
+{% if page > 1 and page <= nombrepage %}
+{% set pagepre = page - 1 %}
+{% else %}
+	{% set pagepre = nombrepage %}
+{% endif %}
+
+{% if page < nombrepage %}
+	{% set pagesuiv = page + 1 %}
+{% else %}
+	{% set pagesuiv =  1 %}
+{% endif %}
+
+{% if nombrepage < 5 %}
+	{% set debut = 1 %}
+	{% set fin = nombrepage %}
+{% else %}
+	{% if page > 2 and page < (nombrepage - 2) %}
+		{% set debut = page - 2 %}
+		{% if page + 2 >= nombrepage %}
+			{% set fin = nombrepage %}
+		{% else %}
+			{% set fin = page + 2 %}
+		{% endif %}
+	{% else %}
+		{% if page <= 2 %}
+			{% if page == 1 %}
+				{% set debut = 1 %}
+				{% set fin = page + 3 %}
+			{% else %}
+				{% set debut = 1 %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% else %}
+			{% set debut = page - 2 %}
+			{% if page + 2 >= nombrepage %}
+				{% set fin = nombrepage %}
+			{% else %}
+				{% set fin = page + 2 %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	
+{% endif %}
+<div>
+  <div class="pagination"> 
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': 1 }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagepre }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+	{% for p in debut..fin %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': p }) }}" class="page {% if p == page %}active{% else %}gradient{% endif %}" class="">{{ p }}</a>
+	{% endfor %}
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': pagesuiv }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': nombrepage }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% else %}
+<div>
+  <div class="pagination">
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Première page" class="page gradient"><span class="fa fa-fast-backward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Page précedente" class="page gradient"><span class="fa fa-step-backward" style="font-size: 8px;"></span></a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" class="page active">0</a>
+
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}"  title="Page suivante" class="page gradient"><span class="fa fa-step-forward" style="font-size: 8px;"></span></a>
+	<a href="{{ path('produit_service_apropos_denous', {'position': position, 'idtype': idtype, 'page': page }) }}" title="Dernière page" class="page gradient"><span class="fa fa-fast-forward" style="font-size: 8px;"></span></a>
+   </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}	
+				
+</div>

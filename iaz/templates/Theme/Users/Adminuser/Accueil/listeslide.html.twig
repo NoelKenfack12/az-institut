@@ -1,0 +1,29 @@
+{% for slide in allslide %}
+	<div class="col-sm-6 item-grid item-gr  simpleCart_shelfItem">
+		<div class="grid-pro">
+			<div  class=" grid-product " >
+				<figure>		
+					<a href="single.html">
+						<div class="grid-img">
+							<img  src="{{ asset(slide.getWebpath) }}" class="img-responsive" alt="" style="height: 120px;">
+						</div>
+						<div class="grid-img">
+							{% if slide.backgroundslide == null %}
+							<img  src="{{ asset('template/images/pr.jpg') }}" class="img-responsive"  alt="" style="height: 120px;">
+							{% else %}
+							<img  src="{{ asset(slide.backgroundslide.getWebpath) }}" class="img-responsive"  alt="" style="height: 120px;">
+							{% endif %}
+						</div>			
+					</a>		
+				</figure>	
+			</div>
+			<div class="women" style="height: 200px; text-align: justify;">
+				<a href="#">{{ slide.rang }}. {{ slide.user.name(20) }} <span class="pull-right">{{ slide.date|date('d/m/y') }}</span></a>
+				<h6><a href="#a" style="color: #333;">{{ slide.titre }}</a></h6>
+				<h6><a href="#a" style="color: #333;">{{ slide.description[:150] }}</a></h6>
+				<a href="{{ path('users_adminuser_delete_courant_slide',{'id': slide.id }) }}" data-text="Supprimer" class="but-hover1 item_add">Supprimer</a>
+				<a href="{{ path('users_adminuser_modification_image_slide_accueil', {'id': slide.id}) }}" data-text="Modifier" class="but-hover1 item_add">Modifier</a>
+			</div>
+		</div>
+	</div>
+{% endfor %}	

@@ -1,0 +1,565 @@
+{% extends "Theme/Users/User/layoutuser.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Boutique,e-commerce,{{ site }},site web, hébergement heb Cameroun, hébergement web illimité,hébergement, site internet, site, gratuite,hébergement revendeur,template,domaine, nom de domaine, cameroun, site cameroun,hébergement web cameroun,site moins cher."/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Cameroun | {{ metier }} ,{{ site }},site web, hébergement heb Cameroun, hébergement web illimité,hébergement, site internet, site, gratuite,hébergement revendeur,template,domaine, nom de domaine, cameroun, site cameroun,hébergement web cameroun,site moins cher." />
+
+{% endblock %}
+{% block title %}
+	{{ parent() }} | Facture
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('ladingpage/css/style.css') }}" media="all" rel="stylesheet" type="text/css">
+<link href="{{ asset('template/css/stylestep.css') }}" media="all" rel="stylesheet" type="text/css">
+<style>
+.stat-tld{
+	background: #f2f2f2; border-radius: 4px; padding: 8px; height: 36px; width: 36px; border-radius: 18px; display: inline-block;
+}
+.completed{
+	font-size: 15px!important;
+}
+
+.pagination {
+  font-weight: bold;
+  font-size: 16px;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+.pagination a {
+  padding: 3px;
+  border: 1px solid #262626;
+  border-radius: 3px;
+  margin: 3px;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #b8b8b8));
+  background: -moz-linear-gradient(top, #e3e3e3, #b8b8b8);
+  background: -webkit-linear-gradient(top, #e3e3e3, #b8b8b8);
+  background: linear-gradient(to bottom, #e3e3e3, #b8b8b8);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6), inset 0 1px rgba(255, 255, 255, 0.4);
+  color: #333;
+  text-decoration: none;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.72);
+}
+.pagination a:hover {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d90073), color-stop(100%, #a00056));
+  background: -moz-linear-gradient(top, #d90073, #a00056);
+  background: -webkit-linear-gradient(top, #d90073, #a00056);
+  background: linear-gradient(to bottom, #d90073, #a00056);
+  color: #260014;
+}
+.pagination a.active {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00add9), color-stop(100%, #00708c));
+  background: -moz-linear-gradient(top, #00add9, #00708c);
+  background: -webkit-linear-gradient(top, #00add9, #00708c);
+  background: linear-gradient(to bottom, #00add9, #00708c);
+  color: #001e26;
+}
+.pagination a.active:hover {
+  cursor: default;
+}
+.pagination .prev:before {
+  content: "« ";
+  font-weight: normal;
+}
+.pagination .next:after {
+  content: " »";
+  font-weight: normal;
+}
+.pagination .next:hover, .pagination .prev:hover {
+  border-color: #141414;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI2MjYyNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhMWExYSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #262626), color-stop(100%, #1a1a1a));
+  background: -moz-linear-gradient(top, #262626, #1a1a1a);
+  background: -webkit-linear-gradient(top, #262626, #1a1a1a);
+  background: linear-gradient(to bottom, #262626, #1a1a1a);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6), inset 0 1px rgba(255, 255, 255, 0.1);
+  color: #ebebeb;
+  text-shadow: none;
+}
+.reset {
+  border: 0;
+  list-style: none outside none;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+.steps {
+  border-radius: 2px;
+  display: flex;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.no-flexbox .steps {
+  border-collapse: separate;
+  display: table;
+  width: 100%;
+}
+.no-flexbox .steps li {
+  display: table-cell;
+  overflow: hidden;
+  text-indent: 0;
+}
+.no-flexbox .steps li:after {
+  right: 0;
+}
+.steps li {
+  background: #8ec760;
+  color: white;
+  flex-grow: 1;
+  margin: 0 4px;
+  padding: 6px 16px;
+  position: relative;
+  text_align: left!important;
+  text-indent: 8px;
+}
+.steps li:before, .steps li:after {
+  border-bottom: 1.5em solid transparent;
+  border-left: 8px solid rgba(30, 144, 255, 0.6);
+  border-top: 1.5em solid transparent;
+  content: "";
+  height: 0;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+		  transform: translateY(-50%);
+  width: 0;
+}
+.steps li:before {
+  border-left-color: white;
+  left: 0;
+}
+.steps li:after {
+  background: white;
+  right: -8px;
+}
+.steps li:first-child {
+  margin-left: 0;
+  text-indent: 0;
+}
+.steps li:first-child:before {
+  display: none;
+}
+.steps li:last-child {
+  margin-right: 0;
+}
+.steps li:last-child:after {
+  display: none;
+}
+.steps li.selected {
+  background: #444;
+}
+.steps li.selected:after {
+  border-left-color: #444;
+}
+</style>
+{% endblock %}
+
+{% block userblog_body %}
+
+<div  style="background: #fff!important;">
+<div class="container">
+<div class="row">
+	<div class="col-md-12" style="margin-bottom: 7px; margin-top: 15px; padding: 0px;">
+	<ul class="steps reset clearfix">
+	  <li class="selected">{{ site }}</li>
+	  <li class="selected">Avis utilisateurs</li>
+	  <li>{{ liste_billet|length }} Avis</li>
+	</ul>
+	</div>
+</div>
+</div>
+</div>
+
+<div style="background: #f5f7f8; padding-top: 20px;">
+	<div class="my-container">
+		<div class="row">
+		<div class="col-md-12">
+		{% for infos in app.session.flashbag.get('information') %}
+		{% if loop.first %}
+			<div style="margin-bottom: 10px;">
+			{% include 'Theme/General/Template/Menu/flasinfos.html.twig' %}
+			</div>
+		{% endif %}
+		{% endfor %}
+	   </div>
+	   
+		<div class="col-md-4">
+			{{ render(controller("App\\Controller\\Produit\\Service\\ServiceController:menuarticle", {'position': 'reviews'})) }}
+		</div>
+		<div class="col-md-8">
+		
+				<main style="background: #fff; padding: 7px; box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 0px; min-width: 100%;">
+					<div class="row">
+					<div class="col-md-12">
+						<strong style="border-bottom: 2px solid #ddd; display: block;">Nous sommes toujours à l'écoute de nos clients</strong>
+					</div>
+					<div class="col-md-5">
+						
+						<div style="margin-top: 7px;">
+						{% set rapport = 0 %}
+						{% if total > 0 %}
+						{% set rapport = (somme/total)|round(2, 'ceil') %}
+						
+						<div class="star-ratings-css" style="margin-left: 0px; display: inline-block; float: left;">
+						  <div class="star-ratings-css-top" style="width: {{ ((rapport/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+						  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+						</div> 
+						<div style="margin-left: 15px; margin-top: 7px; display: inline-block; width: 100px; text-align: center; background: #1e499b;; color: #fff; border-radius: 10px;">{{ rapport }} - {{ total }}</div>
+						{% endif %}
+						<div style="margin-top: 10px;"><strong class="text-success">Evaluation sur 5.</strong></div>
+						</div>
+					</div>
+					<div class="col-md-7 text-warning" style="font-style: italic; height: 50px;">
+					<img src="{{ asset('template/images/quetion.png') }}" alt="avis" style="width: 40px; height:40px; border-radius: 20px; position: absolute; top: 0px; right: 15px; z-index: 2;"/>
+					<div class="base-content text-info" style=" padding-right: 40px;">Les avis ci-dessous viennent des utilisateurs de la communauté {{ site }} ayant enregistrer une campagne sur {{ site }}.</div>
+					</div>
+					</div>
+				</main>
+
+				<main style="background: #fff; padding: 7px; box-shadow:0px 0px 2px rgba(0,0,0,0.0005); margin: 15px 0px; min-width: 100%;">
+					{% for avis in liste_billet %}
+
+					  <div class="topic">
+						<div class="open">
+						<h2 class="question" style="padding-bottom: 10px; padding-top: 10px;">
+						<img src="{% if avis.user != null and avis.user.imgprofil != null %}{{ asset(avis.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ avis.user.name(25) }}" style="width: 50px; height: 50px; float: left; margin-right: 7px;" >  
+						{{ avis.user.name(40) }} - {{ avis.date|date('d') }}.{{ avis.date|date('M') }}.{{ avis.date|date('Y') }}</br>
+
+						<div class="star-ratings-css" style="margin-left: 0px; display: inline-block; float: left;">
+						  <div class="star-ratings-css-top" style="width: {{ ((avis.avisuser/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+						  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+						</div> 
+						<div style="margin-left: 15px; margin-top: 7px; display: inline-block; width: 50px; text-align: center; background: #1e499b;; color: #fff; border-radius: 10px;">{{ avis.avisuser }}</div>
+						
+						
+						
+						<span style="padding: 3px; float: right; color: #ddd; font-size: 15px;">Services:</span>
+						</h2> <span class="faq-t" style="top: -50px;"></span>
+						</div>
+						<div class="answer">{{ avis.description }}</br>
+						
+						{% for comment in avis.reponsebillets %}
+						<div class="module-comment-block" style="border-top: 1px solid #333;">
+
+						  <div class="module-comment-text">
+							<div>
+							<img src="{% if comment.user != null and comment.user.imgprofil != null %}{{ asset(comment.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ comment.user.name(25) }}" style="float: left; width: 50px; height: 50px; margin-right: 7px;" >  
+							<strong>{{ comment.user.name(25) }}</strong>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu-avis-{{ avis.id }}">
+							<a href="#!" class="dropdown-item update-content-article-reponse" style="color: #333;" value="{{ comment.id }}"><i class="fa fa-edit" style="font-size: 18px;"></i> Modifier</a>
+						    </div>
+							<a id="dropdownMenu-avis-{{ avis.id }}" data-toggle="dropdown" style="float: right; font-size: 30px; color: red;">
+								 <i class="fa fa-angle-down"></i> 
+							</a>
+							</div>
+							<div><em>{{ comment.date|date('d') }}.{{ comment.date|date('M') }}.{{ comment.date|date('Y') }}</em></div>
+
+							<div>
+							  {{ comment.description }}
+							</div>
+						  </div>
+
+						</div> <!-- /module-comment-block -->    
+						{% endfor %}
+						  {% if app.user == avis.user or is_granted('ROLE_GESTION') %}
+						  <div class="row" style="border-top: 3px solid #333; margin-top: 15px; padding-top:5px; background: #f7f7f7;">
+						  <div class="col-md-3 col s12 m3">
+							<img src="{% if app.user != null and app.user.imgprofil != null %}{{ asset(app.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ app.user.name(25) }}" width="50" height="50" style="float: right;">  
+						  </div>
+
+						  <div class="col-md-9 col s12 m9">
+							<div><strong>{{ app.user.name(25) }}</strong></div>
+							  <form method="post" action="{{ path('users_user_add_new_reponse_billet_user', {'id': avis.id, 'position': 3}) }}">
+							  <div class="form-group">
+								<label for="reponsebillet-{{ avis.id }}">Ajouter une réponse</label>
+								<textarea name="reponse" class="form-control" id="reponsebillet-{{ avis.id }}" style="width: 100%; background: #fff;" required=""></textarea>
+							  </div>
+							  <div class="form-group" style="margin-top: -15px;">
+								  <button class="btn btn-primary">Enregister</button>
+							  </div>
+							  </form>
+						  </div>
+						  </div>
+						  {% endif %}
+						</div>
+					</div>
+
+					{% else %}
+					<div class="topic">
+						<div class="open">
+						<h2 class="question">1. Aucun avis disponible pour cette commande</h2> <span class="faq-t"></span>
+						</div>
+						<p class="answer">Vos avis nous permettent d'améliorer notre manière de vos servir.</p>
+					</div>
+					{% endfor %}
+					
+					<span class="clearfix"></span>
+					
+				</main>
+
+
+				<div class="menu-ui "style="border-radius: 0px; margin-bottom: 10px; padding: 15px;">
+				<span class="clearfix"></span>
+				{% if nombrepage > 0 %}
+
+				{% if page > 1 and page <= nombrepage %}
+				{% set pagepre = page - 1 %}
+				{% else %}
+					{% set pagepre = nombrepage %}
+				{% endif %}
+
+				{% if page < nombrepage %}
+					{% set pagesuiv = page + 1 %}
+				{% else %}
+					{% set pagesuiv =  1 %}
+				{% endif %}
+
+				{% if nombrepage < 5 %}
+					{% set debut = 1 %}
+					{% set fin = nombrepage %}
+				{% else %}
+					{% if page > 2 and page < (nombrepage - 2) %}
+						{% set debut = page - 2 %}
+						{% if page + 2 >= nombrepage %}
+							{% set fin = nombrepage %}
+						{% else %}
+							{% set fin = page + 2 %}
+						{% endif %}
+					{% else %}
+						{% if page <= 2 %}
+							{% if page == 1 %}
+								{% set debut = 1 %}
+								{% set fin = page + 3 %}
+							{% else %}
+								{% set debut = 1 %}
+								{% set fin = page + 2 %}
+							{% endif %}
+						{% else %}
+							{% set debut = page - 2 %}
+							{% if page + 2 >= nombrepage %}
+								{% set fin = nombrepage %}
+							{% else %}
+								{% set fin = page + 2 %}
+							{% endif %}
+						{% endif %}
+					{% endif %}
+					
+				{% endif %}
+				<div>
+				   <nav class="pagination" role="navigation">
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': 1 }) }}" title="Première page" style=""><span class="fa fa-fast-backward" style="font-size: 13px;"></span></a>
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': pagepre }) }}" title="Page précedente" style=""><span class="fa fa-step-backward" style="font-size: 13px;"></span></a>
+						{% for p in debut..fin %}
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': p }) }}" class="{% if p == page %}active{% endif %}" style="margin: 4px 0px;">{{ p }}</a>
+						{% endfor %}
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': pagesuiv }) }}"  title="Page suivante"><span class="fa fa-step-forward" style="font-size: 13px;"></span></a>
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': nombrepage }) }}" title="Dernière page"><span class="fa fa-fast-forward" style="font-size: 13px;"></span></a>
+					</nav>
+				<div class="clearfix"></div>
+				</div>
+				{% else %}
+				<div>
+				   <nav class="pagination" role="navigation">
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': page }) }}" title="Première page" style=""><span class="fa fa-fast-backward" style="font-size: 13px;"></span></a>
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': page }) }}" title="Page précedente" style=""><span class="fa fa-step-backward" style="font-size: 13px;"></span></a>
+						
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': page }) }}" class="active" style="">0</a>
+						
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': page }) }}"  title="Page suivante"><span class="fa fa-step-forward" style="font-size: 13px;"></span></a>
+						<a href="{{ path('produit_produit_afh_client_reviews', {'page': page }) }}" title="Dernière page"><span class="fa fa-fast-forward" style="font-size: 13px;"></span></a>
+				   </nav>
+				   
+				<div class="clearfix"></div>
+				</div>
+				{% endif %}	
+			</div>
+		
+		</div>
+		</div>
+	</div>
+</div>
+
+
+{% include 'Theme/General/Template/Menu/contacts.html.twig' %}
+
+<section class="clearfix">	
+<div style="border-top: 2px solid #ddd; background: #fff;">
+	<div class="my-container">
+	{{ render(controller("App\\Controller\\Users\\User\\BilletController:aviscarousel")) }}
+	</div>
+</div>
+</section>
+
+<div class="modal fade" data-backdrop="false" id="modalGestionCatalogueSelect">
+<div class="modal-dialog modal-md">
+<div class="modal-content">
+<div class="modal-header color-bottom" style="border-bottom: 4px solid #37c0fb; display: block;">
+	<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button>
+	<h3 class="modal-title"><span class=" fa fa-thumbs-o-up"></span> Mise à jour du contenu </h3>
+</div>
+<div class="modal-body null-bottom null-bottom-in">
+	<div class="row">
+	  <div class="input-field col s12">
+		<div class="wait-chargement-content-module" style="text-align: center;">
+			Patientez un moment pendant le chargement de l'article</br>
+			<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+		</div>
+
+		<div class="content-module-loading" style="display: none;">
+		
+		</div>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block;">
+{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+</div>
+</div>
+</div>
+
+{% if openticket != null %}
+<div class="modal fade" data-backdrop="false" id="modalopenticketUser">
+<div class="modal-dialog modal-md" style="min-width: 300px!important;">
+<div class="modal-content text-left" style="height: 100%;">
+<div class="modal-header color-bottom" style="border-bottom: 4px solid #37c0fb; display: block;">
+	<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button>
+	<h3 class="modal-title">
+		<img src="{% if openticket.user != null and openticket.user.imgprofil != null %}{{ asset(openticket.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}"  style="width: 50px; height: 50px; border-radius: 25px; float: left; margin-right: 7px;"/>
+		{{ openticket.user.name(25) }}<br>
+		<div style="font-size: 12px;">Client</div>
+	</h3>
+</div>
+<div class="modal-body null-bottom null-bottom-in">
+	<div class="row">
+	  <div class="col-md-12">
+		
+		<div>
+		<div class="star-ratings-css" style="margin-left: 0px; display: inline-block; float: left;">
+		  <div class="star-ratings-css-top" style="width: {{ ((openticket.avisuser/5)|round(2, 'ceil'))*100 }}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+		  <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+		</div> 
+		<div style="margin-left: 15px; margin-top: 7px; display: inline-block; width: 50px; text-align: center; background: #1e499b;; color: #fff; border-radius: 10px;">{{ openticket.avisuser }}</div>
+		<div>
+		<span style="padding: 3px; color: #ddd; font-size: 15px;">Services:</span>
+		{% if openticket.panier.collectionproduit == null %}
+			{% for prodpan in openticket.panier.produitpaniers %}
+				{% if prodpan.produit.souscategorie.categorie.rang == 1 %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; margin: 3px; border-radius: 7px;">Nom de domaine</span>
+				{% else %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; margin: 3px; border-radius: 7px;">{{ prodpan.produit.souscategorie.nom }}</span>
+				{% endif %}
+			{% endfor %}
+		{% else %}
+			{% set collection = openticket.panier.collectionproduit %}
+			{% for renewplan in collection.renewplans %}
+				{% set prodpan = renewplan.produitpanier %}
+				{% if prodpan.produit.souscategorie.categorie.rang == 1 %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; margin: 3px; border-radius: 7px;">Nom de domaine</span>
+				{% else %}
+				<span style="padding: 3px; background: green; color: #fff; font-size: 10px; margin: 3px; border-radius: 7px;">{{ prodpan.produit.souscategorie.nom }}</span>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		</div>
+		<div style="margin-top: 15px; background: #f2f2f2; padding: 7px;">
+		{{ openticket.description }}
+		</div>
+		</div>			
+						
+	  </div>
+	</div>
+</div>
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block;">
+	{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripttemplate %}
+$('a').tooltip();
+
+{% if openticket != null %}
+$('#modalopenticketUser').modal('show');
+{% endif %}
+
+{% for infos in app.session.flashbag.get('information') %}
+{% if loop.first %}
+	resetNotif();
+    alertify.alert("{{ infos }}");
+{% endif %}
+{% endfor %}
+
+$(".open").click(function(){
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+
+$('.update-content-article-reponse').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_user_update_reponse_billet', {'position': 3}) }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});		
+
+
+var Accordion = function(el, multiple) {
+	this.el = el || {};
+	this.multiple = multiple || false;
+
+	// Variables privadas
+	var links = this.el.find('.link');
+	// Evento
+	links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+}
+
+Accordion.prototype.dropdown = function(e) {
+	var $el = e.data.el;
+		$this = $(this),
+		$next = $this.next();
+
+	$next.slideToggle();
+	$this.parent().toggleClass('open');
+
+	if (!e.data.multiple) {
+		$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+	};
+}	
+
+var accordion = new Accordion($('#accordion'), false);
+$('a').tooltip();
+
+$('.item-app').hover(function(){
+  $(this).find('.popover').stop(true, true).delay(200).fadeIn(200);
+  }, function(){
+  $(this).find('.popover').stop(true, true).delay(200).fadeOut(200);
+});  
+{% endblock %}

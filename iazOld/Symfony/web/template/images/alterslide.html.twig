@@ -1,0 +1,43 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	<form class="row" action="{{ path('users_adminuser_change_image_slide', {'id': slide.id }) }}" method="post" {{ form_enctype(form) }} style="margin-top: 15px;">
+
+		 <div class="input-field col s12">
+			{{ form_widget(form.titre, {'attr': {'class': 'form-control', 'style': 'border: 1px solid #ddd; padding: 7px;'}}) }}
+		 </div>
+		 
+		 <div class="input-field col s12">
+			{{ form_widget(form.description, {'attr': {'class': 'form-control', 'style': 'border: 1px solid #ddd; padding: 7px;'}}) }}
+		 </div>
+		<div class="input-field col s12">
+		  {{ form_widget(form.souscategorie, {'attr': {'class': 'form-control browser-default', 'style': 'width: 100%; border: 1px solid #ddd; padding: 7px;'}}) }}
+		</div>
+	  <div class="input-field col s12">
+		{{ form_widget(form.rang , {'attr': {'class': 'form-control', 'style': 'border: 1px solid #ddd; padding: 7px;'}}) }}
+	  </div>
+
+	  <div class="input-field col s12" style="margin-bottom: 15px;">
+	  <div style="margin-top: 10px;">{{ form_widget(form.file) }}</div>
+	  </div>
+	  
+	  <div class="input-field col s12">
+		{{ form_errors(form.link) }}
+		{{ form_widget(form.link) }}
+		{{ form_label(form.rang,'Ajouter un lien (facultation)') }}
+	  </div>
+	  
+	  <div class="col s12">
+		{{ form_errors(form.slide) }}
+		{{ form_widget(form.slide) }}
+		{{ form_label(form.rang,'Image d\'accueil') }}
+	  </div>
+	  
+	  <div class="input-field col s12" style="margin-top: 15px;">
+		<button class="btn btn-primary btn-lg">Enregistrez</button>
+	  </div>
+	 <div class="clearfix"></div>
+	 {{ form_rest(form) }}
+	</form>	
+	<div class="clearfix"></div>
+</div>
+</div>

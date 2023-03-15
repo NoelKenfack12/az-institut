@@ -1,0 +1,124 @@
+{% extends "Theme/Users/User/layoutuser.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Boutique,e-commerce,{{ metier }}"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | {{ metier }} | {{ site }} 
+{% endblock %}
+
+{% block userblog_body %}
+
+<!--content-->
+		<div class="product">
+			<div class="container">
+				<div class="col-md-3 product-bottom">
+				{{ render(controller("App\\Controller\\Produit\\Produit\\CategorieController:catalogue")) }}
+				<!---->
+				</div>
+			<div class="col-md-9 animated wow fadeInRight variation-contenu" data-wow-delay=".5s" value="0">
+				<div  style="background: #f7f7f7; border: 1px solid #ddd; margin-bottom: 7px; padding-bottom: 10px;">
+				  <h2>Résultat de la recherche pour le mot clé  <span style="margin-left: 7px; margin-right: 7px;">/</span> {{ donnee }} </h2>
+				</div>
+						{% for produit in liste_produit %}
+							<div class="col-sm-4 item-grid item-gr  simpleCart_shelfItem">
+								<div class="grid-pro">
+									<div  class=" grid-product " >
+										<figure>		
+											<a href="{{ path('produit_produit_detail_produit_market', {'id': produit.id }) }}">
+												<div class="grid-img">
+												   {% set nbre = random() % produit.imgproduits|length %}
+												   {% set nbre2 = random() % produit.imgproduits|length %}
+												   {% if nbre == nbre2 and produit.imgproduits|length >= 2 %}
+												   {% if nbre == produit.imgproduits|length - 1 %}
+												   {% set nbre2 = 0 %}
+												   {% else %}
+												   {% set nbre2 = nbre + 1 %}
+												   {% endif %}
+												   {% endif %}
+												   {% for img in produit.imgproduits %}
+												   {% if loop.index0 == nbre %}
+												   <img src="{{ asset(img.getWebpath) }}" class="img-responsive" alt="" style="height: 180px;"/>
+												   {% endif %}
+												   {% endfor %}
+												</div>
+												<div class="grid-img">
+													{% for img in produit.imgproduits %}
+												   {% if loop.index0 == nbre2 %}
+												   <img src="{{ asset(img.getWebpath) }}" class="img-responsive" alt="" style="height: 180px;"/>
+												   {% endif %}
+												   {% endfor %}
+												</div>			
+											</a>		
+										</figure>	
+									</div>
+									<div class="women">
+										<h6><a href="{{ path('produit_produit_detail_produit_market', {'id': produit.id }) }}">{{ produit.nom }}</a></h6>
+										<h6>{{ produit.description[:30] }}</h6>
+										<h6><span style="text-decoration: line-through;">{{ produit.ancienPrixProduit }} {{ devise }}</span> /{{ produit.newprise }} {{ devise }}</h6>
+										<a href="{% if app.user != null %}#a{% else %}{{ path('login') }}{% endif %}" data-text="Ajouter au panier" class="but-hover1 item_add {% if app.user != null %}ajout-produit-panier{% endif %}" value="{{ produit.id }}">Ajouter au panier</a>
+										<a href="{% if app.user != null %}#a{% else %}{{ path('login') }}{% endif %}" data-text="J'aime" class="but-hover1 item_add {% if app.user != null %}like-produit-courant{% endif %}" value="{{ produit.id }}">{{ produit.nblike }} Likes</a>
+									</div>
+								</div>
+							</div>
+						{% else %}
+						<h4>Aucun produit pour la recherche avec le mot clé {{ donnee }}</h4>
+						{% endfor %}	
+			<div class="clearfix"></div></div>
+			</div>
+			</div>
+			
+			
+			
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.accueil').removeClass('active');
+$('.boutique').addClass('active');
+
+$('.like-produit-courant').click(function(){
+  var id = $(this).attr('value');
+  if($('.variation-contenu').attr('value') == 0)
+  {
+  $('.variation-contenu').attr('value',1);
+  $(this).attr('data-text','...');
+  $(this).html('<span><img src="{{ asset('template/images/wait-user.gif') }}" alt="..."/></span>'); //attente du résultat
+  $.get('{{ path('produit_produit_like_courant_product') }}',{ id: id }, function(data) {
+  $('.variation-contenu').attr('value',0);
+  if(data == 1)
+  {
+  window.location.reload();
+  }else{
+  alert('Une Erreur rencontrée');
+  window.location.reload();
+  }
+  });
+  }
+  return false;
+});
+
+$('.ajout-produit-panier').click(function(){
+  var id = $(this).attr('value');
+  if($('.variation-contenu').attr('value') == 0)
+  {
+  $('.variation-contenu').attr('value',1);
+  $(this).html('<span><img src="{{ asset('template/images/wait-user.gif') }}" alt="..."/></span>'); //attente du résultat
+  $.get('{{ path('produit_produit_ajouter_product_panier') }}',{ id: id }, function(data) {
+  $('.variation-contenu').attr('value',0);
+  if(data == 1)
+  {
+  window.location.reload();
+  }else{
+  alert('Une Erreur rencontrée');
+  window.location.reload();
+  }
+  });
+  }
+  return false;
+});
+
+{% endblock %}

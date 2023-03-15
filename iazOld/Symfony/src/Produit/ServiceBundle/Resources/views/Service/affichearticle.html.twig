@@ -1,0 +1,220 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration, blog {{  site }}"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }} | service | blog {{  site }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Accueil
+{% endblock %}
+
+{% block userblog_body %}
+<section id="blog" class="container">
+        <div class="center">
+            <h2>Blogs</h2>
+            <p class="lead">Description</p>
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="blog-item">
+						<img class="img-responsive img-blog img-thumbnail" src="{{ asset(article.imgservice.getWebPath) }}" width="100%" alt="" style="height: 250px; 100%""/>
+                            <div class="row">  
+                                <div class="col-xs-12 col-sm-2 text-center">
+                                    <div class="entry-meta">
+                                        <span id="publish_date">{{ article.date|date('F jS') }}</span>
+                                        <span><i class="fa fa-user"></i> <a href="#"> {{ article.user.name(12) }}</a></span>
+                                        <span><i class="fa fa-comment"></i> <a href="blog-item.html#comments">{{ article.commentaireblogs|length }} Comments</a></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-10 blog-content" style="tex-align: justify;">
+                                    
+									<h2 style="color: #333;">{{ article.nom }}</h2>
+                                    <p style="text-align: justify;">{{ article.description }}</p>
+									{% for even in liste_even %}
+									<h2 style="color: #ccc;">{{ even.nom }}</h2>
+                                    <p style="text-align: justify;">{{ even.description }}</p>
+									{% endfor %}
+
+                                </div>
+                            </div>
+                        </div><!--/.blog-item-->
+
+                        
+                        <h1 id="comments_title">{{ article.commentaireblogs|length }} Commentaires</h1>
+                        {% for com in liste_com %}
+						<div class="media comment_section">
+                            <div class="col-xs-2 col-sm-2">
+							<div class="post_comments">
+								{% if com.user != null and com.user.imgprofil != null %}
+								<img src="{{ asset(com.user.imgprofil.webpath) }}" alt=""  class="img-thumbnail" style="width: 90px; height: 90px;"/>
+								{% else %}
+								<img src="{{ asset('template/images/co.png') }}" alt=""  class="img-thumbnail" style="width: 90px; height: 90px;"/>
+								{% endif %}
+                            </div>
+                            </div>
+							<div class="col-xs-10 col-sm-10">
+                            <div style="    background: #f5f5f5; border-radius: 4px; padding: 30px;">
+                                <h4>{% if com.user != null %}{{ com.user.name(20) }}{% else %}{{ com.name }}{% endif %} {% if is_granted('ROLE_GESTION') %} <a href="{{ path('produit_service_supprimer_commentaire_courant_article', {'id': com.id }) }}" class="pull-right" style="color: red;"><i class="fa fa-times"></i></a>{% endif %}</h4>
+                                <h3 style="margin-top: 0px;">{{ com.getDuree }}</h3>
+                                <p>{{ com.contenu }}</p>
+								{% if com.url != null %}
+                                <a href="{{ com.url }}">Site web</a>
+								{% endif %}
+                            </div>
+                            </div>
+                        </div> 
+                        {% endfor %}
+                        <div id="contact-page clearfix">
+                            <div class="status alert alert-success" style="display: none"></div>
+                            <div class="message_heading">
+                                <h4>Ajouter votre commentaire</h4>
+                            </div> 
+							{% for infos in app.session.flashbag.get('information') %}
+							{% if loop.last %}
+							<div class="alert alert-success text-center text-success">
+							<h3> {{ infos }}</h3>
+							</div>
+							{% endif %}
+							{% endfor %}
+                            <form method="post" action="{{ path('produit_service_ajouter_commentaire_article_user', {'id': article.id}) }}" role="form" {{ form_enctype(form) }}>
+                                
+								<div class="row">
+                                    <div class="col-sm-5">
+									<span style="color:red;">{{ form_errors(form) }}</span>
+									<span style="color:red;">{{ form_errors(form.nom) }}</span>
+                                        <div class="form-group">
+                                            <label>Name *</label>
+											{% if app.user != null %}
+											{% set nom = app.user.name(20) %}
+											{{ form_widget(form.nom, {'attr':{'value': nom,'class': 'form-control'},'disabled':true}) }}
+											{% else %}
+											{{ form_widget(form.nom,{'attr':{'class': 'form-control'}}) }}
+											{% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email *</label>
+                                            {% if app.user != null %}
+											{% set mail = app.user.username %}
+											{{ form_widget(form.email, {'attr':{'value': mail,'class': 'form-control'},'disabled':true}) }}
+											{% else %}
+											{{ form_widget(form.email,{'attr':{'class': 'form-control'}}) }}
+											{% endif %}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>URL</label>
+                                            {{ form_widget(form.url) }}
+                                        </div>                    
+                                    </div>
+                                    <div class="col-sm-7">                        
+                                        <div class="form-group">
+                                            <label>Message *</label>
+                                            {{ form_widget(form.contenu) }}
+                                        </div>                        
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-lg" required="required">Ajouter le commentaire</button>
+                                        </div>
+                                    </div>
+                                </div>
+								{{ form_rest(form) }}
+                            </form>     
+                        </div><!--/#contact-page-->
+                    </div><!--/.col-md-8-->
+
+                <aside class="col-md-4">
+                    <div class="widget search">
+						<form role="form" action="{{ path('produit_produit_recherche_new_produit') }}" method="post" {{ form_enctype(formrecher) }}>
+								<span style="color:red;">{{ form_errors(formrecher.donnee) }}</span>{{ form_widget(formrecher.donnee,{'attr':{'class':'form-control search_box','autocomplete':'off','placeholder':'Lancer une recherche'}}) }} 
+                        {{ form_rest(formrecher) }}
+						</form>
+                    </div><!--/.search-->
+    				
+    				<div class="widget categories">
+                        <h3 style="color: white;">Recent Comments</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+							{% for com in liste_com|slice(0,5) %}
+                                <div class="single_comments">
+								{% if com.user != null and com.user.imgprofil != null %}
+								<img src="{{ asset(com.user.imgprofil.webpath) }}" alt=""  class="img-thumbnail" style="width: 70px; height: 70px;"/>
+								{% else %}
+								<img src="{{ asset('template/images/co.png') }}" alt=""  class="img-thumbnail" style="width: 70px; height: 70px;"/>
+								{% endif %}
+                                    
+									<strong>{{ com.nom }}</strong>
+                                    <p>{{ com.contenu[:75] }}... </p>
+                                    <div class="entry-meta small muted">
+                                        <span>Par <a href="#">{% if com.user != null %}{{ com.user.name(15) }}{% else %}{{ com.nom}}{% endif %}</a></span <span>|  <a href="#">{{ com.getDuree }}</a></span>
+                                    </div>
+                                </div>
+							{% else %}
+							<div class="single_comments">
+                                    <img src="{{ asset('template/images/co.png') }}" alt=""  class="img-thumbnail"/>
+                                    <p>Aucun commentaire </p>
+                                    <div class="entry-meta small muted">
+                                        <span>{{ site }}</a></span>
+                                    </div>
+                            </div>
+							{% endfor %}
+   							
+                            </div>
+                        </div>                     
+                    </div><!--/.recent comments-->
+                     
+
+                    <div class="widget categories">
+                        <h3 style="color: white;">Menu</h3>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="blog_category">
+                                    <li><a href="{{ path('users_user_acces_plateforme') }}">Accueil</a></li>
+                                    <li><a href="{{ path('produit_service_apropos_denous') }}">L'entreprise</a></li>
+                                    <li><a href="{{ path('produit_service_visiter_notre_blog') }}">Boutique</a></li>
+                                    <li><a href="{{ path('produit_service_contact_us') }}">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>                     
+                    </div><!--/.categories-->
+    				
+    				<div class="widget archieve">
+                        <h3>Archieve</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="blog_archieve">
+								{% for gal in all_blog|slice((all_blog|length - 1),(all_blog|length +1) ) %}
+								<li><a href="{{ path('produit_service_affiche_contenu_detaille_article_blog', {'id': gal.id }) }}"><i class="fa fa-angle-double-right"></i> {{ gal.nom[:30] }}.. <span class="pull-right">({{ gal.commentaireblogs|length }})</span></li>
+								{% endfor %}
+                                </ul>
+                            </div>
+                        </div>                     
+                    </div><!--/.archieve-->   		
+					
+					<div class="widget blog_gallery">
+                        <h3>Nos Articles</h3>
+                        <ul class="sidebar-gallery">
+						{% set pagine = 1 %}
+						{% for gal in all_blog %}
+						{% if loop.index != 2 and loop.index % 2 == 0 %}
+						{% set pagine = pagine + 1 %}
+						{% endif %}
+						<li><a href="{{ path('produit_service_visiter_notre_blog', {'page': pagine }) }}"><img src="{{ asset(gal.imgservice.getWebPath) }}" alt="" class="img-thumbnail" style="height: 63px; width: 107px;"/></a></li>
+						{% endfor %}
+                        </ul>
+                    </div><!--/.blog_gallery-->
+    					
+    				
+                </aside>     
+
+            </div><!--/.row-->
+
+         </div><!--/.blog-->              
+    </section><!--/#blog-->
+     
+{% endblock %}
+
+{% block javascripttemplate %}
+$('.accueil').removeClass('active');
+$('.blog').addClass('active');
+{% endblock %}

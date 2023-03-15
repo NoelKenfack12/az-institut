@@ -1,0 +1,162 @@
+{% extends "UsersAdminuserBundle::layoutadmin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun "/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | {{ 'Accueil Admin'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block userblog_menuleft %}
+	{{ render(controller("UsersAdminuserBundle:Accueil:menuadmin")) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<div id="content">
+	<div class="container">
+	{% include 'GeneralTemplateBundle:Menu:descriptionvariable.html.twig' %}
+	<!--breadcrumbs start-->
+<div class="inner-content">
+
+<div class="col s12 m12 l6">
+ <!--Borderless Table-->
+<div class="section" style="padding: 5px 0px 0px 0px;">
+ <div class="row" style="background: #fafafa; border-bottom: 2px dashed #999; margin-bottom: 15px;">
+  <div class="col s12 m6 16">
+	<h5 class="breadcrumbs-title">
+	{{ 'Vous êtes ici'|trans }}:
+	</h5>
+	<ol class="breadcrumb">
+	  <li><a href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a></li>
+	  <li class="active">Liste administrateurs</li>
+	</ol>
+  </div>
+</div>
+
+
+<div class="row">
+<div id="profile-page-wall" class="col s12 m12">
+
+
+{% set id = '' %}
+	{% set idrole = 1 %}
+	{% for infos in app.session.flashbag.get('supprime_role') %}
+	{% if loop.last %}
+	<div class="alert alert-danger" style="padding: 5px; border-left: 4px solid #3565ae;">
+	<span class="fa fa-warning"></span> {{ 'Êtes vous certain de vouloir supprimer le role'|trans }} {{ infos|trans }} 
+	<form action="{{ path('users_adminuser_enleve_role_admin',{'id': id,'idrole': idrole }) }}" method="post" style="display: inline;">
+	<input type="submit" value="{{ 'Supprimer'|trans }}" style="background: red;"/>
+	{{ form_rest(formsupp) }}
+	</form>
+	</div>
+	{% else %}
+		{% if loop.first %}
+			{% set id = infos %}
+		{% else %}
+			{% set idrole = infos %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+
+{% for infos in app.session.flashbag.get('information') %}
+{% if loop.first %}
+	<div style="margin-bottom: 7px;">
+	{% include 'GeneralTemplateBundle:Menu:flasinfos.html.twig' %}
+	</div>
+{% endif %}
+{% endfor %}
+	
+
+{% for user in liste_user %}
+<!-- profile-page-sidebar-->
+<div id="profile-page-sidebar" class="col s12 m4">
+  <div id="profile-card" class="card" style="margin-top: 0px;">
+	<div class="card-image waves-effect waves-block waves-light">
+	  <img class="activator" src="{{ asset('template/images/assistance-bg.jpg') }}" alt="user bg">
+	</div>
+	<div class="card-content">
+	  <img src="{% if user.imgprofil == null %}{{ asset('template/images/co.png') }}{% else %}{{ asset(user.imgprofil.getWebPath) }}{% endif %}" alt="" class="circle responsive-img activator card-profile-image" style="height: 70px; width: 70px;">
+	  <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right" style="background: #3565ae;">
+		<i class="mdi-content-add-circle-outline"></i>
+	  </a>
+			<ul id="dropdowntype-{{ user.id }}" class="dropdown-content right" style="min-width: 250px; margin-left: -150px;">
+				<li>
+				<a href="{{ path('users_adminuser_enleve_role_admin', {'id': user.id, 'idrole': 1}) }}" class="update-content-type-article"><i class="mdi-action-highlight-remove" style="font-size: 12px;"></i> Supprission rôle Gestion</a>
+				</li>
+				<li>
+				<a href="{{ path('users_adminuser_enleve_role_admin', {'id': user.id, 'idrole': 2}) }}"><i class="mdi-action-highlight-remove" style="font-size: 12px;"></i> Supprission rôle Gestion N2</a>
+				</li>
+			</ul>
+			<a class="dropdown-button right" href="#!" data-activates="dropdowntype-{{ user.id }}" style="margin-top: -25px;"><i class="mdi-hardware-keyboard-control"></i></a>
+
+	  <span class="card-title activator grey-text text-darken-4">{{ user.name(20) }}</span>
+	  <p><i class="mdi-action-perm-phone-msg"></i> {{ user.tel }}</p>
+	  <p><i class="mdi-communication-email"></i> {{ user.username }}</p>
+	  <p><i class="mdi-maps-place"></i> {% if user.pays != null %}{{ user.pays.nom }}{% else %}Pays vide...{% endif %}</p>
+	  <p style="color: #ff4081;"><i class="mdi-action-lock-outline"></i> <span>ROLE_USER</span></p>
+	</div>
+	<div class="card-reveal">
+	  <span class="card-title grey-text text-darken-4">{{ user.name(20) }} <i class="mdi-navigation-close right"></i></span>
+	  <p><i class="mdi-action-perm-phone-msg"></i> {{ user.tel }}</p>
+	  <p><i class="mdi-communication-email"></i> {{ user.username }}</p>
+	  <p><i class="mdi-maps-place"></i> {% if user.pays != null %}{{ user.pays.nom }}{% else %}Pays vide...{% endif %}</p>
+	  <p style="color: #ff4081;">
+	  {% for rol in user.roles %}
+	  {{ rol }},
+	  {% endfor %}
+	  </p>
+	  <p style="color: #ff4081;">
+	  </p>
+	</div>
+  </div>
+</div>
+<!-- profile-page-sidebar-->
+{% endfor %}
+
+<form class="col s12 m4" action="{{ path('users_adminuser_ajout_nouveau_admin') }}" method="post">
+  <div class="card-panel" style="margin-top: 0px;">
+  <h4 class="header2" style="text-transform: capitalyse;">Ajouter un nouveau administrateur</h4>
+  <div style="text-transform: capitalise;">L'utilisateur doit être au préalable inscrit sur cette plateforme.</div>
+  <div class="row">
+	<div class="input-field col s12">
+	  <i class="mdi-action-assignment prefix"></i>
+	  <input type="text" name="username" id="username"/>
+	  <label for="username">Email User</label>
+	</div>
+	<div class="input-field col s12">
+	<select class="" name="roleuser" style="width: 100%;">
+		<option value="ROLE_GESTION">ROLE_GESTION</option>
+		<option value="ROLE_MANAGER_ED">ROLE_GESTION_N2</option>
+	</select>
+	</div>
+	<div class="input-field col s12">
+		<button class="btn cyan waves-effect waves-light" type="submit" name="action"> Envoyer</button>
+	</div>
+  </div>
+  </div>
+</form>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+{% endblock %}

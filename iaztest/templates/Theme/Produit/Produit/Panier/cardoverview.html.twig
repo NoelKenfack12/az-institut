@@ -1,0 +1,280 @@
+<style>
+
+.progress {
+overflow: hidden;
+height: 10px;
+
+background-color: #f7f7f7;
+background-image: -moz-linear-gradient(top, #f5f5f5, #f9f9f9);
+background-image: -ms-linear-gradient(top, #f5f5f5, #f9f9f9);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f5), to(#f9f9f9));
+background-image: -webkit-linear-gradient(top, #f5f5f5, #f9f9f9);
+background-image: -o-linear-gradient(top, #f5f5f5, #f9f9f9);
+background-image: linear-gradient(top, #f5f5f5, #f9f9f9);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#f9f9f9', GradientType=0);
+
+-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+
+}
+
+.progress .bar {
+width: {{ progress|default(0) }}%;
+height: 18px;
+  
+  
+background-color: #0e90d2;
+background-image: -moz-linear-gradient(top, #149bdf, #0480be);
+background-image: -ms-linear-gradient(top, #149bdf, #0480be);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#149bdf), to(#0480be));
+background-image: -webkit-linear-gradient(top, #149bdf, #0480be);
+background-image: -o-linear-gradient(top, #149bdf, #0480be);
+background-image: linear-gradient(top, #149bdf, #0480be);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#149bdf', endColorstr='#0480be', GradientType=0);
+  
+-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+-moz-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+  
+-webkit-transition: width 0.6s ease;
+-moz-transition: width 0.6s ease;
+-ms-transition: width 0.6s ease;
+-o-transition: width 0.6s ease;
+transition: width 0.6s ease;
+}
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu-ui {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 15px auto;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+}
+.menu-ui .menu-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.menu-ui .menu-wrapper .profile-info {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menu-ui .menu-wrapper .profile-info .profile-img {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background: #e8f0ff;
+  border-radius: 50%;
+  text-align: center;
+}
+.menu-ui .menu-wrapper .profile-info .profile-img::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: #65e564;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: absolute;
+  bottom: -2px;
+  right: 17px;
+}
+.menu-ui .menu-wrapper .profile-info .profile-img img {
+  width: 100%;
+  border-radius: 50%;
+  -webkit-user-select: none;
+  line-height: 100px;
+}
+.menu-ui .menu-wrapper .profile-info .profile-author {
+  text-align: center;
+}
+.menu-ui .menu-wrapper .profile-info .profile-author .author__name {
+  margin-top: 1rem;
+  letter-spacing: .3px;
+}
+.menu-ui .menu-wrapper .profile-info .profile-author .author__job-title {
+  margin: .5rem 0 0 0;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+.menu-ui .menu-wrapper .menu-content {
+  flex: 1;
+  border-radius: 0px;
+  background: linear-gradient(0deg, #e8f0ff, #f7faff);
+}
+.menu-ui .menu-wrapper .menu-content .group {
+  height: 100%;
+  padding: 3.5rem 1.7rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group {
+  margin-bottom: 2rem;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li a {
+  display: block;
+  padding: 1rem 2rem;
+  transition: all 300ms ease-in-out;
+  font-family: "Lato", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  overflow: hidden;
+  position: relative;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li a::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 28px;
+  background: #f73081;
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  margin-top: -14px;
+  transition: all 250ms ease-in-out;
+  opacity: 0;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li a:hover {
+  background: #fff;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li a:hover::before {
+  left: 0;
+  opacity: 1;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li.is-list-item-selected {
+  background: #fff;
+  position: relative;
+}
+.menu-ui .menu-wrapper .menu-content .group .profile-links-group li.is-list-item-selected::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 28px;
+  background: #f73081;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -14px;
+}
+.menu-ui .menu-wrapper .menu-content .group .logout-btn {
+  display: block;
+  width: 100%;
+  padding: .8rem 0;
+  align-self: center;
+  background: #dde9ff;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  transition: background 250ms ease-in-out;
+}
+.menu-ui .menu-wrapper .menu-content .group .logout-btn:hover {
+  background: #d8e6ff;
+}
+
+.is-list-item-selected {
+  background: #fff;
+  position: relative;
+}
+.is-list-item-selected::before {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 28px;
+  background: #f73081;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -14px;
+}
+
+</style>
+<div class="menu-ui">
+   <div class="menu-wrapper">
+	  <div class="menu-content text-left">
+		 <div class="group">
+			<ul class="profile-links-group">
+			   <li class="list-item">
+				   <div class="progress">
+					<div class="bar"></div>
+				   </div>
+			   </li>
+			   {% if app.session.get('devisupdate') != null %}
+				 {% set userdevise = app.session.get('devisupdate') %}
+			   {% else %}
+				 {% set userdevise = devise %}
+			   {% endif %}
+			   
+			   
+				   {% set taxe = panier.montantttc - panier.montantht %}
+				   
+				   {% if panier.couponcard != null %}
+						{% set prixremise = convertPrise(panier.couponcard.montant,panier.couponcard.montant,0,userdevise) %}
+						{% set remise = panier.couponcard.montant %}
+				   {% else %}
+						{% set prixremise = convertPrise(0,0,0,userdevise) %}
+						{% set remise = 0 %}
+				   {% endif %}
+			   
+				   {% set prixhorstaxe = convertPrise((panier.montantht + remise),(panier.montantht + remise),taxe,userdevise) %}
+				   {% set prixtaxe = convertPrise(taxe,taxe,0,userdevise) %}
+				   {% set prixtouttaxe = convertPrise((panier.montantttc + remise),(panier.montantttc + remise),0,userdevise) %}
+				   {% set prixttotal = convertPrise((panier.montantttc),(panier.montantttc),0,userdevise) %}
+				   
+			   <li class="list-item"><a href="#!">Montant HT: <span style="float: right; font-size: 12px; margin-top: 10px;">{{ prixhorstaxe['prixint'] }},{{ prixhorstaxe['decimal'] }} {{ prixhorstaxe['devise']|raw }}</span></a></li>
+			   <li class="list-item"><a href="#!">Documentation: <span style="float: right; font-size: 12px; margin-top: 10px;">{{ prixtaxe['prixint'] }},{{ prixtaxe['decimal'] }} {{ prixtaxe['devise']|raw }}</span></a></li>
+			   <li class="list-item"><a href="#!" style="border-top: 1px solid #ddd;">Total: <span style="float: right; font-size: 12px; margin-top: 10px;">{{ prixtouttaxe['prixint'] }},{{ prixtouttaxe['decimal'] }} {{ prixtouttaxe['devise']|raw }}</span></a></li>
+			   <li class="list-item"><a href="#!" style="border-top: 1px solid #ddd;">Remise: <span style="float: right; font-size: 12px; margin-top: 10px;">- {{ prixremise['prixint'] }},{{ prixremise['decimal'] }} {{ prixremise['devise']|raw }}</span></a></li>
+			   <li class="list-item"><a href="#!" style="border-top: 1px solid #ddd;">G. Total:  <span style="float: right; font-size: 12px; margin-top: 10px;">{{ prixttotal['prixint'] }},{{ prixttotal['decimal'] }} {{ prixttotal['devise']|raw }}</span></a></li>
+			</ul>
+		 </div>
+		 {% if panier.user != null %}
+		 <div style="border-top: 1px solid #ddd;padding: 7px 15px;">
+			 <a href="{{ path('users_user_user_accueil', {'id': panier.user.id}) }}">
+				 <img src="{% if panier.user != null and panier.user.imgprofil != null %}{{ asset(panier.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="" style="width: 40px; height: 40px; border-radius: 20px; float: left; margin-right: 7px;">
+				 {{ panier.user.name(50) }}</br>
+				 <div style="font-size: 12px;">Solde: ...{{ devise }}</div>
+			 </a>
+		 </div>
+		 {% else %}
+		 <div style="border-top: 1px solid #ddd;padding: 7px 15px;">
+			 <a href="#!">
+				 <img src="{{ asset('template/images/co.png') }}" alt="..." style="width: 40px; height: 40px; border-radius: 20px; float: left; margin-right: 7px;">
+				 Connexion: Anonyme </br>
+				 <div style="font-size: 12px;">Connectez-vous plus tard.</div>
+			 </a>
+		 </div>
+		 {% endif %}
+	  </div>
+   </div>
+</div>

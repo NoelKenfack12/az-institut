@@ -1,0 +1,59 @@
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	<form class="col s12" action="{{ path('users_adminuser_update_type_article', {'id': typearticle.id }) }}" method="post" {{ form_enctype(formtype) }}>
+		  <div class="row">
+			<span style="color:red;">{{ form_errors(formtype) }}</span>
+			<span style="color:red;">{{ form_errors(formtype.nom) }}</span>
+			  <div class="input-field col s12">
+				{{ form_widget(formtype.nom) }}
+				{{ form_label(formtype.nom,'Type d\'article') }}
+			  </div>
+			  <div class="input-field col s12">
+				{{ form_errors(formtype.rang) }}
+				{{ form_widget(formtype.rang) }}
+			  </div>
+			  <div class="input-field col s12">
+				{{ form_errors(formtype.description) }}
+				{{ form_widget(formtype.description) }}
+				{{ form_label(formtype.description,'Description du type') }}
+			  </div>
+		  </div>
+		  
+		  <div class="row">
+			<div class="file-field input-field col s12">
+				<input class="file-path validate" type="text"/>
+				<div class="btn">
+				  <span>Image Type</span>
+				  {{ form_widget(formtype.file) }}
+				</div>
+			</div>
+			<div class="input-field col s12">
+			<select id="typeservice" name="typeservice" class="frm-field required browser-default" style="width: 100%; margin-top: 10px;">
+			<option value="aproposinstitut" {% if typearticle.position == 'aproposinstitut' %}selected{% endif %}>À propos de l'institut</option> 
+			<option value="evenement" {% if typearticle.position == 'evenement' %}selected{% endif %}>Evènement</option>         
+			<option value="actualite" {% if typearticle.position == 'actualite' %}selected{% endif %}>Actualité scolaire</option>         
+			<option value="demarcheaz" {% if typearticle.position == 'demarcheaz' %}selected{% endif %}>Démarche {{ site }}</option>         
+			<option value="temoignage" {% if typearticle.position == 'temoignage' %}selected{% endif %}>Témoignage</option>    
+			<option value="mediatheque" {% if typearticle.position == 'mediatheque' %}selected{% endif %}>Médiathèque</option>
+			<option value="planingcours" {% if typearticle.position == 'planingcours' %}selected{% endif %}>Planing des cours</option>   
+			<option value="modepaiement" {% if typearticle.position == 'modepaiement' %}selected{% endif %}>Mode de paiement</option>
+			<option value="aide" {% if typearticle.position == 'aide' %}selected{% endif %}>Articles d'aide</option> 
+			<option value="galeriephoto" {% if typearticle.position == 'galeriephoto' %}selected{% endif %}>Partie galerie</option> 
+			</select>
+			</div>
+		  </div>
+			
+		  <div class="row">	
+			<div class="input-field col s12">
+			  <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Enregister
+				<i class="mdi-content-send right"></i>
+			  </button>
+			</div>
+		  </div>
+		 <div class="clear"></div>
+		 {{ form_rest(formtype) }}
+	</form>
+	<div class="clearfix"></div>
+</div>
+</div>
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>

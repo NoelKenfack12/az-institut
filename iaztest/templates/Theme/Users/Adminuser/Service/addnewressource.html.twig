@@ -1,0 +1,74 @@
+
+<link href="{{ asset('template/css/tokenize2.css') }}" rel="stylesheet"/>
+<script src="{{ asset('template/js/tokenize2.js') }}"></script>
+
+<style>
+.tokens-container{
+
+}
+.form-control{
+	background: #fff!important;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+}
+.tokenize-dropdown{
+	background: #fff!important;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	padding: 7px;
+}
+</style>
+
+<div class="row">
+<div class="col-md-8 col-md-offset-2 col-sm-12">
+	<form class="col s12 submit-default" action="{{ path('users_adminuser_add_new_ressource_article', {'id': article.id, 'name': name}) }}" method="post">		  
+
+		<div class="row">
+		 <div class="input-field col s12">
+		 {% if name == 'photo' %}
+			<div style="margin-bottom: 15px;">Sélectionnez les collections de photo à ajouter à cet article</div>
+		 {% else %}
+			<div style="margin-bottom: 15px;">Sélectionnez les collections de vidéo à ajouter à cet article</div>
+		 {% endif %}
+		<select style="width: 100%!important; display: block;" class="tokenize-sample-demo1 form-control" multiple value="">
+			{% for multimedia in liste_article %}
+			<option value="{{ multimedia.id }}">{{ multimedia.nom }}</option>
+			{% endfor %}
+		</select>
+		<input type="hidden" name="recommandation"/>
+		</div>
+
+
+	    <div class="input-field col s12">
+			<input type="number" id="" name="rang" class="form-control"/>
+	    </div>
+
+		<div class="input-field col s12">
+		  <button class="btn cyan waves-effect waves-light" type="submit" name="action">Enregister
+			<i class="mdi-content-send right"></i>
+		  </button>
+		</div>
+	  </div>
+		  
+	 <div class="clear"></div>
+	 
+    </form>
+	<div class="clearfix"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{{ asset('admintemplate/js/materialize.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.tokenize-sample-demo1').tokenize2({
+		placeholder: 'Entrez le premier mot du cours',
+		sortable: true,
+		allowEmptyValues:true,
+		searchFromStart:false
+	});
+	
+	$('form.submit-default').on('submit', function(){
+		$(this).find('input[type="hidden"]').attr('value',$(this).find('select').val());
+	});
+});
+</script>

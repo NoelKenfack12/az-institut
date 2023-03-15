@@ -1,0 +1,221 @@
+
+{% if article != null %}
+	{% if article.typearticle == 'galeriephoto' %}
+		<div class="container">
+		<div class="row">
+		<div class="col-md-4" style="padding: 0px;">
+
+			<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block;">
+				<div class="card-body">
+				  <h4 class="card-title">Evènements</h4>
+				  <h6 class="card-subtitle mb-2">Emilia-Romagna Region, Italy</h6>
+				  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+				</div>
+				<div class="list-group">
+				  <a href="#" class="list-group-item " style="border: none;">
+					San Petronio Basilica
+				  </a>
+				  <a href="#" class="list-group-item " style="border: none;">University of Bologna</a>
+				  <a href="#" class="list-group-item " style="border: none;">Fountain of Neptune</a>
+				  <a href="#" class="list-group-item " style="border: none;">Fountain of Neptune</a>
+				</div>       
+			</div>
+			<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block;">
+				<div class="card-body">
+				  <h4 class="card-title">Actualité</h4>
+				  <h6 class="card-subtitle mb-2">Emilia-Romagna Region, Italy</h6>
+				  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+				</div>
+				<div class="list-group list-group-flush">
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">
+					San Petronio Basilica
+				  </a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">University of Bologna</a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">Fountain of Neptune</a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">Fountain of Neptune</a>
+				</div>       
+			</div>
+
+		</div>
+		<div class="col-md-8" style="background: #fff;padding: 0px;">
+		  <div style="height: 100%;">
+			<div class="silly_scrollbar" style="padding: 15px;">
+				<div>
+					<div style="padding: 5px 0px;">
+					<h2 style="font-size: 25px; margin: 0px;">{{ article.nom }}</h2>
+					<div>{{ article.description|rewriteLink|raw }}</div>
+					</div>
+					
+					<script src="{{ asset('template/galerie/js/lc_lightbox.lite.js') }}" type="text/javascript"></script>
+					<link rel="stylesheet" href="{{ asset('template/galerie/css/lc_lightbox.css') }}" />
+
+					<!-- SKINS -->
+					<link rel="stylesheet" href="{{ asset('template/galerie/skins/minimal.css') }}" />
+
+					<!-- ASSETS -->
+					<script src="{{ asset('template/galerie/lib/AlloyFinger/alloy_finger.min.js') }}" type="text/javascript"></script>
+					<style type="text/css">
+					.elem, .elem * {
+						box-sizing: border-box;
+						margin: 0 !important;	
+					}
+					.elem {
+						display: inline-block;
+						font-size: 0;
+						border: 20px solid transparent;
+						border-bottom: none;
+						background: #fff;
+						padding: 10px;
+						height: auto;
+						background-clip: padding-box;
+						border: 1px solid #f4f4f4;
+					}
+					.elem > span {
+						display: block;
+						cursor: pointer;
+						height: 0;
+						padding-bottom:	70%;
+						background-size: cover;	
+						background-position: center center;
+					}
+					</style>
+
+					<!-- LIGHTBOX FADING SHOW/HIDE EFFECT (as explained in documentation) -->
+					<style type="text/css">
+					.lcl_fade_oc.lcl_pre_show #lcl_overlay,
+					.lcl_fade_oc.lcl_pre_show #lcl_window,
+					.lcl_fade_oc.lcl_is_closing #lcl_overlay,
+					.lcl_fade_oc.lcl_is_closing #lcl_window {
+						opacity: 0 !important;
+					}
+					.lcl_fade_oc.lcl_is_closing #lcl_overlay {
+						-webkit-transition-delay: .15s !important; 
+						transition-delay: .15s !important;
+					}
+					
+					.header .menu-btn:checked ~ .menu {
+						max-height: 500px!important;
+					}
+					</style>
+					<div class=" row" id="carriere-accueil">
+						{% for partie in article.getPartiearticles %}
+						<a class="elem col-lg-4 col-md-4 col-xs-12 col-sm-6" href="{% if partie.imgevenement != null %}{{ asset(partie.imgevenement.getwebpath) }}{% else %}{{ asset('template/images/co.jpg') }}{% endif %}" title="{{ partie.nom }}" data-lcl-txt="{{ partie.description|rewriteLink|raw }}" data-lcl-author="AZ Corporation" data-lcl-thumb="{% if partie.imgevenement.src != null %}{{ asset(partie.imgevenement.getwebpath) }}{% else %}{{ asset('template/images/co.jpg') }}{% endif %}">
+							<span style="background-image: url({% if partie.imgevenement.src != null %}{{ asset(partie.imgevenement.getwebpath) }}{% else %}{{ asset('template/images/co.jpg') }}{% endif %});"></span>
+						</a>
+						{% endfor %}
+						
+						<br/><br/>
+					</div>
+						
+					<script type="text/javascript">
+						$(document).ready(function(e) {
+							// live handler
+							lc_lightbox('.elem', {
+								wrap_class: 'lcl_fade_oc',
+								gallery : true,	
+								thumb_attr: 'data-lcl-thumb', 
+								
+								skin: 'minimal',
+								radius: 0,
+								padding	: 0,
+								border_w: 0,
+							});	
+						});
+					</script>
+					<div style="height: 150px;"></div>
+					
+				</div>
+			</div>
+		  </div>
+		</div>
+		</div>
+		</div>
+	{% else %}
+	<div class="container">
+		<div class="row">
+		<div class="col-md-4" style="padding: 0px;">
+
+			<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block;">
+				<div class="card-body">
+				  <h4 class="card-title">Evènements</h4>
+				  <h6 class="card-subtitle mb-2">Emilia-Romagna Region, Italy</h6>
+				  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+				</div>
+				<div class="list-group">
+				  <a href="#" class="list-group-item " style="border: none;">
+					San Petronio Basilica
+				  </a>
+				  <a href="#" class="list-group-item " style="border: none;">University of Bologna</a>
+				  <a href="#" class="list-group-item " style="border: none;">Fountain of Neptune</a>
+				  <a href="#" class="list-group-item " style="border: none;">Fountain of Neptune</a>
+				</div>       
+			</div>
+			<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block;">
+				<div class="card-body">
+				  <h4 class="card-title">Actualité</h4>
+				  <h6 class="card-subtitle mb-2">Emilia-Romagna Region, Italy</h6>
+				  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+				</div>
+				<div class="list-group list-group-flush">
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">
+					San Petronio Basilica
+				  </a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">University of Bologna</a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">Fountain of Neptune</a>
+				  <a href="#" class="list-group-item list-group-item-action" style="border: none;">Fountain of Neptune</a>
+				</div>       
+			</div>
+
+		</div>
+		<div class="col-md-8" style="background: #fff;padding: 0px;">
+		  <div style="height: 100%;">
+			<div class="silly_scrollbar" style="padding: 15px;">
+				<div>
+					<div style="padding: 5px 0px;">
+					<h2 style="font-size: 25px; margin: 0px;">{{ article.nom }}</h2>
+					<div class="text-center">
+						<img src="{% if article.imgservice != null %}{{ asset(article.imgservice.getwebpath) }}{% else %}{{ asset('templateofferts/images/3132.jpg') }}{% endif %}" alt="{{ article.keyword }}" style="width: 400px; margin: 7px 0px;">
+					</div>
+					</div>
+
+					<div style="padding: 5px;">{{ article.description|rewriteLink|raw }}</div>
+					{% for partie in article.getPartiearticles %}
+					<div id="pointeur-partie-{{ partie.id }}" style="margin-top: 10px; padding: 5px 0px; border-top: 1px solid #ddd;">
+					<h2 style="font-size: 25px; margin: 0px; background: #f4f4f4; ">{{ partie.nom }} </h2>
+
+					{% if partie.imgevenement != null %}
+						<div class="text-center">
+						<img src="{{ asset(partie.imgevenement.getWebPath) }}" alt="" style="width: 100%; margin: 7px 0px;">
+						</div>
+					{% endif %}
+					<div style="padding: 5px;">
+					{{ partie.description|rewriteLink|raw }}
+					</div>
+					</div>
+					{% endfor %}
+					<div style="height: 150px;"></div>
+					
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	</div>
+	{% endif %}
+{% else %}
+<div class="col-md-4">
+  <div style="height: 1000px; padding-top: 65px; padding-left: 35px;">
+  Vide
+  </div>
+</div>
+<div class="col-md-8" style="background: #fff;">
+  <div style="height: 100%;">
+	<div class="alert alert-warning" style="border-left: 3px solid green; margin: 15px 0px;">
+		<h2>
+		<span class="fa fa-warning"></span> Aucun Article pour cette section
+		</h2>
+	</div>
+  </div>
+</div>
+{% endif %}
+	

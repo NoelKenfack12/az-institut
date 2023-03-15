@@ -1,0 +1,262 @@
+{% extends "Theme/Users/User/layoutuser.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }},site web, hébergement heb Cameroun, hébergement web illimité,hébergement, site internet, site, gratuite,hébergement revendeur,template,domaine, nom de domaine, cameroun, site cameroun,hébergement web cameroun,site moins cher."/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Hébergement web, Site web, Hébergement revendeur pas cher, domaine à partir de 10000F." />
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Hébergement web, Site web, Hébergement revendeur pas cher, domaine à partir de 10000F.
+{% endblock %}
+
+{% block menuleft_body %}
+	{{ render(controller("Theme/General/Template/Menu/menubareleft", {'id': user.id, 'position': 'paneluser'})) }}
+{% endblock %}
+
+{% block userblog_body %}
+
+	{{ render(controller("App\\Controller\\General\\Template\\MenuController:menubare", {'id': user.id, 'position': 'paneluser'})) }}
+
+	<div class="content">
+		{% include 'Theme/Users/User/User/liensutiles.html.twig' %}
+		
+		<div class="row">
+			  <div class="col s12 m12 32">
+				<div class="alert alert-info" style="border-left: 3px solid green; margin-bottom: 15px;">
+					  <h5 style="font-size: 20px; padding: 0px!important; margin: 0px!important;">
+					  Vous avez une difficulté d'ordre technique ou commerciale ?
+					  
+					  <a href="#!" class="btn open-modal-billet-new" style="background: #3498db; color: #fff; float: right; line-height: 13px; font-size: 13px;">
+						<span class="fa fa-check-circle"></span> Ajouter un billet
+					  </a>
+					
+					  </h5>
+					  <span style="font-size: 12px;"> Laissez nous un message, nous vous répondrons sous peu.</span>
+				  </div>
+				  
+				  
+                <div class="card main-billets" style="box-shadow:0px 0px 2px rgba(0,0,0,0.0005); padding: 0px;">
+				  {% for billet in liste_billet %}
+				  <div class="topic">
+					<div class="open">
+					<h2 class="question" style="">{{ loop.index }}. {{ billet.titre }}
+					</h2><span class="faq-t"></span>
+					</div>
+					<div class="answer">
+					
+					<div class="module-comment-block">
+					  <div class="module-comment-avatar">
+						<img src="{% if billet.user != null and billet.user.imgprofil != null %}{{ asset(billet.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ billet.user.name(25) }}" width="50" height="50">  
+					  </div>
+
+					  <div class="module-comment-text">
+						<div><strong>{{ billet.user.name(25) }}</strong></div>
+						<div><em>{{ billet.date|date('d') }}.{{ billet.date|date('M') }}.{{ billet.date|date('Y') }}</em></div>
+
+						<div>
+						  {{ billet.description }}
+						</div>
+					  </div>
+					  
+					  <ul id="dropdownbillet-{{ billet.id }}" class="dropdown-content right" style="min-width: 150px;">
+							<li>
+							<a href="#!" class="update-content-article" style="color: #333;" value="{{ billet.id }}"><i class="mdi-content-create" style="font-size: 18px;"></i> Modifier</a>
+							</li>
+						</ul>
+						<a class="dropdown-button right" href="#!" data-activates="dropdownbillet-{{ billet.id }}" style="position: absolute; right: 50px;"><i class="mdi-hardware-keyboard-control"></i></a>
+					</div> <!-- /module-comment-block -->  
+					
+					{% for comment in billet.reponsebillets %}
+					<div class="module-comment-block" style="border-top: 1px solid #333;">
+					  <div class="module-comment-avatar">
+						<img src="{% if comment.user != null and comment.user.imgprofil != null %}{{ asset(comment.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ comment.user.name(25) }}" width="50" height="50">  
+					  </div>
+
+					  <div class="module-comment-text">
+						<div><strong>{{ comment.user.name(25) }}</strong></div>
+						<div><em>{{ comment.date|date('d') }}.{{ comment.date|date('M') }}.{{ comment.date|date('Y') }}</em></div>
+
+						<div>
+						  {{ comment.description }}
+						</div>
+					  </div>
+					  
+					  <ul id="dropdowncommentbillet-{{ comment.id }}" class="dropdown-content right" style="min-width: 150px;">
+							<li>
+							<a href="#!" class="update-content-article-reponse" style="color: #333;" value="{{ comment.id }}"><i class="mdi-content-create" style="font-size: 18px;"></i> Modifier</a>
+							</li>
+						</ul>
+						<a class="dropdown-button right" href="#!" data-activates="dropdowncommentbillet-{{ comment.id }}" style="position: absolute; right: 50px;"><i class="mdi-hardware-keyboard-control"></i></a>
+					</div> <!-- /module-comment-block -->    
+					{% endfor %}
+					  
+					  <div class="row" style="border-top: 3px solid #333; margin-top: 15px; padding-top:5px; background: #f7f7f7;">
+					  <div class="col s12 m3">
+						<img src="{% if app.user != null and app.user.imgprofil != null %}{{ asset(app.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/projets/afrique.png') }}{% endif %}" alt="{{ app.user.name(25) }}" width="50" height="50" style="float: right;">  
+					  </div>
+
+					  <div class="col s12 m9">
+						<div><strong>{{ app.user.name(25) }}</strong></div>
+						  <form method="post" action="{{ path('users_user_add_new_reponse_billet_user', {'id': billet.id}) }}">
+						  <div class="input-field" method="post" action="">
+							<textarea name="reponse" class="materialize-textarea" id="reponsebillet-{{ billet.id }}" style="width: 100%; background: #fff;" required=""></textarea>
+							<label for="reponsebillet-{{ billet.id }}">Ajouter une réponse</label>
+						  </div>
+						  <div class="input-field">
+							  <button class="btn cyan waves-effect waves-light" type="submit" name="action">Enregister
+								<i class="mdi-content-send right"></i>
+							  </button>
+						  </div>
+						  </form>
+					  </div>
+					  </div>
+					</div>
+				  </div>
+				  {% else %}
+				  <div class="topic">
+					<div class="open">
+					<h2 class="question">1. Aucun article publié pour cette catégorie
+					</h2><span class="faq-t"></span>
+					</div>
+					<p class="answer">La liste des billets de {{ user.name(25) }} s'affichera ici.</p>
+				  </div>
+				  {% endfor %}
+				</div>
+				
+              </div>
+			</div>
+			
+		<hr style="margin-top: -20px;"/>
+		{% set dashbord = 1 %}
+		{% include 'Theme/General/Template/Menu/contacts.html.twig' %}
+    </div>
+
+<div class="modal fade" data-backdrop="false"  id="form-send-new-billet" style="padding-top: 40px; min-height: 700px; padding-bottom: 300px; background: rgba(0,0,0,0.5)">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-editor-insert-comment"></i> Enregistrer un nouveau billet <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+	<div class="row">
+	  <div class="input-field col-md-12">
+		<div class="alert alert-info" style="border-left: 3px solid green;">
+			  <h5 style="font-size: 20px; padding: 0px!important; margin: 0px!important;">
+			  Important
+			  </h5>
+			  <span style="font-size: 12px;">Vous devez vous assurer que votre préoccupation n'a pas été traitée dans le ribrique d'aide avant de créer un nouveau billet. </span>
+		 </div>
+		<div class="row">
+			{{ form_start(formbillet, {'class': 'col s12', 'attr': path('users_user_accueil_billet_user', {'id': user.id}) }}
+			{% include 'Theme/Users/User/Billet/formulairebillet.html.twig' %}
+			
+			  <div class="row">
+				<div class="input-field col-md-12">
+				  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Enregister
+					<i class="mdi-content-send right"></i>
+				  </button>
+				</div>
+			  </div>
+			{{ form_end(formbillet) }}
+		</div>
+	  </div>
+</div>
+</div>
+
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block; padding-top: 15px;">
+{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="modal fade" data-backdrop="false" id="modalGestionCatalogueSelect" style="padding-top: 40px; min-height: 700px; padding-bottom: 300px; background: rgba(0,0,0,0.5)">
+<div class="modal-dialog">
+<div class="modal-content" style="padding: 0px; border-radius: 0px;">
+<nav class="red">
+<h5 style="padding-top: 20px; padding-left: 4px;">
+  <i class="mdi-content-create"></i> Mise à jour du contenu <button type="button" class="close right" data-dismiss="modal"><i class="mdi-content-clear modal-action  modal-close"></i></button>
+</h5>
+</nav>
+<div class="modal-body">
+<div class="row" style="padding: 20px;">
+  <div class="input-field col-md-12">
+	<div class="wait-chargement-content-module" style="text-align: center;">
+		Patientez un moment pendant le chargement de l'article</br>
+		<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+	</div>
+
+	<div class="content-module-loading" style="display: none;">
+	
+	</div>
+  </div>
+</div>
+</div>
+
+<div class="modal-footer color-top" style="text-align: right; border-top: 4px solid #37c0fb; display: block; padding-top: 15px;">
+	{% include "Theme/General/Template/Menu/social.html.twig" %}
+</div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block javascripttemplate %}
+$('#accueil-billet').addClass('active');
+
+$('.open-modal-billet-new').click(function(){
+	$('#form-send-new-billet').modal('show');
+});
+
+$('.update-content-article').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_user_update_billet_principale') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$('.update-content-article-reponse').click(function(){
+	var id = $(this).attr('value');
+	$('#modalGestionCatalogueSelect').modal('show');
+	$('.wait-chargement-content-module').show();
+	$('.content-module-loading').hide();
+	$.get('{{ path('users_user_update_reponse_billet') }}',{ id: id }, function(data){
+		$('.wait-chargement-content-module').hide();
+		$('.content-module-loading').show();
+		$('.content-module-loading').html(data);
+	});
+});
+
+$(".open").click( function () {
+  var container = $(this).parents(".topic");
+  var answer = container.find(".answer");
+  var trigger = container.find(".faq-t");
+  
+  answer.slideToggle(200);
+  
+  if (trigger.hasClass("faq-o")) {
+    trigger.removeClass("faq-o");
+  }
+  else {
+    trigger.addClass("faq-o");
+  }
+  
+  if (container.hasClass("expanded")) {
+    container.removeClass("expanded");
+  }
+  else {
+    container.addClass("expanded");
+  }
+});
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "UsersUserBundle::layoutuser.html.twig" %}
+{% block meta %}
+{{ parent() }}
+<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+<meta name="author" content="Noel Kenfack"/>
+<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+{% block title %}
+{{ parent() }} | Connexion
+{% endblock %}
+
+{% block userblog_body %}		
+		<!-- contact -->
+	<div class="login">
+		<div class="container">
+ 
+		{% if entreprise == 1 %} 
+		
+		<section id="conatcat-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="pull-left">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="media-body">
+                            <h2>Vous avez une question ou vous avez besoin d'une assistance ?</h2>
+                            <p>Contactez notre service client, et en quelques minutes l'une de nos équipes technique sera mise à votre disposition. Tel: {{ telephone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.container-->    
+        </section>
+				{% for infos in app.session.flashbag.get('information') %}
+				{% if loop.last %}
+				<div class="alert alert-success text-center">
+				 {{ infos }}
+				 </div>
+				{% endif %}
+				{% endfor %}
+				
+		<h2 class="title">Vous êtes une entreprise !</h2>
+		<form action="{{ path('produit_service_assistance_entreprise') }}" method="post" {{ form_enctype(form) }}>
+			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.titre) }}</span>
+					{{ form_widget(form.titre,{'attr': {'style': 'display: inline;'}}) }}
+					<i class=" fa fa-edit"></i>
+				</div>
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.nom) }}</span>
+						{{ form_widget(form.nom,{'attr': {'style': 'display: inline;','placeholder': 'Nom de l\'entreprise','required': 'true'}}) }}
+					<i class="fa fa-user"></i>
+				</div>
+				<div class="login-mail">
+					  <span style="color:red;">{{ form_errors(form.email) }}</span>
+					  {{ form_widget(form.email,{'attr': {'style': 'display: inline;','placeholder': 'Entrez une adresse email','required': 'true'}}) }}
+					<i class="glyphicon glyphicon-envelope"></i>
+				</div>
+				
+			</div>
+			<div class="col-md-6 login-do animated wow fadeInRight" data-wow-delay=".5s">
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.contenu) }}</span>
+					{{ form_widget(form.contenu,{'attr':{'style': 'width: 100%; height: 90Px; border: 1px solid #fff;'}}) }}
+				</div>
+				
+				<label class="hvr-sweep-to-top login-sub">
+					<input type="submit" value="Envoyez votre message">
+				</label>
+					
+			</div>
+			
+			<div class="clearfix"> </div>
+			{{ form_rest(form) }}
+			</form>
+			{% else %}
+			
+		<section id="conatcat-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="pull-left">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="media-body">
+                            <h2>Vous avez une question ou vous avez besoin d'une assistance ?</h2>
+                            <p>Contactez notre service client, et en quesques minutes l'une de nos équipes technique sera mise à votre disposition. Tel: {{ telephone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/.container-->    
+        </section>
+				{% for infos in app.session.flashbag.get('information') %}
+				{% if loop.last %}
+				<span style="color: red;"> {{ infos }}</span>
+				{% endif %}
+				{% endfor %}
+		<h2 class="title">Vous êtes un particulier !</h2>
+		<form action="{{ path('produit_service_assistance_entreprise', {'entreprise': 0}) }}" method="post" {{ form_enctype(form) }}>
+			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.titre) }}</span>
+					{{ form_widget(form.titre,{'attr': {'style': 'display: inline;'}}) }}
+					<i class=" fa fa-edit"></i>
+				</div>
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.nom) }}</span>
+							{% if app.user != null %}
+							{% set nom = app.user.name(20) %}
+							{{ form_widget(form.nom, {'attr':{'value': nom,'style': 'display: inline;','placeholder': 'Votre nom','required': 'true'},'disabled':true}) }}
+							{% else %}
+							{{ form_widget(form.nom,{'attr':{'style': 'display: inline;','placeholder': 'Votre nom','required': 'true'}}) }}
+							{% endif %}
+					<i class="fa fa-user"></i>
+				</div>
+				<div class="login-mail">
+					  <span style="color:red;">{{ form_errors(form.email) }}</span>
+					    {% if app.user != null %}
+						{% set email = app.user.username %}
+						{{ form_widget(form.email, {'attr':{'value': email,'style': 'display: inline;','placeholder': 'Votre email','required': 'true'},'disabled':true}) }}
+						{% else %}
+						{{ form_widget(form.email,{'attr':{'style': 'display: inline;','placeholder': 'Votre email','required': 'true'}}) }}
+						{% endif %}
+					<i class="glyphicon glyphicon-envelope"></i>
+				</div>
+			</div>
+				
+			<div class="col-md-6 login-do animated wow fadeInRight" data-wow-delay=".5s">
+				<div class="login-mail">
+					<span style="color:red;">{{ form_errors(form.contenu) }}</span>
+					{{ form_widget(form.contenu,{'attr':{'style': 'width: 100%; height: 90Px; border: 1px solid #fff;'}}) }}
+				</div>
+				<label class="hvr-sweep-to-top login-sub">
+					<input type="submit" value="Envoyez votre message">
+				</label>
+					
+			</div>
+			
+			<div class="clearfix"> </div>
+			{{ form_rest(form) }}
+		</form>
+			{% endif %}
+			<br/>
+			<!--div class="get-started center wow fadeInDown">
+                <h2>{{ site }}</h2>
+                <p class="lead">{{ slogan }} <br>  {{ description }}</p>
+                <div class="request">
+                    <h4>{% if app.user == null %}<a href="{{ path('login') }}" style="display: inline-block; width: 180px;">Connectez-vous !</a>{% else %}<a href="{{ path('users_user_user_accueil', {'id': app.user.id }) }}" style="display: inline-block; width: 180px;">{{ app.user.name(15) }}</a>{% endif %}</h4>
+                </div>
+            </div -->
+
+
+	<div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="media  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="pull-left">
+                        <div class="media-body">
+                           <img class="center wow fadeIn img-responsive" src= {{ asset("template/images/support.gif") }} />
+                    </div>
+                </div>
+            </div>
+        </div><!--/.container-->   
+	</div>
+	</div>
+	</div>
+	</div>
+	
+{% endblock %}
+
+{% block javascripttemplate %}
+$('.accueil').removeClass('active');
+$('.assistance').addClass('active');
+{% endblock %}

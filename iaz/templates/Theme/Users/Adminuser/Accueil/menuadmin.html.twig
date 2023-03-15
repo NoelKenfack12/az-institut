@@ -1,0 +1,145 @@
+<!-- START LEFT SIDEBAR NAV-->
+<aside id="left-sidebar-nav">
+<ul id="slide-out" class="side-nav fixed leftside-navigation">
+	<li class="user-details ">
+	<div class="row">
+		<div class="col col s4 m4 l4">
+			<img src="{% if app.user != null and app.user.imgprofil != null %}{{ asset(app.user.imgprofil.getwebpath) }}{% else %}{{ asset('template/images/co.png') }}{% endif %}" alt="" style="width: 50px; height: 50px; border-radius: 25px; margin-top: 10px;">
+		</div>
+		<div class="col col s8 m8 l8">
+			<ul id="profile-dropdown" class="dropdown-content" style="min-width: 200px!important;">
+				{% if app.user != null %}
+				<li><a href="{{ path('users_user_user_accueil', {'id': app.user.id}) }}" style="padding: 5px 2px;" title="Modifier mon profil"><i class="mdi-action-account-circle" style="margin: 0px;"></i> {{ 'Mon profil'|trans }}</a>
+				</li>
+				<li class="divider"></li>
+				{% endif %}
+				{% if app.user != null %}
+				<li><a href="" style="padding: 5px 2px;"><i class="mdi-hardware-keyboard-tab" style="margin: 0px;"></i> {{ 'Déconnexion'|trans }}</a>
+				</li>
+				{% else %}
+				<li><a href="{{ path('login') }}" style="padding: 5px 2px;"><i class="mdi-hardware-keyboard-tab" style="margin: 0px;"></i> {{ 'Connexion'|trans }}</a>
+				</li>
+				{% endif %}
+			</ul>
+			<a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{% if app.user != null %}{{ app.user.nom }}{% else %}{{ 'Anonyme'|trans }}{% endif %} <span class="mdi-hardware-keyboard-arrow-down" style="color: #fff; font-size: 12px;"></span></a>
+			<p class="user-roal" style="font-size: 10px;">{{ 'Abonné'|trans }}</p>
+		</div>
+	</div>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_accueil_administration') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-home"></i> {{ 'Accueil'|trans }}</a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_catalogue_chantier_pro') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-content-sort"></i> {{ 'Catalogue formation'|trans }} </a></li>
+	</ul>
+</li>
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_ajout_nouveau_admin') }}" class="collapsible-header waves-effect waves-cyan" style="white-space: nowrap;"><i class="mdi-action-account-child"></i> {{ 'Administrateurs'|trans }}</a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_ajouter_nouveau_service') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-speaker-notes"></i> {{ 'Articles'|trans }}</a>
+		</li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_liste_message_recu') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-swap-horiz"></i> Billets</a>
+		</li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a class="collapsible-header waves-effect waves-cyan" style="white-space: nowrap;"><i class="mdi-maps-map"></i> {{ 'Localisation'|trans }}</a>
+			<div class="collapsible-body">
+				<ul>
+					<li><a href="{{ path('users_adminuser_form_pays_continent') }}"> Pays et continent</a></li>	
+				</ul>
+			</div>
+		</li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_gestion_applications') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-location-city"></i> {{ 'Applications'|trans }} </a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_liste_dossier_recrutement') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-notification-play-install"></i> {{ 'Téléchargement'|trans }} </a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_liste_panier_non_livrer') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-maps-local-grocery-store"></i> Commandes en cours ({{ nbcommande }})</a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_tousles_panier_livrer') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-maps-beenhere"></i> Commandes traitées ({{ nbvente }})</a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_message_email_new_letter') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-content-markunread"></i> Campagne par mail</a></li>
+	</ul>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a href="{{ path('users_adminuser_apropos_de_nous') }}" class="collapsible-header waves-effect waves-cyan"><i class="mdi-hardware-keyboard-alt"></i> Avis utilisateurs</a></li>
+	</ul>
+</li>
+
+<li class="nav-item">
+	<a href="{{ path('users_adminuser_parametres_administration') }}"  class="nav-link"  title="Toutes les articles">
+		<i class="nav-icon fa fa-cog"></i>
+		<p>
+			Paramètres site web
+		</p>
+	</a>
+</li>
+
+<li class="no-padding">
+	<ul class="collapsible collapsible-accordion">
+		<li class="bold"><a class="collapsible-header waves-effect waves-cyan" style="white-space: nowrap;"><i class="mdi-maps-place"></i> {{ 'Boutique'|trans }}</a>
+			<div class="collapsible-body">
+				<ul>
+					<li><i class="glyphicon glyphicon-menu-right" ></i>  <a href="{{ path('users_adminuser_accueil_administration') }}">Accueil</a></li>
+					<li><i class="glyphicon glyphicon-menu-right" ></i> <a href="{{ path('users_adminuser_liste_panier_non_livrer') }}">Vente non validée ({{ nbcommande }})</a></li>
+					<li><i class="glyphicon glyphicon-menu-right" ></i> <a href="{{ path('users_adminuser_tousles_panier_livrer') }}">Vente effectuée ({{ nbvente }})</a></li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</li>
+</ul>
+<a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan" style="position: fixed!important; z-index: 5000000!important; top: 5px!important; left: 5px!important; border: 2px solid red;">
+	<i class="mdi-navigation-menu"></i>
+</a>
+</aside>
+<!-- END LEFT SIDEBAR NAV-->
+<script type="text/javascript">
+$(function(){
+if($(window).width() >= 768)
+{
+	$('#slide-out').css('min-height',($(window).height())+'px');
+}
+});
+</script>
+<!-- END LEFT SIDEBAR NAV-->

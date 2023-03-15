@@ -1,0 +1,88 @@
+produit_produit_liste_produit_souscategorie:
+    path: /azcorp/svce/{id}
+    controller: App\Controller\Produit\Produit\ProduitController::listeproduituser
+    requirements:
+        id: \d+
+produit_produit_produit_formation_institut:
+    path: /azcorp/institut/{id}
+    controller: App\Controller\Produit\Produit\ProduitController::produitformation
+    requirements:
+        id: \d+
+produit_produit_detail_produit_market:
+    path: /detail/produit/{id}
+    controller: App\Controller\Produit\Produit\ProduitController::detailproduit
+    requirements:
+        id: \d+
+produit_produit_like_courant_product:
+    path: /like/courant/product
+    controller: App\Controller\Produit\Produit\ProduitController::likeproduct
+produit_produit_modal_souscription_service:
+    path: /modal/souscription/service
+    controller: App\Controller\Produit\Produit\ProduitController::modalsouscriptionservice
+produit_produit_ajouter_product_panier:
+    path: /ajouter/product/panier
+    controller: App\Controller\Produit\Produit\ProduitController::ajouterpanier
+produit_produit_add_panier_produit:
+    path: /add/panier/produit/{id}
+    controller: App\Controller\Produit\Produit\ProduitController::addpanier
+    requirements:
+        id: \d+
+produit_produit_reglement_commande_du_panier:
+    path: /reglement/commande/dupanier
+    controller: App\Controller\Produit\Produit\ProduitController::reglementcommande
+produit_produit_editer_courant_commande:
+    path: /edit/courant/commande
+    controller: App\Controller\Produit\Produit\ProduitController::editcommande
+    requirements:
+        id: \d+
+produit_produit_elever_produit_commande:
+    path: /enleve/produit/commande/{id}
+    controller: App\Controller\Produit\Produit\ProduitController::eleveproduit
+    defaults:
+        id: 0
+    requirements:
+        id: \d+
+produit_produit_recherche_new_produit:
+    path: /recherche/new/produit
+    controller: App\Controller\Produit\Produit\ProduitController::rechercheproduit
+produit_produit_modifier_lieu_livraison:
+    path: /modifier/lieu/livraison/panier/{id}
+    controller: App\Controller\Produit\Produit\PanierController::modifierlieulivraison
+    requirements:
+        id: \d+
+produit_produit_accueil_boutique_produit:
+    path: /catalogue/boutique
+    controller: App\Controller\Produit\Produit\ProduitController::accueilboutique
+produit_produit_manage_parametres_commande:
+    path: /manage/parametres/commande/{id}
+    controller: App\Controller\Produit\Produit\PanierController::parametrescommande
+    requirements:
+        id: \d+
+produit_produit_custom_parameter_prodpan:
+    path: /custom/parameter/prodpan/{id}
+    controller: App\Controller\Produit\Produit\PanierController::parameterprodpan
+    requirements:
+        id: \d+
+produit_produit_manage_contacts_panier_user:
+    path: /manage/contacts/panier/user/{id}
+    controller: App\Controller\Produit\Produit\PanierController::contactspanier
+    requirements:
+        id: \d+
+produit_produit_sauvegarde_contacts_panier:
+    path: /sauvegarde/contacts/panier/{id}
+    controller: App\Controller\Produit\Produit\PanierController::savecontacts
+    requirements:
+        id: \d+
+produit_produit_payement_commande_user:
+    path: /paiement/step/commande/user/{id}/{position}/{save}
+    controller: App\Controller\Produit\Produit\PanierController::paiementstep
+    defaults:
+        position: 'contacts'
+        save: 0
+    requirements:
+        id: \d+
+produit_produit_afh_panier_bill:
+    path: /azcorp/card/bill/{id}
+    controller: App\Controller\Produit\Produit\PanierController::cardbill
+    requirements:
+        id: \d+

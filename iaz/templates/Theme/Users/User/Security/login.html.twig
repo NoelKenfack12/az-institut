@@ -1,0 +1,276 @@
+{% extends "Theme/Users/User/layoutuserlogin.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}" />
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | Connexion
+{% endblock %}
+
+{% block stylesheets %}
+
+<meta name="google-signin-client_id" content="808214570153-stbihc7lmtfm86ia20b31pbak1afvam2.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+<script>
+	//Connexion Using Google.
+	function onSuccess(googleUser){
+	  var profile = googleUser.getBasicProfile();
+	  var id = profile.getId();
+	  var email = profile.getEmail();
+	  var nom = profile.getFamilyName();
+	  var prenom = profile.getGivenName();
+	  openModalLoginRS(id,email,nom,prenom,'USG','success','login');
+	}
+	function onFailure(error){
+	  openModalLoginRS('','','','','USG','echec','login');
+	}
+	
+	function renderButton(){
+	  gapi.signin2.render('my-signin2', {
+		'scope': 'profile email',
+		'width': 264,
+		'height': 42,
+		'longtitle': true,
+		'theme': 'dark'
+	  });
+	}
+	
+	function loginGlOne(){
+		gapi.signin2.render('my-signin2',{
+		'scope': 'profile email',
+		'width': 260,
+		'height': 42,
+		'longtitle': true,
+		'theme': 'dark',
+		'onsuccess': onSuccess,
+		'onfailure': onFailure
+	  });
+	}
+	
+	function openModalLoginRS(id,email,nom,prenom,type,statut,position)
+	  {
+		//content-modal-annimation-blog
+		$('#modal-animation-afex-premium').modal('show');
+		$('.wait-account-verification-affiliate').show();
+		$('.content-modal-annimation-afex-premium').hide();
+		
+		$.post('{{ path('users_user_validation_social_login', {'agent': agent|default('ordi') }) }}',{'id': id,'email': email,'nom': nom,'prenom': prenom,'type': type,'statut': statut,'position': position}, function(data){
+			$('.wait-account-verification-affiliate').hide();
+			$('.content-modal-annimation-afex-premium').show();
+			
+			if(data == 1){
+				$('.content-modal-annimation-afex-premium').html('<div style="display: block; text-align: center;">Connexion effectuée avec succès.</br>Redirection en cours ...</br><img src="{{ asset('template/images/wait-user.gif') }}" alt="image"><div>');
+				document.location.href= '{{ path('users_user_acces_plateforme') }}';
+			}else{
+				$('.content-modal-annimation-afex-premium').html(data);
+			}
+		});
+	  }
+	  
+	  //Connexion Using FaceBook.
+
+	  function statusChangeCallback(response){
+		console.log('statusChangeCallback');
+		console.log(response);
+		if (response.status === 'connected') {
+		  testAPI();
+		} else {
+		  //document.getElementById('status').innerHTML = 'Please log ' +'into this app.';
+		}
+	  }
+
+
+	  function checkLoginState() {
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
+	  }
+
+	  window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '1913794535583232',
+		  xfbml      : true,
+		  version    : 'v3.1'
+		});
+		//FB.getLoginStatus(function(response) {
+		 // statusChangeCallback(response);
+		//});
+	  };
+
+	  // Load the SDK asynchronously
+	  (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.1&appId=1913794535583232&autoLogAppEvents=1';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+	  // Here we run a very simple test of the Graph API after login is
+	  // successful.  See statusChangeCallback() for when this call is made.
+	  function testAPI() {
+		console.log('Welcome!  Fetching your information.... ');
+		FB.api('/me?fields=id,name,email', function(response) {
+		 // console.log('Successful login for: ' + response.name);
+		  //document.getElementById('status').innerHTML =
+		 //   'Thanks for logging in, ' + response.name + ' - ' + JSON.stringify(response)+ '!';
+		 
+		 if (!response || response.error){
+			openModalLoginRS('','','','','USF','echec','login');
+		  } else {
+			openModalLoginRS(response.id,response.email,response.name,'','USF','success','login');
+		  }
+			  
+		});
+	  }
+</script>
+{{ parent() }}
+{% endblock %}
+
+{% block userblog_body %}	
+	
+<section class="section">
+	<h1 style="width: 100%; text-align: center;">
+	Connectez-vous à votre compte {{ site }}
+	</h1>
+
+	<!-- <div style="text-align: center!important;"> -->
+	 <!-- <fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"> -->
+	 <!-- </fb:login-button> -->
+	 <!-- </div> -->
+	 
+	 <!-- <div style="text-align: center!important;"> -->
+		<!-- <button id="my-signin2" onclick="loginGlOne()" style="border: none; margin: 15px 0px 0px 0px; padding: 0px;"></button> -->
+	 <!-- </div> -->
+		 
+	<div class="form-progress">
+		<div style="color: red;">{{ error_login }}</div>
+	</div>
+	
+	<div class="animation-container">
+		<!-- Step one -->
+		<div class="form-step js-form-step" data-step="1">
+
+			<!-- <p class="form-instructions"><strong>Pour vous connectez rapidement à votre compte AZ Corporation, cliquez sur l'un des boutons ci-dessus pour continuer</strong></p> -->
+			<!-- <p class="form-instructions"> -->
+			    <!-- <div style="text-align: center; margin: 25px 0px;"> -->
+				<!-- <div class="or-spacer"> -->
+				  <!-- <div class="mask"></div> -->
+				  <!-- <span><i>ou</i></span> -->
+				<!-- </div> -->
+				<!-- </div></p> -->
+
+			<form method="post" action="{{ path('users_user_connexion_user') }}" name="form-step-1">
+				<div class="fieldgroup">
+					<input id="username" name="username" type="text" required="" autocomplete="email"/>
+					<label for="username">Téléphone ou Email</label>
+				</div>
+
+				<div class="fieldgroup">
+					<input type="password" id="password" name="password" type="password" required=""/>
+					<label for="password">Mot de passe</label>
+				</div>
+
+				<div class="fieldgroup" style="margin-top: 15px;">
+					<label style="display: block; text-align: left; width: 100%;">
+					  <a href="#!" class="modal_reset_password" style="float: right; display: inline; color: #CCC;">Mot de pas oublié ?</a>
+					   <input type="checkbox" id="remember_me" name="_remember_me" checked style="float: left!important; height: 15px; width: 15px; margin-right: 7px;"/> Se souvenir de moi
+					</label>
+				</div>
+				<div class="clearfix"></div>
+				<div  style="text-align: center;">
+					<button type="submit" class="btn">Continuer</button>
+				</div>
+			</form>
+
+			<div class="signup-content" style="text-align: center;">
+				<h3>Vous êtes nouveau sur {{ site }} ?</h3>
+				<p>Un compte {{ site }} vous permettra de passer et de suivre vos commandes via un tableau de bord.</p>
+				<div>
+					<a href="{{ path('users_user_inscription_user') }}">Créer un compte <span class="fa fa-angle-right"></span></a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<div class="modal fade" data-backdrop="false"  id="open-modalSelect-reinitialize" style="padding-top: 50px;">
+<div class="modal-dialog">
+    <div class="modal-content">
+		<div class="modal-header color-bottom" style="border-bottom: 4px solid #37c0fb; display: block!important;">
+			<button type="button" class="close" data-dismiss="modal" style="float: right!important;">&times;</button>
+			<h3 class="modal-title" style="margin: 0px; font-size: 22px;"> Initialisation du mot de passe</h3>
+		</div>
+
+		<div class="modal-body">
+			<div class="wait-account-verification-affiliate" style="text-align: center; height: 100px; padding-top: 30px; color: #333;">
+				Patientez un moment pendant la vérification de votre session.</br>
+				<img src="{{ asset('template/images/loader1.gif') }}" alt="image" style="height: 40px; width: 40px;">
+			</div>
+
+			<div class="form-coustom-reset-password" style="text-align: left; display: none; margin-bottom: 30px;">
+				<div class="col-md-10 col-sm-12 offset-md-1" style="color: #333;">
+				 <div style="border-bottom: 1px solid #ddd; margin-bottom: 15px; font-size: 20px;">Identification du compte</div>
+				 <form method="post" action="#" class="form-check-identifiant">
+					<div class="form-group form-group-resset">
+						<input type="text" class="form-control" placeholder="Rentrez l'email du compte" required="">
+					</div>
+					
+					<div class="alert alert-resset alert-block alert-danger" style="display:none">
+					<h4>Erreur !</h4>
+					Nous n'avons pu identifier un compte avec cette adresse.
+					</div>
+					
+					<div class="form-group">
+						<button  class="btn btn-primary" style="background: #e34520;">Envoyer</button>
+					</div>
+				 </form>
+				</div>
+				<div class="clearfix"></div>
+			</div>		
+		</div>
+		<div class="modal-footer" style="color: #333;">
+			{% include 'Theme/General/Template/Menu/social.html.twig' %}
+        </div>
+    </div>
+</div>
+</div>
+	
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.modal_reset_password').click(function(){
+	$('#open-modalSelect-reinitialize').modal('show');
+	setTimeout(function(){ 
+			$('.wait-account-verification-affiliate').hide();
+			$('.form-coustom-reset-password').show();
+	}, 2000);
+});
+
+$('form.form-check-identifiant').on('submit', function(){
+	var hauteur = $(".form-coustom-reset-password").height() + 20;
+	var largeur = $(".form-coustom-reset-password").width() + 5;
+	var padding = Math.round(hauteur/2 - 50);
+	var username = $(this).find('input').val();
+	$(".form-coustom-reset-password").before('<div class="attente-resultat" style="padding-top: '+padding+'px; z-index: 102; height: '+hauteur+'px; text-align: center; vertical-align: center; width: '+largeur+'px; position: absolute; background: #fff; margin-top: -7px;"><span><img src="{{ asset('template/images/loader1.gif') }}" alt="..." style="width: 80px; height: 80px;" /></span></div>');
+	$.post('{{ path('users_user_reset_user_password', {'etape': 1}) }}',{ username: username }, function(data){
+		$('.attente-resultat').hide();
+		if(data != 0)
+		{
+			$('.form-coustom-reset-password').replaceWith(data);
+		}else{
+			$("div.form-group-resset").addClass("has-error");
+			$("div.alert-resset").show("slow").delay(4000).hide("slow");
+		}
+	});
+	return false;
+});
+
+
+{% endblock %}

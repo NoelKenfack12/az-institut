@@ -1,0 +1,198 @@
+{% extends "Theme/Users/User/layoutdashboard.html.twig" %}
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ site }} | Inscription | Cameroun | {{ metier }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} | {{ user.name(20) }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }} 
+	<link rel="stylesheet" href="{{ asset('template/table/css/dataTables.bootstrap.min.css') }}"/>
+	<script src="{{ asset('template/table/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/table/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('template/table/js/dataTables.bootstrap.min.js') }}"></script>
+{% endblock %}
+
+{% block userblog_body %}
+
+<div class="app-inner-layout app-inner-layout-page">
+{{ render(controller("App\\Controller\\General\\Template\\MenuController:menuleft", {'id': user.id, 'position': 'commande' })) }} 
+
+<div class="app-inner-layout__wrapper">
+	<div class="app-inner-layout__sidebar">
+		<div class="app-layout__sidebar-inner dropdown-menu-rounded">
+			<div class="nav flex-column" style="">
+				<div class="nav-item-header text-primary nav-item">
+					Dashboards Examples
+				</div>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/analytics-dashboard.html">Analytics</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/management-dashboard.html">Management</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/advertisement-dashboard.html">Advertisement</a>
+				<a class="dropdown-item active" href="https://demo.dashboardpack.com/fiori-html-pro/index.html">Helpdesk</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/monitoring-dashboard.html">Monitoring</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/crypto-dashboard.html">Cryptocurrency</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/pm-dashboard.html">Project Management</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/product-dashboard.html">Product</a>
+				<a class="dropdown-item" href="https://demo.dashboardpack.com/fiori-html-pro/statistics-dashboard.html">Statistics</a>
+			</div>                            
+		</div>
+	</div>
+	
+	<div class="app-inner-layout__content">
+		<div class="tab-content">
+			<div class="container fiori-container">
+			   <div class="row">
+				   
+				   <div class="col-md-12">
+					<div style="min-height: 800px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+						transition: all 0.3s cubic-bezier(.25,.8,.25,1); margin-top: 15px; padding: 15px;">
+					
+					<table class="tablefilter table-bordered table-hover" cellspacing="0" width="100%" style="min-width: 100%!important; margin: 0px;">					  
+						<style>
+						@media only screen and (max-width: 767px) {
+						/*
+							Label the data
+						*/
+						  td:nth-of-type(1):before {
+							content: "Id Panier";
+						  }
+
+						  td:nth-of-type(2):before {
+							content: "Date";
+						  }
+
+						  td:nth-of-type(3):before {
+							content: "Montant";
+						  }
+
+						  td:nth-of-type(4):before {
+							content: "Réduction";
+						  }
+
+						  td:nth-of-type(5):before {
+							content: "Livraison";
+						  }
+
+						  td:nth-of-type(6):before {
+							content: "Total";
+						  }
+
+						  td:nth-of-type(7):before {
+							content: "Etat";
+						  }
+
+						  .dataTables_length {
+							display: none;
+						  }
+						}
+						</style>
+
+						<thead>
+						  <tr>
+							  <th>Id Panier</th>
+							  <th>Date</th>
+							  <th>Montant</th>
+							  <th>Etat</th>
+						  </tr>
+						</thead>
+						<tfoot>
+						  <tr>
+							  <th>Id Panier</th>
+							  <th>Date</th>
+							  <th>Montant</th>
+							  <th>Etat</th>
+						  </tr>
+						</tfoot>
+						<tbody>
+						  {% for panier in liste_panier %}
+							{% set tprixvente = 0 %}
+							{% set totalttc = 0 %}
+
+							{% for propan in panier.produitpaniers %}
+								{% set tprixvente = tprixvente + (propan.quantite*propan.produit.newprise) %}
+							{% endfor %}
+							{% set totalttc = tprixvente %}
+							<tr>
+							  <td><a href="{{ path('produit_produit_afh_panier_bill', {'id': panier.id}) }}">{{ panier.numfacture }}</a></td>
+							  <td>{{ panier.date|date('d') }}/{{ panier.date|date('m') }}/{{ panier.date|date('Y') }}</td>
+							  <td>{{ tprixvente }} {{ devise }}</td>
+
+							  
+							  <td>
+								{% if panier.sousmis == false %}En cours..{% else %}{% if panier.payer == false %}En attente..{% else %}Payée{% endif %}{% endif %}
+								
+								<div class="dropdown-prfl dropdown" style="display: inline-block; float: right;">
+									<a href="#!" class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown-prfl" aria-haspopup="true" aria-expanded="false">
+										<span class="fa fa-ellipsis-h"></span>
+									</a>
+									<div class="dropdown-content dropdown-content-prfl text-left dropdown__menu">
+										<a href="{{ path('produit_produit_afh_panier_bill', {'id': panier.id }) }}" class="overview_caract_panier dropdown__option" style="color: #333;" value="{{ panier.id }}"><i class="fa fa-external-link" style="font-size: 18px;"></i> Détailler</a>
+										{% if panier.payer == true %}
+											<a href="{{ path('produit_produit_telecherger_panier', {'id': panier.id }) }}"  style="color: #333;" target="_blank" class="dropdown__option"><i class="fa fa-download" style="font-size: 18px;"></i> Télécharger</a>
+										{% endif %}
+									</div>
+								</div>
+							  </td>
+							</tr>
+							{% else %}
+							<tr>
+							  <th>-</th>
+							  <th>-</th>
+							  <th>-</th>
+							  <th>-</th>
+							  <th>-</th>
+							  <th>-</th>
+							  <th>-</th>
+							</tr>
+							{% endfor %}
+						</tbody>
+						</table>
+					</div>
+					</div>
+
+				   
+			   </div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+		
+{% endblock %}
+
+
+{% block javascripttemplate %}
+
+$(document).ready(function(){
+    $('.tablefilter').DataTable({
+      //disable sorting on last column
+      "columnDefs": [
+        { "orderable": false }
+      ],
+      language: {
+        //customize pagination prev and next buttons: use arrows instead of words
+        'paginate': {
+          'previous': '<span class="fa fa-chevron-left"></span>',
+          'next': '<span class="fa fa-chevron-right"></span>'
+        },
+        //customize number of elements to be displayed
+        "lengthMenu": '<select class="form-control input-sm" style="position: absolute; left: 15px; top: 0px;">'+
+        '<option value="10">10</option>'+
+        '<option value="20">20</option>'+
+        '<option value="30">30</option>'+
+        '<option value="40">40</option>'+
+        '<option value="50">50</option>'+
+        '<option value="-1">All</option>'+
+        '</select>'
+      }
+    })  
+});
+
+{% endblock %}
+
+

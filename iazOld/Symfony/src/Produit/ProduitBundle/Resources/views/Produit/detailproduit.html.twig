@@ -1,0 +1,313 @@
+{% extends "UsersUserBundle::layouthome.html.twig" %}
+
+{% block meta %}
+	{{ parent() }}
+	<meta name="keywords" content="{{ site }}, Business, Innovation,Administration"/>
+	<meta name="author" content="Noel Kenfack"/>
+	<meta name="description" content="{{ produit.nom }} - {{ produit.contenu }}"/>
+{% endblock %}
+
+{% block title %}
+	{{ parent() }} - {{ produit.nom }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block userblog_body %}
+
+<link rel="stylesheet" href="{{ asset('template/css/jquery.expandable.css') }}"/>
+<script type="text/javascript" src="{{ asset('template/js/jquery.expandable.js') }}"></script>
+<style>
+
+.expandable .expand-bar{
+	position: absolute;
+	z-index: 50!important;
+}
+
+				
+cool-link {
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+}
+
+.cool-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width .3s;
+}
+
+.cool-link:hover::after {
+  width: 100%;
+}
+
+
+
+.box {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  background: #fbfcee;
+  position: relative;
+  overflow: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.wave {
+  opacity: .4;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  background: #0af;
+  width: 500px;
+  height: 500px;
+  margin-left: -250px;
+  margin-top: -250px;
+  -webkit-transform-origin: 50% 48%;
+          transform-origin: 50% 48%;
+  border-radius: 43%;
+  -webkit-animation: drift 3000ms infinite linear;
+          animation: drift 3000ms infinite linear;
+}
+
+.wave.-three {
+  -webkit-animation: drift 5000ms infinite linear;
+          animation: drift 5000ms infinite linear;
+}
+
+.wave.-two {
+  -webkit-animation: drift 7000ms infinite linear;
+          animation: drift 7000ms infinite linear;
+  opacity: .1;
+  background: yellow;
+}
+
+.box:after {
+  content: '';
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #ee88aa, rgba(221, 238, 255, 0) 80%, rgba(255, 255, 255, 0.5));
+  z-index: 11;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 100%;
+  z-index: 1;
+  line-height: 25px;
+  text-align: center;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  color: white;
+  text-transform: capitalize;
+  font-size: 24px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  text-indent: .3em;
+}
+
+@-webkit-keyframes drift {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes drift {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  from {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+a:hover{
+	text-decoration: underline;
+}
+</style>
+<div class="breadcrumb-panel">
+<div class="container">
+<div class="row">
+{% if is_mobile() %}
+<div class="col-md-12">
+<ol class="c-navigation-breadcrumbs__directory">
+
+<!-- Duplicating the "Home" link in both the global navigation and the breadcrumb trail is not recommended. -->
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="{{ path('users_user_acces_plateforme') }}" property="item" typeof="WebPage">
+	<span class="u-visually-hidden" property="name"><span class="fa fa-home"> </span> Accueil</span>
+  </a>
+  <meta property="position" content="1">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="{{ path('produit_produit_produit_formation_institut', {'id': souscategorie.categorie.id }) }}" property="item" typeof="WebPage">
+	<span property="name">{{ souscategorie.categorie.nom }}</span>
+  </a>
+  <meta property="position" content="2">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="{{ path('produit_produit_liste_produit_souscategorie', {'id': souscategorie.id }) }}" property="item" typeof="WebPage">
+	<span property="name">{{ souscategorie.nom }}</span>
+  </a>
+  <meta property="position" content="3">
+</li>
+
+<li class="c-navigation-breadcrumbs__item" property="itemListElement" typeof="ListItem">
+  <a class="c-navigation-breadcrumbs__link" href="#!" property="item" aria-current="location">
+	<span property="name">{{ produit.nom }}</span>
+  </a>
+  <meta property="position" content="4">
+</li>
+
+</ol>
+</div>
+{% else %}
+<div class="col-md-12">
+<div style="padding: 20px 0px;">
+	{% include "GeneralTemplateBundle:Menu:contacts.html.twig" %}
+
+	<ul class="breadcrumbs">
+	  <li><a href="{{ path('users_user_acces_plateforme') }}"><span class="fa fa-home"></span> Accueil</a></li>
+	  <li><a href="{{ path('produit_produit_produit_formation_institut', {'id': souscategorie.categorie.id }) }}">{{ souscategorie.categorie.nom }}</a></li>
+	  <li><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': souscategorie.id }) }}">{{ souscategorie.nom }}</a></li>
+	  <li> {{ produit.nom }}</li>
+	</ul>
+</div>
+</div>
+{% endif %}
+
+</div>
+</div>
+</div>
+
+
+<div style="background: #f0f0f2; padding-top: 20px;">
+<div class="container">
+<div class="row">
+	<div class="col-md-3">
+	
+	{% for scat in liste_scat %}
+	<div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block!important;">
+		<div class="card-body">
+		  <h4 class="card-title">{{ scat.nom }}</h4>
+		</div>
+		<div class=""> 
+			<a href="#!" class="open-liste-formation" style="display: block;" value="{{ scat.id }}">Liste des formations <span class="fa fa-angle-down"></span> </a> 
+		</div>
+		<div class="list-group list-group-flush item-formation-{{ scat.id }}" style="{% if not(loop.first) %}display: none;{% endif %}">
+			{% for prod in scat.getProduitScat %}
+			<a href="{{ path('produit_produit_detail_produit_market', {'id': prod.id}) }}" title="{{ prod.nom }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">{{ prod.nom }}</span></a>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+
+	</div>
+	
+	<div class="col-md-9">
+		<div class="my-div">
+		<section class="testing" style="width: 100%;">
+		   <div class="description2 to-expand">
+			<h2>Formation: {{ produit.nom }} </h2>
+			<p>
+				{{ produit.contenu|raw }}
+			</p>
+		   </div>
+		   <div class="row">
+			   <div class="col-md-4">
+					<div class='box'>
+					  <div class='wave -one'></div>
+					  <div class='wave -two'></div>
+					  <div class='wave -three'></div>
+					  <div class='title'>Durée de la formation  </br></br> <a href="#!" style="font-size: 13px; color: #fff;">En savoir plus <span class="fa fa-angle-right"></span></a></div>
+					</div>
+			   </div>
+			   <div class="col-md-4">
+					<div class='box'>
+					  <div class='wave -one'></div>
+					  <div class='wave -two'></div>
+					  <div class='wave -three'></div>
+					  <div class='title'>Coût de la formation </br></br> <a href="#!" style="font-size: 13px; color: #fff;">En savoir plus <span class="fa fa-angle-right"></span></a></div>
+					</div>
+			   </div>
+			   <div class="col-md-4">
+					<div class='box'>
+					  <div class='wave -one'></div>
+					  <div class='wave -two'></div>
+					  <div class='wave -three'></div>
+					  <div class='title'>S'incrire à cette formation </br></br> <a href="#!" class="btn btn-primary commande-offer-formation" value="{{ produit.id }}" name="fc" style="font-size: 13px; color: #fff;">S'inscrire <span class="fa fa-thumbs-o-up"></span></a></div>
+					</div>
+			   </div>
+		   </div>
+		</section>
+		</div>
+		
+		
+		{% for caract in produit.souscategorie.caracteristiques %}
+		
+		<div class="my-div">
+			<section class="testing" style="width: 100%;">
+			<div class="description2 to-expand">
+			<h2>{{ caract.nom }}</h2>
+			
+			<div>
+				{% set break = false %}						
+				{% for caractp in caract.caracteristiqueproduits if not break %}
+					{% if caractp.produit == produit %}
+					{% set break = true %}
+					{{ caractp.valeur }}
+					{% endif %}
+				{% endfor %}
+				
+				{% if break == false %}
+					<span>Aucune valeur spécifée pour cet indicateur.</span>
+				{% endif %}
+			</div>
+			
+			</div>
+			</section>
+		</div>
+		{% endfor %}	
+	</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripttemplate %}
+
+$('.description2').expandable({
+	height: 200,
+	expand_responsive : 960,
+	offset: 30
+});
+
+
+$('.accordion-1 > li:eq(0) a').addClass('active').next().slideDown();
+$('.accordion-2 > li:eq(0) a').addClass('active').next().slideDown();
+
+$('a').tooltip();
+{% endblock %}
