@@ -131,7 +131,7 @@ users_adminuser_ajouter_nouveau_service:
     path: /ajouter/nouveau/service/{add}
     controller: App\Controller\Produit\Service\ServiceController::nouveauservice
     defaults:
-        id: 0
+        add: 0
     requirements:
         add: \d+
 users_adminuser_modifier_un_service:

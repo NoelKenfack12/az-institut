@@ -124,7 +124,7 @@
   <div class="container">
 	<div class="row clearfix">
 	  <div class="col-sm-6 col-xs-12 copyRight">
-		<p>© 2016 Copyright Royal College Bootstrap Template by <a href="http://www.iamabdus.com">Abdus</a></p>
+		<p>© 2016 Copyright Royal College Bootstrap Template by {% if is_granted('ROLE_GESTION') %}. <a class="grey-text text-lighten-4" href="{{ path('users_adminuser_accueil_administration') }}">{{ 'Administration'|trans }}</a>{% endif %}</p>
 	  </div><!-- col-sm-6 col-xs-12 -->
 	  <div class="col-sm-6 col-xs-12 privacy_policy">
 		<a href="contact-us.html">Contact us</a>

@@ -23,6 +23,7 @@ public function __construct(ParameterBagInterface $params, Singleemail $servicem
 	$this->params = $params;
 	$this->_servicemail = $servicemail;
 }
+
 public function login(Request $request, GeneralServicetext $service)
 {
 	$em = $this->getDoctrine()->getManager();
@@ -92,7 +93,7 @@ public function accueilsite(GeneralServicetext $service)
 	$em = $this->getDoctrine()->getManager();
 	$user = $this->getUser();
 	$liste_actualite = $em->getRepository(Service::class)
-					   ->findBy(array('typearticle'=>'actualite','principal'=>1), array('rang'=>'asc'),20);
+					      ->findBy(array('typearticle'=>'actualite','principal'=>1), array('rang'=>'asc'),20);
 	$liste_slide = $em->getRepository(Imgslide::class)
 	                  ->myFindAcceuil();
 	$liste_slide = $service->selectEntities($liste_slide, 6);

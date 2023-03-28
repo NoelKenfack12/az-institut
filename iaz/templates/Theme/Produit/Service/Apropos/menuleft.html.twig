@@ -1,43 +1,41 @@
 
 
 <div class="toutleblock">
-
 <div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block!important;">
-<div class="card-body">
-  <h4 class="card-title">L'institut de formation</h4>
-  <h6 class="card-subtitle mb-2">{{ site }}</h6>
-  <p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
-</div>
-<div class="list-group list-group-flush">
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'aproposinstitut' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">À Propos De L'institut Az</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'demarcheaz' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Démarche de formation</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'actualite' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Actualités</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'mediatheque' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Vidéothèque</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'galeriephoto' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Galerie photos</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Planing des cours</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'temoignage' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Temoignage collaborateurs</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'avis' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Avis des étudiant(e)s</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'evenement' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Evènements</span></a>
-	<a href="{{ path('produit_service_apropos_denous', {'position': 'aide' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Foire aux questions</span></a>
-	<a href="{{ path('produit_service_contact_us') }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Nous contacter</span></a>
-</div>       
+	<div class="card-body">
+		<h4 class="card-title">L'institut de formation</h4>
+		<h6 class="card-subtitle mb-2">{{ site }}</h6>
+		<p class="card-text">It is the seventh most populous city in Italy, at the heart of a metropolitan area of about one million people. </p>
+	</div>
+	<div class="list-group list-group-flush">
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'aproposinstitut' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">À Propos De L'institut Az</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'demarcheaz' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Démarche de formation</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'actualite' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Actualités</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'mediatheque' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Vidéothèque</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'galeriephoto' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Galerie photos</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Planing des cours</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'temoignage' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Temoignage collaborateurs</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'avis' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Avis des étudiant(e)s</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'evenement' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Evènements</span></a>
+		<a href="{{ path('produit_service_apropos_denous', {'position': 'aide' }) }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Foire aux questions</span></a>
+		<a href="{{ path('produit_service_contact_us') }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Nous contacter</span></a>
+	</div>       
 </div>
 
 {% for formation in liste_formation %}
 <div class="card" style="background: #fff; border-radius: 5px; padding: 7px; margin-bottom: 7px; display: block!important;">
   <h4 class="card-title">{{ formation.nom }}</h4>
   <h6 class="card-subtitle mb-2">{{ site }}</h6>
-
-<div class=""> 
-	<a href="#!" class="open-liste-formation" style="display: block;" value="{{ formation.id }}">Liste des formations <span class="fa fa-angle-down"></span> </a> 
-</div>
-<div class="list-group list-group-flush item-formation-{{ formation.id }}" style="{% if not(loop.first) %}display: none;{% endif %}">
-	{% for diplome in formation.getScatProduits|slice(0,4) %}
-	<a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}" title="{{ diplome.nom }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">{{ diplome.nom }}</span></a>
-	{% endfor %}
-	
-	<a href="{{ path('produit_produit_produit_formation_institut', {'id': formation.id }) }}" title="{{ formation.nom }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Liste complète</span></a>
-</div>       
+	<div class=""> 
+		<a href="#!" class="open-liste-formation" style="display: block;" value="{{ formation.id }}">Liste des formations <span class="fa fa-angle-down"></span> </a> 
+	</div>
+	<div class="list-group list-group-flush item-formation-{{ formation.id }}" style="{% if not(loop.first) %}display: none;{% endif %}">
+		{% for diplome in formation.getScatProduits|slice(0,4) %}
+		<a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': diplome.id }) }}" title="{{ diplome.nom }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">{{ diplome.nom }}</span></a>
+		{% endfor %}
+		
+		<a href="{{ path('produit_produit_produit_formation_institut', {'id': formation.id }) }}" title="{{ formation.nom }}" class="list-group-item list-group-item-action" style="border: none;"><span class="cool-link">Liste complète</span></a>
+	</div>       
 </div>
 {% endfor %}	
 

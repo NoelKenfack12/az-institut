@@ -17,7 +17,8 @@ use Doctrine\Common\Collections\Collection;
  *
  * @ORM\Table("caracteristique")
  * @ORM\Entity(repositoryClass=CaracteristiqueRepository::class)
- */
+*/
+
 class Caracteristique
 {
     /**

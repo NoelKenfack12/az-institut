@@ -459,24 +459,8 @@
 }
 </style>
 
-{#
-<section class="breadcrumb-panel">
-	<div  style="display: block; background: #3565ae; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); min-height: 100px;">
-	<div class="container">
-	<div class="row">
-	<div class="col-md-8">
-		<h2>Une Nouvelle Affaire</h2>	
-		<div>Des idée que personne ne peut renier</div>	
-	</div>
-	<div class="col-md-4">
-		<div class="welcome_area_thumb text-right" style="margin-top: 15px;"><img src="{{ asset('template/images/hero-2.png') }}" alt="" style="height: 100px;"/><a class="video_btn" href="https://www.youtube.com/watch?v=YLtFGWVWiGo" style="width: 60px; height: 60px;"><i class="lni-play" style="line-height: 60px;"></i><span class="video-sonar"></span></a></div>
-	</div>
-    </div>
-    </div>
-	</div>
-</section>#}
 
-<div class="breadcrumb-panel" style="margin-top: 10px;">
+<div class="breadcrumb-panel" style="background: #f0f0f2;">
 <div class="container">
 
 <div class="row">
@@ -550,8 +534,11 @@
 	{% include "Theme/General/Template/Menu/contacts.html.twig" %}
 	<ul class="breadcrumbs">
 	  <li><a href="#"><span class="fa fa-home"></span> Accueil</a></li>
-		<li><a href="#!">L'Institut</a></li>
 		
+    {% if position == 'evenement' %}
+    <li>Nos évènements</li>
+    {% endif %}
+
 		{% if article != null %}
 		<li><a href="#!">{{ typearticle.nom }}</a></li>
 		<li>{{ article.nom }}</li>
@@ -559,9 +546,6 @@
 		{% else %}
 			{% if typearticle != null %}
 				<li>{{ typearticle.nom }}</li>
-				
-			{% else %}
-				<li>Informations à propos de l'institut</li>
 			{% endif %}
 		{% endif %}
 	</ul>
@@ -578,8 +562,10 @@
 <div style="background: #f0f0f2; padding-top: 20px;">
 <div class="container">
 <div class="row">
-	
-	{{ render(controller("App\\Controller\\Produit\\Service\\ServiceController:menuleft")) }}
+	<div class="col-md-4">
+    {{ render(controller("App\\Controller\\Produit\\Service\\ServiceController:menuleft")) }}
+  </div>
+
 
 	{% if position == 'aproposinstitut' %}
 		{% include 'Theme/Produit/Service/Apropos/aproposdenous.html.twig' %}

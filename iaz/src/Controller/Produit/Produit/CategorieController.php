@@ -154,7 +154,7 @@ public function modificationcategorie(GeneralServicetext $service, Request $requ
 					->find($id);
 	if($categorie != null)
 	{
-    $formcat = $this->createForm(new CategorieType, $categorie);
+    $formcat = $this->createForm(CategorieType::class, $categorie);
 	if ($request->getMethod() == 'POST'){
 		$formcat->handleRequest($request);
 		$categorie->setServicetext($service);

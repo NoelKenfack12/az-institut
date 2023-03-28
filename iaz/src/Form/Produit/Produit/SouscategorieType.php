@@ -36,7 +36,7 @@ class SouscategorieType extends AbstractType
 			'multiple'=>false))
             ->add('cataloguechantier',EntityType::class, array(
                 'class'=> Cataloguechantier::class,
-                'property'=>'nom',
+                'choice_label'=>'nom',
                 'multiple'=>false))
         ;
     }

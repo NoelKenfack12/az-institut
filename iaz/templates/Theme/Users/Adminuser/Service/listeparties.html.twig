@@ -30,7 +30,7 @@
 <div style="margin-top: 20px; padding: 5px 20px; border-top: 1px solid #ddd;">
 <h4 class="header2">Ajouter une nouvelle partie</h4>
 <div class="row">
-	{{ form_start(formeven, {'class': 'col s12', 'attr': path('users_adminuser_add_un_evenement', {'id': article.id}) }}
+	{{ form_start(formeven, {'attr': {'class':'col s12', 'action': path('users_adminuser_add_un_evenement', {'id': article.id}) }}) }}
 	<div class="row">
 	<span style="color:red;">{{ form_errors(formeven) }}</span>
 	<span style="color:red;">{{ form_errors(formeven.nom) }}</span>

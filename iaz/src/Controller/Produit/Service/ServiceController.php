@@ -28,10 +28,10 @@ public function nouveauservice(GeneralServicetext $service, Request $request, $a
 {
 	$em = $this->getDoctrine()->getManager();
 	$nosservice = new Service($service);
-    $form = $this->createForm(new ServiceType, $nosservice);
+    $form = $this->createForm(ServiceType::class, $nosservice);
 	
 	$typearticle = new Typearticle($service);
-    $formtype = $this->createForm(new TypearticleType, $typearticle);
+    $formtype = $this->createForm(TypearticleType::class, $typearticle);
 	
 	$formsupp = $this->createFormBuilder()->getForm();
 
@@ -61,6 +61,11 @@ public function nouveauservice(GeneralServicetext $service, Request $request, $a
 				if($type != null)
 				{
 					$nosservice->setType($type);
+				}
+
+				if(isset($_POST['evenement_date']))
+				{
+					$nosservice->setDateEvent(new \Datetime($_POST['evenement_date']));
 				}
 			}
 			if($_POST['typearticle'] == 'actualite' and isset($_POST['actualite']))
@@ -212,20 +217,18 @@ public function articlespartype($idtype, $page)
 	'nombrepage' => ceil(count($liste_article)/30),'page'=>$page,'idtype'=>$idtype));
 }
 
-public function listeparties(Service $article, $service)
+public function listeparties(Service $article, GeneralServicetext $service)
 {
 	$evenement = new Evenement($service);
     $formeven = $this->createForm(EvenementType::class, $evenement);
-	
-	
-	return $this->render('UsersAdminuserBundle:Service:listeparties.html.twig',
+
+	return $this->render('Theme/Users/Adminuser/Service/listeparties.html.twig',
 	array('article'=>$article, 'formeven'=>$formeven->createView()));
 }
 
-public function modifierservice($id)
+public function modifierservice($id, GeneralServicetext $service, Request $request)
 {
 	$em = $this->getDoctrine()->getManager();
-	$service = $this->container->get('general_service.servicetext');
 	if(isset($_GET['id']))
 	{
 		$id = $_GET['id'];
@@ -236,8 +239,8 @@ public function modifierservice($id)
 					->find($id);
 	if($article != null)
 	{
-    $form = $this->createForm(new ServiceType, $article);
-	$request = $this->get('request');
+    $form = $this->createForm(ServiceType::class, $article);
+
 	if ($request->getMethod() == 'POST'){
 		$form->handleRequest($request);
 		$article->setServicetext($service);
@@ -393,7 +396,7 @@ public function modifierservice($id)
 	$type_galeriephoto = $em->getRepository(Typearticle::class)
 						  ->findBy(array('position'=>'galeriephoto'));
 
-	return $this->render('UsersAdminuserBundle:Service:modifierservice.html.twig',
+	return $this->render('Theme/Users/Adminuser/Service/modifierservice.html.twig',
 	array('form'=>$form->createView(),'article'=>$article,'type_actualite'=>$type_actualite,'type_temoignage'=>$type_temoignage,
 	'type_apropos'=>$type_apropos,'type_evenement'=>$type_evenement,'type_demarcheaz'=>$type_demarcheaz,'type_modepaiement'=>$type_modepaiement,
 	'type_mediatheque'=>$type_mediatheque,'type_planingcours'=>$type_planingcours,'type_aide'=>$type_aide,'type_galeriephoto'=>$type_galeriephoto));
@@ -403,10 +406,9 @@ public function modifierservice($id)
 	}
 }
 
-public function addnewressource($id, $name)
+public function addnewressource($id, $name, GeneralServicetext $service, Request $request)
 {
 	$em = $this->getDoctrine()->getManager();
-	$service = $this->container->get('general_service.servicetext');
 	if(isset($_GET['id']))
 	{
 		$id = $_GET['id'];
@@ -437,7 +439,7 @@ public function addnewressource($id, $name)
 								  ->findBy(array('id'=>$tab));
 			foreach($liste_ressource as $ressource)
 			{
-				$oldarticle = $em->getRepository('ProduitServiceBundle:Ressourcearticle')
+				$oldarticle = $em->getRepository(Ressourcearticle::class)
 								  ->findOneBy(array('service'=>$article,'ressource'=>$ressource),array('date'=>'desc'),1);
 				if($oldarticle == null)
 				{
@@ -462,7 +464,7 @@ public function addnewressource($id, $name)
 					            ->findVideoArticle($article->getId());
 		}
 			
-		return $this->render('UsersAdminuserBundle:Service:addnewressource.html.twig',
+		return $this->render('Theme/Users/Adminuser/Service/addnewressource.html.twig',
 		array('article'=>$article,'liste_article'=>$liste_article,'name'=>$name));
 	}else{
 		echo 'Echec ! Une erreur a été rencontrée.';
@@ -678,20 +680,23 @@ public function aproposdenous($position, $idtype, $idart, $page)
 	{
 		$typearticle = $article->getType();
 	}
+	if($typearticle == null)
+	{
+		$typearticle = $em->getRepository(Typearticle::class)
+				           ->findOneBy(array('position'=>$position), array('rang'=>'desc'));
+	}
 	if($typearticle != null)
 	{
 		$liste_article = $em->getRepository(Service::class)
-	                     ->myAllBlog($typearticle->getId(),$page,8,$position);
-	}else{
+	                        ->myAllBlog($typearticle->getId(),$page,8,$position);
+	}else{ 
 		$liste_article = $em->getRepository(Service::class)
 						 ->findBlog($page,8,'evenement');
 	}
 	 
 	$list_typearticle = $em->getRepository(Typearticle::class)
-				      ->findBy(array('position'=>$position), array('rang'=>'desc'));
-	
-	
-	
+				           ->findBy(array('position'=>$position), array('rang'=>'desc'));
+
 	return $this->render('Theme/Produit/Service/Service/aproposdenous.html.twig',
 	array('article'=>$article,'position'=>$position,'liste_article'=>$liste_article,'page'=>$page,
 	'nombrepage' => ceil(count($liste_article)/8),'idtype'=>$idtype,'typearticle'=>$typearticle,

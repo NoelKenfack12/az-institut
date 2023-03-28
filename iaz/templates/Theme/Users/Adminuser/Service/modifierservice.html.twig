@@ -1,7 +1,7 @@
 
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-sm-12">  
-		{{ form_start(form, {'class': 'col s12', 'attr': path('users_adminuser_modifier_un_service', {'id': article.id}) }}	
+		{{ form_start(form, {'attr': {'class':'col s12', 'action': path('users_adminuser_modifier_un_service', {'id': article.id}) }}) }}
 		<span style="color:red;">{{ form_errors(form) }}</span>
 		<span style="color:red;">{{ form_errors(form.nom) }}</span>
 		  
@@ -45,6 +45,10 @@
 				<option value="{{ type.id }}" {% if article.type != null and article.type.id == type.id %}selected{% endif %}>{{ type.nom }}</option>
 				{% endfor %}
 			</select>
+		  </div>
+
+		  <div class="input-field col s12 type_produit prod_evenement" style="{% if article.typearticle != 'evenement' %}display: none;{% endif %}">
+			<input type="datetime-local" class="frm-field required" name="evenement_date" placeholder="Rentrer la date de l'évènement">
 		  </div>
 		  
 		  <div class="input-field col s12 type_produit prod_actualite" style="{% if article.typearticle != 'actualite' %}display: none;{% endif %}">

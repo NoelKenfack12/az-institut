@@ -188,7 +188,8 @@
 <h4 class="header2">Ajouter un article</h4>
 	
 <div class="row">
-	{{ form_start(form, {'class': 'col s12', 'attr': path('users_adminuser_ajouter_nouveau_service') }}
+	{{ form_start(form, {'attr': {'class':'col s12', 'action': path('users_adminuser_ajouter_nouveau_service') }}) }}
+
    <div class="row">
 	<span style="color:red;">{{ form_errors(form) }}</span>
 	<span style="color:red;">{{ form_errors(form.nom) }}</span>
@@ -228,6 +229,10 @@
 		<option value="{{ type.id }}">{{ type.nom }}</option>
 		{% endfor %}
 		</select>
+	  </div>
+
+	  <div class="input-field col s12 type_produit prod_evenement" style="display: none;">
+		<input type="datetime-local" class="frm-field required" name="evenement_date" placeholder="Rentrer la date de l'évènement">
 	  </div>
 	  
 	  <div class="input-field col s12 type_produit prod_actualite" style="display: none;">
@@ -370,7 +375,8 @@
 <div class="modal-body">
 <h4 class="header2">Ajouter un type d'article</h4>
 <div class="row">
-	{{ form_start(formtype, {'class': 'col s12', 'attr': path('users_adminuser_add_type_article') }}
+	{{ form_start(formtype, {'attr': {'class':'col s12', 'action': path('users_adminuser_add_type_article') }}) }}
+
   <div class="row">
 	<span style="color:red;">{{ form_errors(formtype) }}</span>
 	<span style="color:red;">{{ form_errors(formtype.nom) }}</span>

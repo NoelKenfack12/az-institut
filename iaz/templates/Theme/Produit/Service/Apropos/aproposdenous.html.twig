@@ -4,7 +4,7 @@
 	<section class="testing" style="width: 100%;">
 	   <div class="description2 to-expand">
 		<h2>{{ article.nom }} </h2>
-		<div><img src="{% if article.imgservice != null %}{{ asset(article.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="{{ site }} - {{ article.nom }}" style="width: 100%;"/></div>
+		<div><!-- img src="{% if article.imgservice != null %}{{ asset(article.imgservice.getwebpath) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="{{ site }} - {{ article.nom }}" style="width: 100%;"/ --></div>
 		
 		<p>
 		{{ article.description|raw }}

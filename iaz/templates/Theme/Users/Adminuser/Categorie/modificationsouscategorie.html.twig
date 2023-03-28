@@ -1,6 +1,7 @@
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-sm-12">
-	{{ form_start(formcat, {'style': 'margin-top: 15px', 'attr': path('users_adminuser_modifier_sous_categorie_produit', {'id': scat.id}) }}) }}
+	{{ form_start(formcat, {'attr': {'style': 'margin-top: 15px', 'action': path('users_adminuser_modifier_sous_categorie_produit', {'id': scat.id}) }}) }}
+
 		<div class="row">
 			 <div class="input-field col s12">
 				{{ form_widget(formcat.nom) }}

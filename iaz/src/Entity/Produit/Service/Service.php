@@ -165,21 +165,26 @@ class Service
 	private $servicetext;
 	
 	private $em;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateEvent;
 	
 	public function __construct(GeneralServicetext $service)
-	{
-		$this->servicetext = $service;
-		$this->date = new \Datetime();
-		$this->principal = false;
-		$this->evenements = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->commentaireblogs = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->ressourcearticles = new \Doctrine\Common\Collections\ArrayCollection();
-	}
+         	{
+         		$this->servicetext = $service;
+         		$this->date = new \Datetime();
+         		$this->principal = false;
+         		$this->evenements = new \Doctrine\Common\Collections\ArrayCollection();
+         		$this->commentaireblogs = new \Doctrine\Common\Collections\ArrayCollection();
+         		$this->ressourcearticles = new \Doctrine\Common\Collections\ArrayCollection();
+         	}
 
 	public function setServicetext( GeneralServicetext $service)
-    {
-		$this->servicetext = $service;
-    }
+             {
+         		$this->servicetext = $service;
+             }
 	
     public function getServicetext()
     {
@@ -187,14 +192,14 @@ class Service
     }
 	
 	public function setEm($em)
-	{
-		$this->em = $em;
-	}
+         	{
+         		$this->em = $em;
+         	}
 	
 	public function getEm()
-	{
-		return $this->em;
-	}
+         	{
+         		return $this->em;
+         	}
 
     /**
      * Get id
@@ -573,11 +578,11 @@ class Service
     }
 	
 	public function getPartiearticles()
-	{
-		$liste_partie = $this->em->getRepository(Evenement::class)
-	                         ->findBy(array('service'=>$this, 'typearticle'=>'autres'),array('rang'=>'asc'));
-		return $liste_partie;
-	}
+         	{
+         		$liste_partie = $this->em->getRepository(Evenement::class)
+         	                         ->findBy(array('service'=>$this, 'typearticle'=>'autres'),array('rang'=>'asc'));
+         		return $liste_partie;
+         	}
 
     /**
      * Set principal
@@ -629,6 +634,18 @@ class Service
     public function getRessourcearticles(): ?Collection
     {
         return $this->ressourcearticles;
+    }
+
+    public function getDateEvent(): ?\DateTimeInterface
+    {
+        return $this->dateEvent;
+    }
+
+    public function setDateEvent(?\DateTimeInterface $dateEvent): self
+    {
+        $this->dateEvent = $dateEvent;
+
+        return $this;
     }
     
 }

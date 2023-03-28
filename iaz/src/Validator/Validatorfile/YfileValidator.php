@@ -23,7 +23,7 @@ public function validate($file, Constraint $constraint)
  }else{
  $text = $file->getClientOriginalName();
  $extensionfile = $file->getClientOriginalExtension();
- $size = $file->getClientSize();
+ $size = $file->getSize();
  }
  $text = $this->service->normaliseText($text);
 if ($constraint->taillemax < $size || !in_array($extensionfile, $extension)) 

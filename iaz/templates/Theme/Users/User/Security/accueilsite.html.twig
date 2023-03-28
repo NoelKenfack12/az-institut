@@ -29,7 +29,6 @@
 
 <div class="banner carousel slide" id="recommended-item-carousel" data-ride="carousel">
 	<div class="slides carousel-inner">
-	  
 	  {% for slide in liste_slide %}
 	  <div class="item {% if loop.first %}active{% endif %}">
 		{% if loop.first %}
@@ -75,53 +74,22 @@
 
 	  <div class="about_inner clearfix">
 		<div class="row">
+		  {% for formation in liste_formation|slice(0,1) %}
+		  {% for scatFormation in formation.getSouscategories|slice(0,4) %}
 		  <div class="col-xs-6 col-sm-3">
 			<div class="aboutImage">
-			  <a href="single-course-right-sidebar.html">
-				<img src="{{ asset('templatecourse/images/learn_1.jpg') }}" alt="" class="img-responsive" />
+			  <a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scatFormation.id }) }}">
+				<img src="{% if scatFormation.src != null %}{{ asset(scatFormation.getwebpath ) }}{% else %}{{ asset('templatecourse/images/learn_1.jpg') }}{% endif %}" alt="" class="img-responsive" />
 				<div class="overlay">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis.</p>
+				  <p>{{ scatFormation.description }}</p>
 				</div>
-				<span class="captionLink">English Literature<span></span></span>
+				<span class="captionLink">{{ scatFormation.nom }}<span></span></span>
 			  </a>
 			</div><!-- aboutImage -->
 		  </div>
+		  {% endfor %}
+		  {% endfor %}
 
-		  <div class="col-xs-6 col-sm-3">
-			<div class="aboutImage">
-			  <a href="single-course-right-sidebar.html">
-				<img src="{{ asset('templatecourse/images/learn_2.jpg') }}" alt="" class="img-responsive" />
-				<div class="overlay">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis.</p>
-				</div>
-				<span class="captionLink">Business Administration<span></span></span>
-			  </a>
-			</div><!-- aboutImage -->
-		  </div>
-
-		  <div class="col-xs-6 col-sm-3">
-			<div class="aboutImage">
-			  <a href="single-course-right-sidebar.html">
-				<img src="{{ asset('templatecourse/images/learn_3.jpg') }}" alt="" class="img-responsive" />
-				<div class="overlay">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis.</p>
-				</div>
-				<span class="captionLink">Computer Science<span></span></span>
-			  </a>
-			</div><!-- aboutImage -->
-		  </div>
-
-		  <div class="col-xs-6 col-sm-3">
-			<div class="aboutImage">
-			  <a href="single-course-right-sidebar.html">
-				<img src="{{ asset('templatecourse/images/learn_4.jpg') }}" alt="" class="img-responsive" />
-				<div class="overlay">
-				  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis.</p>
-				</div>
-				<span class="captionLink">Mathematics<span></span></span>
-			  </a>
-			</div><!-- aboutImage -->
-		  </div>
 		</div><!-- row -->
 	  </div><!-- about_inner -->
 

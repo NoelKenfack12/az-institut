@@ -47,9 +47,9 @@ public function menuadmin()
 {
 	$em = $this->getDoctrine()->getManager();
 	$liste_commande = $em->getRepository(Panier::class)
-				         ->findOneBy(array('payer'=>1,'livrer'=>0));
+				         ->findBy(array('payer'=>1,'livrer'=>0));
 	$liste_vente = $em->getRepository(Panier::class)
-				      ->findOneBy(array('payer'=>1,'livrer'=>1));
+				      ->findBy(array('payer'=>1,'livrer'=>1));
 	$nbrecrutement = $em->getRepository(Panier::class)
 	                    ->findAll();
 	return $this->render('Theme/Users/Adminuser/Accueil/menuadmin.html.twig',

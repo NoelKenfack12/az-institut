@@ -369,7 +369,7 @@ class Souscategorie
 	protected function getUploadRootDir()
 	{
 	// On retourne le chemin relatif vers l'image pour notre codePHP
-	return  __DIR__.'/../../../../web/'.$this->getUploadDir();
+	return  __DIR__.'/../../../../public/'.$this->getUploadDir();
 	}
 	public function setFile(UploadedFile $file)
 	{
