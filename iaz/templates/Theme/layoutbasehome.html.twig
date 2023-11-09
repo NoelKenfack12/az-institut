@@ -407,6 +407,10 @@
 	border-radius: 1em;
 }
 
+.banner{
+  background: transparent!important;
+}
+
 @media (max-width: 700px) {
 	.my-div {
 		width: auto;
@@ -415,6 +419,21 @@
 		padding: 1em;
 	}
 }
+.list_block, .sidebar_item, .formArea{
+  border-top-color: #0060b1!important;
+}
+
+
+.border-secondary{
+  border: 1px solid #76b4e7!important;
+}
+.bg-primary{
+  background: #092759!important;
+}
+.bg-secondary{
+  background: #76b4e7!important;
+}
+
 </style>
 </head> 
 
@@ -460,8 +479,8 @@
 <script src="{{ asset('templatecourse/js/SmoothScroll.js') }}"></script>
 <script src="{{ asset('templatecourse/js/custom.js') }}"></script>
 
-<link href="{{ asset('templatecourse/css/optionswitch.css') }}" rel="stylesheet">
-<script src="{{ asset('templatecourse/js/optionswitcher.js') }}"></script>
+<!-- link href="{{ asset('templatecourse/css/optionswitch.css') }}" rel="stylesheet" -->
+<!-- script src="{{ asset('templatecourse/js/optionswitcher.js') }}"></script -->
 
 {% block srcjavascript %}
 

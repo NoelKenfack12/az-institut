@@ -27,46 +27,146 @@
 {% endblock %}
 {% block userblog_body %}
 
-<div class="banner carousel slide" id="recommended-item-carousel" data-ride="carousel">
-	<div class="slides carousel-inner">
-	  {% for slide in liste_slide %}
-	  <div class="item {% if loop.first %}active{% endif %}">
-		{% if loop.first %}
-			<img src="{{ asset('templatecourse/images/slider_image_1.jpg') }}" alt="" />
-		{% else %}
-			<img src="{{ asset('templatecourse/images/slider_image_2.jpg') }}" alt="" />
-		{% endif %}
-		<div class="banner_caption">
-		  <div class="container">
-			<div class="row">
-			  <div class="col-xs-12">
-				<div class="caption_inner animated fadeInUp">
-				  <h1>{{ slide.titre }}</h1>
-				  <p>{{ slide.description }}</p>
-				  <a href="{% if slide.link != null %}{{ slide.link }}{% else %}#!{% endif %}">En savoir plus</a>
-				</div><!--end caption_inner-->
-			  </div>
-			</div><!--end row-->
-		  </div><!--end container--> 
-		</div><!--end banner_caption-->
-	  </div>
-	  {% endfor %}
+<link rel="stylesheet" href="{{ asset('template/test/css/style.css') }}">
+<style>
+	.silder_intro {
+		display: block;
+		position: absolute;
+		right: 0px!important;
+		top: 0px!important;
+		z-index: 9;
+		width: 400px;
+		height: 400px;
+		padding: 25px 15px;
+		overflow: hidden;
+		background: rgba(0, 0, 0, .8);
+		color: #f0f0f0;
+		padding-left: 20px;
+		box-shadow: 0 0 5px 0 #ddd;
+		border-radius: 2px;
+		text-indent: 0;
+		text-decoration: none;
+	}
+	.silder_intro:hover{
+		color: #fff;
+	}
+	.img-slide-lg{
+		height: 400px;
+	}
+</style>
+<section class="diaporama-accueil" style="">
+	<div id="panel-slide-size" style="padding: 5px; margin: 0px; box-shadow:0px 0px 2px rgba(0,0,0,0.1); background: #fff;">	
+	<div>
+		<div class="slider_box" style="height: 400px;">
+			<!-- slide & description -->
+			<div class="silder_con">
 
+			  {% for slide in liste_slide %}
+			  <div class="silder_panel">
+				<a href="#" class="silder_panel_item">
+				  <img src="{{ asset('templatecourse/images/slider_image_1.jpg') }}" class="img-slide-lg"/>
+				</a>
+				<a href="{% if slide.link != null %}{{ slide.link }}{% else %}#!{% endif %}" class="silder_intro">
+				  <div class="silder_intro_content">
+					<h2 style="color: #fff;">{{ slide.titre }}</h2>
+					<div>{{ slide.description }}</div>
+				  </div>
+				</a>
+			  </div>
+			  {% endfor %}
+
+			</div>
+			<!-- contorl nav (created by JS)-->
+			<div class="silder_nav_mask"></div>
+			<div class="silder_nav"></div>
+		</div>
 	</div>
 
-	<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-	  <img src="{{ asset('templatecourse/images/prev.png') }}">
-	  </a>
-	<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-	  <img src="{{ asset('templatecourse/images/next.png') }}">
-	</a>
-  </div><!--end banner-->
+	<script src="{{ asset('template/test/js/slides.js') }}"></script>
+	</div>
 
-  <div class="aboutArea">
+<!--Adding demo page css file -->
+<link rel="stylesheet" type="text/css" href="{{ asset('hometemplate/css/demo-page-styles.css') }}">
+<!--Adding plugin css file -->
+<link rel="stylesheet" type="text/css" href="{{ asset('hometemplate/css/breaking-news-ticker.css') }}">
+
 	<div class="container">
+		
+		<!-- DEMO1 HTML STARTS HERE *-->
+		<!-- *********************** -->
+		<div class="breaking-news-ticker border-secondary" id="newsTicker1">
+			<div class="bn-label bg-secondary"><span class="fa fa-bullhorn"></span> Flash</div>
+			<div class="bn-news">
+				<ul>
+					{% for article in liste_actualite %}
+					<li><a href="{{ path('produit_service_detail_actualite', {'id': article.id }) }}"><span class="label label-primary">{{ loop.index }}</span> {{ article.nom }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="bn-controls">
+				<button><span class="bn-arrow bn-prev"></span></button>
+				<button><span class="bn-action"></span></button>
+				<button><span class="bn-arrow bn-next"></span></button>
+			</div>
+		</div>
+		<!-- *********************** -->
+		<!-- DEMO1 HTML END HERE *** -->
+		
+	</div>
+
+
+<script src="{{ asset('hometemplate/js/breaking-news-ticker.min.js') }}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$('#newsTicker1').breakingNews();
+	});
+</script>
+</div>
+</section>
+
+
+
+  <div >
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-xs-12">
+				<div style="padding-top: 30px;">
+					<h2>Bienvenue à l'institut de Formation Professionnelle AZ Corporation</h2>
+					<div>
+						<h5>Situé à Yaoundé Biyem-assi, au Carrefour Biyem-assi, Immeuble Mater.</h5>
+						<h4>Agrément N° 371/MINEFOP/SG/SDGSF/SACD</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row clearfix">
+		<div class="col-xs-12">
+			<div class="text-left" style="padding-top: 20px;">
+			<h2>La méthode AZ qui vous conduit inéluctablement à un emploi descend</h2>
+			</div><!-- aboutTitle -->
+		</div><!-- col-sm-3 col-xs-12 -->
+		</div><!-- row clearfix -->
+	
+		<div class="row clearfix">
+		<div class="col-xs-12">
+			<div class="text-left" style="padding-top: 20px;">
+			<h2>Nos pôles de formations</h2>
+			</div><!-- aboutTitle -->
+		</div><!-- col-sm-3 col-xs-12 -->
+
+		<div class="col-md-6">
+			Informatique
+		</div>
+
+		<div class="col-md-6">
+			Langue Etrangères
+		</div>
+		</div><!-- row clearfix -->
+
 	  <div class="row clearfix">
 		<div class="col-xs-12">
-		  <div class="aboutTitle">
+		  <div class="text-left" style="padding-top: 20px;">
 			<h2>Formations Diplomantes</h2>
 		  </div><!-- aboutTitle -->
 		</div><!-- col-sm-3 col-xs-12 -->
@@ -79,11 +179,12 @@
 		  <div class="col-xs-6 col-sm-3">
 			<div class="aboutImage">
 			  <a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scatFormation.id }) }}">
-				<img src="{% if scatFormation.src != null %}{{ asset(scatFormation.getwebpath ) }}{% else %}{{ asset('templatecourse/images/learn_1.jpg') }}{% endif %}" alt="" class="img-responsive" />
+				<!-- img src="{% if scatFormation.src != null %}{{ asset(scatFormation.getwebpath ) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="" class="img-responsive" /-->
+				<img src="{{ asset('template/images/present.png') }}" alt="" class="img-responsive" />
 				<div class="overlay">
 				  <p>{{ scatFormation.description }}</p>
 				</div>
-				<span class="captionLink">{{ scatFormation.nom }}<span></span></span>
+				<span class="captionLink" style="text-transform: capitalize;">{{ scatFormation.nom }}<span></span></span>
 			  </a>
 			</div><!-- aboutImage -->
 		  </div>
@@ -111,7 +212,7 @@
 				</div><!-- videoLeft -->
 				<div class="col-lg-4 col-md-5 col-xs-12 videoRight">
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis. Mauris porta fermentum volutpat. Praesent est sapien, tincidunt vel arcu vitae, mattis sollicitudin lectus. Mauris porta fermentum volutpat. Praesent est sapien, tincidunt vel arcu vitae, mattis sollicitudin lectus.</p>
-				<a href="about.html" class="btn btn-block learnBtn">Learn More</a>
+				<a href="" class="btn btn-block learnBtn">Learn More</a>
 				</div><!-- videoRight -->
 			  </div><!-- row -->
 			</div><!-- videoArea -->
@@ -119,32 +220,24 @@
 			<div class="related_post_sec single_post">
 			  <h3>Nos Formations Continues</h3>
 			  <ul>
+				{% for formation in liste_formation|slice(1,2) %}
+		  		{% for scatFormation in formation.getSouscategories|slice(0,2) %}
 				<li>
 				  <span class="rel_thumb">
-					<a href="single-post-right-sidebar.html"><img src="{{ asset('templatecourse/images/related_thumb_01.png') }}" alt=""></a>
+					<a href=""><img src="{{ asset('template/images/present.png') }}" alt=""></a>
 				  </span><!--end rel_thumb-->
 				  <div class="rel_right">
-					<h4><a href="single-post-right-sidebar.html">Lorem Ipsum dolar simt Amet simply dummy Text Lorem Ipsum dolar</a></h4>
+					<h4><a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scatFormation.id }) }}">{{ scatFormation.nom }}</a></h4>
 					<div class="meta">
-					  <span class="author">Posted in: <a href="#">Update</a></span>
-					  <span class="date">on: <a href="#">January 24, 2015</a></span>
+					  <span class="author">Durée de la formation <form action="a"></form>: <a href="#">2 mois</a></span>
+					  <span class="date">Etudiant(e)s Formés: <a href="#">2 000</a></span>
 					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation...</p>
+					<p>{{ scatFormation.description }}</p>
 				  </div><!--end rel right-->
 				</li>
-				<li>
-				  <span class="rel_thumb">
-					<a href="single-post-right-sidebar.html"><img src="{{ asset('templatecourse/images/related_thumb_02.jpg') }}" alt=""></a>
-				  </span><!--end rel_thumb-->
-				  <div class="rel_right">
-					<h4><a href="single-post-right-sidebar.html">Lorem Ipsum dolar simt Amet simply dummy Text Lorem Ipsum dolar</a></h4>
-					<div class="meta">
-					  <span class="author">Posted in: <a href="#">Exam</a></span>
-					  <span class="date">on: <a href="#">January 24, 2015</a></span>
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation...</p>
-				  </div><!--end rel right-->
-				</li>
+				{% endfor %}
+		  		{% endfor %}
+
 			  </ul>
 			</div><!--related_post_sec-->
 
@@ -154,42 +247,43 @@
 		<div class="col-sm-4 col-xs-12">
 		  <div class="formArea clearfix">
 			<div class="formTitle">
-			  <h3>Find a Course</h3>
+			  <h3>Retrouvez un formation</h3>
 			  <p>Offered in small class sizes with great emphasis on the demands of the specification and exam technique.</p>
 			</div><!-- formTitle -->
 			<form action="#" method="post">
 			  <div class="selectBox clearfix">
+				<label for="guiest_id1">Type de formation</label>
 				<select name="guiest_id1" id="guiest_id1">
-				  <option value="0">Location</option>
-				  <option value="1">Location_1</option>
-				  <option value="2">Location_2</option>
-				  <option value="3">Location_3</option>
+				  <option value="0">Type de formation</option>
+				  <option value="1">Formations diplomantes</option>
+				  <option value="2">Formations continues</option>
 				</select>
 			  </div><!-- selectBox -->
 			  <div class="selectBox clearfix">
 				<select name="guiest_id2" id="guiest_id2">
-				  <option value="0">Level</option>
-				  <option value="1">Level_1</option>
-				  <option value="2">Level_2</option>
-				  <option value="3">Level_3</option>
+					{% for formation in liste_formation|slice(0,1) %}
+						{% for scatFormation in formation.getSouscategories|slice(0,4) %}
+						<option value="{{ scatFormation.id }}">{{ scatFormation.nom }}</option>
+						{% endfor %}
+					{% endfor %}
 				</select>
 			  </div><!-- selectBox -->
 			  <div class="form-group">
-				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Course Name">
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Mot clé au choix">
 			  </div>
-			  <button type="submit" class="btn btn-default btn-block commonBtn">Search</button>
+			  <button type="submit" class="btn btn-default btn-block">Rechercher</button>
 			</form>
 		  </div><!-- formArea -->
 		  <div class="list_block related_post_sec">
 			<div class="upcoming_events">
-			  <h3>Upcoming Events</h3>
+			  <h3>Nos derniers évènements</h3>
 			  <ul>
 				<li class="related_post_sec single_post">
 				  <span class="date-wrapper">
 					<span class="date"><span>24</span>January</span>
 				  </span>
 				  <div class="rel_right">
-					<h4><a href="single-events.html">Offered in small class sizes with great emphasis...</a></h4>
+					<h4><a href="">Offered in small class sizes with great emphasis...</a></h4>
 					<div class="meta">
 					  <span class="place"><i class="fa fa-map-marker"></i>Main Campus</span>
 					  <span class="event-time"><i class="fa fa-clock-o"></i>11.00 pm</span>
@@ -201,7 +295,7 @@
 					<span class="date"><span>24</span>January</span>
 				  </span>
 				  <div class="rel_right">
-					<h4><a href="single-events.html">Offered in small class sizes with great emphasis...</a></h4>
+					<h4><a href="">Offered in small class sizes with great emphasis...</a></h4>
 					<div class="meta">
 					  <span class="place"><i class="fa fa-map-marker"></i>Main Campus</span>
 					  <span class="event-time"><i class="fa fa-clock-o"></i>11.00 pm</span>
@@ -213,7 +307,7 @@
 					<span class="date"><span>24</span>January</span>
 				  </span>
 				  <div class="rel_right">
-					<h4><a href="single-events.html">Offered in small class sizes with great emphasis...</a></h4>
+					<h4><a href="">Offered in small class sizes with great emphasis...</a></h4>
 					<div class="meta">
 					  <span class="place"><i class="fa fa-map-marker"></i>Main Campus</span>
 					  <span class="event-time"><i class="fa fa-clock-o"></i>11.00 pm</span>
@@ -221,7 +315,7 @@
 				  </div>
 				</li>
 			  </ul>
-			  <a href="events-3col.html" class="btn btn-default btn-block commonBtn">More Events</a>
+			  <a href="" class="btn btn-default btn-block">Plus d'évènements</a>
 			</div>
 		  </div><!-- end list_block -->
 		</div><!-- col-sm-4 col-xs-12 -->
@@ -240,7 +334,7 @@
 			<span class="timer">8298</span>
 			</div>
 			<div class="seperator-small"></div>
-		  <p>Students</p>
+		  <p>Personnes formées</p>
 		  </div>
 		</div><!-- col-sm-3 -->
 		<div class="col-xs-6 col-sm-3">
@@ -250,7 +344,7 @@
 			<span class="timer">142</span>
 			</div>
 			<div class="seperator-small"></div>
-			<p>Courses</p>
+			<p>Parcours</p>
 		  </div>
 		</div><!-- col-sm-3 -->
 		<div class="col-xs-6 col-sm-3">
@@ -260,7 +354,7 @@
 			<span class="timer">1047</span>
 			</div>
 			<div class="seperator-small"></div>
-			<p>Stuffs</p>
+			<p>Personnels</p>
 		  </div>
 		</div><!-- col-sm-3 -->
 		<div class="col-xs-6 col-sm-3">
@@ -270,16 +364,10 @@
 			<span class="timer">10</span>
 			</div>
 			<div class="seperator-small"></div>
-			<p>Locations</p>
+			<p>Localisations</p>
 		  </div>
 		</div><!-- col-sm-3 -->
-	  </div><!-- row -->
-	  <div class="paralax-text text-center">
-		<h2>Do you like this template?</h2>
-		<p>nec congue consequat risus, nec volutpat enim tempus id. Proin et sapien eget diam ullamcorper consectetur. Sed blandit imperdiet mauris. Mauris eleifend faucib</p>
-		<p>ipsum quis varius. Quisque pharetra leo erat, non eleifend nibh interdum quis.</p>
-		<a href="buying-steps.html" class="btn btn-default commonBtn">Buy now</a>
-	  </div><!-- row -->
+	  </div>
 	</div><!-- container -->
   </div><!-- count -->
 
@@ -293,18 +381,18 @@
 			</div>
 			<div class="carousal_bottom">
 			  <div class="thumb">
-				<img src="images/SARA-LISBON_Art-Student.jpg" alt="" draggable="false">
+				<img src="{{ asset('template/images/co.png') }}" alt="" draggable="false">
 			  </div>
 			  <div class="thumb_title">
 				<span class="author_name">Sara Lisbon</span>
-				<span class="author_designation">Student<a href="#"> English Literature</a></span>
+				<span class="author_designation">Directeur Général <a href="#">Institut Az Corporation</a></span>
 			  </div>
 			</div>
 		  </div><!-- testimonial -->
 		</div><!-- col-xs-12 -->
 		<div class="col-xs-12 col-sm-6">
 		  <div class="features">
-			<h3>Why Choose Us?</h3>
+			<h3>Pourquoi nous choisir ?</h3>
 			<ul>
 			  <li><i class="fa fa-check-circle-o"></i>It’s a complete solution for your college website</li>
 			  <li><i class="fa fa-check-circle-o"></i>PSD file included to help you customize the design better</li>

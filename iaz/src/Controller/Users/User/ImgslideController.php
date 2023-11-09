@@ -4,9 +4,9 @@
 namespace App\Controller\Users\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Users\UserBundle\Entity\Imgslide;
-use Users\UserBundle\Form\ImgslideType;
-use Users\UserBundle\Form\ImgslideeditType;
+use App\Entity\Users\User\Imgslide;
+use App\Form\Users\User\ImgslideType;
+use App\Form\Users\User\ImgslideeditType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\Servicetext\GeneralServicetext;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -109,6 +109,8 @@ public function alterslide(Request $request, GeneralServicetext $service, $id)
 			if($slide->getBackgroundslide() != null)
 			{
 				$slide->getBackgroundslide()->setServicetext($service);
+
+				if($this->getUser() != null)
 				$slide->getBackgroundslide()->setUser($this->getUser());
 			}
 		

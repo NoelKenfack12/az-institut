@@ -186,7 +186,7 @@ public function ajouteradmin(Request $request)
 	{
 		return $this->redirect($this->generateUrl('users_user_acces_plateforme'));
 	}else{
-		return $this->render('Theme/Users/User/ajouteradmin.html.twig');
+		return $this->render('Theme/Users/User/User/ajouteradmin.html.twig');
 	}
 }
 

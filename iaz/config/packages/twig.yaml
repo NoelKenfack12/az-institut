@@ -1,7 +1,7 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
-        site: AZ CORPORATION 
+        site: l'Institut AZ Corporation 
         metier: Produits et services Informatiques
         devise: FCFA
         ville: Yaounde
