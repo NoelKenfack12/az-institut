@@ -433,7 +433,15 @@
 .bg-secondary{
   background: #76b4e7!important;
 }
-
+.features li{
+  color: #092759;
+}
+.features li i{
+  color: #76b4e7!important;
+}
+.partnersLogo img{
+  height: 100px;
+}
 </style>
 </head> 
 
@@ -557,6 +565,10 @@ if($(window).height() > 600)
 }
 
 $(function(){
+
+  $('.video_btn').magnificPopup({
+		type: 'iframe'
+});
 
 $(".dropdown").hover(function(){
 	var dropdownMenu = $(this).children(".dropdown-menu");

@@ -124,9 +124,211 @@
 </div>
 </section>
 
+<style>
+.img__ {
+  max-width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
 
 
-  <div >
+.card__ {
+  padding: 3.5em 2em 2em;
+  width: 100%;
+  background: #fff;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+  position: relative;
+}
+.card__ .rectangle {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translatex(-50%);
+  width: 50px;
+  background: #e8e8e8;
+  height: 10px;
+  display: block;
+  border-radius: 50px;
+}
+.card-content {
+  padding-top: 7.2em;
+}
+.card-content h2 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.35em;
+  font-weight: 700;
+}
+.card-content p {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.card-img {
+  position: relative;
+}
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+.card-img-overlay p {
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: grid;
+  place-items: center;
+  padding: 0.9em;
+  text-align: center;
+  position: relative;
+  top: 100%;
+  min-width: 85px;
+  min-height: 85px;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.card__:nth-child(1) .card-img-overlay {
+  background: #056f6a;
+  /* The Fallback */
+  background: rgba(5, 111, 106, 0.5);
+}
+.card__:nth-child(1) .card-img-overlay p {
+  background: #056f6a;
+  /* The Fallback */
+  background: #056f6a;
+}
+.card__:nth-child(2) .card-img-overlay {
+  background: #b37399;
+  /* The Fallback */
+  background: rgba(179, 115, 153, 0.5);
+}
+.card__:nth-child(2) .card-img-overlay p {
+  background: #b37399;
+  /* The Fallback */
+  background: #b37399;
+}
+
+
+.feature-wrapper {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.feature-wrapper i {
+  color: white;
+}
+
+.zorb-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.zorb-container h3 {
+  font-size: 20px;
+  max-width: 150px;
+}
+
+.zorb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 5px;
+}
+
+.zorb-link {
+  width: 0px;
+  height: 50px;
+  border-bottom: 0px;
+  border-right: 3px solid grey;
+  flex-grow: 1;
+}
+
+@media (min-width: 768px) {
+  .feature-wrapper {
+    flex-direction: row;
+  }
+
+  .zorb-link {
+    height: 0px;
+    border-bottom: 3px solid grey;
+    margin-bottom: 30px;
+    max-width: 100px;
+    max-height: 50px;
+  }
+}
+.text-muted{
+	text-align: center!important;
+	color: #fff!important;
+}
+
+
+
+
+.cardDis{
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+  display: block;
+  color: #333;
+}
+
+.cardDis:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.cardDis h3{
+  font-weight: 600;
+}
+
+.cardDis img{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+
+.card-1{
+      background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+.card-2{
+      background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+.card-3{
+      background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+@media(max-width: 990px){
+  .cardDis{
+    margin: 20px;
+  }
+} 
+</style>
+
+<div>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-xs-12">
@@ -139,14 +341,51 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
 
-		<div class="row clearfix">
-		<div class="col-xs-12">
-			<div class="text-left" style="padding-top: 20px;">
-			<h2>La méthode AZ qui vous conduit inéluctablement à un emploi descend</h2>
-			</div><!-- aboutTitle -->
-		</div><!-- col-sm-3 col-xs-12 -->
-		</div><!-- row clearfix -->
+ 
+<div class="section" style="background-image: url({{ asset('templatecourse/images/paralax03.jpg') }});
+visibility: visible;
+animation-delay: 100ms;
+animation-name: fadeIn; padding: 10px 0px; margin-top: 20px;">
+	<div class="container">
+		<h2 style="color: #fff; margin-bottom: 15px;">La méthode AZ qui vous conduit inéluctablement à un emploi descend</h2>
+
+		<div class="feature-wrapper">
+			<div class="zorb-container">
+			  <div class="zorb">
+				<img src="{{ asset('template/images/orientation.png') }}" alt="" style="height: 60px;">
+			  </div>
+			  <h3 class="text-muted">Orientation vers un profil de métier</h3>
+			</div>
+			<div class="zorb-link"></div>
+			<div class="zorb-container">
+			  <div class="zorb">
+				<img src="{{ asset('template/images/rafiki.png') }}" alt="" style="height: 60px;">
+			  </div>
+			  <h3 class="text-muted">Motivation de l'apprenant</h3>
+			</div>
+			<div class="zorb-link"></div>
+			<div class="zorb-container">
+			  <div class="zorb">
+				<img src="{{ asset('template/images/formation-adapte.png') }}" alt="" style="height: 60px;">
+			  </div>
+			  <h3 class="text-muted">Formation adaptée au profil</h3>
+			</div>
+			<div class="zorb-link"></div>
+			<div class="zorb-container">
+			  <div class="zorb">
+				<img src="{{ asset('template/images/job.png') }}" alt="" style="height: 60px;">
+			  </div>
+			  <h3 class="text-muted" style="min-height: 50px;">Job Direct</h3>
+			</div>
+		</div>
+	</div>
+</div>
+
+  <section>
+	<div class="container">
 	
 		<div class="row clearfix">
 		<div class="col-xs-12">
@@ -156,46 +395,72 @@
 		</div><!-- col-sm-3 col-xs-12 -->
 
 		<div class="col-md-6">
-			Informatique
+
+			<div class="card__">
+				<div class="rectangle"></div>
+				<div class="card-img">
+				  <img src="{{ asset('template/images/PANNEAU-2-min.jpg') }}" alt="Informatique" class="img__">
+				  <div class="card-img-overlay">
+					<p>Formation</p>
+				  </div>
+				</div>
+				<div class="card-content">
+				  <h2 style="font-size: 23px;">Informatique</h2>
+				  <p>Formation continue et Diplômante</p>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="col-md-6">
-			Langue Etrangères
-		</div>
-		</div><!-- row clearfix -->
+			
+			<div class="card__">
+				<div class="rectangle"></div>
+				<div class="card-img">
+				  <img src="{{ asset('template/images/PANNEAU-1-min.jpg') }}" alt="Langue Etrangères" class="img__">
+				  <div class="card-img-overlay">
+					<p>Formation</p>
+				  </div>
+				</div>
+				<div class="card-content">
+				  <h2 style="font-size: 23px;">Langue Etrangères</h2>
+				  <p>Formation continue et Diplômante</p>
+				</div>
+			</div>
 
-	  <div class="row clearfix">
+		</div>
+	  </div><!-- row clearfix -->
+
+	  {% for formation in liste_formation|slice(0,1) %}
+	  <div class="row clearfix" style="margin-bottom: 7px;">
 		<div class="col-xs-12">
 		  <div class="text-left" style="padding-top: 20px;">
-			<h2>Formations Diplomantes</h2>
+			<h2>
+				<a href="{{ path('produit_produit_produit_formation_institut', {'id': formation.id }) }}" style="float: right;">Afficher plus</a>
+				Formations Diplomantes 
+			</h2>
 		  </div><!-- aboutTitle -->
 		</div><!-- col-sm-3 col-xs-12 -->
 	  </div><!-- row clearfix -->
 
 	  <div class="about_inner clearfix">
 		<div class="row">
-		  {% for formation in liste_formation|slice(0,1) %}
-		  {% for scatFormation in formation.getSouscategories|slice(0,4) %}
-		  <div class="col-xs-6 col-sm-3">
-			<div class="aboutImage">
-			  <a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scatFormation.id }) }}">
-				<!-- img src="{% if scatFormation.src != null %}{{ asset(scatFormation.getwebpath ) }}{% else %}{{ asset('template/images/present.png') }}{% endif %}" alt="" class="img-responsive" /-->
-				<img src="{{ asset('template/images/present.png') }}" alt="" class="img-responsive" />
-				<div class="overlay">
-				  <p>{{ scatFormation.description }}</p>
-				</div>
-				<span class="captionLink" style="text-transform: capitalize;">{{ scatFormation.nom }}<span></span></span>
-			  </a>
-			</div><!-- aboutImage -->
-		  </div>
-		  {% endfor %}
-		  {% endfor %}
 
+			{% for scatFormation in formation.getSouscategories|slice(0,3) %}
+			<div class="col-md-4">
+				<a href="{{ path('produit_produit_liste_produit_souscategorie', {'id': scatFormation.id}) }}" class="cardDis card-1" style="background-image: url({{ asset('template/images/present.png') }});">
+					<h3>{{ scatFormation.nom }}</h3>
+					<p>{{ scatFormation.description }}</p>
+				</a>
+			</div>
+			{% endfor %}
+		  
 		</div><!-- row -->
 	  </div><!-- about_inner -->
+	  {% endfor %}
 
 	</div><!-- container -->
-  </div><!-- aboutArea -->
+</section><!-- aboutArea -->
 
   <div class="mainContent clearfix">
 	<div class="container">
@@ -205,13 +470,15 @@
 		  <div class="videoNine clearfix">
 
 			<div class="videoArea clearfix">
-			  <h3>Bienvenue à {{ site }}</h3>
+			  <h3>Des formations continues spéciales à L'institut AZ.</h3>
 			  <div class="row">
 				<div class="col-lg-8 col-md-7 col-xs-12 videoLeft">
-				<img src="{{ asset('templatecourse/images/video_image.jpg') }}" data-video="https://www.youtube.com/embed/oOMcZoeEK0A?autoplay=1">
+					<a class="video_btn" href="https://www.youtube.com/watch?v=VKs4JwM5XHs">
+						<img src="{{ asset('template/images/sever-rent.png') }}">
+					</a>
 				</div><!-- videoLeft -->
 				<div class="col-lg-4 col-md-5 col-xs-12 videoRight">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur ante volutpat sem aliquam lobortis. Mauris porta fermentum volutpat. Praesent est sapien, tincidunt vel arcu vitae, mattis sollicitudin lectus. Mauris porta fermentum volutpat. Praesent est sapien, tincidunt vel arcu vitae, mattis sollicitudin lectus.</p>
+				<p>Noël approche à grands pas, et avec lui vient le temps de la magie, de la joie et de la générosité. À l'Institut de Formation Professionnelle Az Corporation, nous sommes ravis de vous présenter notre toute nouvelle campagne de formation spéciale Noël.</p>
 				<a href="" class="btn btn-block learnBtn">Learn More</a>
 				</div><!-- videoRight -->
 			  </div><!-- row -->
@@ -377,15 +644,20 @@
 		<div class="col-xs-12 col-sm-6">
 		  <div class="testimonial">
 			<div class="carousal_content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+			  <p>
+				Bienvenue sur le site de notre Institut de Formation Professionnelle ! Je suis ravi de vous accueillir et de vous présenter notre établissement dédié à l'excellence et à la réussite professionnelle.
+				<div>
+					En tant que directeur de cet institut, je suis particulièrement fier de notre équipe de formateurs qualifiés et passionnés qui sont dévoués à vous offrir une expérience d'apprentissage exceptionnelle. Notre objectif est de vous aider à acquérir les compétences et les connaissances nécessaires pour réussir dans votre carrière et atteindre vos objectifs professionnels.
+				</div>
+			  </p>
 			</div>
 			<div class="carousal_bottom">
 			  <div class="thumb">
 				<img src="{{ asset('template/images/co.png') }}" alt="" draggable="false">
 			  </div>
 			  <div class="thumb_title">
-				<span class="author_name">Sara Lisbon</span>
-				<span class="author_designation">Directeur Général <a href="#">Institut Az Corporation</a></span>
+				<span class="author_name" style="text-transform: none;">Gaiel bleriot AZAMBOU ZEBAZE</span>
+				<span class="author_designation">Directeur Général <a href="#" style="color: #76b4e7;">Institut Az Corporation</a></span>
 			  </div>
 			</div>
 		  </div><!-- testimonial -->
@@ -394,11 +666,12 @@
 		  <div class="features">
 			<h3>Pourquoi nous choisir ?</h3>
 			<ul>
-			  <li><i class="fa fa-check-circle-o"></i>It’s a complete solution for your college website</li>
-			  <li><i class="fa fa-check-circle-o"></i>PSD file included to help you customize the design better</li>
-			  <li><i class="fa fa-check-circle-o"></i>SASS file included for unlimited hasel free style customization</li>
-			  <li><i class="fa fa-check-circle-o"></i>Theme option switcher for live cusomization preview</li>
-			  <li><i class="fa fa-check-circle-o"></i>24/7 Support</li>
+			  <li><i class="fa fa-check-circle-o"></i>Acquérir des compétences spécialisées</li>
+			  <li><i class="fa fa-check-circle-o"></i>Obtenir une formation pratique</li>
+			  <li><i class="fa fa-check-circle-o"></i>Bénéficier d'un encadrement professionnel</li>
+			  <li><i class="fa fa-check-circle-o"></i>Accéder à des opportunités d'emploi</li>
+			  <li><i class="fa fa-check-circle-o"></i>Se former rapidement et efficacement</li>
+			  <li><i class="fa fa-check-circle-o"></i>Développer un réseau professionnel </li>
 			</ul>
 		  </div>
 		</div><!-- col-xs-12 -->
