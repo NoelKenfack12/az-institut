@@ -638,6 +638,220 @@ Component
     opacity: 0;
   }
 }
+
+/*------------------------ Begin style Accordion -------------------*/
+
+/*Privacy Center*/
+.privacy-center {
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 32px 0 104px;
+  border-radius: 8px;
+  position: relative;
+}
+.privacy-center .privacy-center--header {
+  padding: 0 0 16px;
+  margin: 0 32px;
+}
+.privacy-center .privacy-center--header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0060b1;
+  text-transform: capitalize;
+}
+.privacy-center .privacy-center--body {
+  margin: 0 32px;
+  border-top: 1px solid #dedede;
+  overflow: auto;
+}
+.privacy-center .privacy-center--body .privacy-center-intro {
+  padding: 24px 0;
+  line-height: 150%;
+  border-bottom: 1px solid #dedede;
+}
+.privacy-center .privacy-center--body .privacy-container {
+  margin: 0 auto;
+  background-color: #ffffff;
+  transition: all ease-in-out 0.36s;
+  border-radius: 3px;
+  max-height: 212px;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting {
+  display: flex;
+  align-content: center;
+  padding: 24px 0;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .privacy-label {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  padding-right: 24px;
+  font-weight: 600;
+  transition: rotate ease-in-out 0.36s;
+  background-color: transparent;
+  border: none;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .privacy-label:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-image: url("https://cdn-icons-png.flaticon.com/128/5343/5343102.png");
+  background-size: 12px auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  margin-right: 16px;
+  transition: transform ease-in-out 0.36s;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .privacy-label:hover {
+  cursor: pointer;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .privacy-label.active:before {
+  transform: rotate(90deg);
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container {
+  display: flex;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button {
+  width: 20px;
+  height: 20px;
+  background-color: #fafafb;
+  border-radius: 100%;
+  border: 1px solid #dedede;
+  position: relative;
+  margin: 0 64px 0 0;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button:hover {
+  cursor: pointer;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background-color: transparent;
+  transition: all ease-in-out 0.36s;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button.active {
+  border: 1px solid #2980b9;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button.active:before {
+  background-color: #2980b9;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-setting .button-container .button .button-label {
+  position: absolute;
+  font-weight: 400;
+  top: 0px;
+  left: 24px;
+  bottom: 0;
+  margin: 0 auto;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-description {
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  transition: all 0.65s ease-in-out;
+  border-bottom: 1px solid #dedede;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-description:last-of-type {
+  border: none;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-description p {
+  line-height: 150%;
+  padding: 0px 32px 32px;
+  opacity: 0;
+  transition: opacity ease-in-out 1s;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-description p.active {
+  opacity: 1;
+}
+.privacy-center .privacy-center--body .privacy-container .privacy-settings .privacy-description p a {
+  text-decoration: none;
+  color: #2980b9;
+  font-weight: 600;
+}
+.privacy-center .privacy-center--body .privacy-description {
+  margin: 0;
+}
+.privacy-center .privacy-center--footer {
+  width: calc(100% - 64px);
+  max-width: 768px;
+  height: calc(40px + 64px);
+  padding: 32px 0;
+  background: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #dedede;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+.privacy-center .privacy-center--footer .buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.privacy-center .privacy-center--footer .buttons-container .button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 16px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  transition: background ease-in-out, color ease-in-out 0.36s;
+}
+.privacy-center .privacy-center--footer .buttons-container .button.cancel {
+  color: #2980b9;
+  background-color: #ffffff;
+  border: 2px solid #2980b9;
+}
+.privacy-center .privacy-center--footer .buttons-container .button.cancel:hover {
+  color: #ffffff;
+  background-color: #2980b9;
+}
+.privacy-center .privacy-center--footer .buttons-container .button.preferences {
+  color: #ffffff;
+  background-color: #2980b9;
+}
+.privacy-center .privacy-center--footer .buttons-container .button.preferences:hover {
+  color: #2980b9;
+  background-color: #ffffff;
+  border: 2px solid #2980b9;
+}
+.privacy-center .privacy-center--footer .buttons-container .button:hover {
+  cursor: pointer;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dedede;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2980b9;
+  cursor: scroll;
+}
+/*----------------------End style Accordion----------------------*/
 </style>
 
 <div>
@@ -656,13 +870,132 @@ Component
 	</div>
 </div>
 
+<div>
+<div class="container">
+
+<div class="privacy-center">
+	<div class="privacy-center--header">
+		<h1>Nos programmes de formation et fiches de renseignement consultables hors ligne</h1>
+	</div>
+	<div class="privacy-center--body">
+		<div class="privacy-center-intro">
+			<p>Téléchargez les fiches de renseignement, emplois de temps et programmes de formation.</p>
+		</div>
+		<div class="privacy-container">
+			<div class="privacy-settings">
+				<div class="privacy-setting">
+					<button class="privacy-label">Necessary Cookies</button>
+					<div class="button-container">
+						<a href="" class="btn cancel" style="white-space: nowrap;">Télécharger <span class="fa fa-download"></span></a>
+					</div>
+				</div>
+				<div class="privacy-description">
+					<p>Necessary cookies are essential and are used to provide you with services available through COMPANY websites. For instance, these cookies allow COMPANY to remember your choices about cookies preferences, to record your interface customization trackers e.g. for the choice of language used by the website. Necessary cookies are enabled by default and cannot be switched off. To see the list of the cookies used for this purpose, <a href="#" target="_blank" rel="noreferrer noopener">click here</a>
+					</p>
+				</div>
+				<div class="privacy-settings">
+					<div class="privacy-setting">
+						<button class="privacy-label">Functional Cookies</button>
+						<div class="button-container">
+							<button class="button accept">
+								<span class="button-label">Accept</span>
+							</button>
+							<button class="button refuse">
+								<span class="button-label">Refuse</span>
+							</button>
+						</div>
+					</div>
+					<div class="privacy-description">
+						<p>Functional cookies are used to provide you with contents and proposals that correspond to your interactions. They may consist of information logged on your device or recorded as you navigate through COMPANY websites. These cookies also allow us to analyze site usage so we can measure and improve performance.
+							To see the list of the cookies used for these purposes,
+							<a href="#" target="_blank" rel="noreferrer noopener">click here</a>
+						</p>
+					</div>
+					<div class="privacy-setting">
+						<button class="privacy-label">Targeted Advertising Cookies</button>
+						<div class="button-container">
+							<button class="button accept">
+								<span class="button-label">Accept</span>
+							</button>
+							<button class="button refuse">
+								<span class="button-label">Refuse</span>
+							</button>
+						</div>
+					</div>
+					<div class="privacy-description">
+						<p>Advertising cookies are used to enable COMPANY and its trusted COMPANY business stakeholders to serve ads that are relevant to your interests. The intention is to display ads that are relevant to you.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="privacy-center--footer">
+		<div class="buttons-container">
+			<button class="button cancel">Emplois de temps</button>
+			<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours'}) }}" class="button preferences">Toutes les fiches</a>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+const accordion = function () {
+	const privacyLabels = document.querySelectorAll(".privacy-label"),
+		buttons = document.querySelectorAll(".button"),
+		privacyDescription = document.getElementsByClassName("privacy-description");
+
+	// Accordion
+	const toggleAccordion = (e) => {
+		// Toggle chevron
+		e.currentTarget.classList.toggle("active");
+
+		// Toggle privacy-description opacity
+		e.currentTarget.parentElement.nextElementSibling
+			.querySelector("p")
+			.classList.toggle("active");
+
+		// Toggle collapsible
+		if (e.currentTarget.parentElement.nextElementSibling.style.maxHeight) {
+			e.currentTarget.parentElement.nextElementSibling.style.maxHeight = null;
+		} else {
+			e.currentTarget.parentElement.nextElementSibling.style.maxHeight =
+				e.currentTarget.parentElement.nextElementSibling.scrollHeight + "px";
+		}
+	};
+
+	privacyLabels.forEach((label) => {
+		label.addEventListener("click", toggleAccordion);
+	});
+
+	// Set Privacy
+	const setPrivacy = (e) => {
+		e.preventDefault();
+		const active = e.currentTarget.parentElement.querySelector(".active");
+		if (active) {
+			active.classList.remove("active");
+		}
+		e.currentTarget.classList.add("active");
+	};
+
+	buttons.forEach((button) => {
+		button.addEventListener("click", setPrivacy);
+	});
+};
+accordion();
+
+
+</script>
+
  
 <div class="section" style="background-image: url({{ asset('templatecourse/images/paralax03.jpg') }});
 visibility: visible;
 animation-delay: 100ms;
 animation-name: fadeIn; padding: 10px 0px; margin-top: 20px;">
 	<div class="container">
-		<h2 style="color: #fff; margin-bottom: 15px;">La méthode AZ qui vous conduit inéluctablement à un emploi descend</h2>
+		<h2 class="text-center" style="color: #fff; margin-bottom: 15px;">La méthode AZ qui vous conduit inéluctablement à un emploi descend</h2>
 
 		<div class="feature-wrapper">
 			<div class="zorb-container">
@@ -982,7 +1315,7 @@ animation-name: fadeIn; padding: 10px 0px; margin-top: 20px;">
 		  </div><!-- testimonial -->
 		</div><!-- col-xs-12 -->
 		<div class="col-xs-12 col-sm-6">
-		  <div class="features">
+		  <div class="features" style="background: #fff; border-radius: 10px; padding: 10px;">
 			<h3>Pourquoi nous choisir ?</h3>
 			<ul>
 			  <li><i class="fa fa-check-circle-o"></i>Acquérir des compétences spécialisées</li>
