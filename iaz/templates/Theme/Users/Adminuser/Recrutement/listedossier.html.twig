@@ -167,7 +167,7 @@
 </nav>
 <div class="modal-body">
 <div class="row">
-	{{ form_start(form, {'class': 'col s12', 'attr': path('users_adminuser_liste_dossier_recrutement') }}
+	{{ form_start(form, {'attr': {'class': 'col s12', 'action': path('users_adminuser_liste_dossier_recrutement') }}) }}
 	<div class="row">
 	<span style="color:red;">{{ form_errors(form) }}</span>
 	<span style="color:red;">{{ form_errors(form.message) }}</span>

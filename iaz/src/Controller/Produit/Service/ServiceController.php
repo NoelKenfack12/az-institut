@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Service\Servicetext\GeneralServicetext;
 use App\Entity\Produit\Service\Apropos;
 use App\Entity\Produit\Produit\Categorie;
+use App\Entity\Produit\Service\Recrutement;
 
 class ServiceController extends AbstractController
 {
@@ -697,10 +698,14 @@ public function aproposdenous($position, $idtype, $idart, $page)
 	$list_typearticle = $em->getRepository(Typearticle::class)
 				           ->findBy(array('position'=>$position), array('rang'=>'desc'));
 
+	$liste_depliant = $em->getRepository(Recrutement::class)
+						 ->findSupportByType('depliant');
+	$liste_planing = $em->getRepository(Recrutement::class)
+						 ->findSupportByType('planing');
 	return $this->render('Theme/Produit/Service/Service/aproposdenous.html.twig',
 	array('article'=>$article,'position'=>$position,'liste_article'=>$liste_article,'page'=>$page,
 	'nombrepage' => ceil(count($liste_article)/8),'idtype'=>$idtype,'typearticle'=>$typearticle,
-	'list_typearticle'=>$list_typearticle));
+	'list_typearticle'=>$list_typearticle, 'liste_depliant'=>$liste_depliant,'liste_planing'=>$liste_planing));
 }
 
 public function detailarticlesupport($position)

@@ -883,57 +883,26 @@ Component
 		</div>
 		<div class="privacy-container">
 			<div class="privacy-settings">
+				{% for document in liste_dossier|slice(0,8) %}
 				<div class="privacy-setting">
-					<button class="privacy-label">Necessary Cookies</button>
+					<button class="privacy-label">{{ document.message }}</button>
 					<div class="button-container">
-						<a href="" class="btn cancel" style="white-space: nowrap;">Télécharger <span class="fa fa-download"></span></a>
+						<a href="{{ path('users_adminuser_telecharg_cv_user', {'id': document.id }) }}" class="btn cancel" style="white-space: nowrap;">Télécharger <span class="fa fa-download"></span></a>
 					</div>
 				</div>
 				<div class="privacy-description">
 					<p>Necessary cookies are essential and are used to provide you with services available through COMPANY websites. For instance, these cookies allow COMPANY to remember your choices about cookies preferences, to record your interface customization trackers e.g. for the choice of language used by the website. Necessary cookies are enabled by default and cannot be switched off. To see the list of the cookies used for this purpose, <a href="#" target="_blank" rel="noreferrer noopener">click here</a>
 					</p>
 				</div>
-				<div class="privacy-settings">
-					<div class="privacy-setting">
-						<button class="privacy-label">Functional Cookies</button>
-						<div class="button-container">
-							<button class="button accept">
-								<span class="button-label">Accept</span>
-							</button>
-							<button class="button refuse">
-								<span class="button-label">Refuse</span>
-							</button>
-						</div>
-					</div>
-					<div class="privacy-description">
-						<p>Functional cookies are used to provide you with contents and proposals that correspond to your interactions. They may consist of information logged on your device or recorded as you navigate through COMPANY websites. These cookies also allow us to analyze site usage so we can measure and improve performance.
-							To see the list of the cookies used for these purposes,
-							<a href="#" target="_blank" rel="noreferrer noopener">click here</a>
-						</p>
-					</div>
-					<div class="privacy-setting">
-						<button class="privacy-label">Targeted Advertising Cookies</button>
-						<div class="button-container">
-							<button class="button accept">
-								<span class="button-label">Accept</span>
-							</button>
-							<button class="button refuse">
-								<span class="button-label">Refuse</span>
-							</button>
-						</div>
-					</div>
-					<div class="privacy-description">
-						<p>Advertising cookies are used to enable COMPANY and its trusted COMPANY business stakeholders to serve ads that are relevant to your interests. The intention is to display ads that are relevant to you.
-						</p>
-					</div>
-				</div>
+				{% endfor %}
+
 			</div>
 		</div>
 	</div>
 	<div class="privacy-center--footer">
 		<div class="buttons-container">
-			<button class="button cancel">Emplois de temps</button>
-			<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours'}) }}" class="button preferences">Toutes les fiches</a>
+			<a href="" class="button cancel" value="0">Emplois de temps</a>
+			<a href="{{ path('produit_service_apropos_denous', {'position': 'planingcours'}) }}" class="button preferences" value="0">Toutes les fiches</a>
 		</div>
 	</div>
 </div>
@@ -944,7 +913,7 @@ Component
 
 const accordion = function () {
 	const privacyLabels = document.querySelectorAll(".privacy-label"),
-		buttons = document.querySelectorAll(".button"),
+		buttons = document.querySelectorAll("button.button"),
 		privacyDescription = document.getElementsByClassName("privacy-description");
 
 	// Accordion
@@ -1118,7 +1087,7 @@ animation-name: fadeIn; padding: 10px 0px; margin-top: 20px;">
 			  <h3>Des formations continues spéciales à L'institut AZ.</h3>
 			  <div class="row">
 				<div class="col-lg-8 col-md-7 col-xs-12 videoLeft">
-					<a class="video_btn" href="https://www.youtube.com/watch?v=VKs4JwM5XHs">
+					<a class="video_btn" href="https://www.youtube.com/watch?v=s7tOfP3IDK4">
 						<img src="{{ asset('template/images/sever-rent.png') }}">
 					</a>
 				</div><!-- videoLeft -->

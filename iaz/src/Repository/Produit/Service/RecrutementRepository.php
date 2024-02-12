@@ -19,4 +19,26 @@ public function myfindAll()
                   ->getQuery();
 	return $query->getResult();
 }
+
+public function findPublicSupport()
+{
+	$query = $this->createQueryBuilder('r')
+				  ->where('r.typedocument LIKE :n')
+				  ->orWhere('r.typedocument LIKE :m')
+				  ->setParameter('n','%depliant%')
+				  ->setParameter('m','%planing%')
+	              ->orderBy('r.date','DESC')
+                  ->getQuery();
+	return $query->getResult();
+}
+
+public function findSupportByType($type)
+{
+	$query = $this->createQueryBuilder('r')
+			      ->where('r.typedocument LIKE :n')
+	              ->orderBy('r.date','DESC')
+				  ->setParameter('n','%'.$type.'%')
+                  ->getQuery();
+	return $query->getResult();
+}
 }

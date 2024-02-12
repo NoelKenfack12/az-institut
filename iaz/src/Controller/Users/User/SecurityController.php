@@ -12,6 +12,7 @@ use App\Entity\Produit\Projet\Projet;
 use App\Entity\Produit\Service\Service;
 use App\Entity\Users\User\Imgslide;
 use App\Entity\Produit\Produit\Categorie;
+use App\Entity\Produit\Service\Recrutement;
 
 class SecurityController extends AbstractController
 {
@@ -110,9 +111,11 @@ public function accueilsite(GeneralServicetext $service)
 	}
 	$liste_article = $em->getRepository(Service::class)
 						 ->findBlog(1,15,'evenement');
+	$liste_dossier = $em->getRepository(Recrutement::class)
+						 ->findPublicSupport();
 	return $this->render('Theme/Users/User/Security/accueilsite.html.twig',
 	array('liste_slide'=>$liste_slide,'liste_actualite'=>$liste_actualite,'liste_formation'=>$liste_formation
-	,'liste_article'=>$liste_article));
+	,'liste_article'=>$liste_article, 'liste_dossier'=>$liste_dossier));
 }
 
 public function logout()

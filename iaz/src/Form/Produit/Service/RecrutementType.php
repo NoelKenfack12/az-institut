@@ -21,7 +21,7 @@ class RecrutementType extends AbstractType
         $builder
             ->add('file',FileType::class)
             ->add('message',TextareaType::class,array('attr'=>array('class'=>'materialize-textarea','style'=>'width: 100%;')))
-            ->add('yourcv',new YourcvType())
+            ->add('yourcv',YourcvType::class)
         ;
     }
     
